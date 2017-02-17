@@ -1,0 +1,54 @@
+html, body {
+    height: 100%;
+    margin: 0px;
+}
+
+.container{
+    height:92%;
+    width:100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+.row{
+    height:100%;
+    margin:0px;
+    padding: 0;
+}
+
+#left_div{ 
+    background-color: #000000;
+    opacity :0.8;
+    margin : 0px;
+    height:100%;
+    padding : 3%
+}
+
+#mapid{
+    margin:0px;
+    height:100%;
+}
+
+p{
+    width:100%;
+    text-align: center;
+    color : white;
+    font-weight: 200;
+}
+
+#welcome, #title{
+    font-size:26pt;
+}
+
+#title{
+    color:#23a1a8;
+    font-weight:500;
+}
+
+.description{
+    font-size: 14pt;
+}
+
+.leaflet-touch .leaflet-bar a{
+    color :#23a1a8!important;
+}

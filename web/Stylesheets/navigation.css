@@ -1,0 +1,97 @@
+.navbar{
+    background-color: #000000;
+    opacity :0.85;
+    border-radius: 0;
+    border:none;
+    margin-bottom:0px!important;  
+    height:8%;
+}
+.navbar-nav {
+    margin-bottom:0px!important;  
+    width: 100%;
+    text-align: center;
+}
+
+.navbar-nav > ul {    margin-bottom:0px!important; height:8%}
+
+.navbar-nav > li {
+    float: none;
+    display: inline-block;
+}
+
+.navbar-nav > li.navbar-right {
+    float: right !important;
+}
+
+a{
+    color:white!important;
+    padding-bottom:0!important;
+}
+a:hover{ 
+    color:#23A1A8!important;
+}
+
+#logo:hover{
+    cursor:default!important;
+}
+
+#connection:hover{
+    background-image: url(../Ressources/connection_over.png);
+}
+
+.onglet {
+    cursor:pointer;
+    padding:7px;
+    color : white!important;
+    font-weight: 200;
+}
+.onglet:hover{
+    color:#87c2c4!important;
+    text-decoration: underline!important;
+}
+
+.onglet_actif{
+    text-decoration: underline!important;
+    color:#23A1A8 !important;
+    cursor:default;
+}
+.onglet_actif:hover{
+    text-decoration: underline!important;
+    color:#23A1A8 !important;
+}
+
+.info_perso{
+    color:white!important;
+    font-weight: 200;
+    text-align: left;
+    line-height:5pt;
+}
+
+#modification_link{
+   text-align:left!important; 
+   padding:0;
+   font-weight: 200;
+   font-style:italic;
+   text-decoration:underline;
+   color:#87c2c4!important;
+   font-size: 9pt;
+}
+
+#modification_link:hover{
+     color:#23A1A8!important;
+}
+
+#favorite_link{
+   text-align:left!important; 
+   padding:0;
+   font-weight: 200;
+   font-style:italic;
+   text-decoration:underline;
+   color:#fffe83!important;
+   font-size: 9pt;
+   line-height: 8pt;
+}
+
+#favorite_link:hover{
+     color:#FFFF51!important;
+}

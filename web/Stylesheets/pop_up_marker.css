@@ -1,0 +1,94 @@
+.mapboxgl-popup-anchor-top .mapboxgl-popup-tip{
+   border-bottom-color: #2b2f36!important; 
+    opacity:0.8;
+}
+
+.mapboxgl-popup-content{
+    background-color: #2b2f36; 
+      opacity:0.8;
+}
+
+.mapboxgl-popup-close-button{
+    color:white;
+    font-size: 16pt;
+}
+
+.link_info{
+    padding:0;
+    margin:0!important;
+    font-style: italic;
+    font-weight:100;
+}
+
+.link_title{
+    padding:0;
+    margin:0!important;
+    font-weight:500;
+}
+
+.link_marker{
+    width:100%;
+}
+
+.link_marker:hover{
+    text-decoration:none!important ;
+}
+
+.checkbox_pop{
+    color:#87c2c4!important;
+}
+
+.checkbox_marker{
+    vertical-align: bottom;
+    position: relative;
+    width:30px!important;
+    height:15px!important;
+    margin:0!important;
+    padding:0!important;
+}
+
+.text{
+    padding:0;
+    padding-bottom: 5px;
+    margin:0!important;
+    font-weight:200;
+    color:#87c2c4!important;
+}
+
+label{
+    font-weight:200!important; 
+    display:block!important;
+    margin:0!important;
+    padding:0!important;
+}
+
+.p_group{
+   margin-bottom: 4px;
+   cursor:pointer;
+   padding:2px;
+}
+.p_group:hover{
+     background-color: #23a1a8 !important;
+    opacity:1 !important;
+}
+
+/*Scrollbar*/
+.links::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    border-radius: 10px;
+    background-color: transparent;
+
+}
+
+.links::-webkit-scrollbar
+{
+    width: 10px;
+    background-color:transparent;
+}
+
+.links::-webkit-scrollbar-thumb
+{
+    border-radius: 8px;
+    background-color: #23a1a8;
+}

@@ -1,0 +1,157 @@
+.modal.in .modal-dialog{
+    min-width:800px;
+}
+
+/*********** DIV MULTIMEDIA ***********/
+#multimedia_div{
+    width:90%;
+    height:400px;
+    width:100%;
+    background-color: black;
+    margin-top:20px;
+    margin-bottom:20px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.img_multi{
+    max-height:400px;
+    max-width:100%;
+}
+
+.video_multi{
+    max-height:400px;
+}
+
+/*********** INFOS MULTIMEDIA ***********/
+#multi_title{
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+#multi_description{
+    font-style : italic;
+}
+#multimedia_info{
+        display:inline-block;
+        vertical-align: top;
+        width:50%!important;
+}
+
+#multimedia_action{
+    display:inline-block;
+    float:right;
+}
+/*********** SIGNALISATION ***********/
+
+#signalisation_action{
+    display:none;
+}
+
+#signalisation_action_locked{
+    display:none;
+}
+#signal, #signal2, #signal_locked{
+    display:inline-block;
+    font-style:italic;
+    font-weight:200;
+    font-size : 9pt;
+}
+#signal{
+    font-weight: 400;
+    text-decoration: underline!important;
+    cursor:pointer;
+}
+
+/*********** LIKES / DISLIKES  ***********/
+
+#like_action{
+    display:none;
+}
+
+#like_action_locked{
+    display:none;
+}
+
+.like_button{
+    position:relative;
+    display:inline-block;
+    cursor:pointer;
+    width:30px;
+    height:30px;
+    border:none;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-size: contain;
+    outline:none;
+}
+.like{
+    background-image : url("../Ressources/like.png");
+}
+.like:hover{
+    background-image : url("../Ressources/like_over.png");
+}
+.dislike{
+    background-image : url("../Ressources/dislike.png");
+}
+.dislike:hover{
+    background-image : url("../Ressources/dislike_over.png");
+}
+
+.like_lock{
+    cursor:default;
+    background-image : url("../Ressources/like.png");
+}
+.like_lock:hover{
+    background-image : url("../Ressources/like.png");
+}
+.dislike_lock{
+    cursor:default;
+    background-image : url("../Ressources/dislike.png");
+}
+.dislike_lock:hover{
+    background-image : url("../Ressources/dislike.png");
+}
+
+#nlike , #nlike1{
+    display:inline-block;
+    color:#B2DE4C;
+    font-weight: 400;
+    font-size: 20pt;
+    margin-left : 10px;
+}
+
+#ndislike , #ndislike1{
+    display:inline-block;
+    color : #f01644;
+    font-weight: 400;
+    font-size: 20pt;
+    margin-left : 10px;
+}
+
+.separator{
+    margin-left: 15px;
+    width:15px;
+    display:inline-block;
+    height:30px;
+    border-left: solid 1px white;
+}
+
+/*********** FAVORIS ***********/
+
+#favorite_action{
+    display:none;
+    cursor:pointer;
+}
+
+#favorite_action_locked{
+    display:none;
+}
+
+.p_favorite{
+    display:inline-block;
+    color : #FFFF51;
+}
+#button_favorite{
+    display:inline-block;
+}

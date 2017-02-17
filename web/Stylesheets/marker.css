@@ -1,0 +1,10 @@
+.marker{
+    display: block;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+
+

@@ -1,0 +1,46 @@
+.button {
+    background-color: #23a1a8;
+    border: none;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 200; 
+    cursor: pointer;
+    outline:none;
+
+}
+.button:hover {
+    box-shadow: 0 8px 16px 0 rgba(240,247,247,0.11), 0 6px 20px 0 rgba(240,247,247,0.10);
+    background-color: #87c2c4;
+    color:white!important;
+    text-decoration: none;
+}
+
+.large_button{
+    width:250px;
+    height:60px;
+}
+
+.small_button{
+    font-size: 15px;
+    padding : 10px; 
+    width:100px;
+}
+
+.close{
+    font-weight: 200;
+    background-color: transparent;
+    outline:none;
+    color:#e1e0e0;
+    text-shadow: none;
+    opacity:1;
+    font-size:18pt;
+}
+
+.close:hover{
+    color:#87c2c4;
+    text-shadow: none;
+    opacity:1;
+}

@@ -1,0 +1,24 @@
+p{
+    font-weight: 200; 
+    color:white;
+}
+
+.title{
+    color:#23a1a8;
+    font-size: 14pt;
+}
+
+.error_message{
+    font-style: italic;
+    color : #f01644;
+}
+
+.info{
+    font-style:italic;
+    color:#87c2c4;
+}
+
+.click_here{
+    color:#87c2c4!important;
+    text-decoration: underline;
+}
