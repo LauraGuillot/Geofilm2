@@ -110,12 +110,14 @@
                         <div style="display:inline-block!important" class="input_upload">
                             <label for="u_video" style="display:inline-block!important;"> </label>
                             <input class="radio_marker" style="display:inline-block!important; margin-right:3px; margin-bottom:12px!important; width:30px;" type="radio" name="choix_type" id="u_video" value="v"><p style="display:inline-block!important; color:white;">Video</p>
-
-
                         </div>
                         <div style="display:inline-block!important" class="input_upload">
                             <label for="u_sound" style="display:inline-block!important; color:white;"></label>
-                            <input class="radio_marker" style="display:inline-block!important; margin-right:5px; margin-bottom:12px!important; width:30px;" type="radio" name="choix_type" id="u_sound" value="v"><p style="display:inline-block!important; color:white;">Son</p>
+                            <input class="radio_marker" style="display:inline-block!important; margin-right:5px; margin-bottom:12px!important; width:30px;" type="radio" name="choix_type" id="u_sound" value="s"><p style="display:inline-block!important; color:white;">Son</p>
+                        </div>
+                        <div style="display:inline-block!important" class="input_upload">
+                            <label for="u_image" style="display:inline-block!important; color:white;"></label>
+                            <input class="radio_marker" style="display:inline-block!important; margin-right:5px; margin-bottom:12px!important; width:30px;" type="radio" name="choix_type" id="u_image" value="i"><p style="display:inline-block!important; color:white;">Image</p>
                         </div>
                         <br>
 
@@ -132,33 +134,40 @@
                             <p class="label_form" id="upload_description"></p>
                             <input style="width:500px!important;" type="text" name ="description" id="upload_description_entered">
                         </div>
+                        
+                        <!--Saisie du time code (surtout s'il s'agit d'une séquence video)-->
+                        <div class="input_upload">
+                            <p class="label_form" id="upload_time_code"></p>
+                            <p class="label_form" style="display:inline-block!important" id="upload_time_begin"></p>
+                            <input style="display:inline-block!important; width:100px!important;" id="time_begin" type="time" name="begin">
+                            <p class="label_form" style="display:inline-block!important" id="upload_time_end"></p>
+                            <input style="display:inline-block!important; width:100px!important;" id="time_end" type="time" name="end"> <!--A récupérer sous la forme d'une chaine de caracatères-->
+                            
+                        </div>
 
 
                         <!--Saisie des informations liées à la source (nom, type)-->
                         <div class="input_upload">
                             <p class="error_message" id="error_source_type"></p>
                             <p class="label_form" id="upload_source"></p>
-                            <select id="" name="" onchange="">
-                                <option selected id="upload_source_s">
-                                <option id="upload_source_unknown"></option>
-                                <option id="upload_film"></option>
-                                <option id="upload_serie"></option>
-                                <option id="upload_game"></option>
+                            <select id="choice_source" name="choice" onchange="">
+                                <option selected id="upload_source_search">
+                                <option style="color:black!important" id="upload_source_unknown"></option>
+                                <option style="color:blacl!important" id="upload_film"></option>
+                                <option style="color:black!important" id="upload_serie"></option>
+                                <option style="color:black!important" id="upload_game"></option>
                             </select>
-                            <br>
-                            <input type ="submit">
+                            
                         </div>
-                        
+                        <br>
                         <div class="input_upload">
-                            <br>
                             <p class="label_form" id="upload_source_title"></p>
-                            <br>
-                            <input type="text" name="title_source" id="upload_source_title_entered">
+                            <input style="width:500px!important;" type="text" name="title_source" id="upload_source_title_entered">
                         </div>
                     </div>
                     <div id="content_general2" class="col-md-6">
                         <!--TODO : renvoi du bouton suivant-->
-                        <right><button id ="next1" type="button" class="button small_button" onclick="" style="margin-bottom: 40px"></button></right>
+                        <right><button id ="next1" type="button" class="button small_button" onclick="" style="margin-left:300px; margin-top: 500px"></button></right>
                     </div>
                 </div>
 

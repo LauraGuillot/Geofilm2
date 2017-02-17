@@ -33,7 +33,7 @@ html, body {
 }
 
 #upload{
-    position:fixed;
+    position:relative;
     z-index: 10;
     margin:0;
     margin-top: 3%;

@@ -10,9 +10,6 @@ function loadText() {
         document.getElementById("title1").innerHTML = upload_title_fr;
         document.getElementById("subtitle1").innerHTML = upload_subtitle1_fr;
         document.getElementById("upload_type_multimedia").innerHTML = upload_type_fr;
-        document.getElementById("upload_video").innerHTML = upload_video_fr;
-        document.getElementById("upload_sound").innerHTML = upload_sound_fr;
-        document.getElementById("upload_image").innerHTML = upload_image_fr;
         document.getElementById("upload_title_multimedia").innerHTML = title_fr;
         document.getElementById("upload_description").innerHTML = upload_description_fr;
         document.getElementById("upload_source").innerHTML = upload_source_fr;
@@ -22,7 +19,10 @@ function loadText() {
         document.getElementById("upload_film").innerHTML = upload_source_movie_fr;
         document.getElementById("upload_serie").innerHTML = upload_source_serie_fr;
         document.getElementById("upload_game").innerHTML = upload_source_game_fr;
-        document.getElementById("next1").innerHTML = upload_next_fr;
+        document.getElementById("next1").innerHTML = next_fr;
+        document.getElementById("upload_time_code").innerHTML = upload_time_code_fr;
+        document.getElementById("upload_time_begin").innerHTML = upload_time_begin_fr;
+        document.getElementById("upload_time_end").innerHTML = upload_time_end_fr;
        
 
         //UPLOAD MEDIA 1 : LOCALISATION
