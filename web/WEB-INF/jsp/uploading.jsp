@@ -167,7 +167,7 @@
                     </div>
                     <div id="content_general2" class="col-md-6">
                         <!--TODO : renvoi du bouton suivant-->
-                        <right><button id ="next1" type="button" class="button small_button" onclick="" style="margin-left:300px; margin-top: 500px"></button></right>
+                        <right><button id ="next1" type="button" class="button small_button" href="#" onclick="valid_form_upload1();" style="margin-left:300px; margin-top: 500px"></button></right>
                     </div>
                 </div>
 
@@ -201,7 +201,7 @@
                     <div id="right_div" class="col-md-6">
                         <!--TODO : carte interactive -->
                     </div>
-                    <right><button id ="validation2" type="button" class="button small_button" onclick="" style="margin-bottom: 40px"></button></right>
+                    <right><button id ="next2" type="button" class="button small_button" onclick="" style="margin-bottom: 40px"></button></right>
 
                 </div>
 

@@ -39,6 +39,8 @@ public class UploadServlet extends HttpServlet {
         String title = request.getParameter("title");
         String description = request.getParameter("description");
         String date = request.getParameter("date");
+        String time_begin = request.getParameter("time_code_begin");
+        String time_end = request.getParameter("time_code_end");
         String format = request.getParameter("format");
         String language = request.getParameter("language");
         String type_media = request.getParameter("type_media");

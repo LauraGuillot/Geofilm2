@@ -123,6 +123,8 @@ public interface MultimediaManager {
     /**
      * Insertion d'un multimédia dans la base de données
      *
+     * @param time_begin
+     * @param time_end
      * @param title
      * @param description
      * @param path
@@ -134,7 +136,7 @@ public interface MultimediaManager {
      * @param p Personne qui upload la vidéo
      * @param sourceId Source du multimédia
      */
-    public void insertMultimedia(String title, String description, String path, String date, String format, String language, String type, Location l, Person p, Source sourceId);
+    public void insertMultimedia(String time_begin, String time_end, String title, String description, String path, String date, String format, String language, String type, Location l, Person p, Source sourceId);
 
     /**
      * Matrice de multimédias qui correspond à une matrice de positions

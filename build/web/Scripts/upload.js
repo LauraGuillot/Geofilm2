@@ -6,16 +6,13 @@ function open_upload() {
     var form = document.createElement('form');
     form.method = "GET";
     form.action = "uploading.htm";
-
     var c1 = document.createElement('input');
     c1.type = "hidden";
     c1.name = "idco";
     c1.value = document.getElementById("idco").value;
     form.appendChild(c1);
-
     document.body.appendChild(form);
     form.submit();
-
 }
 
 
@@ -24,15 +21,17 @@ function open_upload() {
  * On ne vérifie pas si le type de source du fichier entré correspond
  * au type de source entré par l'utilisateur, pour le moment
  */
-function upload() {
+function upload1() {
 
 //On récupère les infos
-    var type_video = document.getElementById("upload_video").value;
-    var type_image = document.getElementById("upload_image").value;
-    var type_sound = document.getElementById("upload_sound").value;
+    var type_video = document.getElementById("u_video").value;
+    var type_image = document.getElementById("u_image").value;
+    var type_sound = document.getElementById("u_sound").value;
     var title = document.getElementById("upload_title_entered").value;
-    var source = document.getElementById("upload_source_entered").value;
+    var choice_source = document.getElementById("choice_source").value;
     var type_media = "";
+    var multiid = document.getElementById("multi_open").value;
+    var idco = document.getElementById("idco").value;
     //TODO : path ???
     //TODO : the_geom variable
     //TODO : personne variable
@@ -64,48 +63,38 @@ function upload() {
 
                     //Appel du controller pour effuectuer l'ajout d'un multimédia via un formulaire (Post)
 
-//                    var form = document.createElement('form');
-//                    form.method = "POST";
-//                    form.action = "uploading.htm";
-//
-//                    var c1 = document.createElement('input');
-//                    c1.type = "hidden";
-//                    c1.name = "email";
-//                    c1.value = email;
-//                    form.appendChild(c1);
-//
-//                    var c2 = document.createElement('input');
-//                    c2.type = "hidden";
-//                    c2.name = "mdp";
-//                    c2.value = mdp;
-//                    form.appendChild(c2);
-//
-//                    document.body.appendChild(form);
-//                    form.submit();
-//
-//                    //Si l'addresse email est déjà prise   
-//                } else {
-//                    //Message d'erreur
-//                    document.getElementById("inscription_error").innerHTML = error_email_already_taken_fr;
-//                }
-//
-//            }
-//        };
-//        var data = "email=" + email + "&" + "mdp=" + mdp + "&" + "name=" + name + "&" + "firstname=" + firstname;
-//        xhttp.open("GET", "ControlInscriptionServlet?" + data, true);
-//        xhttp.setRequestHeader("Content-Type", "text/html; charset=UTF-8");
-//        xhttp.send();
-                    //TODO
+                    var form = document.createElement('form');
+                    form.method = "POST";
+                    form.action = "uploading.htm";
+                    var c1 = document.createElement('input');
+                    c1.type = "hidden";
+                    c1.name = "email";
+                    c1.value = email;
+                    form.appendChild(c1);
+                    var c2 = document.createElement('input');
+                    c2.type = "hidden";
+                    c2.name = "mdp";
+                    c2.value = mdp;
+                    form.appendChild(c2);
+                    document.body.appendChild(form);
+                    form.submit();
+                } else {
+                    //Message d'erreur
+                    document.getElementById("error_multimedia_already").innerHTML = error_multimedia_already_entered_fr;
                 }
-            }
 
-        }
+            }
+        };
+        var data = "id=" + multiid + "&" + "idco=" + idco + "&" + "type=" + type;
+        xhttp.open("GET", "UploadingServlet?" + data, true);
+        xhttp.setRequestHeader("Content-Type", "text/html; charset=UTF-8");
+        xhttp.send();
     }
 }
 
 /**
  * Vérifier qu'une valeur est entrée pour le type de multimédia (i.e. qu'une case est bien cochée)
- * et modifie la valuer de type_media en fonction du type de multimédia
+ * et modifie la valeur de type_media en fonction du type de multimédia
  * @param {type} video
  * @param {type} sound
  * @param {type} image
@@ -115,15 +104,15 @@ function upload() {
 function valid_multimedia(video, sound, image, type_media) {
 
     if (video == "v") {
-        type_media = "VIDEO";
+        type_media = "Video";
         return true;
     }
     if (image == "i") {
-        type_media = "IMAGE";
+        type_media = "Image";
         return true;
     }
     if (sound == "s") {
-        type_media = "SOUND";
+        type_media = "Sound";
         return true;
     } else {
         document.getElementById("error_multimedia_type").innerHTML = error_multimedia_type_fr;
@@ -181,16 +170,16 @@ function valid_number(number) {
 
 
 /**
- * Validation du premier formulaire (infos générales)
+ * Validation du premier formulaire
  * @param {type} video
- * @param {type} image
  * @param {type} sound
- * @param {type} name
- * @param {type} source
+ * @param {type} image
+ * @param {type} title
+ * @param {type} choice
  * @returns {Boolean}
  */
-function valid_form_upload1(video, image, sound, name, source) {
-    return valid_multimedia_type(video, sound, image) && valid_name(name) && valid_source(source);
+function valid_form_upload1(video, sound, image, title, choice) {
+    return valid_multimedia(video, sound, image, "") && valid_name(title) && valid_source(choice);
 }
 
 /**Validation du second formulaire d'upload (localisation de la vidéo)

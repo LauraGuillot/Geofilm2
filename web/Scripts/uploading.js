@@ -35,9 +35,8 @@ function loadText() {
         document.getElementById("postal_code").innerHTML = postal_code_fr;
         document.getElementById("city").innerHTML = city_fr;
         document.getElementById("country").innerHTML = country_fr;
-        document.getElementById("next").innerHTML = next_fr;
+        document.getElementById("next2").innerHTML = next_fr;
         document.getElementById("title2").innerHTML = upload_title_fr;
-        document.getElementById("validation2").innerHTML = validation_fr;
 
         //UPLOAD MEDIA 2 : UPLOAD
         document.getElementById("title3").innerHTML = upload_title_fr;
