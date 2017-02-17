@@ -10,7 +10,7 @@ function initFavorite() {
     var cpt = document.getElementById('nbLoc').value;
     for (var i = 0; i < cpt; i++) {
         var cpt1 = document.getElementById('nbMulti' + i).value;
-       
+
         for (var j = 0; j < cpt1; j++) {
 
             var title = document.getElementById("pos" + i + "_multi" + j + "_title").value;
@@ -47,7 +47,7 @@ function initFavorite() {
  */
 function displayFavorite(favorites) {
     var div = document.getElementById("favorite");
-    div.innerHTML="";
+    div.innerHTML = "";
 
     for (var i = 0; i < favorites.length; i++) {
 
@@ -89,7 +89,7 @@ function displayFavorite(favorites) {
         var button = document.createElement("a");
         button.className = "del_button";
         button.innerHTML = delete_fr;
-        button.addEventListener("click", delegate1( multi.id), false);
+        button.addEventListener("click", delegate1(multi.id), false);
 
         p_group.appendChild(img);
         p.appendChild(p1);
@@ -128,11 +128,68 @@ function delegate1(id) {
 
 /**
  * Ouverture du multimedia i
- * @param {int} i - Index du multimédia
+ * @param {int} i - Index de la position du multimedia
+ * @param {int} j - Index du multimédia
  * @returns {void}
  */
-function openMulti(i) {
-//TODO
+function openMulti(i, j) {
+
+    //Ouverture de la pop-up
+    $('#multimedia_pop').modal('show');
+
+    //Chargement des données
+    var title = document.getElementById("pos" + i + "_multi" + j + "_title").value;
+    var publisher = document.getElementById("pos" + i + "_multi" + j + "_publisher").value;
+    var date = document.getElementById("pos" + i + "_multi" + j + "_uploaddate").value;
+    var descr = document.getElementById("pos" + i + "_multi" + j + "_descr").value;
+
+    document.getElementById("multi_title").innerHTML = title;
+    document.getElementById("multi_publisher_date").innerHTML = by_fr + publisher + the_fr + date;
+    document.getElementById("multi_descr").innerHTML = descr;
+
+    //Chargement du multimedia
+    var type = document.getElementById("pos" + i + "_multi" + j + "_type").value;
+    var path = document.getElementById("pos" + i + "_multi" + j + "_path").value + "." + document.getElementById("pos" + i + "_multi" + j + "_format").value;
+    loadMulti(path, type);
+}
+
+/**
+ * Chargement du multimedia dans la pop-up
+ * @param {String} path - Chemin d'accès vers le mulimédia
+ * @param {String} type - Type du multimédia
+ * @returns {void}
+ */
+function loadMulti(path, type) {
+    var div = document.getElementById("multimedia_div");
+    div.innerHTML = "";
+    switch (type) {
+        case "IMAGE" :
+            path = "Multimedias/Images/" + path;
+            var img = document.createElement("img");
+            img.className = "img_multi";
+            img.src = path;
+            div.appendChild(img);
+            break;
+        case "VIDEO" :
+            path = "Multimedias/Videos/" + path;
+            var vi = document.createElement("video");
+            vi.className = "video_multi";
+            vi.src = path;
+            vi.controls = "controls";
+            div.appendChild(vi);
+            break;
+        default :
+            path = "Multimedias/Sons/" + path;
+            var au = document.createElement("audio");
+            au.className = "audio_multi";
+            au.controls = "controls";
+            var source = document.createElement("source");
+            source.src = path;
+            source.type = "audio/mpeg";
+            au.appendChild(source)
+            div.appendChild(au);
+            break;
+    }
 }
 
 

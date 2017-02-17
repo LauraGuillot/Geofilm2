@@ -178,90 +178,52 @@
                 <div class="modal-content modal_form">
                     <!-- Croix de fermeture -->
                     <button class="close close1" data-dismiss="modal">&times;</button>
-                    <!-- Champ caché pour l'id du multimédia ouvert -->
-                    <input type="hidden" id="multi_open" value=""/>
 
                     <div class="modal-body"> 
                         <!-- Multimédia -->
                         <div id="multimedia_div"></div>
 
                         <!-- Informations-->
-                        <div id="multimedia_info">
+                        <div id="multimedia_info" style="width:100%!important">
                             <p id="multi_title"></p>
                             <p id="multi_publisher_date"></p>
                             <p id="multi_descr"></p>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                        <div id="multimedia_action">
-                            <!-- Ajout aux favoris-->
-                            <div id="favorite_action" onmouseover="overFavorite()" onmouseout="outFavorite();" onclick="addToFavorite();">
-                                <img id="button_favorite" src="Ressources/star.png"width="30px" height="30px" ></img>
-                                <p class="p_favorite" id="add_favorite"></p>
-                            </div>
-                            <div id="favorite_action_locked" >
-                                <p class="p_favorite" id="added_favorite" style="font-style:italic"></p>
-                            </div>
-
-                            <!-- Like / Dislike -->
-                            <div id="like_action" >
-                                <button class="like_button like" onclick="like('LIKE');"></button>
-                                <p id="nlike"></p>
-                                <div class="separator"></div>
-                                <button class="like_button dislike" onclick="like('DISLIKE');"></button>
-                                <p id="ndislike"></p>
-                            </div>
-                            <div id="like_action_locked" >
-                                <button id="like_lock" class="like_button like_lock" ></button>
-                                <p id="nlike1"></p>
-                                <div class="separator"></div>
-                                <button id="dislike_lock" class="like_button dislike_lock"></button>
-                                <p id="ndislike1"></p>
-                            </div>
-
-                            <!-- Signalement mauvaise localisation -->
-                            <div id="signalisation_action" >
-                                <a id="signal" onclick="signal();"></a>
-                                <p id="signal2"> </p>
-                            </div>
-                            <div id="signalisation_action_locked" >
-                                <p id="signal_locked"> </p>
-                            </div>
+            <!--POPUP : modification des informations personnelles-->
+            <div class="modal fade" id="modification_form" role="dialog">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content modal_form">
+                        <!-- Croix de fermeture -->
+                        <button class="close" data-dismiss="modal">&times;</button>
+                        <!-- Titre -->
+                        <center>
+                            <p id="modification_title" class= "title"  style="margin-top: 40px"</p> 
+                        </center>
+                        <!-- Zone pour les messages d'erreur -->
+                        <p id="modification_error" class="error_message"></p>
+                        <!-- Formulaire de modification -->
+                        <div class="modal-body"> 
+                            <!-- Champ pour le nom -->
+                            <p class="label_form" id="name_label"></p>
+                            <input type="text" name ="name" id="name_input">  
+                            <!-- Champ pour le prénom -->
+                            <p  class="label_form" id="firstname_label"></p>
+                            <input  type="text" name="firstname" id="firstname_input">
+                            <!-- Champ pour l'email -->
+                            <p  class="label_form" id="email_label"></p>
+                            <input  type="text" name="email" id="email_input">
+                            <!-- Bouton de soumission du formulaire de modification -->
+                            <center>
+                                <button id ="valid_modif" type="button" class="button small_button" onclick="modif();"></button>
+                            </center>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!--POPUP : modification des informations personnelles-->
-        <div class="modal fade" id="modification_form" role="dialog">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content modal_form">
-                    <!-- Croix de fermeture -->
-                    <button class="close" data-dismiss="modal">&times;</button>
-                    <!-- Titre -->
-                    <center>
-                        <p id="modification_title" class= "title"  style="margin-top: 40px"</p> 
-                    </center>
-                    <!-- Zone pour les messages d'erreur -->
-                    <p id="modification_error" class="error_message"></p>
-                    <!-- Formulaire de modification -->
-                    <div class="modal-body"> 
-                        <!-- Champ pour le nom -->
-                        <p class="label_form" id="name_label"></p>
-                        <input type="text" name ="name" id="name_input">  
-                        <!-- Champ pour le prénom -->
-                        <p  class="label_form" id="firstname_label"></p>
-                        <input  type="text" name="firstname" id="firstname_input">
-                        <!-- Champ pour l'email -->
-                        <p  class="label_form" id="email_label"></p>
-                        <input  type="text" name="email" id="email_input">
-                        <!-- Bouton de soumission du formulaire de modification -->
-                        <center>
-                            <button id ="valid_modif" type="button" class="button small_button" onclick="modif();"></button>
-                        </center>
-                    </div>
-                </div>
-            </div>
-        </div>
     </body>
 </html>
