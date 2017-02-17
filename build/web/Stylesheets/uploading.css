@@ -1,0 +1,115 @@
+
+/* 
+    Created on : 14 févr. 2017, 11:04:48
+    Author     : Paola
+*/
+
+html, body {
+    height: 100%;
+    width:100%;
+    margin: 0px;
+    background-color:#333333; 
+
+}
+
+.container{
+    height:92%;
+    width:100%;
+    margin: 0px;
+    padding: 0px!important;
+    background-color: #333333!important; 
+    display:inline;
+}
+
+.content_general{
+    height:92%;
+    width:100%;
+    padding:0px;
+    background-color: #333333!important;
+    display:inline;
+    text-align: left;
+    white-space:pre-line;
+    
+}
+
+#head{
+    opacity :0.85;
+    border-radius: 0;
+    border:none;
+    margin-bottom:0px!important;  
+    height:10%;
+    width:90%;
+    text-align:left;
+    padding-top: 13px;
+    padding-left :40px;
+    padding-bottom:10px;
+    position : relative;
+}
+
+#content_general1{
+    opacity :0.85;
+    border-radius: 0;
+    border:none;
+    margin-bottom:0px!important;  
+    height:82%;
+   
+    
+    padding-bottom : 5px;
+    padding-left: 40px;
+}
+
+#content_general2{
+    opacity :0.85;
+    border-radius: 0;
+    border:none;
+    margin-bottom:0px!important;  
+    height:82%;
+    padding-bottom:5px;
+    padding-left : 5px;
+}
+
+.p{
+    display:inline;
+    
+}
+
+#right-div{
+    
+}
+
+#left_div{
+    
+}
+
+/*#mapid{
+    margin: 0px;
+    padding: 0px;
+    height:92%;
+    width: 100%;
+    position:absolute;
+}*/
+
+.links{
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.input_upload{
+    color:#87c2c4!important;
+}
+
+.radio_marker{
+    vertical-align: bottom;
+    position: relative;
+    width:30px!important;
+    height:15px!important;
+    margin:0!important;
+    padding:0!important;
+}
+
+.label{
+    font-weight:200!important; 
+    display:block!important;
+    margin:0!important;
+    padding:0!important;
+}

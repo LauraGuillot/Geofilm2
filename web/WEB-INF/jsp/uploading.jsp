@@ -34,9 +34,11 @@
         <link rel="stylesheet" type="text/css" media="screen" href="Stylesheets/font.css">
         <link rel="stylesheet" type="text/css" media="screen" href="Stylesheets/pop_up_marker.css">
         <link rel="stylesheet" type="text/css" media="screen" href="Stylesheets/marker.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="Stylesheets/uploading.css">
 
         <!-- MAP -->
         <script src="Scripts/mapbox_tracker.js"></script>
+        <script src="Scripts/load_map_2.js"></script> <!--TODO : load map 3 (petite map sur le côté ?-->
 
         <!-- SCRIPTS -->
            <script src="Scripts/navigation.js"></script>
@@ -88,118 +90,166 @@
         <div class="container"> 
             <!--Trois blocs pour l'upload-->
 
+            <div class="row">
+                <!--Premier bloc : informations générales-->
 
-            <!--Premier bloc : informations générales-->
+                <div class="uploading" id="content_general">
+                    <div  id="head">
+                        <p class="title" style="padding-bottom: 0px!important" id="title1" > </p> 
+                        <p class="title" style="font-style:italic" id="subtitle1"> </p>
+                        <!--TODO : mettre image step-->
+                    </div>
+                    <div id="content_general1" class="col-md-6">
 
-            <div id="content_general" class="row">
-                <div id="head" class="col-md-6">
-                    <p class="title" id="title1"></p>
-                    <p class="title" id="subtitle1"></p>
-                    <!--TODO : mettre image step-->
+                        <!--Saisie du type de multimédia-->
+                        <br>
+                        <p class="error_message" id="error_multimedia_type"> </p>
+                        <br>
+                        <p class="label_form" style="display:inline-block!important;" id="upload_type_multimedia"></p>
+
+                        <div style="display:inline-block!important" class="input_upload">
+                            <label for="u_video" style="display:inline-block!important;"> </label>
+                            <input class="radio_marker" style="display:inline-block!important; margin-right:3px; margin-bottom:12px!important; width:30px;" type="radio" name="choix_type" id="u_video" value="v"><p style="display:inline-block!important; color:white;">Video</p>
+
+
+                        </div>
+                        <div style="display:inline-block!important" class="input_upload">
+                            <label for="u_sound" style="display:inline-block!important; color:white;"></label>
+                            <input class="radio_marker" style="display:inline-block!important; margin-right:5px; margin-bottom:12px!important; width:30px;" type="radio" name="choix_type" id="u_sound" value="v"><p style="display:inline-block!important; color:white;">Son</p>
+                        </div>
+                        <br>
+
+                        <!--Saisie du titre de multimédia-->
+                        <div class="input_upload">
+                            <p class="error_message" id="error_name"></p>
+                            <p class="label_form" id="upload_title_multimedia"></p>
+                            <input style="width:500px!important;" type="text" name="titre" id="upload_title_entered"><!--id = id à retenir pour le fichier upload.js-->
+                        </div>
+
+
+                        <!--Saisie d'une description du multimédia-->
+                        <div class="input_upload">
+                            <p class="label_form" id="upload_description"></p>
+                            <input style="width:500px!important;" type="text" name ="description" id="upload_description_entered">
+                        </div>
+
+
+                        <!--Saisie des informations liées à la source (nom, type)-->
+                        <div class="input_upload">
+                            <p class="error_message" id="error_source_type"></p>
+                            <p class="label_form" id="upload_source"></p>
+                            <select id="" name="" onchange="">
+                                <option selected id="upload_source_s">
+                                <option id="upload_source_unknown"></option>
+                                <option id="upload_film"></option>
+                                <option id="upload_serie"></option>
+                                <option id="upload_game"></option>
+                            </select>
+                            <br>
+                            <input type ="submit">
+                        </div>
+                        
+                        <div class="input_upload">
+                            <br>
+                            <p class="label_form" id="upload_source_title"></p>
+                            <br>
+                            <input type="text" name="title_source" id="upload_source_title_entered">
+                        </div>
+                    </div>
+                    <div id="content_general2" class="col-md-6">
+                        <!--TODO : renvoi du bouton suivant-->
+                        <right><button id ="next1" type="button" class="button small_button" onclick="" style="margin-bottom: 40px"></button></right>
+                    </div>
                 </div>
-                <div id ="content1" class="col-md-6">
 
-                    <!--Saisie du type de multimédia-->
-                    <p class="error_message" id="error_multimedia_type"></p>
-                    <p class="label_form" id="upload_type_multimedia"></p>
-                    <input type="radio" name="video" id="upload_video" value="v"> <!--changer v par video ?-->
-                    <input type="radio" name="image" id="upload_image" value="i"> 
-                    <input type="radio" name="sound" id="upload_sound" value="s"> 
+                <!--Deucième bloc de saisie des informations de localisation-->
+                <div id="content_upload1" class="col-md-8" style="visibility:hidden;">
+                    <div class="head">
+                        <p class="title" id="title2"></p>
+                        <p class="title" id="subtitle2"></p>
+                        <!--TODO : mettre image step-->
+                    </div>
+                    <div id="left_div" class="col-md-6">
+                        <!--Saisie du numéro, de la rue, d'un complément d'adresse si nécessaire,
+                        du code postal, puis de la ville, et du pays-->
+                        <p class="title" id="address"></p>
+                        <p class="error_message" id="error_mandatory"></p>
+                        <p class="label_form" id="numero"></p>
+                        <p class="label_form" id="street"></p> 
+                        <br>
+                        <input type="text" name="loc_numero" id="numero_entered">
+                        <input type="text" name="loc_street" id="street_entered">
+                        <br>
+                        <p class="label_form" id="address_complement"></p>
+                        <input type="text" id="address_complement_entered" name="loc_ad_complement">
+                        <p class ="label_form" id="postal_code"></p>
+                        <input type="text" name="loc_code" id="postal_code_entered">
+                        <p class="label_form" id="city"></p>
+                        <input type="text" name="loc_city" id="city_entered">
+                        <p class="label_form" id="country"></p>
+                        <input type="text" name="loc_country" id="country_entered">
+                    </div>
+                    <div id="right_div" class="col-md-6">
+                        <!--TODO : carte interactive -->
+                    </div>
+                    <right><button id ="validation2" type="button" class="button small_button" onclick="" style="margin-bottom: 40px"></button></right>
 
-                    <!--Saisie du titre de multimédia-->
-                    <p class="error_message" id="error_name"></p>
-                    <p class="label_form" id="upload_title_multimedia"></p>
-                    <p class="label_form" id="star1"></p>
-                    <br>
-                    <input type="text" name="titre" id="upload_title_entered"><!--id = id à retenir pour le fichier upload.js-->
-
-                    <!--Saisie d'une description du multimédia-->
-                    <p class="label_form" id="upload_description"></p>
-                    <input type="text" name ="description" id="upload_description_entered">
-
-                    <!--Saisie des informations liées à la source (nom, type)-->
-                    <p class="error_message" id="error_source_type"></p>
-                    <p class="label_form" id="upload_source"></p>
-                    <p class="label_form" id="star2"></p>
-                    <br>
-                    <input type="" name="source" id="upload_source_entered">
-                    <select>
-                        <option id="upload_source_search"></option>
-                        <option id="upload_film"></option>
-                        <option id="upload_serie"></option>
-                        <option id="upload_game"></option>
-                    </select>
-                    <input type ="submit">
-                    <br>
-                    <p class="label_form" id="upload_source_title"></p>
-                    <br>
-                    <input type="text" name="title_source" id="upload_source_title_entered">
                 </div>
-                <!--TODO : renvoi du bouton validation-->
-                <right><button id ="validation1" type="button" class="button small_button" onclick="" style="margin-bottom: 40px"></button></right>
 
+                <!--3eme bloc : Upload du multimédia-->
+                <div class="content_upload2" style="visibility:hidden">
+                    <div class="head">
+                        <p class="title" id="title3"></p>
+                        <p class="title" id="subtitle3"></p>
+                        <!--TODO : mettre image step-->
+                    </div>
+                    <div class="col-md-6">
+                        <!--Parcourir les fichiers de l'utilisateur pour uploader un multimédia-->
+                        <p class="label_form" id="input_choice"></p>
+                        <input type="file" name="file" id="file_entered">
+                    </div>
+                    <right><button id ="validation3" type="button" class="button small_button" onclick="" style="margin-bottom: 40px"></button></right>
+
+
+                </div>
             </div>
+        </div>
 
-            <!--Deucième bloc de saisie des informations de localisation-->
-            <div id="upload1" class="row" style="visibility:hidden;">
-                <div id="title" class="head">
-                    <p class="title" id="title2"></p>
-                    <p class="title" id="subtitle2"></p>
-                    <!--TODO : mettre image step-->
-                </div>
-                <div id="left_div" class="col-md-6">
-                    <!--Saisie du numéro, de la rue, d'un complément d'adresse si nécessaire,
-                    du code postal, puis de la ville, et du pays-->
-                    <p class="title" id="address"></p>
-                    <p class="error_message" id="error_mandatory"></p>
-                    <p class="label_form" id="numero"></p>
-                    <p class=label_form" id="star3">    </p>
-                    <p class="label_form" id="street"></p>
-                    <p class=label_form" id="star4"></p>    
-                    <br>
-                    <input type="text" name="loc_numero" id="numero_entered">
-                    <input type="text" name="loc_street" id="street_entered">
-                    <br>
-                    <p class="label_form" id="address_complement"></p>
-                    <input type="text" id="address_complement_entered" name="loc_ad_complement">
-                    <p class ="label_form" id="postal_code"></p>
-                    <p class="label_form" id="star5"></p>
-                    <input type="text" name="loc_code" id="postal_code_entered">
-                    <p class="label_form" id="city"></p>
-                    <p class="label_form" id="star6"></p>
-                    <input type="text" name="loc_city" id="city_entered">
-                    <p class="label_form" id="country"></p>
-                    <p class="label_form" id="star7"></p>
-                    <input type="text" name="loc_country" id="country_entered">
-                </div>
-                <div id="right_div" class="col-md-6">
-                    <!--TODO : carte interactive -->
-                </div>
-                <right><button id ="validation2" type="button" class="button small_button" onclick="" style="margin-bottom: 40px"></button></right>
+        <!--POPUP : modification des informations personnelles-->
+        <div class="modal fade" id="modification_form" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content modal_form">
+                    <!-- Croix de fermeture -->
+                    <button class="close" data-dismiss="modal">&times;</button>
+                    <!-- Titre -->
+                    <center>
+                        <p id="modification_title" class= "title"  style="margin-top: 40px"</p> 
+                    </center>
+                    <!-- Zone pour les messages d'erreurs -->
+                    <p id="modification_error" class="error_message"></p>
 
+                    <!-- Formulaire de modification -->
+                    <div class="modal-body">  
+                        <!-- Champ pour le nom -->
+                        <p class="label_form" id="name_label"></p>
+                        <input type="text" name ="name" id="name_input"> 
+                        <!-- Champ pour le prénom -->
+                        <p  class="label_form" id="firstname_label"></p>
+                        <input  type="text" name="firstname" id="firstname_input">
+                        <!-- Champ pour l'email -->
+                        <p  class="label_form" id="email_label"></p>
+                        <input  type="text" name="email" id="email_input">
+                        <!-- Bouton pour soumettre le formulaire de modification -->
+                        <center>
+                            <button id ="valid_modif" type="button" class="button small_button" onclick="modif();"></button>
+                        </center>
+                    </div>
+                </div>
             </div>
-
-            <!--3eme bloc : Upload du multimédia-->
-            <div id="upload2" class="row" style="visibility:hidden">
-                <div id="head" class="col-md-6">
-                    <p class="title" id="title3"></p>
-                    <p class="title" id="subtitle3"></p>
-                    <!--TODO : mettre image step-->
-                </div>
-                <div id ="content1" class="col-md-6">
-                    <!--Parcourir les fichiers de l'utilisateur pour uploader un multimédia-->
-                    <p class="label_form" id="input_choice"></p>
-                    <p class="label_form" id="star8"></p>
-                    <input type="file" name="file" id="file_entered">
-                </div>
-                <right><button id ="validation3" type="button" class="button small_button" onclick="" style="margin-bottom: 40px"></button></right>
-
-
-            </div>
-
         </div>
 
 
     </body>
 </html>
 
+                      

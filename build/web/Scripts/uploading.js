@@ -5,16 +5,7 @@ function load() {
 
 function loadText() {
     if (language == "fr") {
-        document.getElementById("star1").innerHTML = star_fr;
-        document.getElementById("star2").innerHTML = star_fr;
-        document.getElementById("star3").innerHTML = star_fr;
-        document.getElementById("star4").innerHTML = star_fr;
-        document.getElementById("star5").innerHTML = star_fr;
-        document.getElementById("star6").innerHTML = star_fr;
-        document.getElementById("star7").innerHTML = star_fr;
-        document.getElementById("star8").innerHTML = star_fr;
-
-
+      
         //UPLOAD GENERAL INFORMATION
         document.getElementById("title1").innerHTML = upload_title_fr;
         document.getElementById("subtitle1").innerHTML = upload_subtitle1_fr;
@@ -31,11 +22,10 @@ function loadText() {
         document.getElementById("upload_film").innerHTML = upload_source_movie_fr;
         document.getElementById("upload_serie").innerHTML = upload_source_serie_fr;
         document.getElementById("upload_game").innerHTML = upload_source_game_fr;
-        document.getElementById("validation1").innerHTML = validation_fr;
+        document.getElementById("next1").innerHTML = upload_next_fr;
+       
 
-        
-
-        //UPLOAD MERDIA 1 : LOCALISATION
+        //UPLOAD MEDIA 1 : LOCALISATION
         document.getElementById("title2").innerHTML = upload_title_fr;
         document.getElementById("subtitle2").innerHTML = upload_subtitle2_fr;
         document.getElementById("address").innerHTML = address_fr;
@@ -49,7 +39,7 @@ function loadText() {
         document.getElementById("title2").innerHTML = upload_title_fr;
         document.getElementById("validation2").innerHTML = validation_fr;
 
-        //UPLOAD MERDIA 2 : UPLOAD
+        //UPLOAD MEDIA 2 : UPLOAD
         document.getElementById("title3").innerHTML = upload_title_fr;
         document.getElementById("subtitle3").innerHTML = upload_subtitle3_fr;
         document.getElementById("input_choice").innerHTML = upload_choice_input_fr;

@@ -2,8 +2,6 @@
  * Définition des chaînes de caractères pour les pages HTML
  */
 
-
-
 //GENERAL
 var close_fr = "FERMER";
 var validation_fr = "VALIDER";
@@ -83,7 +81,6 @@ var upload_source_unknown_fr = "Indéterminé";
 var upload_source_movie_fr = "Film";
 var upload_source_serie_fr = "Série";
 var upload_source_game_fr = "Jeu Vidéo";
-
 var upload_subtitle2_fr = "Localisation";
 var address_fr = "SAISIR UNE ADRESSE";
 var numero_fr = "N°";
@@ -115,7 +112,7 @@ var film_fr = "FILM";
 var game_fr = "JEU";
 var serie_fr = "SERIE";
 var or_fr = "OU";
-var no_source_fr ="Aucune source ne correspond à cette recherche."
+var no_source_fr ="Aucune source ne correspond à cette recherche.";
 
 //Favoris
 var favorite2_fr="FAVORIS";
