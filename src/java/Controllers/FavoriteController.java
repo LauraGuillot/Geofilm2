@@ -33,32 +33,41 @@ public class FavoriteController {
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView get(HttpServletRequest request, HttpServletResponse response, @RequestParam("idco") String idco) {
-        //Résultat
-        ModelAndView result = new ModelAndView("favorite");
-
-        //Mise à jour des connexions dans la base de données
-        ConnectManager cm = ConnectManagerImpl.getInstance();
-        cm.checkConnection();
-        cm.updateConnection(cm.getByConnectId(idco));
 
         //Récupération de l'utilisateur
         PersonManager pm = PersonManagerImpl.getInstance();
         Person p = pm.findPerson(idco);
-        result.addObject("email", p.getPersonEmail());
-        result.addObject("nom", p.getPersonName());
-        result.addObject("prenom", p.getPersonFirstname());
-        result.addObject("id", p.getPersonId());
 
-        //Connexion de l'utilisateur 
-        result.addObject("idco", idco);
+        if (p != null) {
+            //Résultat
+            ModelAndView result = new ModelAndView("favorite");
 
-        //Récupération des multimédias favoris
-        LocationManager lm = LocationManagerImpl.getInstance();
-        MultimediaManager mm = MultimediaManagerImpl.getInstance();
-        ArrayList<Location> loc = lm.getFavorite(p);
-        result.addObject("locations", loc);
-        result.addObject("favorites", mm.getMultiByPos(loc));
+            //Mise à jour des connexions dans la base de données
+            ConnectManager cm = ConnectManagerImpl.getInstance();
+            cm.checkConnection();
+            cm.updateConnection(cm.getByConnectId(idco));
 
-        return result;
+            //Utilisateur
+            result.addObject("email", p.getPersonEmail());
+            result.addObject("nom", p.getPersonName());
+            result.addObject("prenom", p.getPersonFirstname());
+            result.addObject("id", p.getPersonId());
+
+            //Connexion de l'utilisateur 
+            result.addObject("idco", idco);
+
+            //Récupération des multimédias favoris
+            LocationManager lm = LocationManagerImpl.getInstance();
+            MultimediaManager mm = MultimediaManagerImpl.getInstance();
+            ArrayList<Location> loc = lm.getFavorite(p);
+            result.addObject("locations", loc);
+            result.addObject("favorites", mm.getMultiByPos(loc));
+
+            return result;
+        } else {
+            ModelAndView result = new ModelAndView("index");
+            result.addObject("idco", 0);
+            return result;
+        }
     }
 }

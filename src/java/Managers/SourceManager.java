@@ -33,5 +33,5 @@ public interface SourceManager {
      * @param time_end
      * @return 
      */
-    public Source createSource(String title, String type, String time_begin, String time_end);
+    public Integer createSource(String title, String type, String time_begin, String time_end);
 }

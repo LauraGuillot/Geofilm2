@@ -3,8 +3,8 @@ package Controllers;
 /**
  * ********************************************************************
  * Controller pour la connexion : accès à la carte interactive
- * -------------------------------------------------------------------- 
- * Last update : 01/02/2017
+ * -------------------------------------------------------------------- Last
+ * update : 01/02/2017
  * ********************************************************************
  */
 import Managers.ConnectManager;
@@ -51,32 +51,41 @@ public class ConnectController {
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView get(HttpServletRequest request, HttpServletResponse response, @RequestParam("idco") String idco) {
-        ModelAndView result = new ModelAndView("globalMap");
 
-        //Récupération de l'utilisateur
         PersonManager pm = PersonManagerImpl.getInstance();
         Person p = pm.findPerson(idco);
-        result.addObject("email", p.getPersonEmail());
-        result.addObject("nom", p.getPersonName());
-        result.addObject("prenom", p.getPersonFirstname());
-         result.addObject("id", p.getPersonId());
 
-        //Connexion de l'utilisateur 
-        result.addObject("idco", idco);
+        if (p != null) {
+            ModelAndView result = new ModelAndView("globalMap");
 
-        //Récupération des multimédias
-        MultimediaManager mm = MultimediaManagerImpl.getInstance();
-        LocationManager lm = LocationManagerImpl.getInstance();
-        ArrayList<Location> markers = lm.getMarkers();
-        result.addObject("markers", markers);
-        ArrayList<ArrayList<Multimedia>> multis = mm.getMultiByPos(markers);
-        result.addObject("multis", multis);
+            //Récupération de l'utilisateur
+            result.addObject("email", p.getPersonEmail());
+            result.addObject("nom", p.getPersonName());
+            result.addObject("prenom", p.getPersonFirstname());
+            result.addObject("id", p.getPersonId());
 
-        //Pour chaque multimédia : like, dislike et bad location
-        result.addObject("likes", mm.getLikes(multis));
-        result.addObject("dislikes", mm.getDislikes(multis));
-        result.addObject("badloc", mm.getBadLoc(multis));
+            //Connexion de l'utilisateur 
+            result.addObject("idco", idco);
 
-        return result;
+            //Récupération des multimédias
+            MultimediaManager mm = MultimediaManagerImpl.getInstance();
+            LocationManager lm = LocationManagerImpl.getInstance();
+            ArrayList<Location> markers = lm.getMarkers();
+            result.addObject("markers", markers);
+            ArrayList<ArrayList<Multimedia>> multis = mm.getMultiByPos(markers);
+            result.addObject("multis", multis);
+
+            //Pour chaque multimédia : like, dislike et bad location
+            result.addObject("likes", mm.getLikes(multis));
+            result.addObject("dislikes", mm.getDislikes(multis));
+            result.addObject("badloc", mm.getBadLoc(multis));
+
+            return result;
+
+        } else {
+            ModelAndView result = new ModelAndView("index");
+            result.addObject("idco", 0);
+            return result;
+        }
     }
 }

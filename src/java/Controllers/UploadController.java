@@ -11,8 +11,6 @@ import Managers.PersonManager;
 import Managers.PersonManagerImpl;
 import Managers.ConnectManager;
 import Managers.ConnectManagerImpl;
-import Managers.LocationManager;
-import Managers.LocationManagerImpl;
 import Objects.Person;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,24 +25,33 @@ public class UploadController {
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView get(HttpServletRequest request, HttpServletResponse response, @RequestParam("idco") String idco) {
-        ModelAndView result = new ModelAndView("uploading");
-
-        //Mise à jour des connexions dans la base de données
-        ConnectManager cm = ConnectManagerImpl.getInstance();
-        cm.checkConnection();
-        cm.updateConnection(cm.getByConnectId(idco));
 
         //Récupération de l'utilisateur
         PersonManager pm = PersonManagerImpl.getInstance();
         Person p = pm.findPerson(idco);
-        result.addObject("email", p.getPersonEmail());
-        result.addObject("nom", p.getPersonName());
-        result.addObject("prenom", p.getPersonFirstname());
-        result.addObject("id", p.getPersonId());
 
-        //Connexion de l'utilisateur 
-        result.addObject("idco", idco);
+        if (p != null) {
+            ModelAndView result = new ModelAndView("uploading");
 
-        return result;
+            //Mise à jour des connexions dans la base de données
+            ConnectManager cm = ConnectManagerImpl.getInstance();
+            cm.checkConnection();
+            cm.updateConnection(cm.getByConnectId(idco));
+
+            //Infos personnelles
+            result.addObject("email", p.getPersonEmail());
+            result.addObject("nom", p.getPersonName());
+            result.addObject("prenom", p.getPersonFirstname());
+            result.addObject("id", p.getPersonId());
+
+            //Connexion de l'utilisateur 
+            result.addObject("idco", idco);
+
+            return result;
+        } else {
+            ModelAndView result = new ModelAndView("index");
+            result.addObject("idco", 0);
+            return result;
+        }
     }
 }
