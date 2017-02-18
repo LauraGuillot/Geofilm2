@@ -6,9 +6,7 @@
 package Objects;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,14 +14,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Laura
+ * @author Paola
  */
 @Entity
 @Table(name = "source", catalog = "geofilm", schema = "geofilm")
@@ -32,7 +28,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Source.findAll", query = "SELECT s FROM Source s"),
     @NamedQuery(name = "Source.findBySourceId", query = "SELECT s FROM Source s WHERE s.sourceId = :sourceId"),
     @NamedQuery(name = "Source.findBySourceTitle", query = "SELECT s FROM Source s WHERE s.sourceTitle = :sourceTitle"),
-    @NamedQuery(name = "Source.findBySourceType", query = "SELECT s FROM Source s WHERE s.sourceType = :sourceType")})
+    @NamedQuery(name = "Source.findBySourceType", query = "SELECT s FROM Source s WHERE s.sourceType = :sourceType"),
+    @NamedQuery(name = "Source.findBySourceMultimediaStart", query = "SELECT s FROM Source s WHERE s.sourceMultimediaStart = :sourceMultimediaStart"),
+    @NamedQuery(name = "Source.findBySourceMultimediaEnd", query = "SELECT s FROM Source s WHERE s.sourceMultimediaEnd = :sourceMultimediaEnd")})
 public class Source implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,8 +44,10 @@ public class Source implements Serializable {
     private String sourceTitle;
     @Column(name = "source_type")
     private String sourceType;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sourceId")
-    private Collection<Multimedia> multimediaCollection;
+    @Column(name = "source_multimedia_start")
+    private String sourceMultimediaStart;
+    @Column (name = "source_multimedia_end")
+    private String sourceMultimediaEnd;
 
     public Source() {
     }
@@ -85,13 +85,20 @@ public class Source implements Serializable {
         this.sourceType = sourceType;
     }
 
-    @XmlTransient
-    public Collection<Multimedia> getMultimediaCollection() {
-        return multimediaCollection;
+    public String getSourceMultimediaStart() {
+        return sourceMultimediaStart;
     }
 
-    public void setMultimediaCollection(Collection<Multimedia> multimediaCollection) {
-        this.multimediaCollection = multimediaCollection;
+    public void setSourceMultimediaStart(String sourceMultimediaStart) {
+        this.sourceMultimediaStart = sourceMultimediaStart;
+    }
+
+    public String getSourceMultimediaEnd() {
+        return sourceMultimediaEnd;
+    }
+
+    public void setSourceMultimediaEnd(String sourceMultimediaEnd) {
+        this.sourceMultimediaEnd = sourceMultimediaEnd;
     }
 
     @Override

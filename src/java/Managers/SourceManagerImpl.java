@@ -69,5 +69,33 @@ public class SourceManagerImpl implements SourceManager {
         }
         return s;
     }
+    
+    /**
+     * TODO : récupérer l'id d'une source
+     */
+    
+    /**
+     * Créer une nouvelle source et renvoyer son id
+     * @param title
+     * @param type
+     * @param time_begin
+     * @param time_end 
+     */
+    @Override
+    public Integer createSource(String title, String type, String time_begin, String time_end){
+        Source s = new Source();
+        s.setSourceTitle(title);
+        s.setSourceType(type);
+        s.setSourceMultimediaEnd(time_end);
+        s.setSourceMultimediaStart(time_begin);
+
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(s);
+        em.getTransaction().commit();
+        
+        return s.getSourceId();
+        
+    }
 
 }

@@ -24,4 +24,14 @@ public interface SourceManager {
      * @return Liste de sources
      */
     public ArrayList<Source> getSources();
+    
+    /**
+     * Création d'une nouvelle source et renvoi de son ID
+     * @param title
+     * @param type
+     * @param time_begin
+     * @param time_end
+     * @return 
+     */
+    public Source createSource(String title, String type, String time_begin, String time_end);
 }
