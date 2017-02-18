@@ -109,6 +109,23 @@ public class PersonManagerImpl implements PersonManager {
         em.merge(p);
         em.getTransaction().commit();
     }
+    
+    /**
+     * Mise à jour du mot de passe d'une personne
+     *
+     * @param p Personne
+     * @param mdp Mot de passe
+     */
+    @Override
+    public void updateMdp(Person p, String mdp) {
+        //Mise à jour des infos
+        p.setPersonPassword(mdp);
+        //Update dans la base de données
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.merge(p);
+        em.getTransaction().commit();
+    }
 
     /**
      * Suppression d'un favoris

@@ -65,6 +65,8 @@ var remove_bad_location_fr = "Retirer les contenus mal géolocalisés"
 //Mot de passe oublié
 var password_title_fr = "MOT DE PASSE OUBLIE";
 var error_email_not_found_fr = "Cette adresse email est inconnue de notre base de données";
+var password_enter1_fr = "Veuillez entrer un nouveau mot de passe (6 caractères minimum) *";
+var password_correctly_changed_fr = "Le mot de passe a été correctement modifié.";
 
 //Upload d'un multimédia
 var upload_title_fr = "UPLOADER UN MULTIMEDIA";

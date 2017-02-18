@@ -167,6 +167,10 @@
                 <div class="modal-body">  
                      <p  class="label_form" id="password_forgotten_email_label"></p>
                     <input  type="text" name="email" id="password_forgotten_email">
+                    <p class="label_form" id="password_enter1"></p>
+                    <input type="text" name="password" id="password_new">
+                    <p class="label_form" id="password_enter2"></p>
+                    <input type="text" name="password_confirmed" id="password_new_confirmed">
                     
                     <p class="label_form_small" id="mandatory3"></p>
 
@@ -176,6 +180,23 @@
             </div>
         </div>
     </div>
+    
+    <!--POPUP : password forgotten : confirmed form -->
+    <div class="modal fade" id="password_forgotten_confirmed_form" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content modal_form">
+
+                <button class="close" data-dismiss="modal">&times;</button>
+                
+                <p id="password_title" class= "title"  style="margin-top: 40px"</p> 
+                <p id="password_correctly_changed" class="label_form"></p>
+
+                
+            </div>
+        </div>
+    </div>
+    
+    
     
     
     

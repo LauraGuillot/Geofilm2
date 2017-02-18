@@ -47,6 +47,14 @@ public interface PersonManager {
      * @param email Adresse Email
      */
     public void updateInfos(Person p, String name, String firstname, String email);
+    
+    /**
+     * Mise à jour du mot de passe d'une personne
+     *
+     * @param p Personne
+     * @param mdp Mot de passe
+     */
+    public void updateMdp(Person p, String mdp) ;
 
     /**
      * Suppression d'un favoris
