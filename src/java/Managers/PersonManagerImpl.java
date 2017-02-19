@@ -119,7 +119,7 @@ public class PersonManagerImpl implements PersonManager {
     @Override
     public void updateMdp(Person p, String mdp) {
         //Mise à jour des infos
-        p.setPersonPassword(mdp);
+        p.setPersonPassword(PasswordHash.hash(mdp));
         //Update dans la base de données
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();

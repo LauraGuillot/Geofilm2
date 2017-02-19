@@ -85,7 +85,7 @@ function upload1() {
 
             }
         };
-        var data = "id=" + multiid + "&" + "idco=" + idco + "&" + "type=" + type;
+        var data = "id=" + multiid + "&" + "idco=" + idco + "&" + "type=" + type_media;
         xhttp.open("GET", "UploadingServlet?" + data, true);
         xhttp.setRequestHeader("Content-Type", "text/html; charset=UTF-8");
         xhttp.send();

@@ -167,10 +167,10 @@
                 <div class="modal-body">  
                      <p  class="label_form" id="password_forgotten_email_label"></p>
                     <input  type="text" name="email" id="password_forgotten_email">
-                    <p class="label_form" id="password_enter1"></p>
-                    <input type="text" name="password" id="password_new">
-                    <p class="label_form" id="password_enter2"></p>
-                    <input type="text" name="password_confirmed" id="password_new_confirmed">
+                    <p class="label_form" name="password" id="password_enter1"></p>
+                    <input type="password" name="password_new" id="password_new">
+                    <p class="label_form" name="password_2" id="password_enter2"></p>
+                    <input type="password" name="password_confirmed" id="password_new_confirmed">
                     
                     <p class="label_form_small" id="mandatory3"></p>
 

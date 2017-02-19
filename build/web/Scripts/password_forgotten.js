@@ -30,29 +30,9 @@ function obtain_password() {
                 //Si l'adresse email est dans la base de données, on envoie les nouvelles infos à la servlet
                 if (answer == "true") {
 
-                    var form = document.createElement('form');
-                    form.method = "POST";
-                    form.action = "#password_modified_form";
-
-                    var c1 = document.createElement('input');
-                    c1.type = "hidden";
-                    c1.name = "email";
-                    c1.value = email;
-                    form.appendChild(c1);
-
-                    var c2 = document.createElement('input');
-                    c2.type = "hidden";
-                    c2.name = "mdp";
-                    c2.value = mdp;
-                    form.appendChild(c2);
-
-                    document.body.appendChild(form);
-                    form.submit();
+                    
                     $('#password_forgotten_form').modal('hide');
                     $('#password_modified_form').modal('show');
-
-
-
                     //Si l'addresse email n'est pas déjà dans la base de données :  
                 } else {
                     //Message d'erreur
@@ -61,8 +41,8 @@ function obtain_password() {
 
             }
         };
-        var data = "email=" + email;
-        xhttp.open("GET", "ControlInscriptionServlet?" + data, true);
+        var data = "email=" + email + "&" + "mdp=" + mdp;
+        xhttp.open("GET", "ModifPasswordServlet?" + data, true);
         xhttp.setRequestHeader("Content-Type", "text/html; charset=UTF-8");
         xhttp.send();
     }
@@ -83,7 +63,7 @@ function valid_email_mdp(email) {
         return true;
     } else {
         //Message d'erreur
-        document.getElementById("inscription_error").innerHTML = error_email_fr;
+        document.getElementById("password_forgotten_error").innerHTML = error_email_fr;
         return false;
     }
 }
@@ -110,6 +90,13 @@ function valid_new_password(mdp1, mdp2) {
     }
 }
 
+/**
+ * Vérification de la validité de l'email et du mot de passe
+ * @param {String} email
+ * @param {String} mdp1
+ * @param {String} mdp2
+ * @returns {Boolean}
+ */
 function valid_form_password(email, mdp1, mdp2) {
-    return valid_email_mdp(email) & valid_new_password(mdp1, mdp2);
+    return valid_email_mdp(email) && valid_new_password(mdp1, mdp2);
 }

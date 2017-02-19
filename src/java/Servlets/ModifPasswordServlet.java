@@ -38,28 +38,19 @@ public class ModifPasswordServlet extends HttpServlet {
 
         //On récupère les paramètres
         String email = request.getParameter("email");
-        String idco = request.getParameter("idco");
         String mdp = request.getParameter("mdp");
-
-        //Mise à jour des connexions
-        ConnectManager cm = ConnectManagerImpl.getInstance();
-        Connect c = cm.getByConnectId(idco);
-        cm.updateConnection(c);
-        cm.checkConnection();
 
         //On cherche l'existence de la personne associée au mail
         PersonManager pm = PersonManagerImpl.getInstance();
         Person p = pm.findPersonByEmail(email);
         Boolean b = (p != null); // Booléen vrai si une personne correspond à l'email
 
-        
-
         //Update : si oui, on met à jour les infos
         if (b) {
             pm.updateMdp(p, mdp);
         }
 
-        //Envoi de la réponse : booléen vrai si l'email n'est pas celui d'un autre utilisateur
+        //Envoi de la réponse : booléen vrai si l'email est déjà utilisé
         response.setContentType("text/html; charset=UTF-8");
         response.getWriter().write(b + "");
     }
