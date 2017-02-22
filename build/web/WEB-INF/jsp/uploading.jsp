@@ -103,29 +103,29 @@
 
                         <!--Saisie du type de multimédia-->
                         <br>
-                        <p class="error_message" id="error_multimedia_type"> </p>
+                        <p class="error_message" id="error_upload"> </p>
+                        <p class="error_message" id="error_test"></p>
                         <br>
                         <p class="label_form" style="display:inline-block!important;" id="upload_type_multimedia"></p>
 
                         <div style="display:inline-block!important" class="input_upload">
                             <label for="u_video" style="display:inline-block!important;"> </label>
-                            <input class="radio_marker" style="display:inline-block!important; margin-right:3px; margin-bottom:12px!important; width:30px;" type="radio" name="choix_type" id="u_video" value="v"><p style="display:inline-block!important; color:white;">Video</p>
+                            <input class="radio_marker" style="display:inline-block!important; margin-right:3px; margin-bottom:12px!important; width:30px;" type="radio" name="choix_type" id="u_video" ><p style="display:inline-block!important; color:white;">Video</p>
                         </div>
                         <div style="display:inline-block!important" class="input_upload">
                             <label for="u_sound" style="display:inline-block!important; color:white;"></label>
-                            <input class="radio_marker" style="display:inline-block!important; margin-right:5px; margin-bottom:12px!important; width:30px;" type="radio" name="choix_type" id="u_sound" value="s"><p style="display:inline-block!important; color:white;">Son</p>
+                            <input class="radio_marker" style="display:inline-block!important; margin-right:5px; margin-bottom:12px!important; width:30px;" type="radio" name="choix_type" id="u_sound" ><p style="display:inline-block!important; color:white;">Son</p>
                         </div>
                         <div style="display:inline-block!important" class="input_upload">
                             <label for="u_image" style="display:inline-block!important; color:white;"></label>
-                            <input class="radio_marker" style="display:inline-block!important; margin-right:5px; margin-bottom:12px!important; width:30px;" type="radio" name="choix_type" id="u_image" value="i"><p style="display:inline-block!important; color:white;">Image</p>
+                            <input class="radio_marker" style="display:inline-block!important; margin-right:5px; margin-bottom:12px!important; width:30px;" type="radio" name="choix_type" id="u_image" ><p style="display:inline-block!important; color:white;">Image</p>
                         </div>
                         <br>
 
                         <!--Saisie du titre de multimédia-->
                         <div class="input_upload">
-                            <p class="error_message" id="error_name"></p>
                             <p class="label_form" id="upload_title_multimedia"></p>
-                            <input style="width:500px!important;" type="text" name="titre" id="upload_title_entered"><!--id = id à retenir pour le fichier upload.js-->
+                            <input style="width:500px!important;" type="text" name="titre" id="upload_title_entered">
                         </div>
 
 
@@ -148,14 +148,13 @@
 
                         <!--Saisie des informations liées à la source (nom, type)-->
                         <div class="input_upload">
-                            <p class="error_message" id="error_source_type"></p>
                             <p class="label_form" id="upload_source"></p>
                             <select id="choice_source" name="choice" onchange="">
-                                <option selected id="upload_source_search">
-                                <option style="color:black!important" id="upload_source_unknown"></option>
-                                <option style="color:blacl!important" id="upload_film"></option>
-                                <option style="color:black!important" id="upload_serie"></option>
-                                <option style="color:black!important" id="upload_game"></option>
+                                <option selected value="none" id="upload_source_search">
+                                <option style="color:black!important" value="unknown" id="upload_source_unknown"></option>
+                                <option style="color:black!important" value="film" id="upload_film"></option>
+                                <option style="color:black!important" value="serie" id="upload_serie"></option>
+                                <option style="color:black!important" value="game" id="upload_game"></option>
                             </select>
                             
                         </div>
@@ -167,12 +166,12 @@
                     </div>
                     <div id="content_general2" class="col-md-6">
                         <!--TODO : renvoi du bouton suivant-->
-                        <right><button id ="next1" type="button" class="button small_button" href="#" onclick="valid_form_upload1();" style="margin-left:300px; margin-top: 500px"></button></right>
+                        <right><button id ="next1" type="button" class="button small_button" href="#" onclick="valid_form_upload1(getElementById('upload_title_entered'), getElementById('choice_source'),'content_general1', 'content_upload1');" style="margin-left:300px; margin-top: 500px"></button></right>
                     </div>
                 </div>
 
                 <!--Deucième bloc de saisie des informations de localisation-->
-                <div id="content_upload1" class="col-md-8" style="visibility:hidden;">
+                <div id="content_upload1" class="col-md-8" style="display:none;">
                     <div class="head">
                         <p class="title" id="title2"></p>
                         <p class="title" id="subtitle2"></p>
@@ -206,7 +205,7 @@
                 </div>
 
                 <!--3eme bloc : Upload du multimédia-->
-                <div class="content_upload2" style="visibility:hidden">
+                <div class="content_upload2" style="display:none">
                     <div class="head">
                         <p class="title" id="title3"></p>
                         <p class="title" id="subtitle3"></p>

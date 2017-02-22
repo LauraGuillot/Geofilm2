@@ -69,12 +69,13 @@ var password_enter1_fr = "Veuillez entrer un nouveau mot de passe (6 caractères
 var password_correctly_changed_fr = "Le mot de passe a été correctement modifié.";
 
 //Upload d'un multimédia
-var upload_title_fr = "UPLOADER UN MULTIMEDIA";
+var upload_contents_title_fr = "UPLOADER UN MULTIMEDIA";
 var upload_subtitle1_fr = "Informations générales";
 var upload_type_fr = "Type de contenu* :";
 var upload_video_fr = "Vidéo";
 var upload_image_fr = "Image";
 var upload_sound_fr = "Son";
+var upload_title_fr = "Titre *";
 var upload_description_fr = "Description";
 var upload_time_code_fr = "Entrez le début et la fin de la séquence :";
 var upload_time_begin_fr = "Début : ";
@@ -95,11 +96,14 @@ var postal_code_fr = "Code postal";
 var city_fr = "Ville";
 var country_fr = "Pays";
 var next_fr = "SUIVANT";
+var type_media = "Indéterminé";
 
 var upload_subtitle3_fr = "Ajout du fichier multimédia";
 var upload_choice_input_fr = "Choisissez un fichier multimédia :";
 
+var error_multimedia_name_fr = "Veuillez saisir le nom du multimédia";
 var error_multimedia_type_fr ="Veuillez sélectionner un type de multimédia";
+var error_source_type_fr = "Veuillez sélectionner une source pour le multimédia";
 var error_mandatory_fr = "Veuillez remplir les champs obligatoires *";
 
 //Visualisation d'un multimédia

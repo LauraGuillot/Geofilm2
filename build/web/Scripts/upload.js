@@ -1,3 +1,5 @@
+
+
 /**
  * Accès à la page d'upload
  * @returns {undefined}
@@ -95,30 +97,28 @@ function upload1() {
 /**
  * Vérifier qu'une valeur est entrée pour le type de multimédia (i.e. qu'une case est bien cochée)
  * et modifie la valeur de type_media en fonction du type de multimédia
- * @param {type} video
- * @param {type} sound
- * @param {type} image
  * @param {type} type_media
  * @returns {Boolean}
  */
-function valid_multimedia(video, sound, image, type_media) {
+function valid_multimedia(type_media) {
 
-    if (video == "v") {
+    if (document.getElementById("u_video").checked) {
         type_media = "Video";
+        document.getElementById("error_test").innerHTML = error_test_fr;
         return true;
-    }
-    if (image == "i") {
+    } else if (document.getElementById("u_image").checked) {
         type_media = "Image";
         return true;
-    }
-    if (sound == "s") {
+    } else if (document.getElementById("u_sound").checked) {
         type_media = "Sound";
         return true;
     } else {
-        document.getElementById("error_multimedia_type").innerHTML = error_multimedia_type_fr;
+        document.getElementById("error_upload").innerHTML = error_multimedia_type_fr;
         return false;
     }
 }
+
+
 
 
 /**
@@ -127,9 +127,9 @@ function valid_multimedia(video, sound, image, type_media) {
  * @returns {Boolean}
  */
 function valid_titre(name) {
-    if (name == "") {
+    if (name.value == "") {
 //Message d'erreur
-        document.getElementById("error_name").innerHTML = error_name_fr;
+        document.getElementById("error_upload").innerHTML = error_multimedia_name_fr;
         return false;
     } else {
         return true;
@@ -142,9 +142,9 @@ function valid_titre(name) {
  * @returns {Boolean}
  */
 function valid_source(type) {
-    if (type == upload_source_search_fr) {
+    if (type.value == "none") {
 //Message d'erreur
-        document.getElementById("error_source_type").innerHTML = error_multimedia_type_fr;
+        document.getElementById("error_upload").innerHTML = error_source_type_fr;
         return false;
     } else {
         return true;
@@ -176,10 +176,18 @@ function valid_number(number) {
  * @param {type} image
  * @param {type} title
  * @param {type} choice
+ * @param {type} elem1
+ * @param {type} elem2
  * @returns {Boolean}
  */
-function valid_form_upload1(video, sound, image, title, choice) {
-    return valid_multimedia(video, sound, image, "") && valid_name(title) && valid_source(choice);
+function valid_form_upload1(title, choice, elem1, elem2) {
+    if (valid_multimedia("") && valid_titre(title) && valid_source(choice)) {
+        visibilite_element(elem1);
+        visibilite_element(elem2);
+        return true;
+    } else {
+        return false;
+    }
 }
 
 /**Validation du second formulaire d'upload (localisation de la vidéo)
@@ -192,4 +200,21 @@ function valid_form_upload1(video, sound, image, title, choice) {
  */
 function valid_form_upload2(number, street, postal_code, city, country) {
     return valid_number(number) && valid_number(street) && valid_number(postal_code) && valid_number(city) && valid_number(country);
+}
+
+/**
+ * Rendre visible ou invisible un élément de la page HTM
+ * @param {type} thingId Element que l'on veut rendre visible ou non
+ * @returns {undefined}
+ */
+function visibilite_element(thingId) {
+
+    var targetElement;
+    targetElement = document.getElementById(thingId);
+    if (targetElement.style.display == "none")
+    {
+        targetElement.style.display = "";
+    } else {
+        targetElement.style.display = "none";
+    }
 }

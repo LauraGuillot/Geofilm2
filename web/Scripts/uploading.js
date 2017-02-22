@@ -7,10 +7,10 @@ function loadText() {
     if (language == "fr") {
       
         //UPLOAD GENERAL INFORMATION
-        document.getElementById("title1").innerHTML = upload_title_fr;
+        document.getElementById("title1").innerHTML = upload_contents_title_fr;
         document.getElementById("subtitle1").innerHTML = upload_subtitle1_fr;
         document.getElementById("upload_type_multimedia").innerHTML = upload_type_fr;
-        document.getElementById("upload_title_multimedia").innerHTML = title_fr;
+        document.getElementById("upload_title_multimedia").innerHTML = upload_title_fr;
         document.getElementById("upload_description").innerHTML = upload_description_fr;
         document.getElementById("upload_source").innerHTML = upload_source_fr;
         document.getElementById("upload_source_search").innerHTML = upload_source_search_fr;
