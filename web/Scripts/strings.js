@@ -71,7 +71,7 @@ var password_correctly_changed_fr = "Le mot de passe a été correctement modifi
 //Upload d'un multimédia
 var upload_contents_title_fr = "UPLOADER UN MULTIMEDIA";
 var upload_subtitle1_fr = "Informations générales";
-var upload_type_fr = "Type de contenu* :";
+var upload_type_fr = "Type de contenu : *";
 var upload_video_fr = "Vidéo";
 var upload_image_fr = "Image";
 var upload_sound_fr = "Son";
@@ -89,12 +89,12 @@ var upload_source_serie_fr = "Série";
 var upload_source_game_fr = "Jeu Vidéo";
 var upload_subtitle2_fr = "Localisation";
 var address_fr = "SAISIR UNE ADRESSE";
-var numero_fr = "N°";
-var street_fr = "Rue";
+var numero_fr = "N° *";
+var street_fr = "Rue *";
 var address_complement_fr = "Complément d'adresse";
-var postal_code_fr = "Code postal";
-var city_fr = "Ville";
-var country_fr = "Pays";
+var postal_code_fr = "Code postal *";
+var city_fr = "Ville *";
+var country_fr = "Pays *";
 var next_fr = "SUIVANT";
 var type_media = "Indéterminé";
 

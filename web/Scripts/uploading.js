@@ -5,7 +5,20 @@ function load() {
 
 function loadText() {
     if (language == "fr") {
-      
+        //NAVIGATION
+        document.getElementById("global_map").innerHTML = global_map_fr;
+        document.getElementById("route_map").innerHTML = route_map_fr;
+        document.getElementById("modification_link").innerHTML = modification_fr;
+        document.getElementById("favorite_link").innerHTML = favorite_fr;
+
+        //MODIFICATION DES INFORMATIONS PERSONNELLES
+        document.getElementById("name_label").innerHTML = name_fr;
+        document.getElementById("firstname_label").innerHTML = firstname_fr;
+        document.getElementById("email_label").innerHTML = email_fr;
+        document.getElementById("modification_title").innerHTML = modif_infos_fr;
+        document.getElementById("valid_modif").innerHTML = validation_fr;
+
+
         //UPLOAD GENERAL INFORMATION
         document.getElementById("title1").innerHTML = upload_contents_title_fr;
         document.getElementById("subtitle1").innerHTML = upload_subtitle1_fr;
@@ -23,10 +36,10 @@ function loadText() {
         document.getElementById("upload_time_code").innerHTML = upload_time_code_fr;
         document.getElementById("upload_time_begin").innerHTML = upload_time_begin_fr;
         document.getElementById("upload_time_end").innerHTML = upload_time_end_fr;
-       
+
 
         //UPLOAD MEDIA 1 : LOCALISATION
-        document.getElementById("title2").innerHTML = upload_title_fr;
+        document.getElementById("title2").innerHTML = upload_contents_title_fr;
         document.getElementById("subtitle2").innerHTML = upload_subtitle2_fr;
         document.getElementById("address").innerHTML = address_fr;
         document.getElementById("numero").innerHTML = numero_fr;
@@ -36,10 +49,9 @@ function loadText() {
         document.getElementById("city").innerHTML = city_fr;
         document.getElementById("country").innerHTML = country_fr;
         document.getElementById("next2").innerHTML = next_fr;
-        document.getElementById("title2").innerHTML = upload_title_fr;
 
         //UPLOAD MEDIA 2 : UPLOAD
-        document.getElementById("title3").innerHTML = upload_title_fr;
+        document.getElementById("title3").innerHTML = upload_contents_title_fr;
         document.getElementById("subtitle3").innerHTML = upload_subtitle3_fr;
         document.getElementById("input_choice").innerHTML = upload_choice_input_fr;
         document.getElementById("validation3").innerHTML = validation_fr;

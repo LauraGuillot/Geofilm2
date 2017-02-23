@@ -104,7 +104,6 @@ function valid_multimedia(type_media) {
 
     if (document.getElementById("u_video").checked) {
         type_media = "Video";
-        document.getElementById("error_test").innerHTML = error_test_fr;
         return true;
     } else if (document.getElementById("u_image").checked) {
         type_media = "Image";

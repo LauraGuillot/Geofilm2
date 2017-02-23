@@ -41,11 +41,12 @@
         <script src="Scripts/load_map_2.js"></script> <!--TODO : load map 3 (petite map sur le côté ?-->
 
         <!-- SCRIPTS -->
-           <script src="Scripts/navigation.js"></script>
+        <script src="Scripts/navigation.js"></script>
         <script src="Scripts/deconnect.js"></script>
         <script src="Scripts/modif_infos_perso.js"></script>
         <script src="Scripts/uploading.js"></script>
         <script src="Scripts/upload.js"></script>
+
 
     </head>
     <body onload="load();">
@@ -63,19 +64,14 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="navbar-left" ><a href="#" id="logo"><img src="Ressources/logo1.png" width="100px" ></a></li> <!-- LOGO-->
-                    <li class="navbar-left onglet" ><a onclick="getGlobalMap();" class=" onglet " id="global_map"></a></li> <!-- ONGLET GLOBAL MAP-->
-                    <li class="navbar-left onglet" ><a onclick="getRouteMap();" class="onglet " id="route_map"></a></li> <!-- ONGLET ROUTE MAP-->
+                    <li class="navbar-left onglet" ><a href="#" class=" onglet onglet_actif" id="global_map"></a></li>
+                    <li class="navbar-left onglet" ><a onclick="getRouteMap();" class="onglet" id="route_map"></a></li>
                     <li class="navbar-right"><a href="#"><img id="connection" src="Ressources/connection.png" onMouseOver="this.src = 'Ressources/connection_over.png'" onMouseOut="this.src = 'Ressources/connection.png'" width="25px" onclick="deconnect();"></a></li><!-- Connexion-->
-                    <!-- INFORMATION PERSONNELLES-->
                     <li class="navbar-right" style="margin-right:20px; border-left: solid white 1px; padding-left:6px;">
-                        <!-- nom prénom-->
                         <p class="info_perso" id="info_name" style="margin-top:10px;font-weight:bold;"><c:out value="${prenom}"/> <c:out value="${nom}"/></p>
-                        <!-- email-->
                         <p class="info_perso"id="info_email" ><c:out value="${email}"/></p>
-                        <!-- lien de modificatio -->
                         <a id="modification_link" href="#" onclick="pop_info();"></a>
                     </li>
-                    <!-- ONGLET FAVORIS-->
                     <li class="navbar-right">
                         <a href="#" onclick="getFavorite();" onmouseover="favoriteOver();" onmouseout="favoriteOut();" style="padding-right:6px;padding-top:9px;">
                             <img id="star" style="padding-bottom:4px;" src="Ressources/star.png" width="30px" >
@@ -104,7 +100,6 @@
                         <!--Saisie du type de multimédia-->
                         <br>
                         <p class="error_message" id="error_upload"> </p>
-                        <p class="error_message" id="error_test"></p>
                         <br>
                         <p class="label_form" style="display:inline-block!important;" id="upload_type_multimedia"></p>
 
@@ -134,7 +129,7 @@
                             <p class="label_form" id="upload_description"></p>
                             <input style="width:500px!important;" type="text" name ="description" id="upload_description_entered">
                         </div>
-                        
+
                         <!--Saisie du time code (surtout s'il s'agit d'une séquence video)-->
                         <div class="input_upload">
                             <p class="label_form" id="upload_time_code"></p>
@@ -142,7 +137,7 @@
                             <input style="display:inline-block!important; width:100px!important;" id="time_begin" type="time" name="begin">
                             <p class="label_form" style="display:inline-block!important" id="upload_time_end"></p>
                             <input style="display:inline-block!important; width:100px!important;" id="time_end" type="time" name="end"> <!--A récupérer sous la forme d'une chaine de caracatères-->
-                            
+
                         </div>
 
 
@@ -156,7 +151,7 @@
                                 <option style="color:black!important" value="serie" id="upload_serie"></option>
                                 <option style="color:black!important" value="game" id="upload_game"></option>
                             </select>
-                            
+
                         </div>
                         <br>
                         <div class="input_upload">
@@ -165,29 +160,32 @@
                         </div>
                     </div>
                     <div id="content_general2" class="col-md-6">
-                        <!--TODO : renvoi du bouton suivant-->
-                        <right><button id ="next1" type="button" class="button small_button" href="#" onclick="valid_form_upload1(getElementById('upload_title_entered'), getElementById('choice_source'),'content_general1', 'content_upload1');" style="margin-left:300px; margin-top: 500px"></button></right>
+                        <right><button id ="next1" type="button" class="button small_button" href="#" onclick="valid_form_upload1(getElementById('upload_title_entered'), getElementById('choice_source'), 'content_general', 'content_upload1');" style="margin-left:300px; margin-top: 500px"></button></right>
                     </div>
                 </div>
 
                 <!--Deucième bloc de saisie des informations de localisation-->
-                <div id="content_upload1" class="col-md-8" style="display:none;">
+                <div id="content_upload1" class="uploading" style="display:none;">
                     <div class="head">
-                        <p class="title" id="title2"></p>
-                        <p class="title" id="subtitle2"></p>
+                        <p class="title" style="padding-bottom: 0px!important" id="title2"></p>
+                        <p class="title" style="font-style:italic" id="subtitle2"></p>
                         <!--TODO : mettre image step-->
                     </div>
                     <div id="left_div" class="col-md-6">
+                        <br>
                         <!--Saisie du numéro, de la rue, d'un complément d'adresse si nécessaire,
                         du code postal, puis de la ville, et du pays-->
-                        <p class="title" id="address"></p>
+                        <p class="title" id="address" style="color:white;size:10px;;" ></p>
                         <p class="error_message" id="error_mandatory"></p>
-                        <p class="label_form" id="numero"></p>
-                        <p class="label_form" id="street"></p> 
-                        <br>
-                        <input type="text" name="loc_numero" id="numero_entered">
-                        <input type="text" name="loc_street" id="street_entered">
-                        <br>
+                        <div class="col-md-4" style="padding-left:0px!important">
+                            <p class="label_form" id="numero"></p>
+                            <input type="text" name="loc_numero" id="numero_entered" style="width:80px!important">
+                        </div>
+                        <div class="col-md-8" style="margin-left:0px!important">
+                            <p class="label_form" id="street" ></p>
+                            <input type="text" name="loc_street" id="street_entered">
+                        </div>
+
                         <p class="label_form" id="address_complement"></p>
                         <input type="text" id="address_complement_entered" name="loc_ad_complement">
                         <p class ="label_form" id="postal_code"></p>
@@ -200,8 +198,11 @@
                     <div id="right_div" class="col-md-6">
                         <!--TODO : carte interactive -->
                     </div>
-                    <right><button id ="next2" type="button" class="button small_button" onclick="" style="margin-bottom: 40px"></button></right>
 
+                    <div id="content_upload2" class="col-md-6">
+                        <!--TODO : renvoi du bouton suivant-->
+                        <right><button id ="next2" type="button" class="button small_button" href="#" onclick="valid_form_upload2(getElementById('upload_title_entered'), getElementById('choice_source'), 'content_general', 'content_upload1');" style="margin-left:300px; margin-top: 500px"></button></right>
+                    </div>
                 </div>
 
                 <!--3eme bloc : Upload du multimédia-->
@@ -260,4 +261,3 @@
     </body>
 </html>
 
-                      
