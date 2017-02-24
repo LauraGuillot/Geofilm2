@@ -1,6 +1,5 @@
 //Stockage des marqueurs de la carte
 var markers = [];
-
 /**
  * Récupération des sources qui correspondent à un type donné et affichage
  * @returns {Liste de sources}
@@ -9,10 +8,8 @@ var markers = [];
 function search_source_type() {
     //Nombre total de source
     var cpt = document.getElementById("nbSources").value;
-
     //Type désiré
     var type = document.getElementById("select_source").value;
-
     //On récupère toutes les sources de ce type
     var sources = [];
     if (language == "fr" && type != chose_source_fr) {
@@ -30,7 +27,6 @@ function search_source_type() {
 
     //Affichage
     displaySource(sources);
-
     return sources;
 }
 
@@ -43,7 +39,6 @@ function search_key_word() {
     //TRI PAR TYPE
     var type = document.getElementById("select_source").value;
     var sources = search_source_type();
-
     //Si aucun type n'a été choisi, on prend toutes les sources
     if (sources.length == 0 && type === chose_source_fr) {
         var cpt = document.getElementById("nbSources").value;
@@ -67,7 +62,6 @@ function search_key_word() {
     sources.sort(function (a, b) {
         return a.score < b.score;
     });
-
     //Affichage
     displaySource(sources);
 }
@@ -83,7 +77,6 @@ function displaySource(sources) {
 
     var div = document.getElementById("result");
     div.innerHTML = "";
-
     //Si pas de source : message
     if (sources.length === 0) {
         div.innerHTML = no_source_fr;
@@ -126,17 +119,14 @@ function delegateOpenSource(i) {
 function openSource(i) {
     //On efface les précédents markers
     removeMarkers();
-
     //On récupère toutes les positions 
     var pos = [];
     var cpt = document.getElementById("nbPos" + i).value;
     for (var j = 0; j < cpt; j++) {
         var geom = document.getElementById("src" + i + "_pos" + j).value;
-
         var p = new Object();
         p.geom = geom;
         p.index = j;
-        
         pos.push(p);
     }
 
@@ -170,12 +160,8 @@ function displayMarkers(i, pos) {
         var y = pt[1];
         var popup = preparePopUp(i, pos[j].index);
         markers.push(addMarker(x, y, popup));
-
-        if (j == 0) {
-            //Centrage
-            map.flyTo({center: [y, x], zoom: 7});
-        }
     }
+    centerMap(pos);
 }
 
 /**
@@ -192,7 +178,6 @@ function addMarker(x, y, popup) {
     el.style.backgroundImage = 'url(Ressources/marker_red.png)';
     el.style.width = '25px';
     el.style.height = '35px';
-
     //Ajout du marker
     var marker = new mapboxgl.Marker(el, {offset: [0, 0]})
             .setLngLat([y, x])
@@ -211,7 +196,6 @@ function preparePopUp(i, j) {
 
     //Mise en place du header
     var html = header(i, j);
-
     //Pour chaque multimédia, on ajoute un lien
     html += '<div class="links" id="multis' + i + '_' + j + '">';
     var cpt = document.getElementById("nbMulti" + i + "_" + j).value;
@@ -220,7 +204,6 @@ function preparePopUp(i, j) {
         html = html + li;
     }
     html += '</div>';
-
     return new mapboxgl.Popup({offset: 25}).setHTML(html);
 }
 
@@ -233,13 +216,11 @@ function preparePopUp(i, j) {
  */
 function getLinkMulti(i, j, k) {
     var html = '';
-
     var title = document.getElementById("src" + i + "_pos" + j + "_multi" + k + "_title").value;
     var id = document.getElementById("src" + i + "_pos" + j + "_multi" + k + "_id").value;
     var publisher = document.getElementById("src" + i + "_pos" + j + "_multi" + k + "_publisher").value;
     var date = document.getElementById("src" + i + "_pos" + j + "_multi" + k + "_uploaddate").value;
     var type = document.getElementById("src" + i + "_pos" + j + "_multi" + k + "_type").value;
-
     html += '<a class="link_marker"  onclick="openMult(' + i + ',' + j + ',' + k + ',' + id + ')">';
     html += '<div class="p_group"><p class="link_title">';
     html += title;
@@ -248,7 +229,6 @@ function getLinkMulti(i, j, k) {
     html += by_fr + publisher + the_fr + date;
     html += '</p></div>';
     html += '</a>';
-
     return html;
 }
 
@@ -260,48 +240,37 @@ function getLinkMulti(i, j, k) {
  */
 function header(i, j) {
     var html = '';
-
     html += '<p class="text">' + sort_by_fr + '</p>';
-
     html += "<div class=\"checkbox_pop\">";
     html += "<label><input id=\"title_" + i + "_" + j + "\" class=\"checkbox_marker\" type=\"checkbox\" name=\"title\" value=\"title\" onclick=\"sort(" + i + "," + j + ")\">";
     html += title_fr + "</label>";
     html += "</div>";
-
     html += "<div class=\"checkbox_pop\">";
     html += "<label><input id=\"date_" + i + "_" + j + "\" class=\"checkbox_marker\" type=\"checkbox\" name=\"date\" value=\"date\" onclick=\"sort(" + i + "," + j + ")\">";
     html += date_fr + "</label>";
     html += "</div>";
-
     html += "<div class=\"checkbox_pop\">";
     html += "<label><input id=\"likes_" + i + "_" + j + "\" class=\"checkbox_marker\" type=\"checkbox\" name=\"likes\" value=\"likes\" onclick=\"sort(" + i + "," + j + ")\">";
     html += likes_fr + "</label>";
     html += "</div>";
-
     html += "<br><p class=\"text\">" + source_type_fr + "</p>";
-
     html += "<div class=\"checkbox_pop\">";
     html += "<label><input  id=\"video_" + i + "_" + j + "\" class=\"checkbox_marker\" type=\"checkbox\" name=\"video\" value=\"video\" onclick=\"sort(" + i + "," + j + ")\" checked>";
     html += video_fr + "</label>";
     html += "</div>";
-
     html += "<div class=\"checkbox_pop\">";
     html += "<label><input id=\"image_" + i + "_" + j + "\" class=\"checkbox_marker\" type=\"checkbox\" name=\"image\" value=\"image\" onclick=\"sort(" + i + "," + j + ")\" checked>";
     html += image_fr + "</label>";
     html += "</div>";
-
     html += "<div class=\"checkbox_pop\">";
     html += "<label><input id=\"sound_" + i + "_" + j + "\" class=\"checkbox_marker\" type=\"checkbox\" name=\"sound\" value=\"sound\" onclick=\"sort(" + i + "," + j + ")\"checked>";
     html += sound_fr + "</label>";
     html += "</div>";
-
     html += "<br><div class=\"checkbox_pop\">";
     html += "<label><input id=\"badloc_" + i + "_" + j + "\" class=\"checkbox_marker\" type=\"checkbox\" name=\"badloc\" value=\"badloc\" onclick=\"sort(" + i + "," + j + ")\">";
     html += remove_bad_location_fr + "</label>";
     html += "</div>";
-
     html += "<HR align=center size=5 width=\"90%\">";
-
     return html;
 }
 
@@ -325,4 +294,77 @@ function computeScore(title, key) {
     }
     return score;
 }
+
+/**
+ * Centrage d'une carte sur un ensemble de positions
+ * @param {array} pos - Liste de positions
+ * @returns {void}
+ */
+function centerMap(pos) {
+    //Liste de points
+    var points = extractPoints(pos);
+
+    //Bounding box
+    var lat_min = points[0].lat;
+    var long_min = points[0].long;
+    var lat_max = points[0].lat;
+    var long_max = points[0].long;
+
+    //Obtention de la bounding box
+    for (var i = 1; i < points.length; i++) {
+        var lat = points[i].lat;
+        var long = points[i].long;
+
+        if (lat_min > lat) {
+            lat_min = lat;
+        }
+        if (lat_max < lat) {
+            lat_max = lat;
+        }
+        if (long_min > long) {
+            long_min = long;
+        }
+        if (long_max < long) {
+            long_max = long;
+        }
+    }
+
+    //Centrage
+    /*  map.fitBounds([[
+     parseFloat(long_min),
+     parseFloat(lat_min)
+     ], [
+     parseFloat(long_max),
+     parseFloat(lat_max)
+     ]], {padding: 50});*/
+    fitBounds([[long_min, lat_min], [long_max, lat_max]]);
+}
+
+/**
+ * Obtenir une liste de points à partir d'une liste de géométries
+ * @param {type} pos - Liste de position
+ * @returns {Array|extractPoints.points}
+ */
+function extractPoints(pos) {
+    var points = [];
+    for (var i = 0; i < pos.length; i++) {
+        var p = new Object();
+        var geom = pos[i].geom;
+        geom = geom.substring(6, geom.length - 1);
+        var pt = geom.split(",");
+        p.lat = pt[0];
+        p.long = pt[1];
+        points.push(p);
+    }
+    return points;
+}
+
+function fitBounds(boundsArray) {
+    var bounds = new mapboxgl.LngLatBounds();
+    boundsArray.forEach(function (item) {
+        bounds.extend(item);
+    });
+    map.fitBounds(bounds, {padding: 100});
+}
+
 
