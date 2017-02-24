@@ -36,7 +36,6 @@ function initFavorite() {
             favorites.push(m);
         }
     }
-
     //Affichage 
     displayFavorite(favorites);
 }

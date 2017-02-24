@@ -158,12 +158,27 @@ function getLinkMulti(i, j) {
     var type = document.getElementById("pos" + i + "_multi" + j + "_type").value;
 
     html += '<a class="link_marker"  onclick="openMulti(' + i + ',' + j + ')">';
-    html += '<div class="p_group"><p class="link_title">';
+    html += '<div class="p_group">';
+
+    switch (type) {
+        case 'VIDEO':
+            html += "<img class=\"icon_video\" src=\"Ressources/video.png\"/>";
+            break;
+        case 'IMAGE':
+            html += "<img class=\"icon_image\" src=\"Ressources/image.png\"/>";
+            break;
+        case 'SON':
+            html += "<img class=\"icon_sound\" src=\"Ressources/sound.png\"/>";
+            break;
+    }
+
+    html += '<div class="p">';
+    html += '<p class = "link_title" > ';
     html += title;
     html += '</p>';
     html += '<p class="link_info">';
     html += by_fr + publisher + the_fr + date;
-    html += '</p></div>';
+    html += '</p></div></div>';
     html += '</a>';
 
     return html;
