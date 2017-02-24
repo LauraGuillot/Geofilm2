@@ -19,10 +19,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Laura
- */
 @WebServlet(name = "LikeServlet", urlPatterns = {"/LikeServlet"})
 public class LikeServlet extends HttpServlet {
 

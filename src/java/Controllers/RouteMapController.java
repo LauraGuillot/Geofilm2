@@ -29,10 +29,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-/**
- *
- * @author Laura
- */
 @Controller
 public class RouteMapController {
 
@@ -43,6 +39,7 @@ public class RouteMapController {
         PersonManager pm = PersonManagerImpl.getInstance();
         Person p = pm.findPerson(idco);
 
+        //Si la connexion est valide : on renvoie la carte
         if (p != null) {
 
             //Résultat
@@ -80,6 +77,8 @@ public class RouteMapController {
             result.addObject("badloc", mm.getBadLocSource(multis));
 
             return result;
+            
+        //Si la connexion est invalide : retour sur la page d'accueil
         } else {
             ModelAndView result = new ModelAndView("index");
             result.addObject("idco", 0);

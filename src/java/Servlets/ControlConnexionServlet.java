@@ -12,10 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Laura
- */
 @WebServlet(name = "ControlConnexionServlet", urlPatterns = {"/ControlConnexionServlet"})
 public class ControlConnexionServlet extends HttpServlet {
 

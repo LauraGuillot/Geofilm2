@@ -14,10 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Laura
- */
 @WebServlet(name = "ControlInscriptionServlet", urlPatterns = {"/ControlInscriptionServlet"})
 public class ControlInscriptionServlet extends HttpServlet {
 

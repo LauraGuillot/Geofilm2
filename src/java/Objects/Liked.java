@@ -1,7 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* Classe Liked.java
+  * ------------------------------------------------------------------------------
+  * Objet de la base de données
+  * Un objet 'Liked' désigne un like fait par un utilisateur sur un multimédia.
+  * Il comporte donc l'identifiant de la personne et celui du multimédia concerné. 
+  * Il a aussi un type : 'like' ou 'dislike'
  */
 package Objects;
 
@@ -17,10 +19,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author Laura
- */
 @Entity
 @Table(name = "liked", catalog = "geofilm", schema = "geofilm")
 @XmlRootElement
@@ -116,5 +114,5 @@ public class Liked implements Serializable {
     public String toString() {
         return "Objects.Liked[ likedPK=" + likedPK + " ]";
     }
-    
+
 }

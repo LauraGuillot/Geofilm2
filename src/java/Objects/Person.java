@@ -1,7 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Classe Person.java
+  * ------------------------------------------------------------------------------
+  * Objet de la base de données
+  * Une personne désigne tout utilisateur de l'application. 
+  * Elle est caractérisée par un identifiant, un nom, un prénom, un email (qui est unique),un mot de passe hashé.
  */
 package Objects;
 
@@ -21,10 +23,6 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author Laura
- */
 @Entity
 @Table(name = "person", catalog = "geofilm", schema = "geofilm")
 @XmlRootElement
@@ -190,5 +188,5 @@ public class Person implements Serializable {
     public String toString() {
         return "Objects.Person[ personId=" + personId + " ]";
     }
-    
+
 }

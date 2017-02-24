@@ -18,10 +18,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Laura
- */
 @WebServlet(name = "AddFavoriteServlet", urlPatterns = {"/AddFavoriteServlet"})
 public class AddFavoriteServlet extends HttpServlet {
 

@@ -2,8 +2,6 @@
  * ********************************************************************
  * Class LocationManagementImpl
  * Gestion des localisations
- * --------------------------------------------------------------------
- * Last update : 29/01/2017
  *********************************************************************
  */
 package Managers;
@@ -42,6 +40,7 @@ public class LocationManagerImpl implements LocationManager {
      *
      * @return Liste de positions
      */
+    @Override
     public ArrayList<Location> getMarkers() {
         ArrayList<Location> l = new ArrayList<>();
 
@@ -103,7 +102,7 @@ public class LocationManagerImpl implements LocationManager {
      * lesquelles il y a des multimédias de cette source
      *
      * @param s Liste de sources
-     * @return Liste de liste de position
+     * @return Liste de liste de positions
      */
     @Override
     public ArrayList<ArrayList<Location>> getLocationForSources(ArrayList<Source> s) {

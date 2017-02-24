@@ -2,8 +2,6 @@
  * ********************************************************************
  * Class ConnectManagementImpl
  * Gestion des connexions
- * --------------------------------------------------------------------
- * Last update : 29/01/2017
  *********************************************************************
  */
 package Managers;
@@ -232,7 +230,5 @@ public class ConnectManagerImpl implements ConnectManager {
         } else {
             return PasswordHash.match(mdp, ((Person) l.get(0)).getPersonPassword());
         }
-
     }
-
 }

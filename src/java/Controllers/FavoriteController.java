@@ -24,10 +24,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-/**
- *
- * @author Laura
- */
 @Controller
 public class FavoriteController {
 
@@ -38,7 +34,9 @@ public class FavoriteController {
         PersonManager pm = PersonManagerImpl.getInstance();
         Person p = pm.findPerson(idco);
 
+        //Si la connexion est valide : on renvoie les favoris
         if (p != null) {
+            
             //Résultat
             ModelAndView result = new ModelAndView("favorite");
 
@@ -64,6 +62,8 @@ public class FavoriteController {
             result.addObject("favorites", mm.getMultiByPos(loc));
 
             return result;
+
+            //Si la connexion est invalide, on renvoie la page d'accueil
         } else {
             ModelAndView result = new ModelAndView("index");
             result.addObject("idco", 0);

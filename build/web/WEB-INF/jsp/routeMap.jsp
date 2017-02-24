@@ -121,7 +121,7 @@
                         <p class="info_perso" id="info_name" style="margin-top:10px;font-weight:bold;"><c:out value="${prenom}"/> <c:out value="${nom}"/></p>
                         <!-- email-->
                         <p class="info_perso"id="info_email" ><c:out value="${email}"/></p>
-                        <!-- lien de modificatio -->
+                        <!-- lien de modification -->
                         <a id="modification_link" href="#" onclick="pop_info();"></a>
                     </li>
                     <!-- ONGLET FAVORIS-->
@@ -175,7 +175,7 @@
             <div class="modal-dialog modal-sm">
                 <div class="modal-content modal_form">
                     <!-- Croix de fermeture -->
-                    <button class="close close1" data-dismiss="modal">&times;</button>
+                    <button class="close" data-dismiss="modal">&times;</button>
                     <!-- Champ caché pour l'id du multimédia ouvert -->
                     <input type="hidden" id="multi_open" value=""/>
 

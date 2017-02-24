@@ -2,8 +2,6 @@
  * ********************************************************************
  * Class MultimediaManagementImpl
  * Gestion des multimédias
- * --------------------------------------------------------------------
- * Last update : 29/01/2017
  *********************************************************************
  */
 package Managers;
@@ -52,18 +50,18 @@ public class MultimediaManagerImpl implements MultimediaManager {
     public ArrayList<ArrayList<Multimedia>> getMultiByPos(ArrayList<Location> pos) {
         ArrayList<ArrayList<Multimedia>> mult = new ArrayList<>();
 
+        //Pour chaque position de la liste, on récupère les multimédias associés
         for (Location loc : pos) {
             ArrayList<Multimedia> m = new ArrayList<>();
-
+            //Requête
             EntityManager em = emf.createEntityManager();
             Query q = em.createQuery("SELECT m FROM Multimedia m WHERE  m.locationId=:loc");
             q.setParameter("loc", loc);
             List l = q.getResultList();
-
+            //Tranformation en arraylist
             for (Object o : l) {
                 m.add((Multimedia) o);
             }
-
             mult.add(m);
         }
         return mult;
@@ -77,11 +75,13 @@ public class MultimediaManagerImpl implements MultimediaManager {
      */
     @Override
     public Integer getLike(Multimedia m) {
+        //On récupère tous les liked du multimedia
         EntityManager em = emf.createEntityManager();
         Query q = em.createQuery("SELECT l FROM Liked l WHERE  l.multimedia=:m");
         q.setParameter("m", m);
         List l = q.getResultList();
 
+        //On compte le nombre de liked de type 'LIKE'
         int cpt = 0;
         for (Object o : l) {
             Liked li = (Liked) o;
@@ -100,11 +100,13 @@ public class MultimediaManagerImpl implements MultimediaManager {
      */
     @Override
     public Integer getDislike(Multimedia m) {
+        //On récupère tous les liked du multimedia
         EntityManager em = emf.createEntityManager();
         Query q = em.createQuery("SELECT l FROM Liked l WHERE  l.multimedia=:m");
         q.setParameter("m", m);
         List l = q.getResultList();
 
+        //On compte le nombre de liked de type 'DISLIKE'
         int cpt = 0;
         for (Object o : l) {
             Liked li = (Liked) o;
@@ -124,9 +126,12 @@ public class MultimediaManagerImpl implements MultimediaManager {
     @Override
     public ArrayList<ArrayList<Integer>> getLikes(ArrayList<ArrayList<Multimedia>> multis) {
         ArrayList<ArrayList<Integer>> li = new ArrayList<>();
+        //Pour chaque tableau de multimédia
         for (ArrayList<Multimedia> mu : multis) {
             ArrayList<Integer> l = new ArrayList<>();
+            //Pour chaque multimédia
             for (Multimedia m : mu) {
+                //On récupère le nombre de likes
                 l.add(this.getLike(m));
             }
             li.add(l);
@@ -143,9 +148,12 @@ public class MultimediaManagerImpl implements MultimediaManager {
     @Override
     public ArrayList<ArrayList<Integer>> getDislikes(ArrayList<ArrayList<Multimedia>> multis) {
         ArrayList<ArrayList<Integer>> li = new ArrayList<>();
+        //Pour chaque tableau de multimédias
         for (ArrayList<Multimedia> mu : multis) {
             ArrayList<Integer> l = new ArrayList<>();
+            //Pour chaque multimédia
             for (Multimedia m : mu) {
+                //On récupère le nombre de dislikes
                 l.add(this.getDislike(m));
             }
             li.add(l);
@@ -179,9 +187,12 @@ public class MultimediaManagerImpl implements MultimediaManager {
     @Override
     public ArrayList<ArrayList<Integer>> getBadLoc(ArrayList<ArrayList<Multimedia>> multis) {
         ArrayList<ArrayList<Integer>> li = new ArrayList<>();
+        //Pour chaque tableau de multimédia
         for (ArrayList<Multimedia> mu : multis) {
             ArrayList<Integer> l = new ArrayList<>();
+            //Pour chaque multimédia
             for (Multimedia m : mu) {
+                //On récupère le nombre de signalements
                 l.add(this.getBadLocMult(m));
             }
             li.add(l);
@@ -242,12 +253,13 @@ public class MultimediaManagerImpl implements MultimediaManager {
         q2.setParameter("p", p);
         List l2 = q2.getResultList();
 
+        //Si pas de like : on écrit 'no'
         if (l2.isEmpty()) {
             result += "no";
+            //Si like : on écrit le type : 'like' ou 'dislike'
         } else {
             result += ((Liked) l2.get(0)).getLikedType();
         }
-
         return result;
     }
 
@@ -360,14 +372,14 @@ public class MultimediaManagerImpl implements MultimediaManager {
      * Insertion d'un multimédia dans la base de données et création de la
      * localisation associée (à partir d'une géométrie reçue en paramètre)
      *
-     * @param title
-     * @param description
-     * @param path
-     * @param date
-     * @param format
-     * @param language
-     * @param type
-     * @param l Localisation du média
+     * @param title Titre
+     * @param description Description
+     * @param path Chemin d'accès au fichier
+     * @param date Date d'upload
+     * @param format Format (extension)
+     * @param language Langage
+     * @param type Type du fichier : video, image ou son
+     * @param l Localisation du multimédia
      * @param p Person p qui upload le multimédia
      * @param sourceId s Source du multimédia
      */
@@ -392,24 +404,28 @@ public class MultimediaManagerImpl implements MultimediaManager {
     }
 
     /**
-     * Matrice de multimédias qui correspond à une matrice de positions
+     * Etant donnée un matrice 2D de positions (positions classées par source),
+     * on récupère une matrice 3D de multimédias (multimédias classés par
+     * sources et par position)
      *
      * @param loc Matrice de positions
-     * @return Matrice de multimédia
+     * @return Matrice de multimédias
      */
     @Override
     public ArrayList<ArrayList<ArrayList<Multimedia>>> getMultimediaForSource(ArrayList<ArrayList<Location>> loc) {
         ArrayList<ArrayList<ArrayList<Multimedia>>> multi = new ArrayList<>();
-
+        //Pour chaque liste de positions
         for (ArrayList<Location> pos : loc) {
+            //On récupère les multimédias correspondants
             multi.add(getMultiByPos(pos));
         }
-
         return multi;
     }
 
     /**
-     * Récupérer les likes de chaque multimédiasde chaque source
+     * Etant donnée un matrice 3D de multimédias (multimédias classés par
+     * sources et par position), on récupère pour chaque multimédia de cette
+     * matrice le nombre de likes
      *
      * @param multis Matrice de multimédias
      * @return Matrice de nombre de likes
@@ -424,7 +440,9 @@ public class MultimediaManagerImpl implements MultimediaManager {
     }
 
     /**
-     * Récupérer les dislikes de chaque multimédias pour chaque sources
+     * Etant donnée un matrice 3D de multimédias (multimédias classés par
+     * sources et par position), on récupère pour chaque multimédia de cette
+     * matrice le nombre de dislikes
      *
      * @param multis Matrice de multimédias
      * @return Matrice de nombre de dislikes
@@ -439,8 +457,9 @@ public class MultimediaManagerImpl implements MultimediaManager {
     }
 
     /**
-     * Récupérer le nombre de signalements de chaque multimédias pour chaque
-     * sources
+     * Etant donnée un matrice 3D de multimédias (multimédias classés par
+     * sources et par position), on récupère pour chaque multimédia de cette
+     * matrice le nombre de signalements
      *
      * @param multis Matrice de multimédias
      * @return Matrice de nombre de dsignalements

@@ -1,8 +1,6 @@
 /**
  * ********************************************************************
  * Interface MultimediaManager
- * --------------------------------------------------------------------
- * Last update : 29/01/2017
  *********************************************************************
  */
 package Managers;
@@ -137,15 +135,19 @@ public interface MultimediaManager {
     public void insertMultimedia(String title, String description, String path, String date, String format, String language, String type, Location l, Person p, Source sourceId);
 
     /**
-     * Matrice de multimédias qui correspond à une matrice de positions
+     * Etant donnée un matrice 2D de positions (positions classées par source),
+     * on récupère une matrice 3D de multimédias (multimédias classés par
+     * sources et par position)
      *
      * @param loc Matrice de positions
-     * @return Matrice de multimédia
+     * @return Matrice de multimédias
      */
     public ArrayList<ArrayList<ArrayList<Multimedia>>> getMultimediaForSource(ArrayList<ArrayList<Location>> loc);
 
     /**
-     * Récupérer les likes de chaque multimédiasde chaque source
+     * Etant donnée un matrice 3D de multimédias (multimédias classés par
+     * sources et par position), on récupère pour chaque multimédia de cette
+     * matrice le nombre de likes
      *
      * @param multis Matrice de multimédias
      * @return Matrice de nombre de likes
@@ -153,7 +155,9 @@ public interface MultimediaManager {
     public ArrayList<ArrayList<ArrayList<Integer>>> getLikesSource(ArrayList<ArrayList<ArrayList<Multimedia>>> multis);
 
     /**
-     * Récupérer les dislikes de chaque multimédias pour chaque sources
+     * Etant donnée un matrice 3D de multimédias (multimédias classés par
+     * sources et par position), on récupère pour chaque multimédia de cette
+     * matrice le nombre de dislikes
      *
      * @param multis Matrice de multimédias
      * @return Matrice de nombre de dislikes
@@ -161,8 +165,9 @@ public interface MultimediaManager {
     public ArrayList<ArrayList<ArrayList<Integer>>> getDislikesSource(ArrayList<ArrayList<ArrayList<Multimedia>>> multis);
 
     /**
-     * Récupérer le nombre de signalements de chaque multimédias pour chaque
-     * sources
+     * Etant donnée un matrice 3D de multimédias (multimédias classés par
+     * sources et par position), on récupère pour chaque multimédia de cette
+     * matrice le nombre de signalements
      *
      * @param multis Matrice de multimédias
      * @return Matrice de nombre de dsignalements

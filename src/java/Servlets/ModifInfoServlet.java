@@ -16,10 +16,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Laura
- */
 @WebServlet(name = "ModifInfoServlet", urlPatterns = {"/ModifInfoServlet"})
 public class ModifInfoServlet extends HttpServlet {
 
@@ -46,17 +42,18 @@ public class ModifInfoServlet extends HttpServlet {
         Connect c = cm.getByConnectId(idco);
         cm.updateConnection(c);
         cm.checkConnection();
-
+ 
+        //On récupère la personne qui correspond à l'email
         PersonManager pm = PersonManagerImpl.getInstance();
-        //On récupère la personne qiu correspond à l'email
         Person p = pm.findPersonByEmail(email);
+        
         //On récupère la personne qui correspond à l'identifiant de connexion
         Person p1 = pm.findPerson(idco);
 
         //On teste si le nouveau email est déjà utilisé par un autre utilisateur ou non 
         Boolean b = (p == null) || (p.equals(p1));
 
-        //Update
+        //Update : si le mail est disponible
         if (b) {
             pm.updateInfos(p1, name,firstname,email);
         }

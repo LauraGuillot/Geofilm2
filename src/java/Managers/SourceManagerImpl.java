@@ -2,8 +2,6 @@
  * ********************************************************************
  * Class SourcesManagementImpl
  * Gestion des sources (film, série ou jeu)
- * --------------------------------------------------------------------
- * Last update : 29/01/2017
  *********************************************************************
  */
 package Managers;
@@ -37,8 +35,8 @@ public class SourceManagerImpl implements SourceManager {
     /**
      * Trouver une Source à partir de son nom
      *
-     * @param name
-     * @return
+     * @param name Nom de la source
+     * @return Source
      */
     @Override
     public Source findSource(String name) {
@@ -58,31 +56,34 @@ public class SourceManagerImpl implements SourceManager {
     public ArrayList<Source> getSources() {
         ArrayList<Source> s = new ArrayList<>();
 
+        //Requête
         EntityManager em = emf.createEntityManager();
         Query q = em.createNamedQuery("Source.findAll", Source.class);
         List l = q.getResultList();
 
+        //Transformation en arraylist
         for (Object o : l) {
             if (((Source) o).getSourceId() > 0) {
                 s.add((Source) o);
             }
         }
+
         return s;
     }
-    
+
     /**
      * TODO : récupérer l'id d'une source
      */
-    
     /**
      * Créer une nouvelle source et renvoyer son id
+     *
      * @param title
      * @param type
      * @param time_begin
-     * @param time_end 
+     * @param time_end
      */
     @Override
-    public Integer createSource(String title, String type, String time_begin, String time_end){
+    public Integer createSource(String title, String type, String time_begin, String time_end) {
         Source s = new Source();
         s.setSourceTitle(title);
         s.setSourceType(type);
@@ -93,9 +94,8 @@ public class SourceManagerImpl implements SourceManager {
         em.getTransaction().begin();
         em.persist(s);
         em.getTransaction().commit();
-        
+
         return s.getSourceId();
-        
     }
 
 }

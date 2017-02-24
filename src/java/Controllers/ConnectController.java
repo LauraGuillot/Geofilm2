@@ -1,12 +1,10 @@
-package Controllers;
-
 /**
  * ********************************************************************
  * Controller pour la connexion : accès à la carte interactive
- * -------------------------------------------------------------------- Last
- * update : 01/02/2017
  * ********************************************************************
  */
+package Controllers;
+
 import Managers.ConnectManager;
 import Managers.ConnectManagerImpl;
 import Managers.LocationManager;
@@ -52,9 +50,11 @@ public class ConnectController {
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView get(HttpServletRequest request, HttpServletResponse response, @RequestParam("idco") String idco) {
 
+        //On récupère la personne associée à l'identifiant de connexion
         PersonManager pm = PersonManagerImpl.getInstance();
         Person p = pm.findPerson(idco);
 
+        //Si cette personne existe (identifiant valide), on renvoie la carte
         if (p != null) {
             ModelAndView result = new ModelAndView("globalMap");
 
@@ -83,6 +83,7 @@ public class ConnectController {
             return result;
 
         } else {
+            //Si la connexion est invalide, on renvoie la page d'accueil
             ModelAndView result = new ModelAndView("index");
             result.addObject("idco", 0);
             return result;

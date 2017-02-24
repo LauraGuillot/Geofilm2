@@ -16,10 +16,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Laura
- */
 @WebServlet(name = "DeleteFavoriteServlet", urlPatterns = {"/DeleteFavoriteServlet"})
 public class DeleteFavoriteServlet extends HttpServlet {
 

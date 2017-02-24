@@ -37,6 +37,10 @@
     text-shadow: none;
     opacity:1;
     font-size:18pt;
+    cursor:pointer!important;
+    z-index: 10;
+    position:relative;
+    float:right;
 }
 
 .close:hover{

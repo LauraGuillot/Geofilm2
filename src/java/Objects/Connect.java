@@ -1,7 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* Classe Connect.java
+  * ------------------------------------------------------------------------------
+  * Objet de la base de données
+  * Une connexion est créée lorsque l'utilisateur se connecte sur le site.
+  * Celle-ci comporte un identifiant (chaîne de caractères générés aléatoirement),
+  * l'identifiant de la personne connecté ainsi qu'une date caractérisant la dernière 
+  * action faite par l'utilisateur sur le site.
  */
 package Objects;
 
@@ -17,10 +20,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author Laura
- */
 @Entity
 @Table(name = "connect", catalog = "geofilm", schema = "geofilm")
 @XmlRootElement
@@ -108,5 +107,5 @@ public class Connect implements Serializable {
     public String toString() {
         return "Objects.Connect[ connectId=" + connectId + " ]";
     }
-    
+
 }

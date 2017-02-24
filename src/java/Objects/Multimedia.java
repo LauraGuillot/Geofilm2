@@ -1,7 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* 
+  * Classe Multimédia.java
+  * ------------------------------------------------------------------------------
+  * Objet de la base de données
+  * Un multimédia est une vidéo, une imge ou un son qui est localisé.
+  * Il comporte un identifiant, un titre, une description (facultative), une source, un path,
+  * une date d'upload, un format (extension), un langage, un type (VIDEO, IMAGE, SON),
+  * une localisation et un publisher, c'est-à-dire l'utilisateur qui a uploadé ce contenu.
  */
 package Objects;
 
@@ -23,10 +27,6 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author Laura
- */
 @Entity
 @Table(name = "multimedia", catalog = "geofilm", schema = "geofilm")
 @XmlRootElement
@@ -238,5 +238,5 @@ public class Multimedia implements Serializable {
     public String toString() {
         return "Objects.Multimedia[ multimediaId=" + multimediaId + " ]";
     }
-    
+
 }

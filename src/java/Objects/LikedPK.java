@@ -1,7 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* Classe LikedPK.java
+  * ------------------------------------------------------------------------------
+  * Clé primaire de l'objet 'Liked'
+  * Elle est formé de l'identifiant d'une personne et de celui d'un multimédia.
  */
 package Objects;
 
@@ -10,10 +10,6 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-/**
- *
- * @author Laura
- */
 @Embeddable
 public class LikedPK implements Serializable {
 
@@ -76,5 +72,5 @@ public class LikedPK implements Serializable {
     public String toString() {
         return "Objects.LikedPK[ personId=" + personId + ", multimediaId=" + multimediaId + " ]";
     }
-    
+
 }

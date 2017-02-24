@@ -18,10 +18,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Laura
- */
 @WebServlet(name = "OpenMultimediaServlet", urlPatterns = {"/OpenMultimediaServlet"})
 public class OpenMultimediaServlet extends HttpServlet {
 
