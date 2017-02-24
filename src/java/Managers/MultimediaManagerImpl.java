@@ -330,7 +330,30 @@ public class MultimediaManagerImpl implements MultimediaManager {
         em.getTransaction().begin();
         em.persist(like);
         em.getTransaction().commit();
+    }
 
+    /**
+     * Suppression d'un like
+     *
+     * @param m Multimédia liké
+     * @param p Utilisateur
+     */
+    @Override
+    public void deleteLike(Multimedia m, Person p) {
+        EntityManager em = emf.createEntityManager();
+
+        //Primary key
+        LikedPK pk = new LikedPK();
+        pk.setMultimediaId(m.getMultimediaId());
+        pk.setPersonId(p.getPersonId());
+
+        //Like
+        Liked l = em.find(Liked.class, pk);
+
+        //Suppression
+        em.getTransaction().begin();
+        em.remove(l);
+        em.getTransaction().commit();
     }
 
     /**
@@ -430,6 +453,4 @@ public class MultimediaManagerImpl implements MultimediaManager {
         }
         return li;
     }
-
-    
 }

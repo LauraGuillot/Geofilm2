@@ -236,3 +236,32 @@ function incrLike(id, type) {
         document.getElementById("pos" + i + "_multi" + j + "_dislike").value = parseInt(document.getElementById("pos" + i + "_multi" + j + "_dislike").value) + 1;
     }
 }
+
+
+/**
+ * Décrémentation du nombre de likes a la suppression d'un like par un utilisateur 
+ * @param {type} id - Id du multimedia
+ * @param {type} type - Type du like 
+ * @returns {void}
+ */
+function decrLike(id, type) {
+    var cptPos = document.getElementById("nbMarkers").value;
+    var i;
+    var j;
+
+    for (var k = 0; k < cptPos; k++) {
+        var cptMult = document.getElementById("nbMulti" + k).value;
+        for (var p = 0; p < cptMult; p++) {
+            if (document.getElementById("pos" + k + "_multi" + p + "_id").value == id) {
+                i = k;
+                j = p;
+            }
+        }
+    }
+
+    if (type === 'LIKE') {
+        document.getElementById("pos" + i + "_multi" + j + "_like").value = parseInt(document.getElementById("pos" + i + "_multi" + j + "_like").value) - 1;
+    } else {
+        document.getElementById("pos" + i + "_multi" + j + "_dislike").value = parseInt(document.getElementById("pos" + i + "_multi" + j + "_dislike").value) - 1;
+    }
+}

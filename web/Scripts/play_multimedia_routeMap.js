@@ -247,3 +247,35 @@ function incrLike(id, type) {
         document.getElementById("src" + i + "_pos" + j + "_multi" + k + "_dislike").value = parseInt(document.getElementById("src" + i + "_pos" + j + "_multi" + k + "_dislike").value) + 1;
     }
 }
+
+/**
+ * Décrémentation du nombre de likes a la suppression d'un like par un utilisateur 
+ * @param {type} id - Id du multimedia
+ * @param {type} type - Type du like 
+ * @returns {void}
+ */
+function decrLike(id, type) {
+    var cptSrc = document.getElementById("nbSources").value;
+    var i;
+    var j;
+    var k;
+
+    for (var m = 0; m < cptSrc; m++) {
+        var cptPos = document.getElementById("nbPos" + m).value;
+        for (var n = 0; n < cptPos; n++) {
+            var cptMult = document.getElementById("nbMulti" + m + "_" + n).value;
+            for (var p = 0; p < cptMult; p++) {
+                if (document.getElementById("src" + m + "_pos" + n + "_multi" + p + "_id").value == id) {
+                    i = m;
+                    j = n;
+                    k = p;
+                }
+            }
+        }
+    }
+    if (type === 'LIKE') {
+        document.getElementById("src" + i + "_pos" + j + "_multi" + k + "_like").value = parseInt(document.getElementById("src" + i + "_pos" + j + "_multi" + k + "_like").value) - 1;
+    } else {
+        document.getElementById("src" + i + "_pos" + j + "_multi" + k + "_dislike").value = parseInt(document.getElementById("src" + i + "_pos" + j + "_multi" + k + "_dislike").value) - 1;
+    }
+}

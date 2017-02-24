@@ -122,6 +122,7 @@ public interface MultimediaManager {
 
     /**
      * Insertion d'un multimédia dans la base de données
+     *
      * @param title
      * @param description
      * @param path
@@ -168,5 +169,11 @@ public interface MultimediaManager {
      */
     public ArrayList<ArrayList<ArrayList<Integer>>> getBadLocSource(ArrayList<ArrayList<ArrayList<Multimedia>>> multis);
 
-   
+    /**
+     * Suppression d'un like
+     *
+     * @param m Multimédia liké
+     * @param p Utilisateur
+     */
+    public void deleteLike(Multimedia m, Person p);
 }

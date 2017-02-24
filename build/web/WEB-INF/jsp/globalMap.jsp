@@ -52,6 +52,7 @@
         <script src="Scripts/add_favorite.js"></script>
         <script src="Scripts/signal_bad_loc.js"></script>
         <script src="Scripts/like.js"></script>
+        <script src="Scripts/delete_like.js"></script>
 
     </head>
     <body onload="load();">
@@ -160,10 +161,10 @@
                                 <p id="ndislike"></p>
                             </div>
                             <div id="like_action_locked" >
-                                <button id="like_lock" class="like_button like_lock" ></button>
+                                <button id="like_lock" class="like_button like_lock" onclick="deleteLike('LIKE')"></button>
                                 <p id="nlike1"></p>
                                 <div class="separator"></div>
-                                <button id="dislike_lock" class="like_button dislike_lock"></button>
+                                <button id="dislike_lock" class="like_button dislike_lock" onclick="deleteLike('DISLIKE')"></button>
                                 <p id="ndislike1"></p>
                             </div>
 

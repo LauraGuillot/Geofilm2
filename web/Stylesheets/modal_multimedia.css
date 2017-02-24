@@ -99,14 +99,14 @@
 }
 
 .like_lock{
-    cursor:default;
+    cursor:pointer;
     background-image : url("../Ressources/like.png");
 }
 .like_lock:hover{
     background-image : url("../Ressources/like.png");
 }
 .dislike_lock{
-    cursor:default;
+    cursor:pointer;
     background-image : url("../Ressources/dislike.png");
 }
 .dislike_lock:hover{
