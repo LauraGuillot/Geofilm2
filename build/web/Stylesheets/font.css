@@ -1,23 +1,30 @@
+/******** POLICES ********/
+
+/* PARAGRAPHES */
 p{
     font-weight: 200; 
     color:white;
 }
 
+/* TITRE */
 .title{
     color:#23a1a8;
     font-size: 14pt;
 }
 
+/* MESSAGE D'ERREUR' */
 .error_message{
     font-style: italic;
     color : #f01644;
 }
 
+/* MESSAGE D'INFORMATION' */
 .info{
     font-style:italic;
     color:#87c2c4;
 }
 
+/* LIEN 'CLIQUER ICI' */
 .click_here{
     color:#87c2c4!important;
     text-decoration: underline;

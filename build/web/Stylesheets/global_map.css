@@ -2,7 +2,6 @@ html, body {
     height: 100%;
     margin: 0px;
 }
-
 .container{
     height:92%;
     width:100%;
@@ -10,6 +9,7 @@ html, body {
     padding: 0px!important;
 }
 
+/* CARTE */
 #mapid{
     margin: 0px;
     padding: 0px;
@@ -17,21 +17,17 @@ html, body {
     width: 100%;
     position:absolute;
 }
-
+/* GEOCODER */
+.mapboxgl-ctrl-geocoder ul > li.active > a{
+    background-color: black!important; 
+}
+/* RESULTAT DU GEOCODER*/
 .suggestions{
     background-color: #2b2f36!important; 
     opacity:0.9;
 }
 
-.mapboxgl-ctrl-geocoder ul > li.active > a{
-    background-color: black!important; 
-}
-
-.links{
-    max-height: 250px;
-    overflow-y: auto;
-}
-
+/* BOUTON D'UPLOAD */
 #upload{
     position:relative;
     z-index: 10;
@@ -44,12 +40,9 @@ html, body {
     border:none;
     outline:none;
 }
-
 #upload:hover{
     width:130px;
 }
-
-
 #upload_text{
     color:#23a1a8!important;
     position:absolute;
@@ -57,7 +50,6 @@ html, body {
     margin-left: 10px;
     margin-top:5px;
 }
-
 .img_over{
      margin-left: 60px;
 }

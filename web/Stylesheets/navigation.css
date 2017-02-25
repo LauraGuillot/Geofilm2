@@ -1,3 +1,4 @@
+/* BARRE DE NAVIGATION */
 .navbar{
     background-color: #000000;
     opacity :0.85;
@@ -11,18 +12,19 @@
     width: 100%;
     text-align: center;
 }
-
-.navbar-nav > ul {    margin-bottom:0px!important; height:8%}
-
+.navbar-nav > ul {    
+    margin-bottom:0px!important;
+    height:8%
+}
 .navbar-nav > li {
     float: none;
     display: inline-block;
 }
-
 .navbar-nav > li.navbar-right {
     float: right !important;
 }
 
+/* A */
 a{
     color:white!important;
     padding-bottom:0!important;
@@ -31,14 +33,17 @@ a:hover{
     color:#23A1A8!important;
 }
 
+/* LOGO DE L'APPLICATION*/
 #logo:hover{
     cursor:default!important;
 }
 
+/* BOUTON DE CONNEXION */
 #connection:hover{
     background-image: url(../Ressources/connection_over.png);
 }
 
+/* ONGLET DE BASE*/
 .onglet {
     cursor:pointer;
     padding:7px;
@@ -49,7 +54,7 @@ a:hover{
     color:#87c2c4!important;
     text-decoration: underline!important;
 }
-
+/* ONGLET ACTIF*/
 .onglet_actif{
     text-decoration: underline!important;
     color:#23A1A8 !important;
@@ -60,38 +65,38 @@ a:hover{
     color:#23A1A8 !important;
 }
 
+/* INFORMATIONs PERSONNELLES*/
 .info_perso{
     color:white!important;
     font-weight: 200;
     text-align: left;
     line-height:5pt;
 }
-
+/* LIEN POUR MODIFIER LES INFORMATIONS PERSONNELLEs*/
 #modification_link{
-   text-align:left!important; 
-   padding:0;
-   font-weight: 200;
-   font-style:italic;
-   text-decoration:underline;
-   color:#87c2c4!important;
-   font-size: 9pt;
+    text-align:left!important; 
+    padding:0;
+    font-weight: 200;
+    font-style:italic;
+    text-decoration:underline;
+    color:#87c2c4!important;
+    font-size: 9pt;
 }
-
 #modification_link:hover{
-     color:#23A1A8!important;
+    color:#23A1A8!important;
 }
 
+/* ONGLET FAVORIS*/
 #favorite_link{
-   text-align:left!important; 
-   padding:0;
-   font-weight: 200;
-   font-style:italic;
-   text-decoration:underline;
-   color:#fffe83!important;
-   font-size: 9pt;
-   line-height: 8pt;
+    text-align:left!important; 
+    padding:0;
+    font-weight: 200;
+    font-style:italic;
+    text-decoration:underline;
+    color:#fffe83!important;
+    font-size: 9pt;
+    line-height: 8pt;
 }
-
 #favorite_link:hover{
-     color:#FFFF51!important;
+    color:#FFFF51!important;
 }

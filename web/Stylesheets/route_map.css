@@ -2,26 +2,35 @@ html, body {
     height: 100%;
     margin: 0px;
 }
-
 .container{
     height:92%;
     width:100%;
     margin: 0px;
     padding: 0px!important;
 }
-
 .row{
     height:100%;
     margin:0px;
     padding: 0;
 }
 
+/* CARTE */
 #mapid{
     margin: 0px;
     padding: 0px;
     height:100%;
 }
+/* GEOCODER */
+.mapboxgl-ctrl-geocoder ul > li.active > a{
+    background-color: black!important; 
+}
+/* RESULTAT DU GEOCODER */
+.suggestions{
+    background-color: #2b2f36!important; 
+    opacity:0.9;
+}
 
+/* VOLET DE GAUCHE */
 #left_div{ 
     background-color: #000000;
     opacity :0.8;
@@ -30,16 +39,17 @@ html, body {
     padding : 3%;
     text-align: center;
 }
-
-.suggestions{
-    background-color: #2b2f36!important; 
-    opacity:0.9;
+/* HEADER DU VOLET DE GAUCHE*/
+#head{
+    height:30%;
+}
+/* ZONE POUR AFFICHER LES RESULTATS DE LA RECHERCHE*/
+#result{
+    height: 70%;
+    overflow-y: auto;
 }
 
-.mapboxgl-ctrl-geocoder ul > li.active > a{
-    background-color: black!important; 
-}
-
+/* SELECT */
 select{
     font-weight:200;
     font-size:13pt;
@@ -49,6 +59,8 @@ select{
     width:80%;
 } 
 
+/* RECHERCHE PAR MOT CLE */
+/* BOUTON DE RECHERCHE*/
 #search_button{
     display:inline-block;
     height:30px;
@@ -63,33 +75,27 @@ select{
 #search_button:hover{
     background-image: url('../Ressources/search_over.png');
 }
-
+/* CHAMP POUR LA RECHERCHE*/
 #search_key_word{
     height:30px;
     width:70%;
     display:inline-block;
 }
 
+/* DIV DE SEPARATION */
 #separator{
     border-bottom: 1px solid white;
     width:100%;
     height:2px;
 }
 
-#head{
-    height:30%;
-}
-
-#result{
-    height: 70%;
-    overflow-y: auto;
-}
-
+/* MESSAGE : AUCUN RESULTAT */
 .no_source{
     color:#f01644;
     font-style: italic;
 }
 
+/* LIENS : RESULTATS DE LA RECHERCHE*/
 .source_link{
     cursor:pointer!important;
     padding-top: 10px;
@@ -100,19 +106,12 @@ select{
     width:100%;
     
 }
-
 .source_link:hover{
     background-color: #23a1a8!important;
     color:white!important;
     text-decoration: none!important;
 }
-
-.source_link_active{
-    
-    
-    
-}
-
+/* SEPARATEUR ENTRE LES LIENS */
 .separator_link{
     text-align:center;
     border-bottom: 1px solid #5E5F5F;
