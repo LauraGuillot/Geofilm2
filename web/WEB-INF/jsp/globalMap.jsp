@@ -42,15 +42,15 @@
 
         <!-- MAP -->
         <script src="Scripts/mapbox_tracker.js"></script>
-        <script src="Scripts/load_map_2.js"></script>
+        <script src="Scripts/load_global_map.js"></script>
 
         <!-- SCRIPTS -->
         <script src="Scripts/navigation.js"></script>
         <script src="Scripts/global_map.js"></script>
         <script src="Scripts/deconnect.js"></script>
         <script src="Scripts/modif_infos_perso.js"></script>
-        <script src="Scripts/sort.js"></script>
-        <script src="Scripts/play_multimedia.js"></script>
+        <script src="Scripts/sort_globalMap.js"></script>
+        <script src="Scripts/play_multimedia_globalMap.js"></script>
         <script src="Scripts/upload.js"></script>
         <script src="Scripts/add_favorite.js"></script>
         <script src="Scripts/signal_bad_loc.js"></script>

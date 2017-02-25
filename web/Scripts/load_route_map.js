@@ -1,10 +1,16 @@
+/**
+ * Fonctions pour charger la route map
+ */
+
 //Carte
 var map;
 
 /**
  * Chargement de la carte avec tous les marqueurs
+ * @returns {void}
  */
 function loadMap() {
+    //Création de la carte
     mapboxgl.accessToken = 'pk.eyJ1IjoiZ2VvZmlsbSIsImEiOiJjaXlqd2d1NGUwMDA5MnFrMXUyaHdtYmt5In0.zaWf5uM65g8RiAj9LACvHw';
     map = new mapboxgl.Map({
         container: 'mapid',

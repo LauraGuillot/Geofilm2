@@ -3,7 +3,9 @@
  * chargement du texte et chargement de la carte
  */
 function load() {
+    //Chargement des chaînes de caractère
     loadText();
+    //Chargement de la carte
     loadMap();
 }
 
@@ -39,7 +41,7 @@ function loadText() {
         document.getElementById("select_serie").innerHTML = serie_fr;
         document.getElementById("select_game").innerHTML = game_fr;
         document.getElementById("or").innerHTML = or_fr;
-         document.getElementById("search_key_word").placeholder = search_key_word_fr;
+        document.getElementById("search_key_word").placeholder = search_key_word_fr;
     }
 }
 

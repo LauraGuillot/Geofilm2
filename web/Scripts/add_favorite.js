@@ -3,11 +3,13 @@
  * @returns {void}
  */
 function addToFavorite() {
-    
+
     //Paramètres
     var multiid = document.getElementById("multi_open").value;
     var idco = document.getElementById("idco").value;
 
+    //Appel de la Servlet avec en paramètre l'identifiant de connexion de 
+    //l'utilisateur et l'identifiant du multimédia
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {

@@ -1,6 +1,10 @@
 /**
+ * Fonctions pour trier la liste des favoris
+ */
+
+/**
  * Tri de la liste des favoris selon les critères de l'utilisateur
- * @returns {undefined}
+ * @returns {void}
  */
 function sort() {
 
@@ -10,15 +14,23 @@ function sort() {
         fav.push(favorites[i]);
     }
 
-    //Tri par type 
+    // **********************************************************
+    // 1- Tri par type de multimédia
+    // **********************************************************
+
+    //Booléen valant vrai si l'utilisateur souhaite afficher les multimédia de type video
     var video = document.getElementById("sort_video").checked;
+    //Booléen valant vrai si l'utilisateur souhaite afficher les multimédia de type image
     var image = document.getElementById("sort_image").checked;
+    //Booléen valant vrai si l'utilisateur souhaite afficher les multimédia de type son
     var son = document.getElementById("sort_sound").checked;
 
+    //Tableau contenant les indices multimédias à ne pas afficher
     var todelete = [];
 
+    //Pour chaque multimédia, on regarde si son type est souhaité par l'utilisateur 
+    //et si non, on l'ajoute dans le tableau des multimédias
     for (var j = 0; j < fav.length; j++) {
-
         if (fav[j].type === "VIDEO" && !video) {
             todelete.push(j);
         }
@@ -29,7 +41,7 @@ function sort() {
             todelete.push(j);
         }
     }
-
+    //On supprime les multimédias qui sont dans le tableau todelete
     for (var k = 0; k < todelete.length; k++) {
         fav.splice(todelete[k], 1);
 
@@ -38,8 +50,13 @@ function sort() {
         }
     }
 
-//Tri par titre
+    // **********************************************************
+    // 2- Tri selon les titres
+    // **********************************************************
+
+    //Booléen vrai si l'utilisateur veut trier la liste par titre
     var title_sort = document.getElementById("sort_title").checked;
+    //Tri selon les titres
     if (title_sort) {
         fav.sort(function (a, b) {
             if (a.title < b.title)
@@ -50,10 +67,14 @@ function sort() {
         });
     }
 
-//Tri par date
+    // **********************************************************
+    // 3- Tri selon les dates
+    // **********************************************************
+
+    //Booléen vrai si l'utilisateur veut tirer la liste selon les dates d'upload
     var date_sort = document.getElementById("sort_date").checked;
+    //Tri selon les dates
     if (date_sort) {
-        // dateSort(multis);
         fav.sort(function (a, b) {
             var aa = a.date.split("/");
             var bb = b.date.split("/");
@@ -71,7 +92,8 @@ function sort() {
         });
     }
 
-    //Affichage
+    //Affichage de la liste des favoris
     displayFavorite(fav);
+    //Affichage des markers correspondants
     displayMarkers(fav);
 }

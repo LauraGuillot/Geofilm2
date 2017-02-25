@@ -1,9 +1,18 @@
+/**
+ * Fonction de chargement appelée à l'ouverture de la page d'accueil
+ * @returns {void}
+ */
 function load() {
+    //Chargement des chaînes de caractères
     loadText();
+    //Chargement de la carte
     loadMap();
 }
 
-
+/**
+ * Chargement des chaînes de caractères
+ * @returns {void}
+ */
 function loadText() {
     if (language == "fr") {
         //HOME

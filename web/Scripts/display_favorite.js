@@ -1,3 +1,7 @@
+/**
+ * Fonctions pour afficher les favoris de l'utilisateur 
+ */
+
 //Variable globale : tableau de favoris
 var favorites = [];
 
@@ -6,13 +10,14 @@ var favorites = [];
  * @returns {void}
  */
 function initFavorite() {
-//Initialisation du tableau
+    //Initialisation du tableau
     var cpt = document.getElementById('nbLoc').value;
+    //Pour chaque position
     for (var i = 0; i < cpt; i++) {
         var cpt1 = document.getElementById('nbMulti' + i).value;
-
+        //Pour chaque multimédia
         for (var j = 0; j < cpt1; j++) {
-
+            //On récupère les paramètres
             var title = document.getElementById("pos" + i + "_multi" + j + "_title").value;
             var id = document.getElementById("pos" + i + "_multi" + j + "_id").value;
             var publisher = document.getElementById("pos" + i + "_multi" + j + "_publisher").value;
@@ -21,7 +26,7 @@ function initFavorite() {
             var format = document.getElementById("pos" + i + "_multi" + j + "_format").value;
             var path = document.getElementById("pos" + i + "_multi" + j + "_path").value;
             var descr = document.getElementById("pos" + i + "_multi" + j + "_descr").value;
-
+            //On crée l'objet
             var m = new Object();
             m.title = title;
             m.id = id;
@@ -33,6 +38,7 @@ function initFavorite() {
             m.path = path;
             m.loc = i;
             m.rank = j;
+            //On l'ajoute au tableau
             favorites.push(m);
         }
     }
@@ -45,9 +51,11 @@ function initFavorite() {
  * @returns {void}
  */
 function displayFavorite(favorites) {
+    //Div dans laquelle on affiche les favoris
     var div = document.getElementById("favorite");
     div.innerHTML = "";
 
+    //Pour chaque favoris : on crée un lien
     for (var i = 0; i < favorites.length; i++) {
 
         var a = document.createElement('a');
@@ -126,7 +134,7 @@ function delegate1(id) {
 }
 
 /**
- * Ouverture du multimedia i
+ * Ouverture du multimedia i dans une pop-up
  * @param {int} i - Index de la position du multimedia
  * @param {int} j - Index du multimédia
  * @returns {void}
@@ -141,7 +149,6 @@ function openMulti(i, j) {
     var publisher = document.getElementById("pos" + i + "_multi" + j + "_publisher").value;
     var date = document.getElementById("pos" + i + "_multi" + j + "_uploaddate").value;
     var descr = document.getElementById("pos" + i + "_multi" + j + "_descr").value;
-
     document.getElementById("multi_title").innerHTML = title;
     document.getElementById("multi_publisher_date").innerHTML = by_fr + publisher + the_fr + date;
     document.getElementById("multi_descr").innerHTML = descr;

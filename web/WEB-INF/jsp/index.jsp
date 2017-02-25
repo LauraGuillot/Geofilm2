@@ -41,7 +41,7 @@
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
         <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
         <script src="Scripts/position_tracker.js"></script>
-        <script src="Scripts/load_map.js"></script>
+        <script src="Scripts/load_home_map.js"></script>
 
         <!-- SCRIPTS -->
         <script src="Scripts/home.js"></script>
