@@ -170,9 +170,6 @@ function valid_number(number) {
 
 /**
  * Validation du premier formulaire
- * @param {type} video
- * @param {type} sound
- * @param {type} image
  * @param {type} title
  * @param {type} choice
  * @param {type} elem1
@@ -189,16 +186,27 @@ function valid_form_upload1(title, choice, elem1, elem2) {
     }
 }
 
+//TODO : dans le valid_form2 ; vérifier que l'adresse entrée existe en la convertissant en position
+
 /**Validation du second formulaire d'upload (localisation de la vidéo)
- * @param {type} number
- * @param {type} street
- * @param {type} postal_code
- * @param {type} city
- * @param {type} country
+ * @param {type} elem1 Contenu à cacher
+ * @param {type} elem2 Contenu à ouvrir
  * @returns {Boolean}
  */
-function valid_form_upload2(number, street, postal_code, city, country) {
-    return valid_number(number) && valid_number(street) && valid_number(postal_code) && valid_number(city) && valid_number(country);
+function valid_form_upload2(elem1, elem2) {
+    var number = document.getElementById("numero_entered").value;
+    var street = document.getElementById("street_entered").value;
+    var postal_code = document.getElementById("postal_code_entered").value;
+    var city = document.getElementById("city_entered").value;
+    var country = document.getElementById("country_entered").value;
+    var complement  = document.getElementById("address_complement_entered").value;
+    if ((valid_number(number) && valid_number(street) && valid_number(postal_code) && valid_number(city) && valid_number(country))&&(geocodeAddress(codeAddressJson(number, street, complement, postal_code, city, country)))) {
+        visibilite_element(elem1);
+        visibilite_element(elem2);
+        return true;
+    } else {
+        return false;
+    }
 }
 
 /**

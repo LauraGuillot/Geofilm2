@@ -105,6 +105,7 @@ var error_multimedia_name_fr = "Veuillez saisir le nom du multimédia";
 var error_multimedia_type_fr ="Veuillez sélectionner un type de multimédia";
 var error_source_type_fr = "Veuillez sélectionner une source pour le multimédia";
 var error_mandatory_fr = "Veuillez remplir les champs obligatoires *";
+var error_localisation_fr = "L'adresse entrée n'est pas valide";
 
 //Visualisation d'un multimédia
 var signal_fr = "Signaler";

@@ -4,8 +4,6 @@ html, body {
 }
 
 .container{
-    background-color: #000000!important;
-    opacity :0.7;
     height:92%;
     width:100%;
     margin: 0px;
@@ -25,6 +23,8 @@ html, body {
 }
 
 #left_div{ 
+    background-color: #000000!important;
+    opacity:0.8;
     margin : 0px;
     height:100%;
     padding: 2%;
