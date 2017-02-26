@@ -1,3 +1,7 @@
+/**
+ * Fonctions pour charger la carte des favoris
+ */
+
 //Carte
 var map;
 
@@ -59,18 +63,21 @@ function loadMap() {
     startTracker();
 }
 
+//Tableau des marqueurs affichés
+var markers = [];
+
 /**
  * Affichage des marqueurs pour les multimédias
+ * @param {array} fav - Favoris à afficher
+ * @returns {void}
  */
-var markers = [];
 function displayMarkers(fav) {
-//Suppression des markers existants
+    //Suppression des markers existants
     removeMarkers();
 
+    //Affichage des markers
     var indexTab = [];
-
     for (var i = 0; i < fav.length; i++) {
-
         //Si il y a déjà un marker pour cette position, on n'ajoute rien
         var index = fav[i].loc;
         var toAdd = true;
@@ -81,20 +88,21 @@ function displayMarkers(fav) {
         }
 
         if (toAdd) {
+            //Récupératio des coordonnées longitude/latitude
             var point = document.getElementById("loc" + fav[i].loc).value;
-
             point = point.substring(6, point.length - 1);
             var pt = point.split(",");
             var x = pt[0];
             var y = pt[1];
-
+            //Préparation de la pop-up qui s'affichera au clic sur le marqueur
             var popup = preparePopUp(fav, fav[i].loc);
+            //Création du marqueur
             var m = addMarker(x, y, popup);
+            //Ajout de celui-ci dans le tableau
             markers.push(m);
         }
     }
 }
-
 
 /**
  * Ajout d'un marker sur la carte
@@ -104,7 +112,6 @@ function displayMarkers(fav) {
  * @returns {marker}
  */
 function addMarker(x, y, popup) {
-
     //Div pour le marker
     var el = document.createElement('div');
     el.className = 'marker';
@@ -120,14 +127,13 @@ function addMarker(x, y, popup) {
     return marker;
 }
 
-
 /**
  * Pour chaque marqueur préparation de la pop-up
- * @param {type} i
+ * @param {type} i - Indice de la position
+ * @param {array} fav - Tableau des favoris
  * @returns {popup}
  */
 function preparePopUp(fav, i) {
-
     var html = '';
     //Pour chaque multimédia, on ajoute un lien
     html += '<div class="links" id="multis_' + i + '">';
@@ -138,7 +144,7 @@ function preparePopUp(fav, i) {
         }
     }
     html += '</div>';
-
+    //On renvoie la popup créée à partir du html construit
     return new mapboxgl.Popup({offset: 25}).setHTML(html);
 }
 
@@ -149,17 +155,19 @@ function preparePopUp(fav, i) {
  * @returns {String}
  */
 function getLinkMulti(i, j) {
+    //Variable pour le contenu html
     var html = '';
-
+    //Récupération des paramètres
     var title = document.getElementById("pos" + i + "_multi" + j + "_title").value;
     var id = document.getElementById("pos" + i + "_multi" + j + "_id").value;
     var publisher = document.getElementById("pos" + i + "_multi" + j + "_publisher").value;
     var date = document.getElementById("pos" + i + "_multi" + j + "_uploaddate").value;
     var type = document.getElementById("pos" + i + "_multi" + j + "_type").value;
-
+    //Création du lien
+    //Lien 
     html += '<a class="link_marker"  onclick="openMulti(' + i + ',' + j + ')">';
     html += '<div class="p_group">';
-
+    //Icone video/image/son
     switch (type) {
         case 'VIDEO':
             html += "<img class=\"icon_video\" src=\"Ressources/video.png\"/>";
@@ -171,7 +179,7 @@ function getLinkMulti(i, j) {
             html += "<img class=\"icon_sound\" src=\"Ressources/sound.png\"/>";
             break;
     }
-
+    //Titre, date, auteur
     html += '<div class="p">';
     html += '<p class = "link_title" > ';
     html += title;
@@ -180,7 +188,7 @@ function getLinkMulti(i, j) {
     html += by_fr + publisher + the_fr + date;
     html += '</p></div></div>';
     html += '</a>';
-
+    //Renvoi du lien
     return html;
 }
 

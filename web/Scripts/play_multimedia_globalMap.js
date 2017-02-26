@@ -1,4 +1,8 @@
 /**
+ * Fonctions permettant l'ouverture d'un multimédia dans une pop-up dans la global map
+ */
+
+/**
  * Ouverture d'un multimédia : on récupère les données, on prépare la pop-up et on l'affiche
  * @param {int} id Identifiant du multimédia
  * @param {int} i Index de la position du multimédia
@@ -83,7 +87,7 @@ function displayMultimedia(id, i, j, like, favorite, badloc) {
     document.getElementById("multi_publisher_date").innerHTML = by_fr + document.getElementById("pos" + i + "_multi" + j + "_publisher").value + the_fr + document.getElementById("pos" + i + "_multi" + j + "_uploaddate").value;
     document.getElementById("multi_descr").innerHTML = document.getElementById("pos" + i + "_multi" + j + "_descr").value;
 
-    //Ouverture du multimedia
+    //Ouverture du multimedia : les multimédias sont stockés dans un dossier dont le chemin d'accès est de la forme : TYPE/PATH_MULTIMEDIA.FORMAT
     var path = document.getElementById("pos" + i + "_multi" + j + "_path").value + "." + document.getElementById("pos" + i + "_multi" + j + "_format").value;
     var type = document.getElementById("pos" + i + "_multi" + j + "_type").value;
     loadMulti(path, type);
@@ -171,6 +175,7 @@ function displayLikeDiv(like, publisher, nlike, ndislike) {
     document.getElementById("ndislike").innerHTML = ndislike;
     document.getElementById("ndislike1").innerHTML = ndislike;
 
+    //Si l'utilisateur est la personne qui a publié le multimédia, il ne peut pas liker
     if (publisher === 'true') {
         document.getElementById("like_action_locked").style.display = "block";
         document.getElementById("like_action").style.display = "none";
@@ -216,10 +221,14 @@ function displayBadLocDiv(badloc) {
  * @returns {void}
  */
 function incrLike(id, type) {
+    //On cherche le champ de lequel est stocké le nombre de like du multimédia
+    // Il faut dont trouver deux indices : celui du multimédia et 
+    // celui de la position du multimédia
     var cptPos = document.getElementById("nbMarkers").value;
-    var i;
-    var j;
+    var i; //Indice de la position
+    var j; // Indice du multimédia
 
+    //On recherche le multimédia qui a le bon id
     for (var k = 0; k < cptPos; k++) {
         var cptMult = document.getElementById("nbMulti" + k).value;
         for (var p = 0; p < cptMult; p++) {
@@ -230,6 +239,7 @@ function incrLike(id, type) {
         }
     }
 
+    //On incrémente le nombre de likes/dislikes
     if (type === 'LIKE') {
         document.getElementById("pos" + i + "_multi" + j + "_like").value = parseInt(document.getElementById("pos" + i + "_multi" + j + "_like").value) + 1;
     } else {
@@ -245,10 +255,14 @@ function incrLike(id, type) {
  * @returns {void}
  */
 function decrLike(id, type) {
+    //On cherche le champ de lequel est stocké le nombre de like du multimédia
+    // Il faut dont trouver deux indices : celui du multimédia et 
+    // celui de la position du multimédia
     var cptPos = document.getElementById("nbMarkers").value;
-    var i;
-    var j;
+    var i; //Indice de la position
+    var j; // Indice du multimédia
 
+    //On recherche le multimédia qui a le bon id
     for (var k = 0; k < cptPos; k++) {
         var cptMult = document.getElementById("nbMulti" + k).value;
         for (var p = 0; p < cptMult; p++) {
@@ -259,6 +273,7 @@ function decrLike(id, type) {
         }
     }
 
+    //On décrémente le nombre de likes/dislikes
     if (type === 'LIKE') {
         document.getElementById("pos" + i + "_multi" + j + "_like").value = parseInt(document.getElementById("pos" + i + "_multi" + j + "_like").value) - 1;
     } else {

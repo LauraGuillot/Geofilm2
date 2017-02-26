@@ -4,6 +4,7 @@ var long = 2.287592000000018;
 
 //Précédente position enregistrée
 var prec;
+//Booléen valant vrai si le centrage a été effectué
 var center = 0;
 
 /*
@@ -23,7 +24,7 @@ var blueIcon = L.icon({
     popupAnchor: [0, -12] // point from which the popup should open relative to the iconAnchor
 });
 
-//Marquer rouge pour les multimédias
+//Marqueur rouge pour les multimédias
 var redIcon = L.icon({
     iconUrl: 'Ressources/marker_red.png',
     shadowUrl: 'Ressources/marker_shadow.png',
@@ -43,6 +44,7 @@ var redIcon = L.icon({
 
 /**
  * Obtention de la position de l'utilisateur
+ * @returns {void}
  */
 function getLocation() {
     if (navigator.geolocation) {
@@ -57,6 +59,7 @@ function getLocation() {
 /**
  * Enregistrement de la position de l'utilisateur 
  * @param {type} position
+ * @returns {void}
  */
 function recordPosition(position) {
     lat = position.coords.latitude;
@@ -65,6 +68,7 @@ function recordPosition(position) {
 
 /**
  * Affichage d'un marqueur de position pour l'utilisateur
+ * @returns {void}
  */
 function displayPosition() {
     if (prec != null) {
@@ -91,6 +95,7 @@ function displayPosition() {
  * Tracking de la position de l'utilisateur : à chaque nouvelle position, 
  * enregistrement et affichage de celle-ci
  * @param {type} position
+ * @returns {void}
  */
 function trackPosition(position) {
     recordPosition(position);
@@ -99,6 +104,7 @@ function trackPosition(position) {
 
 /**
  * Lancement du tracking
+ * @returns {void}
  */
 function startTracker() {
     navigator.geolocation.watchPosition(trackPosition);

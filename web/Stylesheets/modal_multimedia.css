@@ -1,3 +1,4 @@
+/* POP-UP POUR VISUALISER UN MULTIMEDIA */
 .modal.in .modal-dialog{
     min-width:800px;
 }
@@ -13,41 +14,42 @@
     text-align: center;
     vertical-align: middle;
 }
-
+/* AFFICHAGE D'UNE IMAGE*/
 .img_multi{
     max-height:400px;
     max-width:100%;
 }
-
+/* AFFICHAGE D'UNE VIDEO*/
 .video_multi{
     max-height:400px;
 }
 
-/*********** INFOS MULTIMEDIA ***********/
-#multi_title{
-    font-size: 14pt;
-    font-weight: bold;
-}
-
-#multi_description{
-    font-style : italic;
-}
+/*********** INFOS SUR LE MULTIMEDIA ***********/
 #multimedia_info{
         display:inline-block;
         vertical-align: top;
         width:50%!important;
 }
+/* TITRE */
+#multi_title{
+    font-size: 14pt;
+    font-weight: bold;
+}
+/* DESCRIPTION */
+#multi_description{
+    font-style : italic;
+}
 
+/******** ZONE POUR LES INTERACTIONS USER/MULTIMEDIA ***********/
 #multimedia_action{
     display:inline-block;
     float:right;
 }
-/*********** SIGNALISATION ***********/
 
+/*********** SIGNALISATION MAUVAISE LOCALISATION***********/
 #signalisation_action{
     display:none;
 }
-
 #signalisation_action_locked{
     display:none;
 }
@@ -64,15 +66,13 @@
 }
 
 /*********** LIKES / DISLIKES  ***********/
-
 #like_action{
     display:none;
 }
-
 #like_action_locked{
     display:none;
 }
-
+/* BOUTON LIKE + DISLIKE*/
 .like_button{
     position:relative;
     display:inline-block;
@@ -85,19 +85,21 @@
     background-size: contain;
     outline:none;
 }
+/* BOUTON LIKE */
 .like{
     background-image : url("../Ressources/like.png");
 }
 .like:hover{
     background-image : url("../Ressources/like_over.png");
 }
+/* BOUTON DISLIKE */
 .dislike{
     background-image : url("../Ressources/dislike.png");
 }
 .dislike:hover{
     background-image : url("../Ressources/dislike_over.png");
 }
-
+/* BOUTON LIKE ACTIF */
 .like_lock{
     cursor:pointer;
     background-image : url("../Ressources/like.png");
@@ -105,6 +107,7 @@
 .like_lock:hover{
     background-image : url("../Ressources/like.png");
 }
+/* BOUTON DISLIKE ACTIf */
 .dislike_lock{
     cursor:pointer;
     background-image : url("../Ressources/dislike.png");
@@ -112,7 +115,7 @@
 .dislike_lock:hover{
     background-image : url("../Ressources/dislike.png");
 }
-
+/* NOMBRE DE LIKES*/
 #nlike , #nlike1{
     display:inline-block;
     color:#B2DE4C;
@@ -120,7 +123,7 @@
     font-size: 20pt;
     margin-left : 10px;
 }
-
+/* NOMBRE DE DISLIKES*/
 #ndislike , #ndislike1{
     display:inline-block;
     color : #f01644;
@@ -138,16 +141,13 @@
 }
 
 /*********** FAVORIS ***********/
-
 #favorite_action{
     display:none;
     cursor:pointer;
 }
-
 #favorite_action_locked{
     display:none;
 }
-
 .p_favorite{
     display:inline-block;
     color : #FFFF51;

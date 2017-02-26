@@ -1,4 +1,8 @@
 /**
+ * Fonctions pour gérer l'inscription d'un utilisateur
+ */
+
+/**
  * Méthode permettant d'afficher la pop-up d'inscription
  */
 function pop_inscription() {
@@ -32,7 +36,6 @@ function inscription() {
                 if (answer == "true") {
 
                     //Appel du controller pour effuectuer la connexion via un formulaire (en Post)
-
                     var form = document.createElement('form');
                     form.method = "POST";
                     form.action = "globalMap.htm";

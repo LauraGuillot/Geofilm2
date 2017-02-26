@@ -1,4 +1,8 @@
 /**
+ * Fonctionnalités de modification des informations personnelles
+ */
+
+/**
  * Affichage de la pop-up pour modifier les informations personnelles
  */
 function pop_info() {
@@ -32,13 +36,15 @@ function modif() {
                 //On met à jout l'affichage et on ferme la pop-up
                 if (answer == "true") {
 
+                    //Mise à jour de l'affichage
                     document.getElementById("email").value = email;
                     document.getElementById("name").value = nom;
                     document.getElementById("firstname").value = prenom;
                     document.getElementById("info_name").innerHTML = prenom + " " + nom;
                     document.getElementById("info_email").innerHTML = email;
-                    
+                    //On efface la zone pour les messages d'erreur
                     document.getElementById("modification_error").innerHTML = "";
+                    //On ferme la pop-up
                     $('#modification_form').modal('hide');
 
                 } else {

@@ -2,20 +2,19 @@ html, body {
     height: 100%;
     margin: 0px;
 }
-
 .container{
     height:92%;
     width:100%;
     margin: 0px;
     padding: 0px;
 }
-
 .row{
     height:100%;
     margin:0px;
     padding: 0;
 }
 
+/* VOLET DE GAUCHE */
 #left_div{ 
     background-color: #000000;
     opacity :0.8;
@@ -24,31 +23,33 @@ html, body {
     padding : 3%
 }
 
+/* CARTE */
 #mapid{
     margin:0px;
     height:100%;
 }
+/* BOUTONS DE CONTROLE POUR LA CARTE */
+.leaflet-touch .leaflet-bar a{
+    color :#23a1a8!important;
+}
 
+/* PARAGRAPHE */
 p{
     width:100%;
     text-align: center;
     color : white;
     font-weight: 200;
 }
-
+/* MESSAGE D'ACCUEIL ET TITRE*/
 #welcome, #title{
     font-size:26pt;
 }
-
+/* TITRE */
 #title{
     color:#23a1a8;
     font-weight:500;
 }
-
+/* DESCRIPTION */
 .description{
     font-size: 14pt;
-}
-
-.leaflet-touch .leaflet-bar a{
-    color :#23a1a8!important;
 }
