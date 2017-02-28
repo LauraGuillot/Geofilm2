@@ -1,3 +1,4 @@
+/* BOUTON CLASSIQUE*/
 .button {
     background-color: #23a1a8;
     border: none;
@@ -9,7 +10,6 @@
     font-weight: 200; 
     cursor: pointer;
     outline:none;
-
 }
 .button:hover {
     box-shadow: 0 8px 16px 0 rgba(240,247,247,0.11), 0 6px 20px 0 rgba(240,247,247,0.10);
@@ -18,17 +18,19 @@
     text-decoration: none;
 }
 
+/* BOUTON LARGE */
 .large_button{
     width:250px;
     height:60px;
 }
-
+/* BOUTON REDUIT */
 .small_button{
     font-size: 15px;
     padding : 10px; 
     width:100px;
 }
 
+/* CROIX DE FERMETURE */
 .close{
     font-weight: 200;
     background-color: transparent;
@@ -42,7 +44,6 @@
     position:relative;
     float:right;
 }
-
 .close:hover{
     color:#87c2c4;
     text-shadow: none;

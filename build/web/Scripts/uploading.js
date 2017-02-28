@@ -1,7 +1,6 @@
 function load() {
     loadText();
     loadMap();
-    initialize_geocoder();
 }
 
 

@@ -1,12 +1,16 @@
+/**
+ * Fonctions de recherche de source pour la route map
+ */
+
 //Stockage des marqueurs de la carte
 var markers = [];
+
 /**
  * Récupération des sources qui correspondent à un type donné et affichage
  * @returns {Liste de sources}
  */
-
 function search_source_type() {
-    //Nombre total de source
+    //Nombre total de sources
     var cpt = document.getElementById("nbSources").value;
     //Type désiré
     var type = document.getElementById("select_source").value;
@@ -24,7 +28,6 @@ function search_source_type() {
             }
         }
     }
-
     //Affichage
     displaySource(sources);
     return sources;
@@ -35,8 +38,7 @@ function search_source_type() {
  * @returns {undefined}
  */
 function search_key_word() {
-
-    //TRI PAR TYPE
+    //Tri par type
     var type = document.getElementById("select_source").value;
     var sources = search_source_type();
     //Si aucun type n'a été choisi, on prend toutes les sources
@@ -51,17 +53,20 @@ function search_key_word() {
         }
     }
 
-    //CALCUL DES SCORES POUR CHAQUE SOURCE
+    // Calcul des scores pour chaque source
+    // Le score d'une source correspond au nombre de mots en commun entre le 
+    // titre de la source et les mots de la recherche de l'utilisateur
     var key = document.getElementById("search_key_word").value;
     for (var i = 0; i < sources.length; i++) {
         var score = computeScore(sources[i].title, key);
         sources[i].score = score;
     }
 
-    //TRI DE LA LISTE
+    //Tri de la liste suivant les scores
     sources.sort(function (a, b) {
         return a.score < b.score;
     });
+
     //Affichage
     displaySource(sources);
 }
@@ -74,10 +79,11 @@ function search_key_word() {
  * @returns {void}
  */
 function displaySource(sources) {
-
+    //Div dans laquelle on affiche la liste des sources
     var div = document.getElementById("result");
     div.innerHTML = "";
-    //Si pas de source : message
+
+    //Si pas de source : message 
     if (sources.length === 0) {
         div.innerHTML = no_source_fr;
         div.className = "no_source";
@@ -112,14 +118,16 @@ function delegateOpenSource(i) {
 }
 
 /**
- * Ouverture de la source i
+ * Ouverture de la source i : on efface les markers affichés et on affiche les 
+ * marqueurs pour les multimédias de la nouvelle source
  * @param {int} i - Index de la source
- * @returns {undefined}
+ * @returns {void}
  */
 function openSource(i) {
     //On efface les précédents markers
     removeMarkers();
-    //On récupère toutes les positions 
+
+    //On récupère toutes les positions de la source
     var pos = [];
     var cpt = document.getElementById("nbPos" + i).value;
     for (var j = 0; j < cpt; j++) {
@@ -152,24 +160,29 @@ function removeMarkers() {
  * @returns {void}
  */
 function displayMarkers(i, pos) {
+    //Pour chaque position
     for (var j = 0; j < pos.length; j++) {
+        //On récupère les coordonnées gps
         var point = pos[j].geom;
         point = point.substring(6, point.length - 1);
         var pt = point.split(",");
         var x = pt[0];
         var y = pt[1];
+        //On prépare la popup dans laquelle seront affichés les multimédias
         var popup = preparePopUp(i, pos[j].index);
+        //On affiche un marqueur
         markers.push(addMarker(x, y, popup));
     }
+    //Centrage de la carte
     centerMap(pos);
 }
 
 /**
- * Ajout d'un marker sur la carte
+ * Ajout d'un marqueur sur la carte
  * @param {double} x longitude
  * @param {double} y latitude
  * @param {popup} Popup
- * @returns {marker}
+ * @returns {marqueur}
  */
 function addMarker(x, y, popup) {
     //Div pour le marker
@@ -187,13 +200,13 @@ function addMarker(x, y, popup) {
 }
 
 /**
- * Pour chaque marqueur préparation de la pop-up
+ * Pour chaque marqueur préparation de la pop-up associée. Au clic sur le marqueur,
+ *  la pop up affiche la liste des multimédias disponibles à cet endroit.
  * @param {type} i - Index de la source
- * @param {type} j - Index du marqueur
+ * @param {type} j - Index du marqueur (position)
  * @returns {popup}
  */
 function preparePopUp(i, j) {
-
     //Mise en place du header
     var html = header(i, j);
     //Pour chaque multimédia, on ajoute un lien
@@ -204,6 +217,7 @@ function preparePopUp(i, j) {
         html = html + li;
     }
     html += '</div>';
+    //On renvoie la popup créée à partir du contenu html construit
     return new mapboxgl.Popup({offset: 25}).setHTML(html);
 }
 
@@ -215,18 +229,19 @@ function preparePopUp(i, j) {
  * @returns {String}
  */
 function getLinkMulti(i, j, k) {
-
+    //Variable pour le contenu html
     var html = '';
-
+    //Récupération des paramètres
     var title = document.getElementById("src" + i + "_pos" + j + "_multi" + k + "_title").value;
     var id = document.getElementById("src" + i + "_pos" + j + "_multi" + k + "_id").value;
     var publisher = document.getElementById("src" + i + "_pos" + j + "_multi" + k + "_publisher").value;
     var date = document.getElementById("src" + i + "_pos" + j + "_multi" + k + "_uploaddate").value;
     var type = document.getElementById("src" + i + "_pos" + j + "_multi" + k + "_type").value;
-
+    //Création du lien
+    //Lien 
     html += '<a class="link_marker"  onclick="openMult(' + i + ',' + j + ',' + k + ',' + id + ')">';
     html += '<div class="p_group">';
-
+    //Icone video/image/son
     switch (type) {
         case 'VIDEO':
             html += "<img class=\"icon_video\" src=\"Ressources/video.png\"/>";
@@ -238,7 +253,7 @@ function getLinkMulti(i, j, k) {
             html += "<img class=\"icon_sound\" src=\"Ressources/sound.png\"/>";
             break;
     }
-
+    //Titre, date, auteur
     html += '<div class="p">';
     html += '<p class = "link_title" > ';
     html += title;
@@ -247,44 +262,54 @@ function getLinkMulti(i, j, k) {
     html += by_fr + publisher + the_fr + date;
     html += '</p></div></div>';
     html += '</a>';
-
+    //Renvoi du lien
     return html;
 }
 
 /**
- * Création du header pour les pop-up
+ * Création du header pour les pop-up.
+ * Le header des pop-up contient des checkbox qui permettent de trier la liste 
+ * des multimédias suivant différents critères : titre, date, like, type ...
  * @param {type} i - Index de la source
  * @param {type} j - Index du marqueur
  * @returns {String} Header de la pop-up
  */
 function header(i, j) {
+    //Contenu html
     var html = '';
+    //Checkbox pour le tri par titre
     html += '<p class="text">' + sort_by_fr + '</p>';
     html += "<div class=\"checkbox_pop\">";
     html += "<label><input id=\"title_" + i + "_" + j + "\" class=\"checkbox_marker\" type=\"checkbox\" name=\"title\" value=\"title\" onclick=\"sort(" + i + "," + j + ")\">";
     html += title_fr + "</label>";
     html += "</div>";
+    //Checkbox pour le tri par date
     html += "<div class=\"checkbox_pop\">";
     html += "<label><input id=\"date_" + i + "_" + j + "\" class=\"checkbox_marker\" type=\"checkbox\" name=\"date\" value=\"date\" onclick=\"sort(" + i + "," + j + ")\">";
     html += date_fr + "</label>";
     html += "</div>";
+    //Checkbox pour le tri par likes
     html += "<div class=\"checkbox_pop\">";
     html += "<label><input id=\"likes_" + i + "_" + j + "\" class=\"checkbox_marker\" type=\"checkbox\" name=\"likes\" value=\"likes\" onclick=\"sort(" + i + "," + j + ")\">";
     html += likes_fr + "</label>";
     html += "</div>";
+    //Checkbox pour afficher les multimédias de type vidéo
     html += "<br><p class=\"text\">" + source_type_fr + "</p>";
     html += "<div class=\"checkbox_pop\">";
     html += "<label><input  id=\"video_" + i + "_" + j + "\" class=\"checkbox_marker\" type=\"checkbox\" name=\"video\" value=\"video\" onclick=\"sort(" + i + "," + j + ")\" checked>";
     html += video_fr + "</label>";
     html += "</div>";
+    //Checkbox pour afficher les multimédias de type image
     html += "<div class=\"checkbox_pop\">";
     html += "<label><input id=\"image_" + i + "_" + j + "\" class=\"checkbox_marker\" type=\"checkbox\" name=\"image\" value=\"image\" onclick=\"sort(" + i + "," + j + ")\" checked>";
     html += image_fr + "</label>";
     html += "</div>";
+    //Checkbox pour afficher les multimédias de type son
     html += "<div class=\"checkbox_pop\">";
     html += "<label><input id=\"sound_" + i + "_" + j + "\" class=\"checkbox_marker\" type=\"checkbox\" name=\"sound\" value=\"sound\" onclick=\"sort(" + i + "," + j + ")\"checked>";
     html += sound_fr + "</label>";
     html += "</div>";
+    //Checkbox pour supprimer les multimédia signaler comme mal géolocalisés
     html += "<br><div class=\"checkbox_pop\">";
     html += "<label><input id=\"badloc_" + i + "_" + j + "\" class=\"checkbox_marker\" type=\"checkbox\" name=\"badloc\" value=\"badloc\" onclick=\"sort(" + i + "," + j + ")\">";
     html += remove_bad_location_fr + "</label>";
@@ -295,7 +320,7 @@ function header(i, j) {
 
 /**
  * Calcule de la similarité entre la recherche de l'utilisateur et le titre d'une source.
- * Ce score est basé sur le nombre de mots en commun
+ * Ce score est basé sur le nombre de mots en commun.
  * @param {type} title - Titre de la source
  * @param {type} key - Recherche de l'utilisateur 
  * @returns {int} score
@@ -349,35 +374,39 @@ function centerMap(pos) {
     }
 
     //Centrage
-    /*  map.fitBounds([[
-     parseFloat(long_min),
-     parseFloat(lat_min)
-     ], [
-     parseFloat(long_max),
-     parseFloat(lat_max)
-     ]], {padding: 50});*/
     fitBounds([[long_min, lat_min], [long_max, lat_max]]);
 }
 
 /**
  * Obtenir une liste de points à partir d'une liste de géométries
  * @param {type} pos - Liste de position
- * @returns {Array|extractPoints.points}
+ * @returns {Liste de points}
  */
 function extractPoints(pos) {
+    //Liste de points
     var points = [];
+    //Pour chaque position
     for (var i = 0; i < pos.length; i++) {
+        //Création du point correspondant
         var p = new Object();
+        //Extraction de la géométrie de la position : on récupère longitude et latitude
         var geom = pos[i].geom;
         geom = geom.substring(6, geom.length - 1);
         var pt = geom.split(",");
+        // Affectation des longitude/ latitude au point
         p.lat = pt[0];
         p.long = pt[1];
+        //Ajout du point dans le tableau
         points.push(p);
     }
     return points;
 }
 
+/**
+ * Centrage de la carte sur une bounding box
+ * @param {Array} boundsArray Bounding box
+ * @returns {void}
+ */
 function fitBounds(boundsArray) {
     var bounds = new mapboxgl.LngLatBounds();
     boundsArray.forEach(function (item) {

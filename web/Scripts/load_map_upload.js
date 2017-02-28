@@ -1,25 +1,35 @@
 //Carte
 var map;
+
+
 /**
  * Chargement de la carte avec tous les marqueurs
  */
 function loadMap() {
     //Création de la carte, centrage initial sur Paris
-    mapboxgl.accessToken = 'pk.eyJ1IjoiZ2VvZmlsbSIsImEiOiJjaXlqd2d1NGUwMDA5MnFrMXUyaHdtYmt5In0.zaWf5uM65g8RiAj9LACvHw';
+    mapboxgl.accessToken = 'pk.eyJ1IjoicHBhbG1hcyIsImEiOiJjaXpvYTNlNWcwMDJhMzJueTY0ajcyM2s1In0.P_bIPUxWHbVMmYaOenvFaA';
     map = new mapboxgl.Map({
         container: 'mapid',
         style: 'mapbox://styles/mapbox/streets-v9',
         center: [2.287592000000018, 48.862725],
-        zoom: 10
+        zoom: 5
     });
     //Ajout du géocoder : barre de recherche par adresse
     map.addControl(new MapboxGeocoder({
         accessToken: mapboxgl.accessToken
     }));
-   
+
+    var click = document.getElementById('click');
+
+    map.on('click', function (e) {
+        window[e.type].innerHTML = e.latlng.toString();
+        alert(e.latlng);
+    });
+
+
     // Zoom 
     map.addControl(new mapboxgl.NavigationControl());
-    
+
     //Obtention (si possible) de la position de l'utilisateur
     getLocation();
     // Affichage de la position de l'utilisateur
@@ -56,29 +66,29 @@ function addMarker(x, y, popup) {
 
 
 
-L.mapbox.accessToken = '<your access token here>';
-var map = L.mapbox.map('map', 'mapbox.streets')
-    .setView([0, 0], 2);
-
-var coordinates = document.getElementById('coordinates');
-
-var marker = L.marker([0, 0], {
-    icon: L.mapbox.marker.icon({
-      'marker-color': '#f86767'
-    }),
-    draggable: true
-}).addTo(map);
-
-// every time the marker is dragged, update the coordinates container
-marker.on('dragend', ondragend);
-
-// Set the initial marker coordinate on load.
-ondragend();
-
-function ondragend() {
-    var m = marker.getLatLng();
-    coordinates.innerHTML = 'Latitude: ' + m.lat + '<br />Longitude: ' + m.lng;
-}
+//L.mapbox.accessToken = '<your access token here>';
+//var map = L.mapbox.map('map', 'mapbox.streets')
+//        .setView([0, 0], 2);
+//
+//var coordinates = document.getElementById('coordinates');
+//
+//var marker = L.marker([0, 0], {
+//    icon: L.mapbox.marker.icon({
+//        'marker-color': '#f86767'
+//    }),
+//    draggable: true
+//}).addTo(map);
+//
+//// every time the marker is dragged, update the coordinates container
+//marker.on('dragend', ondragend);
+//
+//// Set the initial marker coordinate on load.
+//ondragend();
+//
+//function ondragend() {
+//    var m = marker.getLatLng();
+//    coordinates.innerHTML = 'Latitude: ' + m.lat + '<br />Longitude: ' + m.lng;
+//}
 
 
 

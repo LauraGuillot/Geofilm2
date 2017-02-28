@@ -1,15 +1,22 @@
 /**
+ * Fonctions pour trier les multimédias suivant les paramètres 
+ * choisis par l'utilisateur dans la route map
+ */
+
+/**
  * Tri des multimédias pour la pop-up i suivant les préférences de l'utilisateur
  * @param {int} i Indice de la source
- * @param {int} j Indice de la pop-up
+ * @param {int} j Indice de la position
+ * @returns {void}
  */
 function sort(i, j) {
 
     var multis = [];
 
-    //On récupère tous les multimédias de la position i
+    //On récupère tous les multimédias de la source i et de la position j
     var cpt = document.getElementById("nbMulti" + i + "_" + j).value;
     for (var k = 0; k < cpt; k++) {
+        //Paramètres
         var title = document.getElementById("src" + i + "_pos" + j + "_multi" + k + "_title").value
         var id = document.getElementById("src" + i + "_pos" + j + "_multi" + k + "_id").value;
         var publisher = document.getElementById("src" + i + "_pos" + j + "_multi" + k + "_publisher").value;
@@ -18,7 +25,7 @@ function sort(i, j) {
         var likes = document.getElementById("src" + i + "_pos" + j + "_multi" + k + "_like").value;
         var dislikes = document.getElementById("src" + i + "_pos" + j + "_multi" + k + "_dislike").value;
         var badloc = document.getElementById("src" + i + "_pos" + j + "_multi" + k + "_badloc").value;
-
+        //Création de l'objet multimédia
         var m = new Object();
         m.title = title;
         m.id = id;
@@ -26,22 +33,30 @@ function sort(i, j) {
         m.date = date;
         m.type = type;
         m.likes = likes;
-         m.dislikes = dislikes;
+        m.dislikes = dislikes;
         m.badloc = badloc;
         m.rank = k;
-
+        //Ajout au tableau
         multis.push(m);
     }
 
-    // Tri par type de multimédia
+    // **********************************************************
+    // 1- Tri par type de multimédia
+    // **********************************************************
+
+    //Booléen valant vrai si l'utilisateur souhaite afficher les multimédia de type video
     var video = document.getElementById("video_" + i + "_" + j).checked;
+    //Booléen valant vrai si l'utilisateur souhaite afficher les multimédia de type image
     var image = document.getElementById("image_" + i + "_" + j).checked;
+    //Booléen valant vrai si l'utilisateur souhaite afficher les multimédia de type son
     var sound = document.getElementById("sound_" + i + "_" + j).checked;
 
+    //Tableau contenant les indices multimédias à ne pas afficher
     var todelete = [];
 
+    //Pour chaque multimédia, on regarde si son type est souhaité par l'utilisateur 
+    //et si non, on l'ajoute dans le tableau des multimédias
     for (var k = 0; k < multis.length; k++) {
-
         if (multis[k].type === "VIDEO" && !video) {
             todelete.push(k);
         }
@@ -53,16 +68,21 @@ function sort(i, j) {
         }
     }
 
+    //On supprime les multimédias qui sont dans le tableau todelete
     for (var l = 0; l < todelete.length; l++) {
         multis.splice(todelete[l], 1);
-
         for (var p = 0; p < todelete.length; p++) {
             todelete[p] = todelete[p] - 1;
         }
     }
 
-    //Tri selon les titres
+    // **********************************************************
+    // 2- Tri selon les titres
+    // **********************************************************
+
+    //Booléen vrai si l'utilisateur veut trier la liste par titre
     var title_sort = document.getElementById("title_" + i + "_" + j).checked;
+    //Tri par titre
     if (title_sort) {
         multis.sort(function (a, b) {
             if (a.title < b.title)
@@ -74,10 +94,14 @@ function sort(i, j) {
     }
 
 
-    //Tri selon la date
+    // **********************************************************
+    // 3- Tri selon les dates
+    // **********************************************************
+
+    //Booléen vrai si l'utilisateur veut tirer la liste selon les dates d'upload
     var date_sort = document.getElementById("date_" + i + "_" + j).checked;
+    //Tri selon les dates
     if (date_sort) {
-        // dateSort(multis);
         multis.sort(function (a, b) {
             var aa = a.date.split("/");
             var bb = b.date.split("/");
@@ -95,17 +119,28 @@ function sort(i, j) {
         });
     }
 
-    //Tri selon les likes
+    // **********************************************************
+    // 4- Tri selon les likes
+    // **********************************************************
+
+    //Booléen vrai si l'utilisateur veut tirer la liste selon les likes
     var likes_sort = document.getElementById("likes_" + i + "_" + j).checked;
+    //Tri de la liste
     if (likes_sort) {
         multis.sort(function (a, b) {
-             return (a.likes - a.dislikes) < (b.likes - b.dislikes);
+            return (a.likes - a.dislikes) < (b.likes - b.dislikes);
         });
     }
 
-    //Suppression des mauvaises géolocalisations
+    // **********************************************************
+    // 5- Suppression des mauvaises géolocalisations
+    // **********************************************************
+
+    // Booléen vrai si l'utilisateur ne souhaite pas afficher les multimédias 
+    // signalés comme mal géolocalisés
     var badloc_sort = document.getElementById("badloc_" + i + "_" + j).checked;
 
+    //Suppression des mauvaises géolocalisations
     if (badloc_sort) {
         var todelete1 = [];
         for (var k = 0; k < multis.length; k++) {
@@ -113,7 +148,6 @@ function sort(i, j) {
                 todelete1.push(k);
             }
         }
-
         for (var k = 0; k < todelete1.length; k++) {
             multis.splice(todelete1[k], 1);
             for (var l = 0; l < todelete1.length; l++) {
@@ -124,7 +158,6 @@ function sort(i, j) {
 
     //Affichage de la liste triée
     displayMultis(i, j, multis);
-
 }
 
 
@@ -133,6 +166,7 @@ function sort(i, j) {
  * @param {type} i Index de la  source
  * @param {type} j Index de la position
  * @param {Liste} multis - Multimédias
+ * @returns {void}
  */
 function displayMultis(i, j, multis) {
 

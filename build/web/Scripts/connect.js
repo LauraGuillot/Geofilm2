@@ -1,4 +1,8 @@
 /**
+ * Fonctions pour gérer la connexion d'un utilisateur
+ */
+
+/**
  * Méthode permettant d'afficher la pop-up de connexion
  */
 function pop_connexion() {
@@ -25,7 +29,6 @@ function connect() {
                 if (answer == "true") {
 
                     //Appel du controller pour effuectuer la connexion via un formulaire (en Post)
-
                     var form = document.createElement('form');
                     form.method = "POST";
                     form.action = "globalMap.htm";

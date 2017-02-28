@@ -7,10 +7,11 @@ function deleteLike(type) {
     //Paramètres
     var multiid = document.getElementById("multi_open").value;
     var idco = document.getElementById("idco").value;
+    
+    //Suppression du like
+    // Cette action est possible que si un like a été fait, d'où la condition
     var condition = ((document.getElementById("like_lock").style.backgroundImage == 'url("Ressources/like_green.png")' && (type === 'LIKE')) || (document.getElementById("dislike_lock").style.backgroundImage == 'url("Ressources/dislike_red.png")' && type === 'DISLIKE'));
-
     if (condition) {
-
         xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -29,7 +30,6 @@ function deleteLike(type) {
                     document.getElementById("ndislike1").innerHTML = parseInt(document.getElementById("ndislike1").innerHTML) - 1;
                     document.getElementById("dislike_lock").style.backgroundImage = "url('Ressources/dislike.png')";
                 }
-
                 decrLike(multiid, type);
             }
         };

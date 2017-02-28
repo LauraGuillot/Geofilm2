@@ -13,11 +13,11 @@ function  deleteFavorite(id) {
         }
     }
     favorites.splice(index, 1);
+    //On rafraichit l'affichage
     sort();
 
-    //Suppression dans la base de données
+    //Suppression dans la base de données en appelant une servlet
     var idco = document.getElementById("idco").value;
-
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {

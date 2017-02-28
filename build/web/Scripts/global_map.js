@@ -3,7 +3,9 @@
  * chargement du texte et chargement de la carte
  */
 function load() {
+    //Chargement des chaînes de caractères
     loadText();
+    //Chargement de la carte
     loadMap();
 }
 
@@ -55,7 +57,6 @@ function outUpload() {
     document.getElementById("upload_text").style.display = "none";
 }
 
-
 /**
  * Fonction d'affichage dynamique pour le bouton d'ajout aux favoris
  */
@@ -64,6 +65,7 @@ function overFavorite() {
     document.getElementById("add_favorite").style.color = "#FFFF51";
     document.getElementById("add_favorite").style.textDecoration = "underline";
 }
+
 /**
  * Fonction d'affichage dynamique pour le bouton d'ajout aux favoris
  */

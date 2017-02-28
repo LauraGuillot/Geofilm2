@@ -1,5 +1,9 @@
 /**
- * Affichage de la route map
+ * Fonctionnalités de la barre de navigation
+ */
+
+/**
+ * Onglet route map
  * @returns {void}
  */
 function getRouteMap() {
@@ -18,7 +22,7 @@ function getRouteMap() {
 }
 
 /**
- * Affichage de la global map
+ * Onglet global map
  * @returns {void}
  */
 function getGlobalMap() {
@@ -38,7 +42,7 @@ function getGlobalMap() {
 
 
 /**
- * Affichage des favoris
+ * Onglet favoris
  * @returns {void}
  */
 function getFavorite() {

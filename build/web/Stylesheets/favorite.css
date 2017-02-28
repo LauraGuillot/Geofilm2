@@ -2,26 +2,37 @@ html, body {
     height: 100%;
     margin: 0px;
 }
-
 .container{
     height:92%;
     width:100%;
     margin: 0px;
     padding: 0px;
 }
-
 .row{
     height:100%;
     margin:0px;
     padding: 0;
 }
 
+/* CARTE */
 #mapid{
     margin: 0px;
     padding: 0px;
     height:100%;
 }
 
+/* GEOCODER POUR LA CARTE */
+.mapboxgl-ctrl-geocoder ul > li.active > a{
+    background-color: black!important; 
+}
+
+/* RESULTATS DU GEOCODER*/
+.suggestions{
+    background-color: #2b2f36!important; 
+    opacity:0.9;
+}
+
+/* VOLET DE GAUCHE */
 #left_div{ 
     background-color: #000000!important;
     opacity:0.8;
@@ -29,7 +40,7 @@ html, body {
     height:100%;
     padding: 2%;
 }
-
+/*ZONE POUR AFFICHER LA LISTE DES FAVORIS*/
 #favorite{
     width:100%;
     height:73%;
@@ -37,6 +48,8 @@ html, body {
     margin-top:7%;
 }
 
+/* ICONES POUR LES FAVORIS*/
+/*Video*/
 .icon_video{
     display:inline-block;
     vertical-align: top;
@@ -45,7 +58,7 @@ html, body {
     margin-top:15px;
     margin-right: 15px;
 }
-
+/*Image*/
 .icon_image{
     display:inline-block;
     width:25px;
@@ -54,7 +67,7 @@ html, body {
     vertical-align: top;
     margin-top:15px;
 }
-
+/*Son*/
 .icon_sound{
     display:inline-block;
     width:30px;
@@ -64,35 +77,33 @@ html, body {
     margin-top:15px;
 }
 
+/* DIV POUR SEPARER LES FAVORIS */
 #separator{
     border-bottom: 1px solid white;
     width:95%;
     height:2px;
     margin:4%;
-
 }
 
-/*Scrollbar*/
+/*SCROLLBAR*/
 #favorite::-webkit-scrollbar-track
 {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
     border-radius: 10px;
     background-color: transparent;
-
 }
-
 #favorite::-webkit-scrollbar
 {
     width: 10px;
     background-color:transparent;
 }
-
 #favorite::-webkit-scrollbar-thumb
 {
     border-radius: 8px;
     background-color: #23a1a8;
 }
 
+/*INPUT (POUT LE TRI DES FAVORIS)*/
 .input_label{
     color:white;
     display:inline-block!important;  
@@ -104,17 +115,16 @@ html, body {
     width:20px;
     height:15px!important;
 }
-
 .form_fav{
     display:inline-block;
     height:10%;
     vertical-align: top;
 }
-
 .info_p{
     display:inline-block;
 }
 
+/* BOUTON POUR SUPPRIMER UN FAVORIS */
 .del_button{
     color:#f01644!important;
     font-style: italic;
@@ -122,17 +132,10 @@ html, body {
     font-size:9pt;
    
 }
-
 .del_button:hover{
     color:#f01644!important;
      text-decoration: underline;
 }
 
-.suggestions{
-    background-color: #2b2f36!important; 
-    opacity:0.9;
-}
 
-.mapboxgl-ctrl-geocoder ul > li.active > a{
-    background-color: black!important; 
-}
+
