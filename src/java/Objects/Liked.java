@@ -1,14 +1,11 @@
-/* Classe Liked.java
-  * ------------------------------------------------------------------------------
-  * Objet de la base de données
-  * Un objet 'Liked' désigne un like fait par un utilisateur sur un multimédia.
-  * Il comporte donc l'identifiant de la personne et celui du multimédia concerné. 
-  * Il a aussi un type : 'like' ou 'dislike'
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package Objects;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -19,6 +16,10 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ *
+ * @author Paola
+ */
 @Entity
 @Table(name = "liked", catalog = "geofilm", schema = "geofilm")
 @XmlRootElement
@@ -32,9 +33,8 @@ public class Liked implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected LikedPK likedPK;
-    @Basic(optional = false)
     @Column(name = "liked_type")
-    private String likedType;
+    private Serializable likedType;
     @JoinColumn(name = "multimedia_id", referencedColumnName = "multimedia_id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Multimedia multimedia;
@@ -49,11 +49,6 @@ public class Liked implements Serializable {
         this.likedPK = likedPK;
     }
 
-    public Liked(LikedPK likedPK, String likedType) {
-        this.likedPK = likedPK;
-        this.likedType = likedType;
-    }
-
     public Liked(int personId, int multimediaId) {
         this.likedPK = new LikedPK(personId, multimediaId);
     }
@@ -66,11 +61,11 @@ public class Liked implements Serializable {
         this.likedPK = likedPK;
     }
 
-    public String getLikedType() {
+    public Serializable getLikedType() {
         return likedType;
     }
 
-    public void setLikedType(String likedType) {
+    public void setLikedType(Serializable likedType) {
         this.likedType = likedType;
     }
 
@@ -114,5 +109,5 @@ public class Liked implements Serializable {
     public String toString() {
         return "Objects.Liked[ likedPK=" + likedPK + " ]";
     }
-
+    
 }

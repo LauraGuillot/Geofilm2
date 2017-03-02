@@ -1,78 +1,59 @@
-/* Classe Favorite.java
-  * ------------------------------------------------------------------------------
-  * Objet de la base de données
-  * Un objet 'Favorite' désigne un multimédia ajouté dans les favoris d'un utilisateur.
-  * Il comporte un identifiant, l'identifiant de la personne et celui du multimédia.
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package Objects;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ *
+ * @author Paola
+ */
 @Entity
 @Table(name = "favorite", catalog = "geofilm", schema = "geofilm")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Favorite.findAll", query = "SELECT f FROM Favorite f"),
-    @NamedQuery(name = "Favorite.findByFavoriteId", query = "SELECT f FROM Favorite f WHERE f.favoriteId = :favoriteId")})
+    @NamedQuery(name = "Favorite.findByPersonId", query = "SELECT f FROM Favorite f WHERE f.favoritePK.personId = :personId"),
+    @NamedQuery(name = "Favorite.findByMultimediaId", query = "SELECT f FROM Favorite f WHERE f.favoritePK.multimediaId = :multimediaId"),
+    @NamedQuery(name = "Favorite.findByFavoriteId", query = "SELECT f FROM Favorite f WHERE f.favoritePK.favoriteId = :favoriteId")})
 public class Favorite implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @Column(name = "favorite_id")
-    private Integer favoriteId;
-    @JoinColumn(name = "multimedia_id", referencedColumnName = "multimedia_id")
-    @ManyToOne(optional = false)
-    private Multimedia multimediaId;
-    @JoinColumn(name = "person_id", referencedColumnName = "person_id")
-    @ManyToOne(optional = false)
-    private Person personId;
+    @EmbeddedId
+    protected FavoritePK favoritePK;
 
     public Favorite() {
     }
 
-    public Favorite(Integer favoriteId) {
-        this.favoriteId = favoriteId;
+    public Favorite(FavoritePK favoritePK) {
+        this.favoritePK = favoritePK;
     }
 
-    public Integer getFavoriteId() {
-        return favoriteId;
+    public Favorite(int personId, int multimediaId, int favoriteId) {
+        this.favoritePK = new FavoritePK(personId, multimediaId, favoriteId);
     }
 
-    public void setFavoriteId(Integer favoriteId) {
-        this.favoriteId = favoriteId;
+    public FavoritePK getFavoritePK() {
+        return favoritePK;
     }
 
-    public Multimedia getMultimediaId() {
-        return multimediaId;
-    }
-
-    public void setMultimediaId(Multimedia multimediaId) {
-        this.multimediaId = multimediaId;
-    }
-
-    public Person getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(Person personId) {
-        this.personId = personId;
+    public void setFavoritePK(FavoritePK favoritePK) {
+        this.favoritePK = favoritePK;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (favoriteId != null ? favoriteId.hashCode() : 0);
+        hash += (favoritePK != null ? favoritePK.hashCode() : 0);
         return hash;
     }
 
@@ -83,7 +64,7 @@ public class Favorite implements Serializable {
             return false;
         }
         Favorite other = (Favorite) object;
-        if ((this.favoriteId == null && other.favoriteId != null) || (this.favoriteId != null && !this.favoriteId.equals(other.favoriteId))) {
+        if ((this.favoritePK == null && other.favoritePK != null) || (this.favoritePK != null && !this.favoritePK.equals(other.favoritePK))) {
             return false;
         }
         return true;
@@ -91,7 +72,7 @@ public class Favorite implements Serializable {
 
     @Override
     public String toString() {
-        return "Objects.Favorite[ favoriteId=" + favoriteId + " ]";
+        return "Objects.Favorite[ favoritePK=" + favoritePK + " ]";
     }
-
+    
 }

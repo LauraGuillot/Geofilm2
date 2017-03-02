@@ -131,8 +131,10 @@ public interface MultimediaManager {
      * @param l Localisation du média
      * @param p Personne qui upload la vidéo
      * @param sourceId Source du multimédia
+     * @param time_end
+     * @param time_begin
      */
-    public void insertMultimedia(String title, String description, String path, String date, String format, String language, String type, Location l, Person p, Source sourceId);
+    public void insertMultimedia(String title, String description, String path, String date, String format, String language, String type, Location l, Person p, Source sourceId, String time_end, String time_begin);
 
     /**
      * Etant donnée un matrice 2D de positions (positions classées par source),

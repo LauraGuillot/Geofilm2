@@ -1,9 +1,7 @@
 /*
-  * Classe Location.java
-  * ------------------------------------------------------------------------------
-  * Objet de la base de données
-  * Une localisation désigne une position d'un multimédia. 
-  * Elle comporte un identifiant et une géométrie (de type point, line ou polygon)
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package Objects;
 
@@ -23,6 +21,10 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+/**
+ *
+ * @author Paola
+ */
 @Entity
 @Table(name = "location", catalog = "geofilm", schema = "geofilm")
 @XmlRootElement

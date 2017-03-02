@@ -382,9 +382,11 @@ public class MultimediaManagerImpl implements MultimediaManager {
      * @param l Localisation du multimédia
      * @param p Person p qui upload le multimédia
      * @param sourceId s Source du multimédia
+     * @param time_end
+     * @param time_begin
      */
     @Override
-    public void insertMultimedia(String title, String description, String path, String date, String format, String language, String type, Location l, Person p, Source sourceId) {
+    public void insertMultimedia(String title, String description, String path, String date, String format, String language, String type, Location l, Person p, Source sourceId, String time_end, String time_begin) {
         Multimedia m = new Multimedia();
         m.setMultimediaTitle(title);
         m.setMultimediaDescription(description);
@@ -396,6 +398,8 @@ public class MultimediaManagerImpl implements MultimediaManager {
         m.setLocationId(l);
         m.setPublisher(p);
         m.setSourceId(sourceId);
+        m.setMultimediaEnd(time_end);
+        m.setMultimediaStart(time_begin);
 
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();

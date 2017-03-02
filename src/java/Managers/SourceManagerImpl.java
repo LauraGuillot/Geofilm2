@@ -87,8 +87,7 @@ public class SourceManagerImpl implements SourceManager {
         Source s = new Source();
         s.setSourceTitle(title);
         s.setSourceType(type);
-        s.setSourceMultimediaEnd(time_end);
-        s.setSourceMultimediaStart(time_begin);
+        
 
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();

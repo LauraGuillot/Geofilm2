@@ -97,6 +97,8 @@ var city_fr = "Ville *";
 var country_fr = "Pays *";
 var next_fr = "SUIVANT";
 var type_media = "Indéterminé";
+var location_title_fr = "POINTER SUR LA CARTE";
+var alternative_fr = "OU";
 
 var upload_subtitle3_fr = "Ajout du fichier multimédia";
 var upload_choice_input_fr = "Choisissez un fichier multimédia :";

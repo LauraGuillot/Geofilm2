@@ -50,6 +50,8 @@ function loadText() {
         document.getElementById("city").innerHTML = city_fr;
         document.getElementById("country").innerHTML = country_fr;
         document.getElementById("next2").innerHTML = next_fr;
+        document.getElementById("location").innerHTML = location_title_fr;
+        document.getElementById("alternative").innerHTML = alternative_fr;
 
         //UPLOAD MEDIA 2 : UPLOAD
         document.getElementById("title3").innerHTML = upload_contents_title_fr;

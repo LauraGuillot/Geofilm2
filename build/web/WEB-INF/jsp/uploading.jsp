@@ -10,16 +10,15 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Geofilm</title>
         <link rel="shortcut icon" href="Ressources/logo2.png" >
-        
+
         <script import com.mapbox.mapboxsdk.geometry.LatLng
-                import geocoder ></script>
+        import geocoder ></script>
         <!-- BOOTSTRAP -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
         <!--MAP BOX -->
-        
         <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.1/mapbox-gl.js'></script>
         <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.1/mapbox-gl.css' rel='stylesheet' />
         <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.js'></script>
@@ -60,8 +59,10 @@
 
 
 
+
     </head>
     <body onload="load();">
+
 
         <!-- CHARGEMENT DES DONNEES -->
 
@@ -71,11 +72,15 @@
         <input type="hidden" id="email" value="<c:out value="${email}"/>"/> 
         <input type="hidden" id="idco" value="<c:out value="${idco}"/>"/> 
 
-        <!-- Markers (positions) -->
-        <input type="hidden" id="nbMarkers" value="<c:out value="${fn:length(markers)}"/>"/> 
-        <c:forEach var="p" items="${markers}" varStatus="status">
-            <input type="hidden" id="p<c:out value="${status.index}"/>" value="<c:out value="${p['locationThegeom']}"/>"/>
-        </c:forEach>
+        <!-- Chargement des markers en caché -->
+        <div style="display:none;">
+            <input type="hidden" id="nbMarkers" value="<c:out value="${fn:length(markers)}"/>"/> 
+            <c:forEach var="p" items="${markers}" varStatus="status">
+                <input type="hidden" id="p<c:out value="${status.index}"/>" value="<c:out value="${p['locationThegeom']}"/>"/>
+            </c:forEach>
+        </div>
+
+        
 
         <!-- NAVIGATION -->
         <nav class="navbar-default navbar " role="navigation">
@@ -117,7 +122,7 @@
                     <div id="content_general1" class="col-md-6">
 
                         <!--Saisie du type de multimédia-->
-                        
+
                         <p class="error_message" id="error_upload"> </p>
                         <p class="label_form" style="display:inline-block!important;" id="upload_type_multimedia"></p>
 
@@ -196,8 +201,10 @@
                         <!--Saisie du numéro, de la rue, d'un complément d'adresse si nécessaire,
                         du code postal, puis de la ville, et du pays-->
                         <p class="error_message" id="error_mandatory"></p>
-                        <p class="title" id="address" style="color:white;size:10px;" ></p>
-                        
+                        <p class="title" id="address" style="color:white;size:10px;display:inline-block!important;float:center;" ></p>
+                        <p class="title" id="alternative" style="size:10px;display:inline-block;float:right"></p>
+                        <br>
+
                         <div style="width:10%;display:inline-block!important" style="padding-left:0px!important;">
                             <p class="label_form" id="numero"></p>
                             <input type="text" name="loc_numero" id="numero_entered" style="width:80%!important">
@@ -220,11 +227,12 @@
 
 
                     <div id="right_div" class="col-md-6">
+                        <p class="title" id="location" style="color:white;size:10px;padding-top:20px;text-align:center;" ></p>
                         <br>
                         <div id='output' class='ui-control'>
-                            <code id='click'></code><br/> </div>
-                        <div id="mapid"> </div>
-                        <div id="map-event" class="map"> </div>
+                            <code id='click'></code><br/>
+                        </div>
+                        <div id="mapid" class="map"> </div>
                         <right><button id ="next2" type="button" class="button small_button" href="#" onclick="valid_form_upload2('content_upload1', 'content_upload2');" style="margin-left:70%; margin-top: 50%"></button></right>
                     </div>
                 </div>

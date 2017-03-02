@@ -2,14 +2,6 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="Geofilm2PU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>Objects.Person_1</class>
-    <class>Objects.Multimedia_1</class>
-    <class>Objects.Connect_1</class>
-    <class>Objects.Badlocation_1</class>
-    <class>Objects.Source_1</class>
-    <class>Objects.Favorite_1</class>
-    <class>Objects.Liked_1</class>
-    <class>Objects.Location_1</class>
     <class>Objects.Location</class>
     <class>Objects.Favorite</class>
     <class>Objects.Source</class>
@@ -24,6 +16,7 @@
       <property name="javax.persistence.jdbc.user" value="postgres"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
       <property name="javax.persistence.jdbc.password" value="24121994Laura"/>
+       <property name="eclipselink.allow-zero-id" value="true"/>
     </properties>
   </persistence-unit>
 </persistence>

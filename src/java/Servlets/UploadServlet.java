@@ -61,7 +61,7 @@ public class UploadServlet extends HttpServlet {
 
         //TODO? : vérifier qu'un multimédia n'est pas déjà entrée ? (Comment ? Par la source, le nom, la localisation, la durée... )
         MultimediaManager mm = MultimediaManagerImpl.getInstance();
-        mm.insertMultimedia(title, description, path, date, format, language, type_media, l, p, s);
+        mm.insertMultimedia(title, description, path, date, format, language, type_media, l, p, s, time_begin, time_end);
 
         response.setContentType("text/html; charset=UTF-8");
         response.getWriter().write(true + "");

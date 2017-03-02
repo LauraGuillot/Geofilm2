@@ -62,7 +62,13 @@ function geocodeAddress(addr) {
 //        }
 //    });
 }
-
+/**
+ * Fonction permettant de convertir la position géographique en une adresse
+ * @returns {undefined}
+ */
+function setAdress(){
+    
+}
 
 
 

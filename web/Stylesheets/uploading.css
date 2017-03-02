@@ -34,7 +34,7 @@ html, body {
     display:inline;
     text-align: left;
     white-space:pre-line;
-    
+
 }
 
 
@@ -46,7 +46,7 @@ html, body {
     margin-bottom:0px!important;  
     margin-right: 0px!important;
     height:9%;
-    width:90%;
+    width:100%;
     text-align:left;
     padding-top: 13px;
     padding-left :40px;
@@ -86,7 +86,7 @@ html, body {
     display:inline;
     text-align: left;
     white-space:pre-line;
-    
+
 }
 
 #head2{
@@ -146,6 +146,8 @@ html, body {
     position:absolute;
 }
 
+
+
 /* GEOCODER */
 .mapboxgl-ctrl-geocoder ul > li.active > a{
     background-color: black!important; 
@@ -157,18 +159,22 @@ html, body {
 }
 
 .ui-control {
-  background:#fff;
-  position:relative;
-  top:10px;
-  right:30px;
-  padding:10px;
-  z-index:100;
-  border-radius:3px;
-  }
+    display: block;
+    position: relative;
+    margin: 0px;
+    width: 50%;
+    padding:5px;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    text-align: left;
+    color: #222;
+    background: #fff;
+}
 
 .p{
     display:inline;
-    
+
 }
 
 .links{
