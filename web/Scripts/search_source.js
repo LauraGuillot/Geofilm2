@@ -67,16 +67,16 @@ function search_key_word() {
         return a.score < b.score;
     });
 
-    if(key!=""){
-    //Suppression des sources de score nul si une recherche par mot clé a été effectuée
-    var sources1 = [];
+    if (key != "") {
+        //Suppression des sources de score nul si une recherche par mot clé a été effectuée
+        var sources1 = [];
 
-    for (var k = 0; k < sources.length; k++) {
-        if (sources[k].score > 0) {
-            sources1.push(sources[k]);
+        for (var k = 0; k < sources.length; k++) {
+            if (sources[k].score > 0) {
+                sources1.push(sources[k]);
+            }
         }
-    }
-    sources=sources1
+        sources = sources1
     }
 
     //Affichage
@@ -134,8 +134,15 @@ function delegateOpenSource(i) {
  * @returns {void}
  */
 function openSource(i) {
+    
+    //On stocke la source ouverte
+    document.getElementById("opensource").value=i;
+    
     //On efface les précédents markers
     removeMarkers();
+    
+    //On efface les liens précédents
+    removeLinks();
 
     //On récupère toutes les positions de la source
     var pos = [];
@@ -150,6 +157,17 @@ function openSource(i) {
 
     //On affiche les marqueurs
     displayMarkers(i, pos);
+
+    //Si la temporalité est cochée, on affiche les liens temporels et la barre de défilement
+    var temp = document.getElementById("display_temp").checked;
+    if (temp) {
+        displayTemp();
+    } else {
+        //Si la temporalité n'est pas souhaitée, on masque la barre de défilement
+        document.getElementById("scrollbar").style.display = "none";
+        document.getElementById("scrollbar").innerHTML = "";
+        document.getElementById("mapid").style.height="100%";
+    }
 }
 
 /**
@@ -202,7 +220,7 @@ function addMarker(x, y, popup) {
     el.style.width = '25px';
     el.style.height = '35px';
     //Ajout du marker
-    var marker = new mapboxgl.Marker(el, {offset: [0, 0]})
+    var marker = new mapboxgl.Marker(el, {offset: [-12, 0]})
             .setLngLat([y, x])
             .setPopup(popup)
             .addTo(map);
@@ -422,7 +440,5 @@ function fitBounds(boundsArray) {
     boundsArray.forEach(function (item) {
         bounds.extend(item);
     });
-    map.fitBounds(bounds, {padding: 100});
+    map.fitBounds(bounds, {padding: 200});
 }
-
-

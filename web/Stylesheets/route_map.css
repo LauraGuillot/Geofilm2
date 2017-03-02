@@ -14,11 +14,17 @@ html, body {
     padding: 0;
 }
 
+#map_zone{
+    height:100%;
+    padding:0;
+}
+
 /* CARTE */
 #mapid{
     margin: 0px;
     padding: 0px;
     height:100%;
+    width:100%;
 }
 /* GEOCODER */
 .mapboxgl-ctrl-geocoder ul > li.active > a{
@@ -28,6 +34,15 @@ html, body {
 .suggestions{
     background-color: #2b2f36!important; 
     opacity:0.9;
+}
+
+/* BARRE DE DEFILEMENT */
+#scrollbar{
+    display:none;
+    margin: 0px;
+    padding: 0px;
+    height:20%;
+    width:100%; 
 }
 
 /* VOLET DE GAUCHE */
@@ -41,11 +56,11 @@ html, body {
 }
 /* HEADER DU VOLET DE GAUCHE*/
 #head{
-    height:30%;
+    height:35%;
 }
 /* ZONE POUR AFFICHER LES RESULTATS DE LA RECHERCHE*/
 #result{
-    height: 70%;
+    height: 65%;
     overflow-y: auto;
 }
 
@@ -82,6 +97,24 @@ select{
     display:inline-block;
 }
 
+/* CHECKBOX POUR L'AFFICHAGE DE LA TEMPORALITE */
+.input_label{
+    color:white;
+    display:inline-block!important;  
+    font-size:9pt;
+}
+.checkbox_temp{
+    padding:0px!important;
+    margin:0px!important;
+    display:inline-block;  
+    width:20px;
+    height:15px!important;
+}
+.input_checkbox{
+    text-align: left;
+}
+
+
 /* DIV DE SEPARATION */
 #separator{
     border-bottom: 1px solid white;
@@ -104,7 +137,7 @@ select{
     vertical-align: middle;
     color:white!important;
     width:100%;
-    
+
 }
 .source_link:hover{
     background-color: #23a1a8!important;
