@@ -1,11 +1,7 @@
 /*
-  * Classe Source.java
-  * ------------------------------------------------------------------------------
-  * Objet de la base de données
-  * Une source peut être un film, une série ou un jeu.
-  * Elle se caractérise par un identifiant, un titre et un type (FILM, SERIE, JEU).
-  * La source d'identifiant 0 est la source nulle. Un multimédia qui a pour source 
-  * la source nulle n'a en réalité pas de source connue.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package Objects;
 
@@ -21,6 +17,10 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ *
+ * @author Laura
+ */
 @Entity
 @Table(name = "source", catalog = "geofilm", schema = "geofilm")
 @XmlRootElement
@@ -28,9 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Source.findAll", query = "SELECT s FROM Source s"),
     @NamedQuery(name = "Source.findBySourceId", query = "SELECT s FROM Source s WHERE s.sourceId = :sourceId"),
     @NamedQuery(name = "Source.findBySourceTitle", query = "SELECT s FROM Source s WHERE s.sourceTitle = :sourceTitle"),
-    @NamedQuery(name = "Source.findBySourceType", query = "SELECT s FROM Source s WHERE s.sourceType = :sourceType"),
-    @NamedQuery(name = "Source.findBySourceMultimediaStart", query = "SELECT s FROM Source s WHERE s.sourceMultimediaStart = :sourceMultimediaStart"),
-    @NamedQuery(name = "Source.findBySourceMultimediaEnd", query = "SELECT s FROM Source s WHERE s.sourceMultimediaEnd = :sourceMultimediaEnd")})
+    @NamedQuery(name = "Source.findBySourceType", query = "SELECT s FROM Source s WHERE s.sourceType = :sourceType")})
 public class Source implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,10 +42,6 @@ public class Source implements Serializable {
     private String sourceTitle;
     @Column(name = "source_type")
     private String sourceType;
-    @Column(name = "source_multimedia_start")
-    private String sourceMultimediaStart;
-    @Column(name = "source_multimedia_end")
-    private String sourceMultimediaEnd;
 
     public Source() {
     }
@@ -85,22 +79,6 @@ public class Source implements Serializable {
         this.sourceType = sourceType;
     }
 
-    public String getSourceMultimediaStart() {
-        return sourceMultimediaStart;
-    }
-
-    public void setSourceMultimediaStart(String sourceMultimediaStart) {
-        this.sourceMultimediaStart = sourceMultimediaStart;
-    }
-
-    public String getSourceMultimediaEnd() {
-        return sourceMultimediaEnd;
-    }
-
-    public void setSourceMultimediaEnd(String sourceMultimediaEnd) {
-        this.sourceMultimediaEnd = sourceMultimediaEnd;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -125,5 +103,5 @@ public class Source implements Serializable {
     public String toString() {
         return "Objects.Source[ sourceId=" + sourceId + " ]";
     }
-
+    
 }

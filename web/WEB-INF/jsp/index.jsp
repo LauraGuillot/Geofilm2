@@ -62,8 +62,8 @@
             </c:forEach>
         </div>
 
-        <!-- NAVIGATION -->
-    <nav class="navbar-default navbar " role="navigation">
+        <!-- NAVIGATION GRANDS ECRANS-->
+    <nav id="navbar_large_screen" class="navbar-default navbar " role="navigation">
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class="navbar-left" ><a href="#" id="logo"><img src="Ressources/logo1.png" width="100px" ></a></li> <!-- LOGO-->
@@ -71,6 +71,17 @@
             </ul>
         </div>
     </nav>
+    <!-- NAVIGATION PETITS ECRANS-->
+        <nav id="navbar_small_screen" class="navbar-default navbar " role="navigation">
+            <div>
+                <ul class="nav navbar-nav">
+                    <!-- LOGO-->
+                    <li class="navbar-left" style="padding-left:15px;"><a href="#" id="logo1" style="padding-top:0px!important;"><img src="Ressources/logo2.png" width="35px" ></a></li> 
+                    <!-- CONNEXION-->
+                    <li class="navbar-right"><a href="#"><img id="connection" src="Ressources/connection.png" onMouseOver="this.src = 'Ressources/connection_over.png'" onMouseOut="this.src = 'Ressources/connection.png'" width="25px" onclick="pop_connexion()"></a></li>
+                </ul>
+            </div>
+        </nav>
 
     <!-- CONTENU PRINCIPAL -->
     <div class="container">    
@@ -100,7 +111,7 @@
 
     <!--POPUP : boîte de connexion-->
     <div class="modal fade" id="connection_form" role="dialog">
-        <div class="modal-dialog modal-sm">
+        <div class="modal-dialog modal-sm medium_modal">
             <div class="modal-content modal_form">
                 <!-- Croix de fermeture -->
                 <button class="close" data-dismiss="modal">&times;</button>
@@ -144,7 +155,7 @@
 
     <!--POPUP : inscription-->
     <div class="modal fade" id="inscription_form" role="dialog">
-        <div class="modal-dialog modal-sm">
+        <div class="modal-dialog modal-sm medium_modal">
             <div class="modal-content modal_form">
                 <!-- Croix de fermeture -->
                 <button class="close" data-dismiss="modal">&times;</button>
@@ -183,7 +194,7 @@
 
     <!--POPUP : password forgotten-->
     <div class="modal fade" id="password_forgotten_form" role="dialog">
-        <div class="modal-dialog modal-sm">
+        <div class="modal-dialog modal-sm medium_modal">
             <div class="modal-content modal_form">
                 <!-- Croix de fermeture-->
                 <button class="close" data-dismiss="modal">&times;</button>
@@ -217,7 +228,7 @@
 
     <!--POPUP : password forgotten : confirmed form -->
     <div class="modal fade" id="password_forgotten_confirmed_form" role="dialog">
-        <div class="modal-dialog modal-sm">
+        <div class="modal-dialog modal-sm medium_modal">
             <div class="modal-content modal_form">
                 <!-- Croix de fermeture-->
                 <button class="close" data-dismiss="modal">&times;</button>
@@ -231,7 +242,7 @@
 
     <!-- POPUP : message d'erreur si pas de gps -->
     <div class="modal fade" id="gps_error_modal" role="dialog">
-        <div class="modal-dialog modal-sm">
+        <div class="modal-dialog modal-sm medium_modal">
             <div class="modal-content">
                 <!-- Information : gps non supporté par le navigateur-->
                 <div class="modal-body">

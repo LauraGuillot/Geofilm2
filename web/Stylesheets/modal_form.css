@@ -11,6 +11,10 @@
     min-width: 300px;
 }
 
+.medium_modal{
+     width: 500px;
+}
+
 /* INPUT */
 input{
     text-align: left;

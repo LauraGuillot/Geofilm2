@@ -42,6 +42,11 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Multimedia.findByMultimediaType", query = "SELECT m FROM Multimedia m WHERE m.multimediaType = :multimediaType")})
 public class Multimedia implements Serializable {
 
+    @Column(name = "multimedia_start")
+    private String multimediaStart;
+    @Column(name = "multimedia_end")
+    private String multimediaEnd;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -237,6 +242,22 @@ public class Multimedia implements Serializable {
     @Override
     public String toString() {
         return "Objects.Multimedia[ multimediaId=" + multimediaId + " ]";
+    }
+
+    public String getMultimediaStart() {
+        return multimediaStart;
+    }
+
+    public void setMultimediaStart(String multimediaStart) {
+        this.multimediaStart = multimediaStart;
+    }
+
+    public String getMultimediaEnd() {
+        return multimediaEnd;
+    }
+
+    public void setMultimediaEnd(String multimediaEnd) {
+        this.multimediaEnd = multimediaEnd;
     }
 
 }

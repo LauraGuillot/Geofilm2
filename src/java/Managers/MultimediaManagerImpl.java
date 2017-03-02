@@ -472,4 +472,42 @@ public class MultimediaManagerImpl implements MultimediaManager {
         }
         return li;
     }
+
+    /**
+     * Obtention des favoris correspondant à une liste de positions
+     *
+     * @param pos Liste de positions
+     * @param p Utilisateur
+     * @return Matrice de multimedias
+     */
+    @Override
+    public ArrayList<ArrayList<Multimedia>> getFavoritesByPos(ArrayList<Location> pos, Person p) {
+        ArrayList<ArrayList<Multimedia>> mult = new ArrayList<>();
+
+        //Pour chaque position de la liste, on récupère les multimédias associés
+        for (Location loc : pos) {
+            ArrayList<Multimedia> m = new ArrayList<>();
+            //Requête
+            EntityManager em = emf.createEntityManager();
+            Query q = em.createQuery("SELECT m FROM Multimedia m WHERE  m.locationId=:loc");
+            q.setParameter("loc", loc);
+            List l = q.getResultList();
+
+            //Tranformation en arraylist + conservation uniquement des favoris
+            for (Object o : l) {
+                Multimedia multi = (Multimedia) o;
+                Query q1 = em.createQuery("SELECT f FROM Favorite f WHERE  f.multimediaId=:m AND f.personId=:p");
+                q1.setParameter("m", multi);
+                q1.setParameter("p", p);
+                List l1 = q1.getResultList();
+                if (!l1.isEmpty()) {
+                    m.add(multi);
+                }
+
+            }
+            mult.add(m);
+        }
+
+        return mult;
+    }
 }
