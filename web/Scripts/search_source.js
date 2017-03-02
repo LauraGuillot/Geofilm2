@@ -67,7 +67,8 @@ function search_key_word() {
         return a.score < b.score;
     });
 
-    //Suppression des sources de score nul
+    if(key!=""){
+    //Suppression des sources de score nul si une recherche par mot clé a été effectuée
     var sources1 = [];
 
     for (var k = 0; k < sources.length; k++) {
@@ -75,9 +76,11 @@ function search_key_word() {
             sources1.push(sources[k]);
         }
     }
+    sources=sources1
+    }
 
     //Affichage
-    displaySource(sources1);
+    displaySource(sources);
 }
 
 /**
