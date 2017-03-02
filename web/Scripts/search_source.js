@@ -67,11 +67,18 @@ function search_key_word() {
         return a.score < b.score;
     });
 
+    //Suppression des sources de score nul
+    var sources1 = [];
+
+    for (var k = 0; k < sources.length; k++) {
+        if (sources[k].score > 0) {
+            sources1.push(sources[k]);
+        }
+    }
+
     //Affichage
-    displaySource(sources);
+    displaySource(sources1);
 }
-
-
 
 /**
  * Affichage de la liste des sources trouvées

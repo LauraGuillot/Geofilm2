@@ -6,11 +6,19 @@ function load() {
 
 function loadText() {
     if (language == "fr") {
-        //NAVIGATION
+        
+        //NAVIGATION GRANDS ECRANS
         document.getElementById("global_map").innerHTML = global_map_fr;
         document.getElementById("route_map").innerHTML = route_map_fr;
         document.getElementById("modification_link").innerHTML = modification_fr;
         document.getElementById("favorite_link").innerHTML = favorite_fr;
+        
+        //NAVIGATION PETITS ECRANS
+        document.getElementById("global_map1").innerHTML = global_map_fr;
+        document.getElementById("route_map1").innerHTML = route_map_fr;
+        document.getElementById("modification_link1").innerHTML = modification_fr;
+        document.getElementById("favorite_link1").innerHTML = favorite1_fr;
+         document.getElementById("deconnect").innerHTML = deconnect_fr;
 
         //MODIFICATION DES INFORMATIONS PERSONNELLES
         document.getElementById("name_label").innerHTML = name_fr;

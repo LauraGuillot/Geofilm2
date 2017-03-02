@@ -10,22 +10,20 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Geofilm</title>
         <link rel="shortcut icon" href="Ressources/logo2.png" >
-        
+
         <script import com.mapbox.mapboxsdk.geometry.LatLng
-                import geocoder ></script>
+        import geocoder ></script>
         <!-- BOOTSTRAP -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
         <!--MAP BOX -->
-        
+
         <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.1/mapbox-gl.js'></script>
         <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.1/mapbox-gl.css' rel='stylesheet' />
         <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.js'></script>
         <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.css' type='text/css' />
-
-
 
         <!-- CHAINES DE CARACTERES -->
         <script src="Scripts/language.js"></script>
@@ -48,7 +46,6 @@
         <script src="Scripts/load_map_upload.js"></script> 
 
 
-
         <!-- SCRIPTS -->
         <script src="Scripts/navigation.js"></script>
         <script src="Scripts/deconnect.js"></script>
@@ -56,9 +53,6 @@
         <script src="Scripts/uploading.js"></script>
         <script src="Scripts/upload.js"></script>
         <script src="Scripts/geoloc_upload.js"></script>
-
-
-
 
     </head>
     <body onload="load();">
@@ -77,12 +71,12 @@
             <input type="hidden" id="p<c:out value="${status.index}"/>" value="<c:out value="${p['locationThegeom']}"/>"/>
         </c:forEach>
 
-        <!-- NAVIGATION -->
-        <nav class="navbar-default navbar " role="navigation">
+        <!-- NAVIGATION  GRANDS ECRANS-->
+        <nav id="navbar_large_screen" class="navbar-default navbar " role="navigation">
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="navbar-left" ><a href="#" id="logo"><img src="Ressources/logo1.png" width="100px" ></a></li> <!-- LOGO-->
-                    <li class="navbar-left onglet" ><a href="#" class=" onglet onglet_actif" id="global_map"></a></li>
+                    <li class="navbar-left onglet" ><a href="#" onclick="getGlobalMap();" class=" onglet" id="global_map"></a></li>
                     <li class="navbar-left onglet" ><a onclick="getRouteMap();" class="onglet" id="route_map"></a></li>
                     <li class="navbar-right"><a href="#"><img id="connection" src="Ressources/connection.png" onMouseOver="this.src = 'Ressources/connection_over.png'" onMouseOut="this.src = 'Ressources/connection.png'" width="25px" onclick="deconnect();"></a></li><!-- Connexion-->
                     <li class="navbar-right" style="margin-right:20px; border-left: solid white 1px; padding-left:6px;">
@@ -99,6 +93,50 @@
                 </ul>
             </div>
         </nav>
+        <!-- NAVIGATION PETITS ECRANS-->
+        <nav id="navbar_small_screen" class="navbar-default navbar " role="navigation">
+            <div>
+                <ul class="nav navbar-nav">
+                    <!-- LOGO-->
+                    <li class="navbar-left" style="padding-left:15px;"><a href="#" id="logo1" style="padding-top:0px!important;"><img src="Ressources/logo2.png" width="35px" ></a></li> 
+                    <!-- ICONE MENU-->
+                    <li class="navbar-right">
+                        <a href="javascript:void(0);" style="font-size:25px;" onclick="displayVerticalMenu();">☰</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- MENU VERTICAL POUR LES PETITS ECRANS-->
+        <div class="vertical-menu" id='vmenu' style="padding-top:12px;padding-bottom:12px;">
+            <!-- INFORMATIONS PERSONNELLES-->	
+            <div style="padding:12px;">
+                <!-- nom prénom-->
+                <p class="info_perso1" id="info_name1" style="margin-top:10px;font-weight:bold;"><c:out value="${prenom}"/> <c:out value="${nom}"/></p>
+                <!-- email-->
+                <p class="info_perso1"id="info_email1" ><c:out value="${email}"/></p>
+                <!-- lien de modification -->
+                <a id="modification_link1" href="#" onclick="pop_info();"></a>
+            </div>
+            <center><div class="onglet_separator"></div></center>
+            <!-- GLOBAL MAP-->	
+            <li class="v_onglet"><a href="#" onclick="getGlobalMap();" class=" v_onglet " id="global_map1" style="padding:10px!important;"></a></li>
+            <!-- ROUTE MAP-->
+            <li class="v_onglet"><a href="#"  onclick="getRouteMap();" class=" v_onglet" id="route_map1" style="padding:10px!important;"></a></li>
+            <!-- FAVORIS-->	
+            <li class="v_onglet">
+                <a class="v_onglet " href="#" style="padding:10px!important;" onclick="getFavorite();">
+                    <img style="display:inline-block;" src="Ressources/star_over.png" width="12px" >
+                    <p style="display:inline-block;margin:0;" id="favorite_link1"></p>
+                </a>
+            </li>
+            <!-- DECONNEXION-->		
+            <li class="v_onglet">
+                <a class="v_onglet" href="#" style="padding:10px!important;" onclick="deconnect();">
+                    <img style="display:inline-block;" src="Ressources/connection.png" width="9px" >
+                    <p style="display:inline-block;margin:0;" id="deconnect"></p>
+                </a>
+            </li>
+        </div>
 
         <!-- CONTENU PRINCIPAL -->
         <div class="container"> 
@@ -117,7 +155,7 @@
                     <div id="content_general1" class="col-md-6">
 
                         <!--Saisie du type de multimédia-->
-                        
+
                         <p class="error_message" id="error_upload"> </p>
                         <p class="label_form" style="display:inline-block!important;" id="upload_type_multimedia"></p>
 
@@ -197,7 +235,7 @@
                         du code postal, puis de la ville, et du pays-->
                         <p class="error_message" id="error_mandatory"></p>
                         <p class="title" id="address" style="color:white;size:10px;" ></p>
-                        
+
                         <div style="width:10%;display:inline-block!important" style="padding-left:0px!important;">
                             <p class="label_form" id="numero"></p>
                             <input type="text" name="loc_numero" id="numero_entered" style="width:80%!important">
@@ -251,35 +289,37 @@
 
     <!--POPUP : modification des informations personnelles-->
     <div class="modal fade" id="modification_form" role="dialog">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content modal_form">
-                <!-- Croix de fermeture -->
-                <button class="close" data-dismiss="modal">&times;</button>
-                <!-- Titre -->
-                <center>
-                    <p id="modification_title" class= "title"  style="margin-top: 40px"</p> 
-                </center>
-                <!-- Zone pour les messages d'erreurs -->
-                <p id="modification_error" class="error_message"></p>
-
-                <!-- Formulaire de modification -->
-                <div class="modal-body">  
-                    <!-- Champ pour le nom -->
-                    <p class="label_form" id="name_label"></p>
-                    <input type="text" name ="name" id="name_input"> 
-                    <!-- Champ pour le prénom -->
-                    <p  class="label_form" id="firstname_label"></p>
-                    <input  type="text" name="firstname" id="firstname_input">
-                    <!-- Champ pour l'email -->
-                    <p  class="label_form" id="email_label"></p>
-                    <input  type="text" name="email" id="email_input">
-                    <!-- Bouton pour soumettre le formulaire de modification -->
+        <center>
+            <div id ="small_modal" class="modal-dialog modal-sm">
+                <div class="modal-content modal_form">
+                    <!-- Croix de fermeture -->
+                    <button class="close" data-dismiss="modal">&times;</button>
+                    <!-- Titre -->
                     <center>
-                        <button id ="valid_modif" type="button" class="button small_button" onclick="modif();"></button>
+                        <p id="modification_title" class= "title"  style="margin-top: 40px"</p> 
                     </center>
+                    <!-- Zone pour les messages d'erreurs -->
+                    <p id="modification_error" class="error_message"></p>
+
+                    <!-- Formulaire de modification -->
+                    <div class="modal-body">  
+                        <!-- Champ pour le nom -->
+                        <p class="label_form" id="name_label"></p>
+                        <input type="text" name ="name" id="name_input"> 
+                        <!-- Champ pour le prénom -->
+                        <p  class="label_form" id="firstname_label"></p>
+                        <input  type="text" name="firstname" id="firstname_input">
+                        <!-- Champ pour l'email -->
+                        <p  class="label_form" id="email_label"></p>
+                        <input  type="text" name="email" id="email_input">
+                        <!-- Bouton pour soumettre le formulaire de modification -->
+                        <center>
+                            <button id ="valid_modif" type="button" class="button small_button" onclick="modif();"></button>
+                        </center>
+                    </div>
                 </div>
             </div>
-        </div>
+        </center>
     </div>
 
 
