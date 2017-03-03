@@ -152,7 +152,7 @@ function openSource(i) {
         var p = new Object();
         p.geom = geom;
         p.index = j;
-        pos.push(p);
+        pos.push(p); 
     }
 
     //On affiche les marqueurs
@@ -161,6 +161,7 @@ function openSource(i) {
     //Si la temporalité est cochée, on affiche les liens temporels et la barre de défilement
     var temp = document.getElementById("display_temp").checked;
     if (temp) {
+        document.getElementById("scrollbar").innerHTML = "";
         displayTemp();
     } else {
         //Si la temporalité n'est pas souhaitée, on masque la barre de défilement

@@ -159,7 +159,7 @@ function displayLines(mult) {
         map.addLayer({"id": "line_" + id, "type": "line", "source": line, "layout": layout, "paint": paint});
     }
     line_max = line_min + mult.length - 2;
-    
+
     //Clear passe à 1 car des lignes ont été dessinées
     clear = 1;
 }
@@ -171,5 +171,98 @@ function displayLines(mult) {
  * @returns {void}
  */
 function displayScrollbar(mult) {
-    //TODO
+
+    var table = document.getElementById("scrollbar");
+
+    //Affichage des multimedias
+    for (var i = 0; i < mult.length; i++) {
+
+        var div = document.createElement("div");
+        div.className = "div_mult";
+
+        //Méthode pour ouvrir le multimédia
+        div.addEventListener("click", delegateLaunchMult(mult[i].id), false);
+
+        //Numéro du multimédia
+        var num = document.createElement("num");
+        num.className = "number";
+        num.innerHTML = i + 1;
+
+        //Titre
+        var p = document.createElement("p");
+        p.innerHTML = mult[i].title;
+        p.className = "title_scrollbar";
+
+        //Icone
+        var img = document.createElement("img");
+        switch (mult[i].type) {
+            case 'VIDEO':
+                img.className = "icon_video1";
+                img.src = "./Ressources/video.png";
+                break;
+            case 'IMAGE':
+                img.className = "icon_image1";
+                img.src = "./Ressources/image.png";
+                break;
+            case 'SON':
+                img.className = "icon_sound1";
+                img.src = "./Ressources/sound.png";
+                break;
+        }
+        div.appendChild(num);
+        div.appendChild(img);
+        div.appendChild(p);
+        table.appendChild(div);
+    }
+}
+
+/**
+ * Fonction pour lancer un multimédia à partir de la frise temporelle
+ * @param {int} id - Identifiant du multimédia
+ * @returns {void}
+ */
+function launchMulti(id) {
+    //On cherche les indices du multimédia
+    var cptSrc = document.getElementById("nbSources").value;
+    var i; //Indice de la source
+    var j; // Indice de la position
+    var k; //Indice du multimédia
+
+    //On recherche le multimédia qui a le bon id
+    for (var m = 0; m < cptSrc; m++) {
+        var cptPos = document.getElementById("nbPos" + m).value;
+        for (var n = 0; n < cptPos; n++) {
+            var cptMult = document.getElementById("nbMulti" + m + "_" + n).value;
+            for (var p = 0; p < cptMult; p++) {
+                if (document.getElementById("src" + m + "_pos" + n + "_multi" + p + "_id").value == id) {
+                    i = m;
+                    j = n;
+                    k = p;
+                }
+            }
+        }
+    }
+
+    //Zoom sur la position
+    var geo = document.getElementById("src" + i + "_pos" + j).value;
+    geo = geo.substring(6, geo.length - 1);
+    var pt1 = geo.split(",");
+    var x1 = pt1[0];
+    var y1 = pt1[1];
+    map.flyTo({center: [y1, x1], zoom : 18});
+
+    //Ouverture
+    setTimeout(function(){ openMult(i, j, k, id); }, 5000);
+
+}
+
+/**
+ * Fonction de délégation : ouverture multimédia
+ * @param {int} id - Identifiant du multimédia
+ * @returns {Function}
+ */
+function delegateLaunchMult(id) {
+    return function () {
+        launchMulti(id);
+    };
 }

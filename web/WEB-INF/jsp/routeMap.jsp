@@ -19,6 +19,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+        
+
         <!--MAP BOX -->
         <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.1/mapbox-gl.js'></script>
         <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.1/mapbox-gl.css' rel='stylesheet' />
@@ -225,7 +227,9 @@
                     <!-- Map -->
                     <div id="mapid" > </div>
                     <!-- Barre de défilement pour les multimédias -->
-                    <div id="scrollbar"></div>
+                    <div id="scrollbar" >
+                        
+                    </div>
                 </div>
             </div>
         </div>
