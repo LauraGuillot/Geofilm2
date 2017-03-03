@@ -59,8 +59,8 @@ public class FavoriteController {
             MultimediaManager mm = MultimediaManagerImpl.getInstance();
             ArrayList<Location> loc = lm.getFavorite(p);
             result.addObject("locations", loc);
-            result.addObject("favorites", mm.getMultiByPos(loc));
-
+            result.addObject("favorites", mm.getFavoritesByPos(loc,p));
+ 
             return result;
 
             //Si la connexion est invalide, on renvoie la page d'accueil

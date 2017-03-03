@@ -1,7 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* 
+  * Classe Multimédia.java
+  * ------------------------------------------------------------------------------
+  * Objet de la base de données
+  * Un multimédia est une vidéo, une imge ou un son qui est localisé.
+  * Il comporte un identifiant, un titre, une description (facultative), une source, un path,
+  * une date d'upload, un format (extension), un langage, un type (VIDEO, IMAGE, SON),
+  * une localisation et un publisher, c'est-à-dire l'utilisateur qui a uploadé ce contenu.
  */
 package Objects;
 
@@ -23,10 +27,6 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author Paola
- */
 @Entity
 @Table(name = "multimedia", catalog = "geofilm", schema = "geofilm")
 @XmlRootElement
@@ -39,10 +39,13 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Multimedia.findByMultimediaUploadDate", query = "SELECT m FROM Multimedia m WHERE m.multimediaUploadDate = :multimediaUploadDate"),
     @NamedQuery(name = "Multimedia.findByMultimediaFormat", query = "SELECT m FROM Multimedia m WHERE m.multimediaFormat = :multimediaFormat"),
     @NamedQuery(name = "Multimedia.findByMultimediaLanguage", query = "SELECT m FROM Multimedia m WHERE m.multimediaLanguage = :multimediaLanguage"),
-    @NamedQuery(name = "Multimedia.findByMultimediaType", query = "SELECT m FROM Multimedia m WHERE m.multimediaType = :multimediaType"),
-    @NamedQuery(name = "Multimedia.findByMultimediaStart", query = "SELECT m FROM Multimedia m WHERE m.multimediaStart = :multimediaStart"),
-    @NamedQuery(name = "Multimedia.findByMultimediaEnd", query = "SELECT m FROM Multimedia m WHERE m.multimediaEnd = :multimediaEnd")})
+    @NamedQuery(name = "Multimedia.findByMultimediaType", query = "SELECT m FROM Multimedia m WHERE m.multimediaType = :multimediaType")})
 public class Multimedia implements Serializable {
+
+    @Column(name = "multimedia_start")
+    private String multimediaStart;
+    @Column(name = "multimedia_end")
+    private String multimediaEnd;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -69,10 +72,8 @@ public class Multimedia implements Serializable {
     @Basic(optional = false)
     @Column(name = "multimedia_type")
     private String multimediaType;
-    @Column(name = "multimedia_start")
-    private Serializable multimediaStart;
-    @Column(name = "multimedia_end")
-    private Serializable multimediaEnd;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "multimediaId")
+    private Collection<Badlocation> badlocationCollection;
     @JoinColumn(name = "location_id", referencedColumnName = "location_id")
     @ManyToOne(optional = false)
     private Location locationId;
@@ -82,6 +83,8 @@ public class Multimedia implements Serializable {
     @JoinColumn(name = "source_id", referencedColumnName = "source_id")
     @ManyToOne(optional = false)
     private Source sourceId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "multimediaId")
+    private Collection<Favorite> favoriteCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "multimedia")
     private Collection<Liked> likedCollection;
 
@@ -165,20 +168,13 @@ public class Multimedia implements Serializable {
         this.multimediaType = multimediaType;
     }
 
-    public Serializable getMultimediaStart() {
-        return multimediaStart;
+    @XmlTransient
+    public Collection<Badlocation> getBadlocationCollection() {
+        return badlocationCollection;
     }
 
-    public void setMultimediaStart(Serializable multimediaStart) {
-        this.multimediaStart = multimediaStart;
-    }
-
-    public Serializable getMultimediaEnd() {
-        return multimediaEnd;
-    }
-
-    public void setMultimediaEnd(Serializable multimediaEnd) {
-        this.multimediaEnd = multimediaEnd;
+    public void setBadlocationCollection(Collection<Badlocation> badlocationCollection) {
+        this.badlocationCollection = badlocationCollection;
     }
 
     public Location getLocationId() {
@@ -203,6 +199,15 @@ public class Multimedia implements Serializable {
 
     public void setSourceId(Source sourceId) {
         this.sourceId = sourceId;
+    }
+
+    @XmlTransient
+    public Collection<Favorite> getFavoriteCollection() {
+        return favoriteCollection;
+    }
+
+    public void setFavoriteCollection(Collection<Favorite> favoriteCollection) {
+        this.favoriteCollection = favoriteCollection;
     }
 
     @XmlTransient
@@ -238,5 +243,21 @@ public class Multimedia implements Serializable {
     public String toString() {
         return "Objects.Multimedia[ multimediaId=" + multimediaId + " ]";
     }
-    
+
+    public String getMultimediaStart() {
+        return multimediaStart;
+    }
+
+    public void setMultimediaStart(String multimediaStart) {
+        this.multimediaStart = multimediaStart;
+    }
+
+    public String getMultimediaEnd() {
+        return multimediaEnd;
+    }
+
+    public void setMultimediaEnd(String multimediaEnd) {
+        this.multimediaEnd = multimediaEnd;
+    }
+
 }

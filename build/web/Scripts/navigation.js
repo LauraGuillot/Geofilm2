@@ -77,3 +77,26 @@ function favoriteOut() {
     document.getElementById("favorite_link").style.color = "#fffe83";
     document.getElementById("star").src = "Ressources/star.png";
 }
+
+/**
+ * Affichage du menu vertical au clic sur l'icone
+ * @returns {void}
+ */
+function displayVerticalMenu() {
+    if (document.getElementById("vmenu").style.display == 'none' || document.getElementById("vmenu").style.display == '') {
+        document.getElementById("vmenu").style.display = 'block';
+    } else { 
+        document.getElementById("vmenu").style.display = 'none';
+    }
+}
+
+/**
+ * Lorsqu'on agrandit la fenètre, on rend le menu vertical invisible 
+ * @returns {void}
+ */
+window.onresize = function () {
+    var larg = (document.body.clientWidth);
+    if (larg > 770) {
+        document.getElementById("vmenu").style.display = 'none';
+    }
+}

@@ -42,6 +42,8 @@ function modif() {
                     document.getElementById("firstname").value = prenom;
                     document.getElementById("info_name").innerHTML = prenom + " " + nom;
                     document.getElementById("info_email").innerHTML = email;
+                     document.getElementById("info_name1").innerHTML = prenom + " " + nom;
+                    document.getElementById("info_email1").innerHTML = email;
                     //On efface la zone pour les messages d'erreur
                     document.getElementById("modification_error").innerHTML = "";
                     //On ferme la pop-up

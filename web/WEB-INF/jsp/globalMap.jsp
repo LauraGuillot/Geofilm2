@@ -95,8 +95,8 @@
             </c:forEach>
         </div>
 
-        <!-- NAVIGATION -->
-        <nav class="navbar-default navbar " role="navigation">
+        <!-- NAVIGATION GRANDS ECRANS-->
+        <nav id="navbar_large_screen" class="navbar-default navbar " role="navigation">
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="navbar-left" ><a href="#" id="logo"><img src="Ressources/logo1.png" width="100px" ></a></li> <!-- LOGO-->
@@ -122,6 +122,50 @@
                 </ul>
             </div>
         </nav>
+        <!-- NAVIGATION PETITS ECRANS-->
+        <nav id="navbar_small_screen" class="navbar-default navbar " role="navigation">
+            <div>
+                <ul class="nav navbar-nav">
+                    <!-- LOGO-->
+                    <li class="navbar-left" style="padding-left:15px;"><a href="#" id="logo1" style="padding-top:0px!important;"><img src="Ressources/logo2.png" width="35px" ></a></li> 
+                    <!-- ICONE MENU-->
+                    <li class="navbar-right">
+                        <a href="javascript:void(0);" style="font-size:25px;" onclick="displayVerticalMenu();">☰</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- MENU VERTICAL POUR LES PETITS ECRANS-->
+        <div class="vertical-menu" id='vmenu' style="padding-top:12px;padding-bottom:12px;">
+            <!-- INFORMATIONS PERSONNELLES-->	
+            <div style="padding:12px;">
+                <!-- nom prénom-->
+                <p class="info_perso1" id="info_name1" style="margin-top:10px;font-weight:bold;"><c:out value="${prenom}"/> <c:out value="${nom}"/></p>
+                <!-- email-->
+                <p class="info_perso1"id="info_email1" ><c:out value="${email}"/></p>
+                <!-- lien de modification -->
+                <a id="modification_link1" href="#" onclick="pop_info();"></a>
+            </div>
+            <center><div class="onglet_separator"></div></center>
+            <!-- GLOBAL MAP-->	
+            <li class="v_onglet"><a href="#" class=" v_onglet v_onglet_actif" id="global_map1" style="padding:10px!important;"></a></li>
+            <!-- ROUTE MAP-->
+            <li class="v_onglet"><a href="#" onclick="getRouteMap();" class=" v_onglet " id="route_map1" style="padding:10px!important;"></a></li>
+            <!-- FAVORIS-->	
+            <li class="v_onglet">
+                <a class="v_onglet" href="#" style="padding:10px!important;" onclick="getFavorite();">
+                    <img style="display:inline-block;" src="Ressources/star.png" width="12px" >
+                    <p style="display:inline-block;margin:0;" id="favorite_link1"></p>
+                </a>
+            </li>
+            <!-- DECONNEXION-->		
+            <li class="v_onglet">
+                <a class="v_onglet" href="#" style="padding:10px!important;" onclick="deconnect();">
+                    <img style="display:inline-block;" src="Ressources/connection.png" width="9px" >
+                    <p style="display:inline-block;margin:0;" id="deconnect"></p>
+                </a>
+            </li>
+        </div>
 
         <!-- CONTENU PRINCIPAL -->
         <div class="container">   
@@ -191,32 +235,34 @@
 
         <!--POPUP : modification des informations personnelles-->
         <div class="modal fade" id="modification_form" role="dialog">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content modal_form">
-                    <!-- Croix de fermeture -->
-                    <button class="close" data-dismiss="modal">&times;</button>
-                    <!-- Titre -->
-                    <center><p id="modification_title" class= "title"  style="margin-top: 40px"</p> </center>
-                    <!-- Zone pour les messages d'erreur -->
-                    <p id="modification_error" class="error_message"></p>
-                    <!-- Formulaire de modification -->
-                    <div class="modal-body">         
-                        <!-- Champ pour le nom -->
-                        <p class="label_form" id="name_label"></p>
-                        <input type="text" name ="name" id="name_input">  
-                        <!-- Champ pour le prénom -->
-                        <p  class="label_form" id="firstname_label"></p>
-                        <input  type="text" name="firstname" id="firstname_input">
-                        <!-- Champ pour l'email -->
-                        <p  class="label_form" id="email_label"></p>
-                        <input  type="text" name="email" id="email_input">
-                        <!-- Bouton de soumission du formulaire de modification -->
-                        <center>
-                            <button id ="valid_modif" type="button" class="button small_button" onclick="modif();"></button>
-                        </center>
+            <center>
+                <div id ="small_modal" class="modal-dialog modal-sm">
+                    <div class="modal-content modal_form">
+                        <!-- Croix de fermeture -->
+                        <button class="close" data-dismiss="modal">&times;</button>
+                        <!-- Titre -->
+                        <center><p id="modification_title" class= "title"  style="margin-top: 40px"</p> </center>
+                        <!-- Zone pour les messages d'erreur -->
+                        <p id="modification_error" class="error_message"></p>
+                        <!-- Formulaire de modification -->
+                        <div class="modal-body">         
+                            <!-- Champ pour le nom -->
+                            <p class="label_form" id="name_label"></p>
+                            <input type="text" name ="name" id="name_input">  
+                            <!-- Champ pour le prénom -->
+                            <p  class="label_form" id="firstname_label"></p>
+                            <input  type="text" name="firstname" id="firstname_input">
+                            <!-- Champ pour l'email -->
+                            <p  class="label_form" id="email_label"></p>
+                            <input  type="text" name="email" id="email_input">
+                            <!-- Bouton de soumission du formulaire de modification -->
+                            <center>
+                                <button id ="valid_modif" type="button" class="button small_button" onclick="modif();"></button>
+                            </center>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </center>
         </div>
     </body>
 </html>

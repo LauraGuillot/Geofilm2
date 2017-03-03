@@ -23,6 +23,9 @@
 .navbar-nav > li.navbar-right {
     float: right !important;
 }
+.navbar-nav > li.navbar-left {
+    float: left !important;
+}
 
 /* A */
 a{
@@ -73,7 +76,7 @@ a:hover{
     line-height:5pt;
 }
 /* LIEN POUR MODIFIER LES INFORMATIONS PERSONNELLEs*/
-#modification_link{
+#modification_link , #modification_link1{
     text-align:left!important; 
     padding:0;
     font-weight: 200;
@@ -82,7 +85,7 @@ a:hover{
     color:#87c2c4!important;
     font-size: 9pt;
 }
-#modification_link:hover{
+#modification_link:hover , #modification_link1:hover{
     color:#23A1A8!important;
 }
 
@@ -99,4 +102,87 @@ a:hover{
 }
 #favorite_link:hover{
     color:#FFFF51!important;
+}
+
+/******************** NAVIGATION POUR LES PETITS ECRANS**************************/
+
+/* BARRE DE NAVIGATION POUR LES PETITS ECRANS */
+#navbar_small_screen{
+    display:none;
+}
+#vmenu{
+    display:none;
+}
+
+/* AFFICHAGE DE LA PETITE NAVBAR POUR LES PETITS ECRANS (<770px de large) */
+@media screen and (max-width:770px){
+    #navbar_large_screen{
+        display:none;
+    }
+    #navbar_small_screen{
+        display:block;
+    }
+}
+
+/* MENU VERTICAL */
+.vertical-menu {
+    position:relative;
+    z-index: 10;
+    display:none;
+    width: 300px; 
+    float:right;
+    background-color: #000000; 
+    opacity:0.85;
+}
+.vertical-menu a {
+    background-color: #000000; 
+    color: white; 
+    opacity:0.8;
+    display: block; 
+    text-decoration: none; 
+    text-align:left;
+}
+.vertical-menu a.active {
+    background-color: #23A1A8; 
+    text-align:left;
+    color: white;
+}
+
+/* INFORMATIONS PERSONNELLES */
+.info_perso1{
+    color:white!important;
+    background-color: #000000;
+    opacity:0.8;
+    line-height:5pt;
+    font-weight: 200;
+}
+
+/* ONGLETS */
+.v_onglet {
+    cursor:pointer;
+    color : white!important;
+    font-weight: 200;
+    list-style:none;
+    vertical-align:middle;
+    min-height:30px;
+}
+.v_onglet:hover{
+    background-color:#383D3E!important;
+    color : white!important;
+}
+.v_onglet_actif{
+    background-color:#23A1A8 !important;
+    cursor:default;
+}
+.v_onglet_actif:hover{
+    background-color:#23A1A8 !important;
+    color : white!important;
+}
+
+/* SEPARATEUR ENTRE LES ONGLETS */
+.onglet_separator{
+    margin:10px;
+    width:80%;
+    height : 1px;
+    background-color: #383D3E;
 }

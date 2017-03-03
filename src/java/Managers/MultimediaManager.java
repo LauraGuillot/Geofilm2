@@ -183,4 +183,12 @@ public interface MultimediaManager {
      * @param p Utilisateur
      */
     public void deleteLike(Multimedia m, Person p);
+    
+    /**
+     * Obtention des favoris correspondant à une liste de positions
+     * @param pos Liste de positions
+     * @param p Utilisateur
+     * @return Matrice de multimedias
+     */
+     public ArrayList<ArrayList<Multimedia>> getFavoritesByPos(ArrayList<Location> pos, Person p);
 }

@@ -4,7 +4,15 @@
     padding : 15px;
     padding-top:15px;
     padding-bottom:30px;
-    min-width: 450px;
+}
+
+#small_modal{
+    width: 400px;
+    min-width: 300px;
+}
+
+.medium_modal{
+     width: 500px;
 }
 
 /* INPUT */

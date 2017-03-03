@@ -1,7 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Classe Person.java
+  * ------------------------------------------------------------------------------
+  * Objet de la base de données
+  * Une personne désigne tout utilisateur de l'application. 
+  * Elle est caractérisée par un identifiant, un nom, un prénom, un email (qui est unique),un mot de passe hashé.
  */
 package Objects;
 
@@ -21,10 +23,6 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author Paola
- */
 @Entity
 @Table(name = "person", catalog = "geofilm", schema = "geofilm")
 @XmlRootElement
@@ -55,8 +53,12 @@ public class Person implements Serializable {
     @Basic(optional = false)
     @Column(name = "person_password")
     private String personPassword;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personId")
+    private Collection<Badlocation> badlocationCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "publisher")
     private Collection<Multimedia> multimediaCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personId")
+    private Collection<Favorite> favoriteCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "personId")
     private Collection<Connect> connectCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
@@ -118,12 +120,30 @@ public class Person implements Serializable {
     }
 
     @XmlTransient
+    public Collection<Badlocation> getBadlocationCollection() {
+        return badlocationCollection;
+    }
+
+    public void setBadlocationCollection(Collection<Badlocation> badlocationCollection) {
+        this.badlocationCollection = badlocationCollection;
+    }
+
+    @XmlTransient
     public Collection<Multimedia> getMultimediaCollection() {
         return multimediaCollection;
     }
 
     public void setMultimediaCollection(Collection<Multimedia> multimediaCollection) {
         this.multimediaCollection = multimediaCollection;
+    }
+
+    @XmlTransient
+    public Collection<Favorite> getFavoriteCollection() {
+        return favoriteCollection;
+    }
+
+    public void setFavoriteCollection(Collection<Favorite> favoriteCollection) {
+        this.favoriteCollection = favoriteCollection;
     }
 
     @XmlTransient
@@ -168,5 +188,5 @@ public class Person implements Serializable {
     public String toString() {
         return "Objects.Person[ personId=" + personId + " ]";
     }
-    
+
 }

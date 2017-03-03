@@ -1,59 +1,78 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* Classe Badlocation.java
+  * ------------------------------------------------------------------------------
+  * Objet de la base de données
+  * Une 'badlocation' désigne un signalement de mauvaise localisation fait par un utilisateur.
+  * Il comporte un identifiant, l'identifiant de l'utilisateur ainsi que celui du multimédia.
  */
 package Objects;
 
 import java.io.Serializable;
-import javax.persistence.EmbeddedId;
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author Paola
- */
 @Entity
 @Table(name = "badlocation", catalog = "geofilm", schema = "geofilm")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Badlocation.findAll", query = "SELECT b FROM Badlocation b"),
-    @NamedQuery(name = "Badlocation.findByPersonId", query = "SELECT b FROM Badlocation b WHERE b.badlocationPK.personId = :personId"),
-    @NamedQuery(name = "Badlocation.findByMultimediaId", query = "SELECT b FROM Badlocation b WHERE b.badlocationPK.multimediaId = :multimediaId"),
-    @NamedQuery(name = "Badlocation.findByBadlocationId", query = "SELECT b FROM Badlocation b WHERE b.badlocationPK.badlocationId = :badlocationId")})
+    @NamedQuery(name = "Badlocation.findByBadlocationId", query = "SELECT b FROM Badlocation b WHERE b.badlocationId = :badlocationId")})
 public class Badlocation implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected BadlocationPK badlocationPK;
+    @Id
+    @Basic(optional = false)
+    @Column(name = "badlocation_id")
+    private Integer badlocationId;
+    @JoinColumn(name = "multimedia_id", referencedColumnName = "multimedia_id")
+    @ManyToOne(optional = false)
+    private Multimedia multimediaId;
+    @JoinColumn(name = "person_id", referencedColumnName = "person_id")
+    @ManyToOne(optional = false)
+    private Person personId;
 
     public Badlocation() {
     }
 
-    public Badlocation(BadlocationPK badlocationPK) {
-        this.badlocationPK = badlocationPK;
+    public Badlocation(Integer badlocationId) {
+        this.badlocationId = badlocationId;
     }
 
-    public Badlocation(int personId, int multimediaId, int badlocationId) {
-        this.badlocationPK = new BadlocationPK(personId, multimediaId, badlocationId);
+    public Integer getBadlocationId() {
+        return badlocationId;
     }
 
-    public BadlocationPK getBadlocationPK() {
-        return badlocationPK;
+    public void setBadlocationId(Integer badlocationId) {
+        this.badlocationId = badlocationId;
     }
 
-    public void setBadlocationPK(BadlocationPK badlocationPK) {
-        this.badlocationPK = badlocationPK;
+    public Multimedia getMultimediaId() {
+        return multimediaId;
+    }
+
+    public void setMultimediaId(Multimedia multimediaId) {
+        this.multimediaId = multimediaId;
+    }
+
+    public Person getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(Person personId) {
+        this.personId = personId;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (badlocationPK != null ? badlocationPK.hashCode() : 0);
+        hash += (badlocationId != null ? badlocationId.hashCode() : 0);
         return hash;
     }
 
@@ -64,7 +83,7 @@ public class Badlocation implements Serializable {
             return false;
         }
         Badlocation other = (Badlocation) object;
-        if ((this.badlocationPK == null && other.badlocationPK != null) || (this.badlocationPK != null && !this.badlocationPK.equals(other.badlocationPK))) {
+        if ((this.badlocationId == null && other.badlocationId != null) || (this.badlocationId != null && !this.badlocationId.equals(other.badlocationId))) {
             return false;
         }
         return true;
@@ -72,7 +91,7 @@ public class Badlocation implements Serializable {
 
     @Override
     public String toString() {
-        return "Objects.Badlocation[ badlocationPK=" + badlocationPK + " ]";
+        return "Objects.Badlocation[ badlocationId=" + badlocationId + " ]";
     }
-    
+
 }

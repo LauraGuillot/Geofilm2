@@ -46,8 +46,6 @@ public class Source implements Serializable {
     private String sourceTitle;
     @Column(name = "source_type")
     private String sourceType;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sourceId")
-    private Collection<Multimedia> multimediaCollection;
 
     public Source() {
     }
@@ -83,15 +81,6 @@ public class Source implements Serializable {
 
     public void setSourceType(String sourceType) {
         this.sourceType = sourceType;
-    }
-
-    @XmlTransient
-    public Collection<Multimedia> getMultimediaCollection() {
-        return multimediaCollection;
-    }
-
-    public void setMultimediaCollection(Collection<Multimedia> multimediaCollection) {
-        this.multimediaCollection = multimediaCollection;
     }
 
     @Override

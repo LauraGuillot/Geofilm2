@@ -44,7 +44,9 @@ var global_map_fr = "GLOBAL MAP";
 var route_map_fr = "ROUTE MAP";
 var modification_fr = "Modifier";
 var favorite_fr = "Favoris";
+var favorite1_fr = "FAVORIS";
 var upload_fr = "UPLOAD";
+var deconnect_fr ="DECONNEXION";
 
 //POP-UP MODIFICATION DES INFORMATIONS PERSONNELLES
 var modif_infos_fr = "MODIFICATION DES INFORMATIONS PERSONNELLES";
