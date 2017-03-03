@@ -252,7 +252,7 @@ function launchMulti(id) {
     map.flyTo({center: [y1, x1], zoom : 18});
 
     //Ouverture
-    setTimeout(function(){ openMult(i, j, k, id); }, 5000);
+    setTimeout(function(){ openMult(i, j, k, id); }, 4000);
 
 }
 

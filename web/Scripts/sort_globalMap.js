@@ -184,6 +184,26 @@ function displayMultis(i, multis) {
         var p_group = document.createElement("div");
         p_group.className = "p_group";
 
+        //Icone
+        var img = document.createElement("img");
+        switch (multi.type) {
+            case 'VIDEO':
+                img.className = "icon_video";
+                img.src = "./Ressources/video.png";
+                break;
+            case 'IMAGE':
+                img.className = "icon_image";
+                img.src = "./Ressources/image.png";
+                break;
+            case 'SON':
+                img.className = "icon_sound";
+                img.src = "./Ressources/sound.png";
+                break;
+        }
+
+        var p = document.createElement("div");
+        p.className = "p";
+
         var p1 = document.createElement("p");
         p1.className = "link_title";
         p1.innerHTML = multis[j].title;
@@ -192,8 +212,10 @@ function displayMultis(i, multis) {
         p2.className = "link_info";
         p2.innerHTML = by_fr + multis[j].publisher + the_fr + multis[j].date;
 
-        p_group.appendChild(p1);
-        p_group.appendChild(p2);
+        p_group.appendChild(img);
+        p_group.appendChild(p);
+        p.appendChild(p1);
+        p.appendChild(p2);
         a.appendChild(p_group);
         div.appendChild(a);
     }
