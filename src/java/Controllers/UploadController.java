@@ -11,7 +11,11 @@ import Managers.PersonManager;
 import Managers.PersonManagerImpl;
 import Managers.ConnectManager;
 import Managers.ConnectManagerImpl;
+import Managers.SourceManager;
+import Managers.SourceManagerImpl;
 import Objects.Person;
+import Objects.Source;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
@@ -46,6 +50,11 @@ public class UploadController {
 
             //Connexion de l'utilisateur 
             result.addObject("idco", idco);
+            
+            //Ajout des sources
+            SourceManager sm = SourceManagerImpl.getInstance();
+            ArrayList<Source> sources = sm.getSources();
+            result.addObject("src", sources);
 
             return result;
         } else {

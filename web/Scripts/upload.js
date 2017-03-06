@@ -1,5 +1,3 @@
-
-
 /**
  * Accès à la page d'upload
  * @returns {undefined}
@@ -199,8 +197,8 @@ function valid_form_upload2(elem1, elem2) {
     var postal_code = document.getElementById("postal_code_entered").value;
     var city = document.getElementById("city_entered").value;
     var country = document.getElementById("country_entered").value;
-    var complement  = document.getElementById("address_complement_entered").value;
-    if ((valid_number(number) && valid_number(street) && valid_number(postal_code) && valid_number(city) && valid_number(country))&&(geocodeAddress(codeAddressJson(number, street, complement, postal_code, city, country)))) {
+    var complement = document.getElementById("address_complement_entered").value;
+    if ((valid_number(number) && valid_number(street) && valid_number(postal_code) && valid_number(city) && valid_number(country)) && (geocodeAddress(codeAddressJson(number, street, complement, postal_code, city, country)))) {
         visibilite_element(elem1);
         visibilite_element(elem2);
         return true;
@@ -223,5 +221,46 @@ function visibilite_element(thingId) {
         targetElement.style.display = "";
     } else {
         targetElement.style.display = "none";
+    }
+}
+
+
+/**
+ * Mise en place de l'autocomplétion pour les titres de source
+ * @returns {void}
+ */
+function loadAutoComplete() {
+    //On récupère le type de source séectionné
+    var type ="none";
+    var op2 = document.getElementById("upload_source_unknown");
+    if(op2.selected){
+        type="UNKNOWN";
+    }
+    var op3 = document.getElementById("upload_film");
+    if(op3.selected){
+        type="FILM";
+    }
+    var op4 = document.getElementById("upload_serie");
+    if(op4.selected){
+        type="SERIE";
+    }
+    var op5 = document.getElementById("upload_game");
+    if(op5.selected){
+        type="GAME";
+    }
+
+    //Si un type est sélectionné, on charge les cources de ce type dans l'autocomplétion
+    if (type != 'UNKNOWN' && type != 'none') {
+        var input = document.getElementById("upload_source_title_entered");
+        var awesomplete = new Awesomplete(input);
+        //Liste des titres
+        var list = [];
+        var nbsrc = document.getElementById("nbSources").value;
+        for (var i = 0; i < nbsrc; i++) {
+            if (type == document.getElementById("src_" + i + "_type").value) {
+                list.push(document.getElementById("src_" + i + "_title").value);
+            }
+        }
+        awesomplete.list = list;
     }
 }

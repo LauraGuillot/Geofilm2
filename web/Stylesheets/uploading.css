@@ -34,7 +34,7 @@ html, body {
     display:inline;
     text-align: left;
     white-space:pre-line;
-    
+
 }
 
 
@@ -76,8 +76,6 @@ html, body {
     padding-left : 40px;
 }
 
-
-
 .content_upload1{
     height:92%;
     width:90%!important;
@@ -86,7 +84,7 @@ html, body {
     display:inline;
     text-align: left;
     white-space:pre-line;
-    
+
 }
 
 #head2{
@@ -157,18 +155,18 @@ html, body {
 }
 
 .ui-control {
-  background:#fff;
-  position:relative;
-  top:10px;
-  right:30px;
-  padding:10px;
-  z-index:100;
-  border-radius:3px;
-  }
+    background:#fff;
+    position:relative;
+    top:10px;
+    right:30px;
+    padding:10px;
+    z-index:100;
+    border-radius:3px;
+}
 
 .p{
     display:inline;
-    
+
 }
 
 .links{
@@ -194,4 +192,31 @@ html, body {
     display:block!important;
     margin:0!important;
     padding:0!important;
+}
+
+select{
+    color:#444;
+    font-weight:200;
+    font-size:13pt;
+    outline:none;
+    height:35px;
+    padding:5px;
+}
+
+/*Suggestions le l'autocompletion'*/
+li{
+    list-style-type: none; 
+}
+.awesomplete ul{
+    padding:0;
+    margin:0;
+    background-color: #666;
+}
+.awesomplete li{
+    padding:5px;
+    cursor : pointer;
+    min-height:30px;
+}
+.awesomplete li:hover{
+    background-color: #777;
 }

@@ -47,6 +47,7 @@
 
 
         <!-- SCRIPTS -->
+        <script src="Scripts/awesomplete.js"></script>
         <script src="Scripts/navigation.js"></script>
         <script src="Scripts/deconnect.js"></script>
         <script src="Scripts/modif_infos_perso.js"></script>
@@ -54,22 +55,31 @@
         <script src="Scripts/upload.js"></script>
         <script src="Scripts/geoloc_upload.js"></script>
 
+
     </head>
     <body onload="load();">
 
         <!-- CHARGEMENT DES DONNEES -->
+        <div style="display:none;">
+            <!-- Données personnelles-->
+            <input type="hidden" id="name" value="<c:out value="${nom}"/>"/> 
+            <input type="hidden" id="firstname" value="<c:out value="${prenom}"/>"/> 
+            <input type="hidden" id="email" value="<c:out value="${email}"/>"/> 
+            <input type="hidden" id="idco" value="<c:out value="${idco}"/>"/> 
 
-        <!-- Données personnelles-->
-        <input type="hidden" id="name" value="<c:out value="${nom}"/>"/> 
-        <input type="hidden" id="firstname" value="<c:out value="${prenom}"/>"/> 
-        <input type="hidden" id="email" value="<c:out value="${email}"/>"/> 
-        <input type="hidden" id="idco" value="<c:out value="${idco}"/>"/> 
-
-        <!-- Markers (positions) -->
-        <input type="hidden" id="nbMarkers" value="<c:out value="${fn:length(markers)}"/>"/> 
-        <c:forEach var="p" items="${markers}" varStatus="status">
-            <input type="hidden" id="p<c:out value="${status.index}"/>" value="<c:out value="${p['locationThegeom']}"/>"/>
-        </c:forEach>
+            <!-- Markers (positions) -->
+            <input type="hidden" id="nbMarkers" value="<c:out value="${fn:length(markers)}"/>"/> 
+            <c:forEach var="p" items="${markers}" varStatus="status">
+                <input type="hidden" id="p<c:out value="${status.index}"/>" value="<c:out value="${p['locationThegeom']}"/>"/>
+            </c:forEach>
+                
+             <!-- Sources-->
+            <input type="hidden" id="nbSources" value="<c:out value="${fn:length(src)}"/>"/> 
+            <c:forEach var="s" items="${src}" varStatus="status">
+                <input type="hidden" id="src_<c:out value="${status.index}"/>_title" value="<c:out value="${s['sourceTitle']}"/>"/>
+                <input type="hidden" id="src_<c:out value="${status.index}"/>_type" value="<c:out value="${s['sourceType']}"/>"/>
+            </c:forEach>
+        </div>
 
         <!-- NAVIGATION  GRANDS ECRANS-->
         <nav id="navbar_large_screen" class="navbar-default navbar " role="navigation">
@@ -200,14 +210,13 @@
                         <!--Saisie des informations liées à la source (nom, type)-->
                         <div class="input_upload">
                             <p class="label_form" id="upload_source"></p>
-                            <select id="choice_source" name="choice" onchange="">
+                            <select id="choice_source" name="choice"  onchange="loadAutoComplete();">
                                 <option selected value="none" id="upload_source_search">
-                                <option style="color:black!important" value="unknown" id="upload_source_unknown"></option>
-                                <option style="color:black!important" value="film" id="upload_film"></option>
-                                <option style="color:black!important" value="serie" id="upload_serie"></option>
-                                <option style="color:black!important" value="game" id="upload_game"></option>
+                                <option style="color:black!important" value="UNKNOWN" id="upload_source_unknown"></option>
+                                <option style="color:black!important" value="FILM" id="upload_film"></option>
+                                <option style="color:black!important" value="SERIE" id="upload_serie"></option>
+                                <option style="color:black!important" value="JEU" id="upload_game"></option>
                             </select>
-
                         </div>
                         <br>
                         <div class="input_upload">
@@ -221,7 +230,7 @@
                 </div>
             </div>
 
-            <!--Deucième bloc de saisie des informations de localisation-->
+            <!--Deuxième bloc de saisie des informations de localisation-->
             <div id="content_upload1" style="display:none;">
                 <div id="head2">
                     <p class="title" style="padding-bottom: 0px!important" id="title2"></p>
