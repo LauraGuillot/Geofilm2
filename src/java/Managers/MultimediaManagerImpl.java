@@ -500,6 +500,7 @@ public class MultimediaManagerImpl implements MultimediaManager {
             //Tranformation en arraylist + conservation uniquement des favoris
             for (Object o : l) {
                 Multimedia multi = (Multimedia) o;
+        
                 Query q1 = em.createQuery("SELECT f FROM Favorite f WHERE  f.multimediaId=:m AND f.personId=:p");
                 q1.setParameter("m", multi);
                 q1.setParameter("p", p);
@@ -515,3 +516,4 @@ public class MultimediaManagerImpl implements MultimediaManager {
         return mult;
     }
 }
+

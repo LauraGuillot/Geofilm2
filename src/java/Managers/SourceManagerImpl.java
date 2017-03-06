@@ -72,8 +72,16 @@ public class SourceManagerImpl implements SourceManager {
     }
 
     /**
-     * TODO : récupérer l'id d'une source
+     * Récupérer l'ID d'une source à partir de son nom
+     * @param name
+     * @return
      */
+    @Override
+    public Integer findSourceId(String name) {
+        Source s = findSource(name);
+        return s.getSourceId();
+    }
+
     /**
      * Créer une nouvelle source et renvoyer son id
      *
@@ -87,7 +95,6 @@ public class SourceManagerImpl implements SourceManager {
         Source s = new Source();
         s.setSourceTitle(title);
         s.setSourceType(type);
-        
 
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();

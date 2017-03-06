@@ -53,13 +53,17 @@ public class UploadServlet extends HttpServlet {
         
         //TODO : Chercher comment récupérer une localisation (carte ou adresse, à convertir en géométrie)
         String thegeom = request.getParameter("theGeom"); //TODO variable theGeom)
+        //Ajout de la localisation du multimédia à la base de données
         LocationManager lm = LocationManagerImpl.getInstance();
         Location l = lm.insertLocation(thegeom);
 
+        //Ajout de la source du multimédia dans la base de données 
+        //TODO : rechercher si la source existe déjà
         SourceManager sm = SourceManagerImpl.getInstance();
         Source s = sm.findSource(source_name);
 
         //TODO? : vérifier qu'un multimédia n'est pas déjà entrée ? (Comment ? Par la source, le nom, la localisation, la durée... )
+        //Ajout du multimédia dans la base de données
         MultimediaManager mm = MultimediaManagerImpl.getInstance();
         mm.insertMultimedia(title, description, path, date, format, language, type_media, l, p, s, time_begin, time_end);
 

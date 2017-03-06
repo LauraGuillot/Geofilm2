@@ -111,6 +111,10 @@ var error_source_type_fr = "Veuillez sélectionner une source pour le multimédi
 var error_mandatory_fr = "Veuillez remplir les champs obligatoires *";
 var error_localisation_fr = "L'adresse entrée n'est pas valide";
 
+var error_upload_file_fr = "Le format du fichier n'est pas pris en charge.";
+var true_fr = "vrai";
+var location_ok_fr = "Localisation ok";
+
 //POP-UP VISUALISATION D'UN MULTIMEDIA
 var signal_fr = "Signaler";
 var signal2_fr = "une mauvaise géolocalisation";

@@ -24,6 +24,11 @@
         <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.js'></script>
         <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.css' type='text/css' />
 
+        <!--GOOGLE MAPS-->
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOAkh5jpRroX29qMjb2hWKJCZHnY4zJDU"></script>
+        
+
+
         <!-- CHAINES DE CARACTERES -->
         <script src="Scripts/language.js"></script>
         <script src="Scripts/strings.js"></script>
@@ -74,7 +79,7 @@
             </c:forEach>
         </div>
 
-        
+
 
         <!-- NAVIGATION  GRANDS ECRANS-->
         <nav id="navbar_large_screen" class="navbar-default navbar " role="navigation">
@@ -160,6 +165,7 @@
                     <div id="content_general1" class="col-md-6">
 
                         <!--Saisie du type de multimédia-->
+                        <!--TODO : pour les largeurs des input, mettre des % !!!-->
 
                         <p class="error_message" id="error_upload"> </p>
                         <p class="label_form" style="display:inline-block!important;" id="upload_type_multimedia"></p>
@@ -181,23 +187,23 @@
                         <!--Saisie du titre de multimédia-->
                         <div class="input_upload">
                             <p class="label_form" id="upload_title_multimedia"></p>
-                            <input style="width:500px!important;" type="text" name="titre" id="upload_title_entered">
+                            <input style="width:80%!important;" type="text" name="titre" id="upload_title_entered">
                         </div>
 
 
                         <!--Saisie d'une description du multimédia-->
                         <div class="input_upload">
                             <p class="label_form" id="upload_description"></p>
-                            <input style="width:500px!important;" type="text" name ="description" id="upload_description_entered">
+                            <input style="width:120%!important;" type="text" name ="description" id="upload_description_entered">
                         </div>
 
                         <!--Saisie du time code (surtout s'il s'agit d'une séquence video)-->
                         <div class="input_upload">
                             <p class="label_form" id="upload_time_code"></p>
                             <p class="label_form" style="display:inline-block!important" id="upload_time_begin"></p>
-                            <input style="display:inline-block!important; width:100px!important;" id="time_begin" type="time" name="begin">
+                            <input style="display:inline-block!important; width:25%!important;" id="time_begin" type="time" name="begin">
                             <p class="label_form" style="display:inline-block!important" id="upload_time_end"></p>
-                            <input style="display:inline-block!important; width:100px!important;" id="time_end" type="time" name="end"> <!--A récupérer sous la forme d'une chaine de caracatères-->
+                            <input style="display:inline-block!important; width:25%!important;" id="time_end" type="time" name="end"> <!--A récupérer sous la forme d'une chaine de caracatères-->
 
                         </div>
 
@@ -217,7 +223,7 @@
                         <br>
                         <div class="input_upload">
                             <p class="label_form" id="upload_source_title"></p>
-                            <input style="width:500px!important;" type="text" name="title_source" id="upload_source_title_entered">
+                            <input style="width:80%!important;" type="text" name="title_source" id="upload_source_title_entered">
                         </div>
                     </div>
                     <div id="content_general2" class="col-md-6">
@@ -267,10 +273,14 @@
                     <div id="right_div" class="col-md-6">
                         <p class="title" id="location" style="color:white;size:10px;padding-top:20px;text-align:center;" ></p>
                         <br>
+                        <p class="error_message" id="location_ok" ></p>
+                        <br>
                         <div id='output' class='ui-control'>
                             <code id='click'></code><br/>
                         </div>
                         <div id="mapid" class="map"> </div>
+                        <br>
+                        
                         <right><button id ="next2" type="button" class="button small_button" href="#" onclick="valid_form_upload2('content_upload1', 'content_upload2');" style="margin-left:70%; margin-top: 50%"></button></right>
                     </div>
                 </div>
@@ -285,8 +295,10 @@
                 </div>
                 <div class="col-md-6">
                     <!--Parcourir les fichiers de l'utilisateur pour uploader un multimédia-->
+                    <p class="error_message" id="error_upload_file"></p>
                     <p class="label_form" id="input_choice"></p>
                     <input type="file" name="file" id="file_entered">
+                    <p class="label_form" id="file_format"></p>
                 </div>
                 <right><button id ="validation3" type="button" class="button small_button" onclick="" style="margin-bottom: 40px"></button></right>
 

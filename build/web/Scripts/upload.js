@@ -1,4 +1,4 @@
-
+//TODO : bouton précédent permettant de revenir en arrière ?
 
 /**
  * Accès à la page d'upload
@@ -25,7 +25,7 @@ function open_upload() {
  */
 function upload1() {
 
-//On récupère les infos
+    //On récupère les infos
     var type_video = document.getElementById("u_video").value;
     var type_image = document.getElementById("u_image").value;
     var type_sound = document.getElementById("u_sound").value;
@@ -45,14 +45,15 @@ function upload1() {
     var year = d.getFullYear();
     //Variable du jour :
     var date = document.getElementById("day").value + "/" + document.getElementById("month").value + "/" + document.getElementById("year");
-    // Pour l'instant, la reconnaissance d'adresse n'est pas effective.
-    // On contrôle seulement si des caractères sont bien entrés dans les champs obligatoires pour une adresse
+    //ADRESSE
     var number = document.getElementById("numero_entered").value;
     var street = document.getElementById("street_entered").value;
     var postal_code = document.getElementById("postal_code_entered").value;
     var city = document.getElementById("city_entered").value;
     var country = document.getElementById("country_entered").value;
+    //FORMAT FICHIER
     var file = document.getElementById("file_entered").value;
+    var format = document.getElementById("file_format").value;
     //Si la saisie est valide
     if (valid_form_upload1(type_video, type_sound, type_image, title, source)) {
 
@@ -67,7 +68,7 @@ function upload1() {
 
                     var form = document.createElement('form');
                     form.method = "POST";
-                    form.action = "uploading.htm";
+                    form.action = "global_map.htm";
                     var c1 = document.createElement('input');
                     c1.type = "hidden";
                     c1.name = "email";
@@ -186,7 +187,6 @@ function valid_form_upload1(title, choice, elem1, elem2) {
     }
 }
 
-//TODO : dans le valid_form2 ; vérifier que l'adresse entrée existe en la convertissant en position
 
 /**Validation du second formulaire d'upload (localisation de la vidéo)
  * @param {type} elem1 Contenu à cacher
@@ -194,19 +194,45 @@ function valid_form_upload1(title, choice, elem1, elem2) {
  * @returns {Boolean}
  */
 function valid_form_upload2(elem1, elem2) {
+
     var number = document.getElementById("numero_entered").value;
     var street = document.getElementById("street_entered").value;
     var postal_code = document.getElementById("postal_code_entered").value;
     var city = document.getElementById("city_entered").value;
     var country = document.getElementById("country_entered").value;
-    var complement  = document.getElementById("address_complement_entered").value;
-    if ((valid_number(number) && valid_number(street) && valid_number(postal_code) && valid_number(city) && valid_number(country))&&(geocodeAddress(codeAddressJson(number, street, complement, postal_code, city, country)))) {
-        visibilite_element(elem1);
-        visibilite_element(elem2);
+    var complement = document.getElementById("address_complement_entered").value;
+
+    if ((valid_number(number) && valid_number(street) && valid_number(postal_code) && valid_number(city) && valid_number(country))) {
+        geocodeAddress(codeAddressJson(number, street, complement, city, country), function (localisation) {
+            if (localisation !== undefined) {
+                visibilite_element(elem1);
+                visibilite_element(elem2);
+
+            }
+        });
+        return true;
+
+    } else {
+        return false;
+    }
+}
+
+//codeAddressJson(number, street, complement, postal_code, city, country))
+/**
+ * Peret de vérifier que le fichier entré a un foraat valide
+ * @returns {undefined}
+ */
+function valid_form_upload3() {
+    var type = document.getElementById("choice_source");
+    var filename = document.getElementById("file_entered");
+    document.getElementById("file_format").innerHTML = getExtension(filename);
+    extensionsValides = new Array('avi', 'wmv', 'mov', 'mp4', 'mkv', 'mka', 'mks', 'flv', 'Divx', 'Xvid', 'divx', 'xvid', 'raw', 'jpeg', 'dng', 'tiff', 'png', 'gif', 'jpg', 'psd', 'wav', 'm4v', 'wmv', 'mpg', 'mpeg', 'mp3', 'm4a', 'aac');
+    if (verifFileExtension(filename, listeExt)) {
         return true;
     } else {
         return false;
     }
+
 }
 
 /**
@@ -218,10 +244,45 @@ function visibilite_element(thingId) {
 
     var targetElement;
     targetElement = document.getElementById(thingId);
+
     if (targetElement.style.display == "none")
     {
         targetElement.style.display = "";
     } else {
         targetElement.style.display = "none";
+
     }
+}
+
+/**
+ * Obtention de l'extension (type) d'un fichier
+ * @param {type} filename
+ * @returns {getExtension.parts}
+ */
+function getExtension(filename)
+{
+    var parts = filename.split(".");
+    return (parts[(parts.length - 1)]);
+}
+
+
+/**
+ * Vérifie l'extension d'un fichier uploadé
+ * @param {type} champ type du fichier uploadé
+ * @param {type} listeExt liste des extensions autorisées
+ * @returns {Boolean}
+ */
+function verifFileExtension(filename, listeExt)
+{
+    filename = filename.toLowerCase();
+    fileExt = getExtension(filename);
+    for (i = 0; i < listeExt.length; i++)
+    {
+        if (fileExt == listeExt[i])
+        {
+            return (true);
+        }
+    }
+    document.getElementById("error_upload_file").innerHTML = error_upload_file_fr;
+    return (false);
 }

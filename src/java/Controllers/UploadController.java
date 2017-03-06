@@ -11,7 +11,17 @@ import Managers.PersonManager;
 import Managers.PersonManagerImpl;
 import Managers.ConnectManager;
 import Managers.ConnectManagerImpl;
+import Managers.LocationManager;
+import Managers.LocationManagerImpl;
+import Managers.MultimediaManager;
+import Managers.MultimediaManagerImpl;
+import Managers.SourceManager;
+import Managers.SourceManagerImpl;
+import Objects.Location;
+import Objects.Multimedia;
 import Objects.Person;
+import Objects.Source;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
@@ -30,6 +40,7 @@ public class UploadController {
         PersonManager pm = PersonManagerImpl.getInstance();
         Person p = pm.findPerson(idco);
 
+        //si la connexion est valide, on 
         if (p != null) {
             ModelAndView result = new ModelAndView("uploading");
 
@@ -46,8 +57,20 @@ public class UploadController {
 
             //Connexion de l'utilisateur 
             result.addObject("idco", idco);
+            
+            //Récupération des multimédias
+            MultimediaManager mm = MultimediaManagerImpl.getInstance();
+            LocationManager lm = LocationManagerImpl.getInstance();
+            ArrayList<Location> markers = lm.getMarkers();
+            result.addObject("markers", markers);
+            ArrayList<ArrayList<Multimedia>> multis = mm.getMultiByPos(markers);
+            result.addObject("multis", multis);
+            
+            
+            
 
             return result;
+            //si la connexion n'est pas valide, on retourne à la page d'accueil
         } else {
             ModelAndView result = new ModelAndView("index");
             result.addObject("idco", 0);

@@ -119,7 +119,7 @@ public interface MultimediaManager {
     public void like(Multimedia m, Person p, String type);
 
     /**
-     * Insertion d'un multimédia dans la base de données
+     * Insertion d'un nouveau multimédia dans la base de données
      *
      * @param title
      * @param description

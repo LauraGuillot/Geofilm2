@@ -32,4 +32,11 @@ public interface SourceManager {
      * @return 
      */
     public Integer createSource(String title, String type, String time_begin, String time_end);
+    
+    /**
+     * Récupérer l'ID d'une source à partir de son nom
+     * @param name
+     * @return 
+     */
+    public Integer findSourceId(String name);
 }
