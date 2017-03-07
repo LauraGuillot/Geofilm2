@@ -300,7 +300,7 @@
                     <input type="file" name="file" id="file_entered">
                     <p class="label_form" id="file_format"></p>
                 </div>
-                <right><button id ="validation3" type="button" class="button small_button" onclick="" style="margin-bottom: 40px"></button></right>
+                <right><button id ="validation3" type="button" class="button small_button" onclick="valid_form_upload3()" style="margin-bottom: 40px"></button></right>
 
 
             </div>

@@ -89,6 +89,7 @@ public class SourceManagerImpl implements SourceManager {
      * @param type
      * @param time_begin
      * @param time_end
+     * @return 
      */
     @Override
     public Integer createSource(String title, String type, String time_begin, String time_end) {

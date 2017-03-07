@@ -23,7 +23,7 @@ function open_upload() {
  * On ne vérifie pas si le type de source du fichier entré correspond
  * au type de source entré par l'utilisateur, pour le moment
  */
-function upload1() {
+function upload() {
 
     //On récupère les infos
     var type_video = document.getElementById("u_video").value;
@@ -48,14 +48,27 @@ function upload1() {
     //ADRESSE
     var number = document.getElementById("numero_entered").value;
     var street = document.getElementById("street_entered").value;
+    var complement = document.getElementById("address_complement_entered").value;
     var postal_code = document.getElementById("postal_code_entered").value;
     var city = document.getElementById("city_entered").value;
     var country = document.getElementById("country_entered").value;
+    var location = document.getElementById("output").value;
+    if (location == undefined){
+        
+    } else {
+        
+    }
+    geocodeAddress(codeAddressJson(number, street, complement, city, country), function (localisation) {
+            if (localisation !== undefined) {
+                
+
+            }
+        });
     //FORMAT FICHIER
     var file = document.getElementById("file_entered").value;
     var format = document.getElementById("file_format").value;
-    //Si la saisie est valide
-    if (valid_form_upload1(type_video, type_sound, type_image, title, source)) {
+    //Si le format du fichier entré est valide, on peut ajouter les informations à la base de données
+    if (valid_form_upload3()) {
 
         xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
@@ -89,7 +102,7 @@ function upload1() {
             }
         };
         var data = "id=" + multiid + "&" + "idco=" + idco + "&" + "type=" + type_media;
-        xhttp.open("GET", "UploadingServlet?" + data, true);
+        xhttp.open("GET", "UploadServlet?" + data, true);
         xhttp.setRequestHeader("Content-Type", "text/html; charset=UTF-8");
         xhttp.send();
     }
@@ -217,7 +230,6 @@ function valid_form_upload2(elem1, elem2) {
     }
 }
 
-//codeAddressJson(number, street, complement, postal_code, city, country))
 /**
  * Peret de vérifier que le fichier entré a un foraat valide
  * @returns {undefined}
@@ -227,9 +239,9 @@ function valid_form_upload3() {
     var filename = document.getElementById("file_entered");
     document.getElementById("file_format").innerHTML = getExtension(filename);
     extensionsValides = new Array('avi', 'wmv', 'mov', 'mp4', 'mkv', 'mka', 'mks', 'flv', 'Divx', 'Xvid', 'divx', 'xvid', 'raw', 'jpeg', 'dng', 'tiff', 'png', 'gif', 'jpg', 'psd', 'wav', 'm4v', 'wmv', 'mpg', 'mpeg', 'mp3', 'm4a', 'aac');
-    if (verifFileExtension(filename, listeExt)) {
+    if (verifFileExtension(filename, extensionsValides)) {
         return true;
-    } else {
+    } else{
         return false;
     }
 
@@ -256,12 +268,12 @@ function visibilite_element(thingId) {
 
 /**
  * Obtention de l'extension (type) d'un fichier
- * @param {type} filename
+ * @param {String} filename
  * @returns {getExtension.parts}
  */
 function getExtension(filename)
 {
-    var parts = filename.split(".");
+    var parts = filename.substr(filename.lastIndexOf(".") + 1);
     return (parts[(parts.length - 1)]);
 }
 
@@ -275,7 +287,7 @@ function getExtension(filename)
 function verifFileExtension(filename, listeExt)
 {
     filename = filename.toLowerCase();
-    fileExt = getExtension(filename);
+    var fileExt = getExtension(filename);
     for (i = 0; i < listeExt.length; i++)
     {
         if (fileExt == listeExt[i])

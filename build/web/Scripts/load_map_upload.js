@@ -31,11 +31,12 @@ function loadMap() {
     //Au clic, on affiche les coordonnées et on affiche un marqueur
     map.on('click', function (e) {
         var location = JSON.stringify(e.lngLat);
-        document.getElementById('output').innerHTML =
-                // e.lngLat is the longitude, latitude geographical position of the event
-                location;
+
         var wrapped = e.lngLat.wrap();
         addMarker(wrapped.lng, wrapped.lat);
+        document.getElementById('output').innerHTML =
+                // e.lngLat is the longitude, latitude geographical position of the event
+                "(" + wrapped.lat + "," + wrapped.lng + ")";
 
 //        mapboxgl.geocodeReverse(
 //                {latitude: wrapped.lat, longitude: wrapped.lng},
@@ -44,9 +45,8 @@ function loadMap() {
 //                    // res is a GeoJSON document with up to 1 geocoding match
 //                });
     });
-
     //A la suite d'une recherche d'un lieu, ajout d'un point sur la map
-    map.on('load', function () {
+    map.on('click', function () {
         map.addSource('single-point', {
             "type": "geojson",
             "data": {
@@ -66,7 +66,7 @@ function loadMap() {
         });
 
         // Affichage de la géométrie
-        geocoder.on('result', function (ev) {
+        geocoder.on('click', function (ev) {
             map.getSource('single-point').setData(ev.result.geometry);
 
             document.getElementById('output').innerHTML = JSON.stringify(ev.result.geometry.lngLat);

@@ -46,6 +46,7 @@ public class UploadServlet extends HttpServlet {
         String path = request.getParameter("path");//TODO variable path
         String source_name = request.getParameter("source");
         String idco = request.getParameter("idco");
+        String position = request.getParameter("location");
         
         //Récupération de la personne qui a uploadé, de sa position, puis de la source
         PersonManager pm = PersonManagerImpl.getInstance();
