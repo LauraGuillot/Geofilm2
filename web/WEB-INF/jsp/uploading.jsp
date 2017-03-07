@@ -66,13 +66,7 @@
             <input type="hidden" id="firstname" value="<c:out value="${prenom}"/>"/> 
             <input type="hidden" id="email" value="<c:out value="${email}"/>"/> 
             <input type="hidden" id="idco" value="<c:out value="${idco}"/>"/> 
-
-            <!-- Markers (positions) -->
-            <input type="hidden" id="nbMarkers" value="<c:out value="${fn:length(markers)}"/>"/> 
-            <c:forEach var="p" items="${markers}" varStatus="status">
-                <input type="hidden" id="p<c:out value="${status.index}"/>" value="<c:out value="${p['locationThegeom']}"/>"/>
-            </c:forEach>
-                
+            
              <!-- Sources-->
             <input type="hidden" id="nbSources" value="<c:out value="${fn:length(src)}"/>"/> 
             <c:forEach var="s" items="${src}" varStatus="status">
@@ -225,8 +219,8 @@
                         </div>
                     </div>
                     <div id="content_general2" class="col-md-6">
-                        <right><button id ="next1" type="button" class="button small_button" href="#" onclick="valid_form_upload1(getElementById('upload_title_entered'), getElementById('choice_source'), 'content_general', 'content_upload1');" style="margin-left:300px; margin-top: 500px"></button></right>
-                    </div>
+                       <button id ="next1" type="button" class="button small_button valid_upload" href="#" onclick="valid_form_upload1(getElementById('upload_title_entered'), getElementById('choice_source'), 'content_general', 'content_upload1');"></button>
+                    </div> 
                 </div>
             </div>
 
@@ -264,16 +258,15 @@
                         <input type="text" name="loc_country" id="country_entered" style="width:200px!important">
                     </div>
 
-
-
                     <div id="right_div" class="col-md-6">
-                        <br>
-                        <div id='output' class='ui-control'>
-                            <code id='click'></code><br/> </div>
+                       
+                <!-- <div id='output' class='ui-control'>
+                            <code id='click'></code><br/> </div>-->
                         <div id="mapid"> </div>
-                        <div id="map-event" class="map"> </div>
-                        <right><button id ="next2" type="button" class="button small_button" href="#" onclick="valid_form_upload2('content_upload1', 'content_upload2');" style="margin-left:70%; margin-top: 50%"></button></right>
+                     <!--   <div id="map-event" class="map"> </div> -->
+                       <button id ="next2" type="button" class="button small_button valid_upload" href="#" onclick="valid_form_upload2('content_upload1', 'content_upload2');">
                     </div>
+                    
                 </div>
             </div>
 
@@ -289,7 +282,7 @@
                     <p class="label_form" id="input_choice"></p>
                     <input type="file" name="file" id="file_entered">
                 </div>
-                <right><button id ="validation3" type="button" class="button small_button" onclick="" style="margin-bottom: 40px"></button></right>
+                <button id ="validation3" type="button" class="button small_button valid_upload" onclick="" ></button>
 
 
             </div>

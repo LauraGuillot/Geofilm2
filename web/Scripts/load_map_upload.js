@@ -1,29 +1,54 @@
 //Carte
 var map;
 
+//Marqueur 
+var marqueur;
 
 /**
  * Chargement de la carte avec tous les marqueurs
  */
 function loadMap() {
-    //Création de la carte, centrage initial sur Paris
-    mapboxgl.accessToken = 'pk.eyJ1IjoicHBhbG1hcyIsImEiOiJjaXpvYTNlNWcwMDJhMzJueTY0ajcyM2s1In0.P_bIPUxWHbVMmYaOenvFaA';
+    //Création de la carte
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZ2VvZmlsbSIsImEiOiJjaXlqd2d1NGUwMDA5MnFrMXUyaHdtYmt5In0.zaWf5uM65g8RiAj9LACvHw';
     map = new mapboxgl.Map({
         container: 'mapid',
         style: 'mapbox://styles/mapbox/streets-v9',
         center: [2.287592000000018, 48.862725],
-        zoom: 5
+        zoom: 10
     });
+
     //Ajout du géocoder : barre de recherche par adresse
     map.addControl(new MapboxGeocoder({
         accessToken: mapboxgl.accessToken
     }));
 
-    var click = document.getElementById('click');
-
     map.on('click', function (e) {
-        window[e.type].innerHTML = e.latlng.toString();
-        alert(e.latlng);
+
+        //On récupère le point cliqué 
+        var point = e.lngLat;
+        var point1 = String(point);
+        point1 = point1.substring(7, point1.length - 1);
+        var pt = point1.split(",");
+        var lat = pt[0];
+        var long = pt[1];
+        
+        //On supprime le marqueur précédent
+        if(marqueur!=null){
+            marqueur.remove();
+        }
+
+        //On place le marqueur
+        //Div pour le marker
+        var el = document.createElement('div');
+        el.className = 'marker';
+        el.style.backgroundImage = 'url(Ressources/marker_red.png)';
+        el.style.width = '25px';
+        el.style.height = '35px';
+        //Ajout du marker
+        marqueur = new mapboxgl.Marker(el, {offset: [-12, 0]})
+                .setLngLat([lat, long])
+                .addTo(map);
+
     });
 
 
@@ -32,8 +57,10 @@ function loadMap() {
 
     //Obtention (si possible) de la position de l'utilisateur
     getLocation();
+
     // Affichage de la position de l'utilisateur
     displayPosition();
+
     //Début du tracking de la position de l'utilisateur
     startTracker();
 }
