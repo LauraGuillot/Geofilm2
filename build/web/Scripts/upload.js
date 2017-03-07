@@ -235,8 +235,7 @@ function valid_form_upload2(elem1, elem2) {
  * @returns {undefined}
  */
 function valid_form_upload3() {
-    var type = document.getElementById("choice_source");
-    var filename = document.getElementById("file_entered");
+    var filename = document.getElementById("file_entered").value;
     document.getElementById("file_format").innerHTML = getExtension(filename);
     extensionsValides = new Array('avi', 'wmv', 'mov', 'mp4', 'mkv', 'mka', 'mks', 'flv', 'Divx', 'Xvid', 'divx', 'xvid', 'raw', 'jpeg', 'dng', 'tiff', 'png', 'gif', 'jpg', 'psd', 'wav', 'm4v', 'wmv', 'mpg', 'mpeg', 'mp3', 'm4a', 'aac');
     if (verifFileExtension(filename, extensionsValides)) {
@@ -269,23 +268,27 @@ function visibilite_element(thingId) {
 /**
  * Obtention de l'extension (type) d'un fichier
  * @param {String} filename
- * @returns {getExtension.parts}
+ * @returns {String}
  */
 function getExtension(filename)
 {
-    var parts = filename.substr(filename.lastIndexOf(".") + 1);
-    return (parts[(parts.length - 1)]);
+    var parts = filename.substr(filename.lastIndexOf(".")+1);
+    return (parts);
 }
 
 
 /**
  * Vérifie l'extension d'un fichier uploadé
- * @param {type} champ type du fichier uploadé
- * @param {type} listeExt liste des extensions autorisées
+ * @param {String} filename type du fichier uploadé
+ * @param {Array<String>} listeExt liste des extensions autorisées
  * @returns {Boolean}
  */
-function verifFileExtension(filename, listeExt)
-{
+function verifFileExtension(filename, listeExt){
+
+    if (filename==""){
+        document.getElementById("error_upload_file").innerHTML = error_file_none_fr;
+        return false;
+    } else {
     filename = filename.toLowerCase();
     var fileExt = getExtension(filename);
     for (i = 0; i < listeExt.length; i++)
@@ -297,4 +300,5 @@ function verifFileExtension(filename, listeExt)
     }
     document.getElementById("error_upload_file").innerHTML = error_upload_file_fr;
     return (false);
+    }
 }

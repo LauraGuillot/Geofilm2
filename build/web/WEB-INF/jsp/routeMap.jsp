@@ -19,6 +19,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+        
+
         <!--MAP BOX -->
         <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.1/mapbox-gl.js'></script>
         <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.1/mapbox-gl.css' rel='stylesheet' />
@@ -56,6 +58,7 @@
         <script src="Scripts/sort_routeMap.js"></script>
         <script src="Scripts/play_multimedia_routeMap.js"></script>
         <script src="Scripts/delete_like.js"></script>
+        <script src="Scripts/route_map_temporal_links.js"></script>
 
     </head>
     <body onload="load();"><!-- Chargement des chaînes de caractères et de la carte-->
@@ -96,6 +99,8 @@
                         <input type="hidden" id="src<c:out value="${status.index}"/>_pos<c:out value="${status1.index}"/>_multi<c:out value="${status2.index}_publisherID"/>" value="<c:out value="${m['publisher']['personId']}"/>"/> 
                         <input type="hidden" id="src<c:out value="${status.index}"/>_pos<c:out value="${status1.index}"/>_multi<c:out value="${status2.index}_descr"/>" value="<c:out value="${m['multimediaDescription']}"/>"/>
                         <input type="hidden" id="src<c:out value="${status.index}"/>_pos<c:out value="${status1.index}"/>_multi<c:out value="${status2.index}_path"/>" value="<c:out value="${m['multimediaPath']}"/>"/>
+                        <input type="hidden" id="src<c:out value="${status.index}"/>_pos<c:out value="${status1.index}"/>_multi<c:out value="${status2.index}_start"/>" value="<c:out value="${m['multimediaStart']}"/>"/>
+                        <input type="hidden" id="src<c:out value="${status.index}"/>_pos<c:out value="${status1.index}"/>_multi<c:out value="${status2.index}_end"/>" value="<c:out value="${m['multimediaEnd']}"/>"/>
                         <input type="hidden" id="src<c:out value="${status.index}"/>_pos<c:out value="${status1.index}"/>_multi<c:out value="${status2.index}_uploaddate"/>" value="<c:out value="${m['multimediaUploadDate']}"/>"/>
                         <input type="hidden" id="src<c:out value="${status.index}"/>_pos<c:out value="${status1.index}"/>_multi<c:out value="${status2.index}_format"/>" value="<c:out value="${m['multimediaFormat']}"/>"/>
                         <input type="hidden" id="src<c:out value="${status.index}"/>_pos<c:out value="${status1.index}"/>_multi<c:out value="${status2.index}_type"/>" value="<c:out value="${m['multimediaType']}"/>"/>
@@ -201,6 +206,13 @@
                             <input id="search_key_word" style="padding-left:10px;" type="text" value=""/>
                             <input id="search_button" onclick="search_key_word();" type="submit" value="OK"/>
                         </div>
+                        <br>
+
+                        <!-- Affichage de la temporalité -->
+                        <div class="input_checkbox">
+                            <input id="display_temp" class="checkbox_temp" type="checkbox" name=temp" onclick="refreshMap();"/>
+                            <label class="input_label" id="temp_label"> </label>
+                        </div> 
 
                         <br><br>
                         <div id="separator"> </div>
@@ -209,8 +221,16 @@
                     <!-- Affichage des résultats des recherches -->
                     <div id="result"></div>
                 </div>
-                <!-- Map -->
-                <div id="mapid" class="col-md-9"> </div>
+
+                <div id="map_zone"  class="col-md-9">
+                    <input type="hidden" id="opensource" value=""/> 
+                    <!-- Map -->
+                    <div id="mapid" > </div>
+                    <!-- Barre de défilement pour les multimédias -->
+                    <div id="scrollbar" >
+                        
+                    </div>
+                </div>
             </div>
         </div>
 

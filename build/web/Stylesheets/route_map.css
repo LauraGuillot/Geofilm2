@@ -14,11 +14,17 @@ html, body {
     padding: 0;
 }
 
+#map_zone{
+    height:100%;
+    padding:0;
+}
+
 /* CARTE */
 #mapid{
     margin: 0px;
     padding: 0px;
     height:100%;
+    width:100%;
 }
 /* GEOCODER */
 .mapboxgl-ctrl-geocoder ul > li.active > a{
@@ -28,6 +34,37 @@ html, body {
 .suggestions{
     background-color: #2b2f36!important; 
     opacity:0.9;
+}
+
+/* BARRE DE DEFILEMENT */
+#scrollbar{
+    background-color: black;
+    opacity:0.7;
+    display:none;
+    margin: 0px;
+    padding: 10px;
+    height:20%;
+    min-width:100%; 
+    overflow-x: auto;
+    overflow-y:hidden; 
+    white-space:nowrap;
+}
+#scrollbar::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    border-radius: 5px;
+    background-color: transparent;
+}
+#scrollbar::-webkit-scrollbar
+{
+    height:7px;
+    width: 5px;
+    background-color:transparent;
+}
+#scrollbar::-webkit-scrollbar-thumb
+{
+    border-radius: 5px;
+    background-color: #23a1a8;
 }
 
 /* VOLET DE GAUCHE */
@@ -41,11 +78,11 @@ html, body {
 }
 /* HEADER DU VOLET DE GAUCHE*/
 #head{
-    height:30%;
+    height:35%;
 }
 /* ZONE POUR AFFICHER LES RESULTATS DE LA RECHERCHE*/
 #result{
-    height: 70%;
+    height: 65%;
     overflow-y: auto;
 }
 
@@ -82,6 +119,24 @@ select{
     display:inline-block;
 }
 
+/* CHECKBOX POUR L'AFFICHAGE DE LA TEMPORALITE */
+.input_label{
+    color:white;
+    display:inline-block!important;  
+    font-size:9pt;
+}
+.checkbox_temp{
+    padding:0px!important;
+    margin:0px!important;
+    display:inline-block;  
+    width:20px;
+    height:15px!important;
+}
+.input_checkbox{
+    text-align: left;
+}
+
+
 /* DIV DE SEPARATION */
 #separator{
     border-bottom: 1px solid white;
@@ -104,7 +159,7 @@ select{
     vertical-align: middle;
     color:white!important;
     width:100%;
-    
+
 }
 .source_link:hover{
     background-color: #23a1a8!important;
@@ -117,4 +172,51 @@ select{
     border-bottom: 1px solid #5E5F5F;
     width:100%;
     height:2px; 
+}
+
+/* TABLEAU POUR LA FRISE CHRONOLOGIQUE*/
+.div_mult{
+    color : white;
+    text-align : center;
+    margin:2px;
+    display:inline-block;
+    width:250px;
+    height:120px;
+    border : solid 1px #23a1a8;
+    border-radius:10px;
+    padding:2px;
+    cursor : pointer;
+    overflow-y: auto;
+}
+
+.div_mult:hover{
+    background-color: #666;
+}
+
+.number{
+    font-weight:500;
+    color : #33E0E9;
+    font-size : 15pt;
+}
+.title_scrollbar{
+    white-space: normal;
+    display:block;
+}
+.icon_video1{
+    display:block;
+    width:25px;
+    height:25px;
+    margin-left:112px;
+}
+.icon_image1{
+    display:block;
+    width:25px;
+    height:20px;
+    margin-left:112px;
+}
+.icon_sound1{
+    display:block;
+    width:30px;
+    height:30px;
+    margin-left:112px;
 }

@@ -113,7 +113,7 @@ public class LocationManagerImpl implements LocationManager {
         for (Source source : s) {
             ArrayList<Location> location = new ArrayList<>();
 
-            Query q = em.createQuery("SELECT l FROM Location l INNER JOIN  Multimedia m ON (l.locationId = m.locationId.locationId) WHERE  m.sourceId=:s");
+            Query q = em.createQuery("SELECT DISTINCT l FROM Location l INNER JOIN  Multimedia m ON (l.locationId = m.locationId.locationId) WHERE  m.sourceId=:s");
             q.setParameter("s", source);
             List l = q.getResultList();
 
