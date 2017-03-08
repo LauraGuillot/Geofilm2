@@ -235,6 +235,46 @@ function visibilite_element(thingId) {
     }
 }
 
+
+/**
+ * Mise en place de l'autocomplétion pour les titres de source
+ * @returns {void}
+ */
+function loadAutoComplete() {
+    //On récupère le type de source séectionné
+    var type ="none";
+    var op2 = document.getElementById("upload_source_unknown");
+    if(op2.selected){
+        type="UNKNOWN";
+    }
+    var op3 = document.getElementById("upload_film");
+    if(op3.selected){
+        type="FILM";
+    }
+    var op4 = document.getElementById("upload_serie");
+    if(op4.selected){
+        type="SERIE";
+    }
+    var op5 = document.getElementById("upload_game");
+    if(op5.selected){
+        type="GAME";
+    }
+
+    //Si un type est sélectionné, on charge les cources de ce type dans l'autocomplétion
+    if (type != 'UNKNOWN' && type != 'none') {
+        var input = document.getElementById("upload_source_title_entered");
+        var awesomplete = new Awesomplete(input);
+        //Liste des titres
+        var list = [];
+        var nbsrc = document.getElementById("nbSources").value;
+        for (var i = 0; i < nbsrc; i++) {
+            if (type == document.getElementById("src_" + i + "_type").value) {
+                list.push(document.getElementById("src_" + i + "_title").value);
+            }
+        }
+        awesomplete.list = list;
+    }
+}
 /**
  * Obtention de l'extension (type) d'un fichier
  * @param {String} filename nom du fichier uploadé

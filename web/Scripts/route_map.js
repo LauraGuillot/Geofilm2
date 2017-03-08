@@ -49,6 +49,7 @@ function loadText() {
         document.getElementById("select_game").innerHTML = game_fr;
         document.getElementById("or").innerHTML = or_fr;
         document.getElementById("search_key_word").placeholder = search_key_word_fr;
+        document.getElementById("temp_label").innerHTML = temp_fr;
     }
 }
 

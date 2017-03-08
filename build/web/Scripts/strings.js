@@ -132,6 +132,7 @@ var game_fr = "JEU";
 var serie_fr = "SERIE";
 var or_fr = "OU";
 var no_source_fr ="Aucune source ne correspond à cette recherche.";
+var temp_fr = "Afficher les liens temporels entre les multimédias";
 
 //FAVORIS
 var favorite2_fr="FAVORIS";
