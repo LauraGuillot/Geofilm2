@@ -51,6 +51,7 @@
 
 
         <!-- SCRIPTS -->
+        <script src="Scripts/awesomplete.js"></script>
         <script src="Scripts/navigation.js"></script>
         <script src="Scripts/deconnect.js"></script>
         <script src="Scripts/modif_infos_perso.js"></script>
@@ -211,14 +212,13 @@
                         <!--Saisie des informations liées à la source (nom, type)-->
                         <div class="input_upload">
                             <p class="label_form" id="upload_source"></p>
-                            <select id="choice_source" name="choice" onchange="">
+                            <select id="choice_source" name="choice"  onchange="loadAutoComplete();">
                                 <option selected value="none" id="upload_source_search">
-                                <option style="color:black!important" value="unknown" id="upload_source_unknown"></option>
-                                <option style="color:black!important" value="film" id="upload_film"></option>
-                                <option style="color:black!important" value="serie" id="upload_serie"></option>
-                                <option style="color:black!important" value="game" id="upload_game"></option>
+                                <option style="color:black!important" value="UNKNOWN" id="upload_source_unknown"></option>
+                                <option style="color:black!important" value="FILM" id="upload_film"></option>
+                                <option style="color:black!important" value="SERIE" id="upload_serie"></option>
+                                <option style="color:black!important" value="JEU" id="upload_game"></option>
                             </select>
-
                         </div>
                         <br>
                         <div class="input_upload">
@@ -227,12 +227,12 @@
                         </div>
                     </div>
                     <div id="content_general2" class="col-md-6">
-                        <right><button id ="next1" type="button" class="button small_button" href="#" onclick="valid_form_upload1(getElementById('upload_title_entered'), getElementById('choice_source'), 'content_general', 'content_upload1');" style="margin-left:300px; margin-top: 500px"></button></right>
-                    </div>
+                       <button id ="next1" type="button" class="button small_button valid_upload" href="#" onclick="valid_form_upload1(getElementById('upload_title_entered'), getElementById('choice_source'), 'content_general', 'content_upload1');"></button>
+                    </div> 
                 </div>
             </div>
 
-            <!--Deucième bloc de saisie des informations de localisation-->
+            <!--Deuxième bloc de saisie des informations de localisation-->
             <div id="content_upload1" style="display:none;">
                 <div id="head2">
                     <p class="title" style="padding-bottom: 0px!important" id="title2"></p>
@@ -268,11 +268,9 @@
                         <input type="text" name="loc_country" id="country_entered" style="width:200px!important">
                     </div>
 
-
-
                     <div id="right_div" class="col-md-6">
                         <p class="title" id="location" style="color:white;size:10px;padding-top:20px;text-align:center;" ></p>
-                        <br>
+                        
                         <p class="error_message" id="location_ok" ></p>
                         <br>
                         <div id='output' class='ui-control'>
@@ -281,8 +279,9 @@
                         <div id="mapid" class="map"> </div>
                         <br>
                         
-                        <right><button id ="next2" type="button" class="button small_button" href="#" onclick="valid_form_upload2('content_upload1', 'content_upload2');" style="margin-left:70%; margin-top: 50%"></button></right>
+                        <right><button id ="next2" type="button" class="button small_button" href="#" onclick="valid_form_upload2('content_upload1', 'content_upload2');" ></button></right>
                     </div>
+                    
                 </div>
             </div>
 

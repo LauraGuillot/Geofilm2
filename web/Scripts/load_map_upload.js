@@ -12,6 +12,7 @@ function loadMap() {
         center: [2.287592000000018, 48.862725],
         zoom: 6
     });
+
     //Ajout du géocoder : barre de recherche par adresse
     var geocoder = new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
@@ -22,8 +23,10 @@ function loadMap() {
     map.addControl(new mapboxgl.NavigationControl());
     //Obtention (si possible) de la position de l'utilisateur
     getLocation();
+
     // Affichage de la position de l'utilisateur
     displayPosition();
+
     //Début du tracking de la position de l'utilisateur
     startTracker();
     //Au clic, on affiche les coordonnées

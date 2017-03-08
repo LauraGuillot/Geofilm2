@@ -270,7 +270,7 @@
 
                     <div id="right_div" class="col-md-6">
                         <p class="title" id="location" style="color:white;size:10px;padding-top:20px;text-align:center;" ></p>
-                        <br>
+                        
                         <p class="error_message" id="location_ok" ></p>
                         <br>
                         <div id='output' class='ui-control'>
@@ -279,7 +279,7 @@
                         <div id="mapid" class="map"> </div>
                         <br>
                         
-                        <right><button id ="next2" type="button" class="button small_button" href="#" onclick="valid_form_upload2('content_upload1', 'content_upload2');" style="margin-left:70%; margin-top: 50%"></button></right>
+                        <right><button id ="next2" type="button" class="button small_button" href="#" onclick="valid_form_upload2('content_upload1', 'content_upload2');" ></button></right>
                     </div>
                     
                 </div>
