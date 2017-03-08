@@ -24,19 +24,18 @@ function loadMap() {
     getLocation();
     // Affichage de la position de l'utilisateur
     displayPosition();
-    //Affichage des marqueurs pour les multimédias
-    displayMarkers();
     //Début du tracking de la position de l'utilisateur
     startTracker();
-    //Au clic, on affiche les coordonnées et on affiche un marqueur
-    map.on('click', function (e) {
-        var location = JSON.stringify(e.lngLat);
+    //Au clic, on affiche les coordonnées
+    map.on('click', getPos);
 
-        var wrapped = e.lngLat.wrap();
-        addMarker(wrapped.lng, wrapped.lat);
-        document.getElementById('output').innerHTML =
-                // e.lngLat is the longitude, latitude geographical position of the event
-                "(" + wrapped.lat + "," + wrapped.lng + ")";
+//    map.on('click', function (e, callback) {
+//        var location = JSON.stringify(e.lngLat);
+//
+//        var wrapped = e.lngLat.wrap();
+//        addMarker(wrapped.lng, wrapped.lat);
+//        var point = "(" + wrapped.lat + "," + wrapped.lng + ")";
+//        document.getElementById('output').innerHTML = point;
 
 //        mapboxgl.geocodeReverse(
 //                {latitude: wrapped.lat, longitude: wrapped.lng},
@@ -44,36 +43,24 @@ function loadMap() {
 //                function (err, res) {
 //                    // res is a GeoJSON document with up to 1 geocoding match
 //                });
-    });
-    //A la suite d'une recherche d'un lieu, ajout d'un point sur la map
-    map.on('click', function () {
-        map.addSource('single-point', {
-            "type": "geojson",
-            "data": {
-                "type": "FeatureCollection",
-                "features": []
-            }
-        });
 
-        map.addLayer({
-            "id": "point",
-            "source": "single-point",
-            "type": "circle",
-            "paint": {
-                "circle-radius": 10,
-                "circle-color": "#007cbf"
-            }
-        });
 
-        // Affichage de la géométrie
-        geocoder.on('click', function (ev) {
-            map.getSource('single-point').setData(ev.result.geometry);
+    document.getElementById("output").innerHTML = document.getElementById("output").value.toString();
+    
+}
 
-            document.getElementById('output').innerHTML = JSON.stringify(ev.result.geometry.lngLat);
-
-        })
-
-    });
+/**
+ * Permet de récupérer une position de la map box sous forme de string
+ * @param {type} e
+ * @returns {String}
+ */
+function getPos(e) {
+    var location = JSON.stringify(e.lngLat);
+    var wrapped = e.lngLat.wrap();
+    var point = "(" + wrapped.lat + "," + wrapped.lng + ")";
+    document.getElementById("output").innerHTML = point;
+    position = point;
+    return point;
 }
 
 

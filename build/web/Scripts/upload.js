@@ -1,42 +1,23 @@
 //TODO : bouton précédent permettant de revenir en arrière ?
+var position;
 
-/**
- * Accès à la page d'upload
- * @returns {undefined}
- */
-function open_upload() {
-    var form = document.createElement('form');
-    form.method = "GET";
-    form.action = "uploading.htm";
-    var c1 = document.createElement('input');
-    c1.type = "hidden";
-    c1.name = "idco";
-    c1.value = document.getElementById("idco").value;
-    form.appendChild(c1);
-    document.body.appendChild(form);
-    form.submit();
-}
 
 
 /**
  * Saisie des informations d'upload d'un multimédia
- * On ne vérifie pas si le type de source du fichier entré correspond
- * au type de source entré par l'utilisateur, pour le moment
  */
 function upload() {
 
-    //On récupère les infos
+//RECUPERATION DES INFOS :
     var type_video = document.getElementById("u_video").value;
     var type_image = document.getElementById("u_image").value;
     var type_sound = document.getElementById("u_sound").value;
     var title = document.getElementById("upload_title_entered").value;
     var choice_source = document.getElementById("choice_source").value;
     var type_media = "";
-    var multiid = document.getElementById("multi_open").value;
     var idco = document.getElementById("idco").value;
     //TODO : path ???
-    //TODO : the_geom variable
-    //TODO : personne variable
+    //TODO : variable du langage de l'objet ?
 
     //Récupération de la date :
     var d = new Date();
@@ -44,26 +25,10 @@ function upload() {
     var month = d.getMonth() + 1;
     var year = d.getFullYear();
     //Variable du jour :
-    var date = document.getElementById("day").value + "/" + document.getElementById("month").value + "/" + document.getElementById("year");
+    var date = day + "/" + month + "/" + year;
     //ADRESSE
-    var number = document.getElementById("numero_entered").value;
-    var street = document.getElementById("street_entered").value;
-    var complement = document.getElementById("address_complement_entered").value;
-    var postal_code = document.getElementById("postal_code_entered").value;
-    var city = document.getElementById("city_entered").value;
-    var country = document.getElementById("country_entered").value;
-    var location = document.getElementById("output").value;
-    if (location == undefined){
-        
-    } else {
-        
-    }
-    geocodeAddress(codeAddressJson(number, street, complement, city, country), function (localisation) {
-            if (localisation !== undefined) {
-                
-
-            }
-        });
+    var location = document.getElementById("output");
+    var the_geom = "POINT" + location;
     //FORMAT FICHIER
     var file = document.getElementById("file_entered").value;
     var format = document.getElementById("file_format").value;
@@ -77,21 +42,16 @@ function upload() {
                 var answer = xhttp.responseText;
                 if (answer == "true") {
 
-                    //Appel du controller pour effuectuer l'ajout d'un multimédia via un formulaire (Post)
+                    //Appel du controller pour effuectuer l'ajout d'un multimédia
 
                     var form = document.createElement('form');
                     form.method = "POST";
-                    form.action = "global_map.htm";
+                    form.action = "globalMap.htm";
                     var c1 = document.createElement('input');
                     c1.type = "hidden";
-                    c1.name = "email";
-                    c1.value = email;
+                    c1.name = "idco";
+                    c1.value = document.getElementById("idco").value;
                     form.appendChild(c1);
-                    var c2 = document.createElement('input');
-                    c2.type = "hidden";
-                    c2.name = "mdp";
-                    c2.value = mdp;
-                    form.appendChild(c2);
                     document.body.appendChild(form);
                     form.submit();
                 } else {
@@ -101,7 +61,7 @@ function upload() {
 
             }
         };
-        var data = "id=" + multiid + "&" + "idco=" + idco + "&" + "type=" + type_media;
+        var data = "idco=" + idco + "&" + "type=" + type_media;
         xhttp.open("GET", "UploadServlet?" + data, true);
         xhttp.setRequestHeader("Content-Type", "text/html; charset=UTF-8");
         xhttp.send();
@@ -135,7 +95,7 @@ function valid_multimedia(type_media) {
 
 
 /**
- * Vérifier que le titre du multimédia n'est pas vide
+ * Vérifier que le titre du multimédia n'est pas vide, sinon renvoyer une erreur
  * @param {String} name
  * @returns {Boolean}
  */
@@ -150,7 +110,7 @@ function valid_titre(name) {
 }
 
 /**
- * Vérifier qu'un type de source a été entré
+ * Vérifier qu'un type de source a été entré, sinon renvoyer une erreur
  * @param {type} value
  * @returns {Boolean}
  */
@@ -165,7 +125,7 @@ function valid_source(type) {
 }
 
 /**
- * Vérifier si un champ n'est pas vide, avec renvoi d'un message général
+ * Vérifier si un champ n'est pas vide, si non, renvoi d'un message général
  * demandant de remplir les champs obligatoires
  * @param {type} number
  * @returns {Boolean}
@@ -183,7 +143,8 @@ function valid_number(number) {
 
 
 /**
- * Validation du premier formulaire
+ * Validation du premier formulaire : si la validation est ok, on passe au div suivant
+ * permettant de proposer une localisation du multimédia
  * @param {type} title
  * @param {type} choice
  * @param {type} elem1
@@ -201,7 +162,9 @@ function valid_form_upload1(title, choice, elem1, elem2) {
 }
 
 
-/**Validation du second formulaire d'upload (localisation de la vidéo)
+/**
+ * Validation du second formulaire d'upload (localisation de la vidéo) : si la validation
+ * est ok, on passe au div suivant d'upload du fichier
  * @param {type} elem1 Contenu à cacher
  * @param {type} elem2 Contenu à ouvrir
  * @returns {Boolean}
@@ -214,33 +177,42 @@ function valid_form_upload2(elem1, elem2) {
     var city = document.getElementById("city_entered").value;
     var country = document.getElementById("country_entered").value;
     var complement = document.getElementById("address_complement_entered").value;
-
-    if ((valid_number(number) && valid_number(street) && valid_number(postal_code) && valid_number(city) && valid_number(country))) {
-        geocodeAddress(codeAddressJson(number, street, complement, city, country), function (localisation) {
-            if (localisation !== undefined) {
-                visibilite_element(elem1);
-                visibilite_element(elem2);
-
-            }
-        });
+    var geoloc = document.getElementById("output").value;
+    //Si l'utilisateur n'a pas cliqué sur la carte, on vérifie qu'il a entré une adresse dans les champs
+    if ((geoloc == "") || (geoloc == undefined)) {
+        if ((valid_number(number) && valid_number(street) && valid_number(postal_code) && valid_number(city) && valid_number(country))) {
+            geocodeAddress(codeAddressJson(number, street, complement, city, country), function (localisation) {
+                if (localisation !== undefined) {
+                    visibilite_element(elem1);
+                    visibilite_element(elem2);
+                }
+            });
+            return true;
+        } else {
+            return false;
+        }
+        //Sinon, l'utilisateur a cliqué sur la map, on a donc récupéré une localisation
+    } else {
+        visibilite_element(elem1);
+        visibilite_element(elem2);
         return true;
 
-    } else {
-        return false;
     }
 }
 
 /**
- * Peret de vérifier que le fichier entré a un foraat valide
+ * Peret de vérifier que le fichier entré a un format valide. Cela ne vérifie cependant pas
+ * la correspondance entre le type du fichier entré au div 1 et le format du fichier
  * @returns {undefined}
  */
 function valid_form_upload3() {
     var filename = document.getElementById("file_entered").value;
     document.getElementById("file_format").innerHTML = getExtension(filename);
+    //Array des extensions autorisées/lues
     extensionsValides = new Array('avi', 'wmv', 'mov', 'mp4', 'mkv', 'mka', 'mks', 'flv', 'Divx', 'Xvid', 'divx', 'xvid', 'raw', 'jpeg', 'dng', 'tiff', 'png', 'gif', 'jpg', 'psd', 'wav', 'm4v', 'wmv', 'mpg', 'mpeg', 'mp3', 'm4a', 'aac');
     if (verifFileExtension(filename, extensionsValides)) {
         return true;
-    } else{
+    } else {
         return false;
     }
 
@@ -255,24 +227,22 @@ function visibilite_element(thingId) {
 
     var targetElement;
     targetElement = document.getElementById(thingId);
-
     if (targetElement.style.display == "none")
     {
         targetElement.style.display = "";
     } else {
         targetElement.style.display = "none";
-
     }
 }
 
 /**
  * Obtention de l'extension (type) d'un fichier
- * @param {String} filename
+ * @param {String} filename nom du fichier uploadé
  * @returns {String}
  */
 function getExtension(filename)
 {
-    var parts = filename.substr(filename.lastIndexOf(".")+1);
+    var parts = filename.substr(filename.lastIndexOf(".") + 1);
     return (parts);
 }
 
@@ -283,22 +253,22 @@ function getExtension(filename)
  * @param {Array<String>} listeExt liste des extensions autorisées
  * @returns {Boolean}
  */
-function verifFileExtension(filename, listeExt){
+function verifFileExtension(filename, listeExt) {
 
-    if (filename==""){
+    if (filename == "") {
         document.getElementById("error_upload_file").innerHTML = error_file_none_fr;
         return false;
     } else {
-    filename = filename.toLowerCase();
-    var fileExt = getExtension(filename);
-    for (i = 0; i < listeExt.length; i++)
-    {
-        if (fileExt == listeExt[i])
+        filename = filename.toLowerCase();
+        var fileExt = getExtension(filename);
+        for (i = 0; i < listeExt.length; i++)
         {
-            return (true);
+            if (fileExt == listeExt[i])
+            {
+                return (true);
+            }
         }
-    }
-    document.getElementById("error_upload_file").innerHTML = error_upload_file_fr;
-    return (false);
+        document.getElementById("error_upload_file").innerHTML = error_upload_file_fr;
+        return (false);
     }
 }

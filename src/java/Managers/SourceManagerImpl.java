@@ -83,7 +83,7 @@ public class SourceManagerImpl implements SourceManager {
     }
 
     /**
-     * Créer une nouvelle source et renvoyer son id
+     * Créer une nouvelle source et renvoyer la source
      *
      * @param title
      * @param type
@@ -92,7 +92,7 @@ public class SourceManagerImpl implements SourceManager {
      * @return 
      */
     @Override
-    public Integer createSource(String title, String type, String time_begin, String time_end) {
+    public Source insertSource(String title, String type, String time_begin, String time_end) {
         Source s = new Source();
         s.setSourceTitle(title);
         s.setSourceType(type);
@@ -102,7 +102,7 @@ public class SourceManagerImpl implements SourceManager {
         em.persist(s);
         em.getTransaction().commit();
 
-        return s.getSourceId();
+        return s;
     }
 
 }

@@ -31,8 +31,9 @@ function obtain_password() {
                 if (answer == "true") {
 
                     
-                    $('#password_forgotten_form').modal('hide');
-                    $('#password_modified_form').modal('show');
+//                    $('#password_forgotten_form').modal('hide');
+                    $('#password_forgotten_confirmed_form').modal('show');
+                    
                     //Si l'addresse email n'est pas déjà dans la base de données :  
                 } else {
                     //Message d'erreur

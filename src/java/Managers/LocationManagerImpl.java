@@ -55,7 +55,7 @@ public class LocationManagerImpl implements LocationManager {
     }
 
     /**
-     * Création d'une location à partir d'une géométrie entrée
+     * Création d'une location à partir d'une géométrie entrée et retourne cette Location
      *
      * @param the_geom
      * @return

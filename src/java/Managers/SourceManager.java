@@ -12,7 +12,7 @@ public interface SourceManager {
     /**
      * Trouver une Source à partir de son nom
      * @param name
-     * @return 
+     * @return source trouvée à partir du nom
      */
     public Source findSource(String name);
     
@@ -29,14 +29,14 @@ public interface SourceManager {
      * @param type
      * @param time_begin
      * @param time_end
-     * @return 
+     * @return source insérée dans la base de données
      */
-    public Integer createSource(String title, String type, String time_begin, String time_end);
+    public Source insertSource(String title, String type, String time_begin, String time_end);
     
     /**
      * Récupérer l'ID d'une source à partir de son nom
      * @param name
-     * @return 
+     * @return ID de la source trouvée
      */
     public Integer findSourceId(String name);
 }

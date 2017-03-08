@@ -40,6 +40,22 @@ function getGlobalMap() {
     form.submit();
 }
 
+/**
+ * Accès à la page d'upload
+ * @returns {void}
+ */
+function getUpload() {
+    var form = document.createElement('form');
+    form.method = "GET";
+    form.action = "uploading.htm";
+    var c1 = document.createElement('input');
+    c1.type = "hidden";
+    c1.name = "idco";
+    c1.value = document.getElementById("idco").value;
+    form.appendChild(c1);
+    document.body.appendChild(form);
+    form.submit();
+}
 
 /**
  * Onglet favoris

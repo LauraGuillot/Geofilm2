@@ -289,8 +289,8 @@
             <!--3eme bloc : Upload du multimédia-->
             <div id="content_upload2" class="uploading" style="display:none;">
                 <div class="head">
-                    <p class="title" id="title3"></p>
-                    <p class="title" id="subtitle3"></p>
+                    <p class="title" style="padding-bottom: 0px!important" id="title3"></p>
+                    <p class="title" style="font-style:italic" id="subtitle3"></p>
                     <!--TODO : mettre image step-->
                 </div>
                 <div class="col-md-6">
@@ -300,7 +300,7 @@
                     <input type="file" name="file" id="file_entered">
                     <p class="label_form" id="file_format"></p>
                 </div>
-                <right><button id ="validation3" type="button" class="button small_button" onclick="valid_form_upload3()" style="margin-bottom: 40px"></button></right>
+                <right><button id ="validation3" type="button" class="button small_button" onclick="upload()" style="margin-bottom: 40px"></button></right>
 
 
             </div>

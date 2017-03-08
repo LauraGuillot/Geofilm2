@@ -379,9 +379,9 @@ public class MultimediaManagerImpl implements MultimediaManager {
      * @param format Format (extension)
      * @param language Langage
      * @param type Type du fichier : video, image ou son
-     * @param l Localisation du multimédia
+     * @param l ID de la localisation du multimédia
      * @param p Person p qui upload le multimédia
-     * @param sourceId s Source du multimédia
+     * @param sourceId ID de la source du multimédia
      * @param time_end
      * @param time_begin
      */

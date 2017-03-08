@@ -33,8 +33,9 @@ public class UploadServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //Récupération des informations
         String title = request.getParameter("title");
         String description = request.getParameter("description");
         String date = request.getParameter("date");
@@ -46,24 +47,30 @@ public class UploadServlet extends HttpServlet {
         String path = request.getParameter("path");//TODO variable path
         String source_name = request.getParameter("source");
         String idco = request.getParameter("idco");
-        String position = request.getParameter("location");
-        
+        String thegeom = request.getParameter("the_geom");
+
         //Récupération de la personne qui a uploadé, de sa position, puis de la source
         PersonManager pm = PersonManagerImpl.getInstance();
         Person p = pm.findPerson(idco);
-        
-        //TODO : Chercher comment récupérer une localisation (carte ou adresse, à convertir en géométrie)
-        String thegeom = request.getParameter("theGeom"); //TODO variable theGeom)
-        //Ajout de la localisation du multimédia à la base de données
-        LocationManager lm = LocationManagerImpl.getInstance();
-        Location l = lm.insertLocation(thegeom);
 
-        //Ajout de la source du multimédia dans la base de données 
-        //TODO : rechercher si la source existe déjà
+        //Ajout de la localisation du multimédia à la base de données, si elle n'est pas déjà entrée
+        LocationManager lm = LocationManagerImpl.getInstance();
+        Location l = lm.findLocation(thegeom);
+        Boolean b = (l == null); //Booléen qui vaut vrai si aucune location à la position the_geom
+        //S'il la location n'existe pas, on l'ajoute à la base de données et l'on conserve la location dans la variable l
+        if (b) {
+            l = lm.insertLocation(thegeom);
+        }
+
+        //Ajout de la source du multimédia dans la base de données, si elle n'est pas déjà entrée
         SourceManager sm = SourceManagerImpl.getInstance();
         Source s = sm.findSource(source_name);
+        Boolean b2 = (l == null);
+        //Si b2 vaut vrai, la source entrée n'existe pas encore, elle est donc ajoutée à la base de données
+        if (b2) {
+            s = sm.insertSource(title, type_media, time_begin, time_end);
+        }
 
-        //TODO? : vérifier qu'un multimédia n'est pas déjà entrée ? (Comment ? Par la source, le nom, la localisation, la durée... )
         //Ajout du multimédia dans la base de données
         MultimediaManager mm = MultimediaManagerImpl.getInstance();
         mm.insertMultimedia(title, description, path, date, format, language, type_media, l, p, s, time_begin, time_end);
@@ -71,20 +78,4 @@ public class UploadServlet extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
         response.getWriter().write(true + "");
     }
-
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        //TODO ?
-
-    }
-
 }
