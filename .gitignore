@@ -6,4 +6,6 @@
 *.mp3
 
 *.mp4
+
+*.class
 *.DS_Store

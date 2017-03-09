@@ -273,7 +273,7 @@
                         
                         <p class="error_message" id="location_ok" ></p>
                         <br>
-                        <div id='output' class='ui-control'>
+                        <div id="output" class='ui-control'>
                             <code id='click'></code><br/>
                         </div>
                         <div id="mapid" class="map"> </div>

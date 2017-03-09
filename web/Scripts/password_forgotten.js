@@ -8,7 +8,7 @@ function pop_obtain_password() {
 }
 
 /**
- * Inscription d'un utilisateur 
+ * Modification du mot de passe d'un utilisateur, à partir de son adresse mail
  */
 function obtain_password() {
 
@@ -20,23 +20,21 @@ function obtain_password() {
     //Si la saisie est valide
     if (valid_form_password(email, mdp, mdp2)) {
 
-        //On envoie le mail à une servlet pour voir si celui-ci est déjà utilisé ou non
+        //Vérification du mail par la servlet
         xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (xhttp.readyState == 4 && xhttp.status == 200) {
                 //Réponse de la servlet
                 var answer = xhttp.responseText;
-
-                //Si l'adresse email est dans la base de données, on envoie les nouvelles infos à la servlet
+                //Si l'adresse mail est reconnue par la servlet, le mot de passe associé est modifié
                 if (answer == "true") {
 
                     
 //                    $('#password_forgotten_form').modal('hide');
                     $('#password_forgotten_confirmed_form').modal('show');
                     
-                    //Si l'addresse email n'est pas déjà dans la base de données :  
+                // Sinon, on affiche un message d'erreur   
                 } else {
-                    //Message d'erreur
                     document.getElementById("password_forgotten_error").innerHTML = error_email_not_found_fr;
                 }
 
@@ -76,6 +74,7 @@ function valid_email_mdp(email) {
  * @returns {Boolean}
  */
 function valid_new_password(mdp1, mdp2) {
+    //le mot de passe doit avoir une longueur minimale de 6 caractères
     if (mdp1.length < 6) {
         //Message d'erreur
         document.getElementById("password_forgotten_error").innerHTML = error_password_fr;

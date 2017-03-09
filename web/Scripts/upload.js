@@ -1,10 +1,8 @@
 //TODO : bouton précédent permettant de revenir en arrière ?
-var position;
-
 
 
 /**
- * Saisie des informations d'upload d'un multimédia
+ * Saisie dans la base de données des informations associées à l'upload d'un multimédia
  */
 function upload() {
 
@@ -27,22 +25,23 @@ function upload() {
     //Variable du jour :
     var date = day + "/" + month + "/" + year;
     //ADRESSE
-    var location = document.getElementById("output");
+    var location = document.getElementById("output").value;
     var the_geom = "POINT" + location;
+    alert(the_geom);
     //FORMAT FICHIER
     var file = document.getElementById("file_entered").value;
     var format = document.getElementById("file_format").value;
     //Si le format du fichier entré est valide, on peut ajouter les informations à la base de données
     if (valid_form_upload3()) {
-
+        //on envoie à la servlet les informations
         xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (xhttp.readyState == 4 && xhttp.status == 200) {
-                //Réponse de la servlet
+                //Réponse de la servlet : true si toutes les requêtes sont bien exécutées dans la servlet
                 var answer = xhttp.responseText;
                 if (answer == "true") {
 
-                    //Appel du controller pour effuectuer l'ajout d'un multimédia
+                    //Appel du controller : retour à la page globalMap après l'upload
 
                     var form = document.createElement('form');
                     form.method = "POST";
@@ -75,16 +74,18 @@ function upload() {
  * @returns {Boolean}
  */
 function valid_multimedia(type_media) {
-
+    //Test pour chaque case si elle a été cochée.
+    //Si oui, on attribue à la vaiable type_media la valeur entrée par l'utilisateur
     if (document.getElementById("u_video").checked) {
-        type_media = "Video";
+        type_media = "VIDEO";
         return true;
     } else if (document.getElementById("u_image").checked) {
-        type_media = "Image";
+        type_media = "IMAGE";
         return true;
     } else if (document.getElementById("u_sound").checked) {
-        type_media = "Sound";
+        type_media = "SON";
         return true;
+        //Si aucune des cases n'est cochée, on renvoie un message d'erreur
     } else {
         document.getElementById("error_upload").innerHTML = error_multimedia_type_fr;
         return false;
@@ -153,9 +154,11 @@ function valid_number(number) {
  */
 function valid_form_upload1(title, choice, elem1, elem2) {
     if (valid_multimedia("") && valid_titre(title) && valid_source(choice)) {
+        //Rendre visible le bloc d'upload suivant, et cacher l'actuel
         visibilite_element(elem1);
         visibilite_element(elem2);
         return true;
+        //Si la validation du formulaire est incorrecte, un message d'erreur s'affiche
     } else {
         return false;
     }
@@ -170,14 +173,16 @@ function valid_form_upload1(title, choice, elem1, elem2) {
  * @returns {Boolean}
  */
 function valid_form_upload2(elem1, elem2) {
-
+    //Récupération des informations de localisation
     var number = document.getElementById("numero_entered").value;
     var street = document.getElementById("street_entered").value;
     var postal_code = document.getElementById("postal_code_entered").value;
     var city = document.getElementById("city_entered").value;
     var country = document.getElementById("country_entered").value;
     var complement = document.getElementById("address_complement_entered").value;
-    var geoloc = document.getElementById("output").value;
+    //Lors de l'appel à cette fonction, l'élément d'id output contient la géolocalisation du lieu entré
+    //par l'utilisateur si celui-ci a cliqué sur la map
+    var geoloc = document.getElementById("output");
     //Si l'utilisateur n'a pas cliqué sur la carte, on vérifie qu'il a entré une adresse dans les champs
     if ((geoloc == "") || (geoloc == undefined)) {
         if ((valid_number(number) && valid_number(street) && valid_number(postal_code) && valid_number(city) && valid_number(country))) {
