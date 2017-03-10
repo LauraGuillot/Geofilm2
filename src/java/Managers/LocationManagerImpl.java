@@ -64,6 +64,11 @@ public class LocationManagerImpl implements LocationManager {
     public Location insertLocation(String the_geom) {
         Location l = new Location();
         l.setLocationThegeom(the_geom);
+        //Insertion de la localisation dans la base de données
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(l);
+        em.getTransaction().commit();
         return l;
     }
 
@@ -91,7 +96,7 @@ public class LocationManagerImpl implements LocationManager {
     @Override
     public Location findLocation(String thegeom) {
         EntityManager em = emf.createEntityManager();
-        Query q = em.createQuery("SELECT l.LocationId FROM Location l WHERE  l.locationThegeom=:thegeom");
+        Query q = em.createQuery("SELECT l FROM Location l WHERE  l.locationThegeom=:thegeom");
         q.setParameter("thegeom", thegeom);
         List l = q.getResultList();
         return l.isEmpty() ? null : (Location) l.get(0);

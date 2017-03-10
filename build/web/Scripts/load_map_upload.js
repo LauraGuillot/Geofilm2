@@ -48,7 +48,6 @@ function loadMap() {
 //                });
 
 
-    document.getElementById("output").innerHTML = document.getElementById("output").value.toString();
     
 }
 
@@ -58,11 +57,9 @@ function loadMap() {
  * @returns {String}
  */
 function getPos(e) {
-    var location = JSON.stringify(e.lngLat);
     var wrapped = e.lngLat.wrap();
     var point = "(" + wrapped.lat + "," + wrapped.lng + ")";
     document.getElementById("output").innerHTML = point;
-    position = point;
     return point;
 }
 

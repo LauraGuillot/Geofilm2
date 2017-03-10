@@ -39,15 +39,16 @@ public class UploadServlet extends HttpServlet {
         String title = request.getParameter("title");
         String description = request.getParameter("description");
         String date = request.getParameter("date");
-        String time_begin = request.getParameter("time_code_begin");
-        String time_end = request.getParameter("time_code_end");
+        String time_begin = request.getParameter("time_begin");
+        String time_end = request.getParameter("time_end");
         String format = request.getParameter("format");
         String language = request.getParameter("language");
         String type_media = request.getParameter("type_media");
         String path = request.getParameter("path");//TODO variable path
-        String source_name = request.getParameter("source");
+        String source_name = request.getParameter("source_name");
         String idco = request.getParameter("idco");
         String thegeom = request.getParameter("the_geom");
+        String choice_source = request.getParameter("choice_source");
 
         //Récupération de la personne qui a uploadé, de sa position, puis de la source
         PersonManager pm = PersonManagerImpl.getInstance();
@@ -61,15 +62,16 @@ public class UploadServlet extends HttpServlet {
         if (b) {
             l = lm.insertLocation(thegeom);
         }
-
+        
         //Ajout de la source du multimédia dans la base de données, si elle n'est pas déjà entrée
         SourceManager sm = SourceManagerImpl.getInstance();
         Source s = sm.findSource(source_name);
-        Boolean b2 = (l == null);
+        Boolean b2 = (s == null);
         //Si b2 vaut vrai, la source entrée n'existe pas encore, elle est donc ajoutée à la base de données
         if (b2) {
-            s = sm.insertSource(title, type_media, time_begin, time_end);
+            s = sm.insertSource(source_name, choice_source);
         }
+        
 
         //Ajout du multimédia dans la base de données
         MultimediaManager mm = MultimediaManagerImpl.getInstance();

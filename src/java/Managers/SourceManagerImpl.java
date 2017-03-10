@@ -41,7 +41,7 @@ public class SourceManagerImpl implements SourceManager {
     @Override
     public Source findSource(String name) {
         EntityManager em = emf.createEntityManager();
-        Query q = em.createQuery("SELECT * FROM Source s WHERE  s.sourceTitle=:name");
+        Query q = em.createQuery("SELECT s FROM Source s WHERE  s.sourceTitle=:name");
         q.setParameter("name", name);
         List l = q.getResultList();
         return l.isEmpty() ? null : (Source) l.get(0);
@@ -87,16 +87,14 @@ public class SourceManagerImpl implements SourceManager {
      *
      * @param title
      * @param type
-     * @param time_begin
-     * @param time_end
      * @return 
      */
     @Override
-    public Source insertSource(String title, String type, String time_begin, String time_end) {
+    public Source insertSource(String title, String type) {
         Source s = new Source();
         s.setSourceTitle(title);
         s.setSourceType(type);
-
+//Insertion de la source dans la base de données
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.persist(s);

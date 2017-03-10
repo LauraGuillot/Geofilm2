@@ -39,6 +39,4 @@ function geocodeAddress(addr, callback) {
         }
         callback(results[0]);
     });
-    var l =document.getElementById("output").value.toString();
-    document.getElementById("output").innerHTML = l;
 }

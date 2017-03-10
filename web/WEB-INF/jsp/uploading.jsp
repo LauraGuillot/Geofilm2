@@ -72,15 +72,12 @@
         <input type="hidden" id="email" value="<c:out value="${email}"/>"/> 
         <input type="hidden" id="idco" value="<c:out value="${idco}"/>"/> 
 
-        <!-- Chargement des markers en caché -->
-        <div style="display:none;">
-            <input type="hidden" id="nbMarkers" value="<c:out value="${fn:length(markers)}"/>"/> 
-            <c:forEach var="p" items="${markers}" varStatus="status">
-                <input type="hidden" id="p<c:out value="${status.index}"/>" value="<c:out value="${p['locationThegeom']}"/>"/>
+        <!-- Sources-->
+            <input type="hidden" id="nbSources" value="<c:out value="${fn:length(src)}"/>"/> 
+            <c:forEach var="s" items="${src}" varStatus="status">
+                <input type="hidden" id="src_<c:out value="${status.index}"/>_title" value="<c:out value="${s['sourceTitle']}"/>"/>
+                <input type="hidden" id="src_<c:out value="${status.index}"/>_type" value="<c:out value="${s['sourceType']}"/>"/>
             </c:forEach>
-        </div>
-
-
 
         <!-- NAVIGATION  GRANDS ECRANS-->
         <nav id="navbar_large_screen" class="navbar-default navbar " role="navigation">
@@ -297,7 +294,6 @@
                     <p class="error_message" id="error_upload_file"></p>
                     <p class="label_form" id="input_choice"></p>
                     <input type="file" name="file" id="file_entered">
-                    <p class="label_form" id="file_format"></p>
                 </div>
                 <right><button id ="validation3" type="button" class="button small_button" onclick="upload()" style="margin-bottom: 40px"></button></right>
 

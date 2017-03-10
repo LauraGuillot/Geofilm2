@@ -7,16 +7,21 @@
 function upload() {
 
 //RECUPERATION DES INFOS :
-    var type_video = document.getElementById("u_video").value;
-    var type_image = document.getElementById("u_image").value;
-    var type_sound = document.getElementById("u_sound").value;
+    var email = document.getElementById("email").value;
+    var mdp = document.getElementById("password").value;
     var title = document.getElementById("upload_title_entered").value;
-    var choice_source = document.getElementById("choice_source").value;
-    var type_media = "";
+    var description = document.getElementById("upload_description_entered").value;
+    var choice_source = getSourceChoice();
+    alert(choice_source);
+    var type_media = getMultiType();
     var idco = document.getElementById("idco").value;
+    var source_name = document.getElementById("upload_source_title_entered").value;
     //TODO : path ???
     //TODO : variable du langage de l'objet ?
-
+    var path = "";
+    var language = "";
+    var time_begin = document.getElementById("upload_time_begin").value;
+    var time_end = document.getElementById("upload_time_end").value;
     //Récupération de la date :
     var d = new Date();
     var day = d.getDate();
@@ -25,14 +30,15 @@ function upload() {
     //Variable du jour :
     var date = day + "/" + month + "/" + year;
     //ADRESSE
-    var location = document.getElementById("output").value;
-    var the_geom = "POINT" + location;
-    alert(the_geom);
+
+    var location = document.getElementById("output").innerHTML;
+    var the_geom = ("POINT" + location).toString();
     //FORMAT FICHIER
     var file = document.getElementById("file_entered").value;
-    var format = document.getElementById("file_format").value;
     //Si le format du fichier entré est valide, on peut ajouter les informations à la base de données
     if (valid_form_upload3()) {
+        alert("Votre fichier va être uploadé");
+        var format = getFileExtension(file);
         //on envoie à la servlet les informations
         xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
@@ -41,18 +47,8 @@ function upload() {
                 var answer = xhttp.responseText;
                 if (answer == "true") {
 
-                    //Appel du controller : retour à la page globalMap après l'upload
-
-                    var form = document.createElement('form');
-                    form.method = "POST";
-                    form.action = "globalMap.htm";
-                    var c1 = document.createElement('input');
-                    c1.type = "hidden";
-                    c1.name = "idco";
-                    c1.value = document.getElementById("idco").value;
-                    form.appendChild(c1);
-                    document.body.appendChild(form);
-                    form.submit();
+                    //Appel de la fonction suivante pour accéder à la globalMap
+                    getGlobalMap();
                 } else {
                     //Message d'erreur
                     document.getElementById("error_multimedia_already").innerHTML = error_multimedia_already_entered_fr;
@@ -60,7 +56,7 @@ function upload() {
 
             }
         };
-        var data = "idco=" + idco + "&" + "type=" + type_media;
+        var data = "idco=" + idco + "&" + "email=" + email + "&" + "title=" + title + "&" + "source_name=" + source_name + "&" + "choice_source=" + choice_source + "&" + "type_media=" + type_media + "&" + "date=" + date + "&" + "the_geom=" + the_geom + "&" + "format=" + format + "&" + "type=" + type_media + "&" + "description=" + description + "&" + "time_begin=" + time_begin + "&" + "time_end=" + time_end + "&" + "path=" + path + "&" + "language=" + language;
         xhttp.open("GET", "UploadServlet?" + data, true);
         xhttp.setRequestHeader("Content-Type", "text/html; charset=UTF-8");
         xhttp.send();
@@ -69,7 +65,7 @@ function upload() {
 
 /**
  * Vérifier qu'une valeur est entrée pour le type de multimédia (i.e. qu'une case est bien cochée)
- * et modifie la valeur de type_media en fonction du type de multimédia
+ * et modifie la valeur de type_media placé en paramètre, en fonction du type de multimédia
  * @param {type} type_media
  * @returns {Boolean}
  */
@@ -91,6 +87,35 @@ function valid_multimedia(type_media) {
         return false;
     }
 }
+
+/**
+ * Obtenir le type du multimédia entré
+ * @returns {String}
+ */
+function getMultiType() {
+    var type_media;
+    if (document.getElementById("u_video").checked) {
+        type_media = "VIDEO";
+    } else if (document.getElementById("u_image").checked) {
+        type_media = "IMAGE";
+    } else if (document.getElementById("u_sound").checked) {
+        type_media = "SON";
+        //Si aucune des cases n'est cochée, on renvoie un message d'erreur
+    }
+    return type_media;
+}
+
+/**
+ * Obtenir le choix de la source entrée par l'utilisateur (UNKNOWN, SERIE, GAME, FILM)
+ * @returns {element@arr;options.value}
+ */
+function getSourceChoice() {
+    var choice_source = document.getElementById("choice_source");
+    var idx = choice_source.selectedIndex;
+    var val = choice_source.options[idx].value;
+    return val;
+}
+
 
 
 
@@ -182,7 +207,7 @@ function valid_form_upload2(elem1, elem2) {
     var complement = document.getElementById("address_complement_entered").value;
     //Lors de l'appel à cette fonction, l'élément d'id output contient la géolocalisation du lieu entré
     //par l'utilisateur si celui-ci a cliqué sur la map
-    var geoloc = document.getElementById("output");
+    var geoloc = document.getElementById("output").innerHTML;
     //Si l'utilisateur n'a pas cliqué sur la carte, on vérifie qu'il a entré une adresse dans les champs
     if ((geoloc == "") || (geoloc == undefined)) {
         if ((valid_number(number) && valid_number(street) && valid_number(postal_code) && valid_number(city) && valid_number(country))) {
@@ -193,10 +218,11 @@ function valid_form_upload2(elem1, elem2) {
                 }
             });
             return true;
+
         } else {
             return false;
+
         }
-        //Sinon, l'utilisateur a cliqué sur la map, on a donc récupéré une localisation
     } else {
         visibilite_element(elem1);
         visibilite_element(elem2);
@@ -212,7 +238,6 @@ function valid_form_upload2(elem1, elem2) {
  */
 function valid_form_upload3() {
     var filename = document.getElementById("file_entered").value;
-    document.getElementById("file_format").innerHTML = getExtension(filename);
     //Array des extensions autorisées/lues
     extensionsValides = new Array('avi', 'wmv', 'mov', 'mp4', 'mkv', 'mka', 'mks', 'flv', 'Divx', 'Xvid', 'divx', 'xvid', 'raw', 'jpeg', 'dng', 'tiff', 'png', 'gif', 'jpg', 'psd', 'wav', 'm4v', 'wmv', 'mpg', 'mpeg', 'mp3', 'm4a', 'aac');
     if (verifFileExtension(filename, extensionsValides)) {
@@ -247,22 +272,22 @@ function visibilite_element(thingId) {
  */
 function loadAutoComplete() {
     //On récupère le type de source séectionné
-    var type ="none";
+    var type = "none";
     var op2 = document.getElementById("upload_source_unknown");
-    if(op2.selected){
-        type="UNKNOWN";
+    if (op2.selected) {
+        type = "UNKNOWN";
     }
     var op3 = document.getElementById("upload_film");
-    if(op3.selected){
-        type="FILM";
+    if (op3.selected) {
+        type = "FILM";
     }
     var op4 = document.getElementById("upload_serie");
-    if(op4.selected){
-        type="SERIE";
+    if (op4.selected) {
+        type = "SERIE";
     }
     var op5 = document.getElementById("upload_game");
-    if(op5.selected){
-        type="GAME";
+    if (op5.selected) {
+        type = "GAME";
     }
 
     //Si un type est sélectionné, on charge les cources de ce type dans l'autocomplétion
@@ -316,4 +341,15 @@ function verifFileExtension(filename, listeExt) {
         document.getElementById("error_upload_file").innerHTML = error_upload_file_fr;
         return (false);
     }
+}
+
+/**
+ * Vérifie l'extension d'un fichier uploadé
+ * @param {String} filename type du fichier uploadé
+ * @param {String} format
+ * @returns {Boolean}
+ */
+function getFileExtension(filename) {
+    filename = filename.toLowerCase();
+    return getExtension(filename);
 }

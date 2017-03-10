@@ -27,11 +27,9 @@ public interface SourceManager {
      * Création d'une nouvelle source et renvoi de son ID
      * @param title
      * @param type
-     * @param time_begin
-     * @param time_end
      * @return source insérée dans la base de données
      */
-    public Source insertSource(String title, String type, String time_begin, String time_end);
+    public Source insertSource(String title, String type);
     
     /**
      * Récupérer l'ID d'une source à partir de son nom

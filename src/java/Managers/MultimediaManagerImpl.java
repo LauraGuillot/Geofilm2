@@ -381,12 +381,12 @@ public class MultimediaManagerImpl implements MultimediaManager {
      * @param type Type du fichier : video, image ou son
      * @param l ID de la localisation du multimédia
      * @param p Person p qui upload le multimédia
-     * @param sourceId ID de la source du multimédia
-     * @param time_end
-     * @param time_begin
+     * @param source source du multimédia
+     * @param time_end début du time_code
+     * @param time_begin fin du time_code
      */
     @Override
-    public void insertMultimedia(String title, String description, String path, String date, String format, String language, String type, Location l, Person p, Source sourceId, String time_end, String time_begin) {
+    public void insertMultimedia(String title, String description, String path, String date, String format, String language, String type, Location l, Person p, Source source, String time_begin, String time_end) {
         Multimedia m = new Multimedia();
         m.setMultimediaTitle(title);
         m.setMultimediaDescription(description);
@@ -397,7 +397,7 @@ public class MultimediaManagerImpl implements MultimediaManager {
         m.setMultimediaType(type);
         m.setLocationId(l);
         m.setPublisher(p);
-        m.setSourceId(sourceId);
+        m.setSourceId(source);
         m.setMultimediaEnd(time_end);
         m.setMultimediaStart(time_begin);
 

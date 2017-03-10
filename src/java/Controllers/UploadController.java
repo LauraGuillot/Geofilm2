@@ -58,15 +58,7 @@ public class UploadController {
             //Connexion de l'utilisateur 
             result.addObject("idco", idco);
             
-            //Récupération des multimédias
-            MultimediaManager mm = MultimediaManagerImpl.getInstance();
-            LocationManager lm = LocationManagerImpl.getInstance();
-            ArrayList<Location> markers = lm.getMarkers();
-            result.addObject("markers", markers);
-            ArrayList<ArrayList<Multimedia>> multis = mm.getMultiByPos(markers);
-            result.addObject("multis", multis);
-            
-            
+                
             
 
             return result;
