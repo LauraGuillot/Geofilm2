@@ -26,7 +26,7 @@
 
         <!--GOOGLE MAPS-->
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOAkh5jpRroX29qMjb2hWKJCZHnY4zJDU"></script>
-        
+
 
 
         <!-- CHAINES DE CARACTERES -->
@@ -73,11 +73,11 @@
         <input type="hidden" id="idco" value="<c:out value="${idco}"/>"/> 
 
         <!-- Sources-->
-            <input type="hidden" id="nbSources" value="<c:out value="${fn:length(src)}"/>"/> 
-            <c:forEach var="s" items="${src}" varStatus="status">
-                <input type="hidden" id="src_<c:out value="${status.index}"/>_title" value="<c:out value="${s['sourceTitle']}"/>"/>
-                <input type="hidden" id="src_<c:out value="${status.index}"/>_type" value="<c:out value="${s['sourceType']}"/>"/>
-            </c:forEach>
+        <input type="hidden" id="nbSources" value="<c:out value="${fn:length(src)}"/>"/> 
+        <c:forEach var="s" items="${src}" varStatus="status">
+            <input type="hidden" id="src_<c:out value="${status.index}"/>_title" value="<c:out value="${s['sourceTitle']}"/>"/>
+            <input type="hidden" id="src_<c:out value="${status.index}"/>_type" value="<c:out value="${s['sourceType']}"/>"/>
+        </c:forEach>
 
         <!-- NAVIGATION  GRANDS ECRANS-->
         <nav id="navbar_large_screen" class="navbar-default navbar " role="navigation">
@@ -153,18 +153,16 @@
 
             <!--Premier bloc : informations générales-->
 
-            <div id="content_general" style="display:inline-block!important;">
-                <div  id="head">
-                    <p class="title" style="padding-bottom: 0px!important" id="title1" > </p> 
-                    <p class="title" style="font-style:italic" id="subtitle1"> </p>
-                    <!--TODO : mettre image step-->
-                </div>
+            <div id="content_general">
                 <div class="row">
                     <div id="content_general1" class="col-md-6">
+                        <!--Header du contenu à gauche-->
+                        <div id="head" >
+                            <p class="title" style="padding-bottom: 0px!important" id="title1" > </p> 
+                            <p class="title" style="font-style:italic;display:inline-block;" id="subtitle1"> </p>
+                        </div>
 
                         <!--Saisie du type de multimédia-->
-                        <!--TODO : pour les largeurs des input, mettre des % !!!-->
-
                         <p class="error_message" id="error_upload"> </p>
                         <p class="label_form" style="display:inline-block!important;" id="upload_type_multimedia"></p>
 
@@ -192,7 +190,7 @@
                         <!--Saisie d'une description du multimédia-->
                         <div class="input_upload">
                             <p class="label_form" id="upload_description"></p>
-                            <input style="width:120%!important;" type="text" name ="description" id="upload_description_entered">
+                            <input style="width:90%!important;" type="text" name ="description" id="upload_description_entered">
                         </div>
 
                         <!--Saisie du time code (surtout s'il s'agit d'une séquence video)-->
@@ -224,20 +222,26 @@
                         </div>
                     </div>
                     <div id="content_general2" class="col-md-6">
-                       <button id ="next1" type="button" class="button small_button valid_upload" href="#" onclick="valid_form_upload1(getElementById('upload_title_entered'), getElementById('choice_source'), 'content_general', 'content_upload1');"></button>
+                        <!--Header du contenu à droite de la page : step, avancement du remplissage du formulaire-->
+                        <div class="row">
+                            <right><img style="margin-left:30%!important; display:inline-block;" src="Ressources/step1.png" width="260px";></right>
+                        </div>
+
+
+                        <right><button id ="next1" type="button" class="button small_button " style="margin-left:50%!important;margin-top:55%!important;" href="#" onclick="valid_form_upload1(getElementById('upload_title_entered'), getElementById('choice_source'), 'content_general', 'content_upload1');"></button></right>
                     </div> 
                 </div>
             </div>
 
             <!--Deuxième bloc de saisie des informations de localisation-->
             <div id="content_upload1" style="display:none;">
-                <div id="head2">
-                    <p class="title" style="padding-bottom: 0px!important" id="title2"></p>
-                    <p class="title" style="font-style:italic" id="subtitle2"></p>
-                    <!--TODO : mettre image step-->
-                </div>
                 <div class="row">
                     <div id="left_div" class="col-md-6">
+                        <!--Header du contenu à gauche : titre général-->
+                        <div id="head2">
+                            <p class="title" style="padding-bottom: 0px!important" id="title2"></p>
+                            <p class="title" style="font-style:italic" id="subtitle2"></p>
+                        </div>
                         <br>
                         <!--Saisie du numéro, de la rue, d'un complément d'adresse si nécessaire,
                         du code postal, puis de la ville, et du pays-->
@@ -266,8 +270,12 @@
                     </div>
 
                     <div id="right_div" class="col-md-6">
+                        <!--Header du contenu à droite de la page :step-->
+                        <div class="row">
+                            <right><img style="margin-left:30%!important; display:inline-block;" src="Ressources/step2.png" width="260px";></right>
+                        </div>
                         <p class="title" id="location" style="color:white;size:10px;padding-top:20px;text-align:center;" ></p>
-                        
+
                         <p class="error_message" id="location_ok" ></p>
                         <br>
                         <div id="output" class='ui-control'>
@@ -275,28 +283,36 @@
                         </div>
                         <div id="mapid" class="map"> </div>
                         <br>
-                        
+
                         <right><button id ="next2" type="button" class="button small_button" href="#" onclick="valid_form_upload2('content_upload1', 'content_upload2');" ></button></right>
                     </div>
-                    
+
                 </div>
             </div>
 
             <!--3eme bloc : Upload du multimédia-->
             <div id="content_upload2" class="uploading" style="display:none;">
-                <div class="head">
-                    <p class="title" style="padding-bottom: 0px!important" id="title3"></p>
-                    <p class="title" style="font-style:italic" id="subtitle3"></p>
-                    <!--TODO : mettre image step-->
-                </div>
+
                 <div class="col-md-6">
+                    <!--Header général du bloc d'upload-->
+                    <div class="head3">
+                        <p class="title" style="padding-bottom: 0px!important" id="title3"></p>
+                        <p class="title" style="font-style:italic" id="subtitle3"></p>
+                    </div>
                     <!--Parcourir les fichiers de l'utilisateur pour uploader un multimédia-->
                     <p class="error_message" id="error_upload_file"></p>
                     <p class="label_form" id="input_choice"></p>
                     <input type="file" name="file" id="file_entered">
                 </div>
-                <right><button id ="validation3" type="button" class="button small_button" onclick="upload()" style="margin-bottom: 40px"></button></right>
-
+                <!--Image step 3-->
+                <div class="col-md-6">
+                    <div class="row">
+                        <right><img style="margin-left:30%!important; display:inline-block;" src="Ressources/step3.png" width="260px";></right>
+                    </div>
+                    <br>
+                    <!--Bouton de validation finale-->
+                    <right><button id ="validation3" style="margin-left:50%!important;" type="button" class="button small_button" onclick="upload()" style="margin-bottom: 40px"></button></right>
+                </div>
 
             </div>
         </div>
@@ -332,6 +348,29 @@
                             <button id ="valid_modif" type="button" class="button small_button" onclick="modif();"></button>
                         </center>
                     </div>
+                </div>
+            </div>
+        </center>
+    </div>
+
+    <!--POPUP : indication que l'upload a réussi-->
+    <div class="modal fade" id="upload_confirmed_form" role="dialog">
+        <center>
+            <div id ="small_modal" class="modal-dialog modal-sm">
+                <div class="modal-content modal_form">
+                    <!-- Titre -->
+                    <center>
+                        <p id="title4" class= "title"  style="margin-top: 40px"</p> 
+                    </center>
+                    <!-- Zone pour les messages d'erreurs -->
+                    <p id="upload_confirmed_error" class="error_message"></p>
+                    <!--Confirmation de l'upload-->
+                    <center><p id ="upload_confirmed_done" class="label_form" style="size:20px"></p></center>
+
+                    <!-- Bouton pour fermer la pop-up et revenir à la globalMap -->
+                    <center>
+                        <button id ="valid_upload" type="button" class="button small_button" onclick="getGlobalMap();"></button>
+                    </center>
                 </div>
             </div>
         </center>

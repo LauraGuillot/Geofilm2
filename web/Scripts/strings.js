@@ -116,6 +116,9 @@ var true_fr = "vrai";
 var location_ok_fr = "Localisation ok";
 var error_file_none_fr = "Veuillez choisir un fichier.";
 
+var upload_confirmed_done_fr = "Votre multimédia a bien été uploadé.";
+var valid_upload_fr = "FERMER";
+
 //POP-UP VISUALISATION D'UN MULTIMEDIA
 var signal_fr = "Signaler";
 var signal2_fr = "une mauvaise géolocalisation";

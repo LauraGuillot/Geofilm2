@@ -8,11 +8,9 @@ function upload() {
 
 //RECUPERATION DES INFOS :
     var email = document.getElementById("email").value;
-    var mdp = document.getElementById("password").value;
     var title = document.getElementById("upload_title_entered").value;
     var description = document.getElementById("upload_description_entered").value;
     var choice_source = getSourceChoice();
-    alert(choice_source);
     var type_media = getMultiType();
     var idco = document.getElementById("idco").value;
     var source_name = document.getElementById("upload_source_title_entered").value;
@@ -37,7 +35,6 @@ function upload() {
     var file = document.getElementById("file_entered").value;
     //Si le format du fichier entré est valide, on peut ajouter les informations à la base de données
     if (valid_form_upload3()) {
-        alert("Votre fichier va être uploadé");
         var format = getFileExtension(file);
         //on envoie à la servlet les informations
         xhttp = new XMLHttpRequest();
@@ -48,7 +45,7 @@ function upload() {
                 if (answer == "true") {
 
                     //Appel de la fonction suivante pour accéder à la globalMap
-                    getGlobalMap();
+                    $('#upload_confirmed_form').modal('show');
                 } else {
                     //Message d'erreur
                     document.getElementById("error_multimedia_already").innerHTML = error_multimedia_already_entered_fr;
