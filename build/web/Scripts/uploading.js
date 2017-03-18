@@ -44,6 +44,7 @@ function loadText() {
         document.getElementById("upload_time_code").innerHTML = upload_time_code_fr;
         document.getElementById("upload_time_begin").innerHTML = upload_time_begin_fr;
         document.getElementById("upload_time_end").innerHTML = upload_time_end_fr;
+        document.getElementById("upload_language").innerHTML = upload_language_fr;
 
 
         //UPLOAD MEDIA 1 : LOCALISATION

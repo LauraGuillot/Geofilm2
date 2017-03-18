@@ -25,8 +25,11 @@ function upload() {
     var day = d.getDate();
     var month = d.getMonth() + 1;
     var year = d.getFullYear();
+    var hour = d.getHours();
+    var minute = d.getMinutes();
+    var second = d.getSeconds();
     //Variable du jour :
-    var date = day + "/" + month + "/" + year;
+    var date = day + "/" + month + "/" + year + "_" + hour + "-" + minute + "-" + second;
     //ADRESSE
 
     var location = document.getElementById("output").innerHTML;
@@ -67,8 +70,8 @@ function upload() {
  * @returns {Boolean}
  */
 function valid_multimedia(type_media) {
-    //Test pour chaque case si elle a été cochée.
-    //Si oui, on attribue à la vaiable type_media la valeur entrée par l'utilisateur
+//Test pour chaque case si elle a été cochée.
+//Si oui, on attribue à la vaiable type_media la valeur entrée par l'utilisateur
     if (document.getElementById("u_video").checked) {
         type_media = "VIDEO";
         return true;
@@ -84,6 +87,9 @@ function valid_multimedia(type_media) {
         return false;
     }
 }
+
+
+
 
 /**
  * Obtenir le type du multimédia entré
@@ -113,8 +119,14 @@ function getSourceChoice() {
     return val;
 }
 
-
-
+/**
+ * Retourne la valeur du langage du multimédia
+ * @returns {Element}
+ */
+function getLanguage() {
+    var lang = document.getElementById("upload_language_entered");
+    return lang;
+}
 
 
 /**
@@ -127,6 +139,23 @@ function valid_titre(name) {
 //Message d'erreur
         document.getElementById("error_upload").innerHTML = error_multimedia_name_fr;
         return false;
+    } else {
+        return true;
+    }
+}
+
+/**
+ * Retourne vrai si : une valeur est entrée pour langage ET (le multimédia est un son OU une vidéo)
+ * @returns {Boolean}
+ */
+function validLanguage() {
+    if ((document.getElementById("u_video").checked) || (document.getElementById("u_sound").checked)) {
+        if (document.getElementById("upload_language_entered").value == "") {
+            document.getElementById("error_upload").innerHTML = error_multimedia_language_fr;
+            return false;
+        } else {
+            return true;
+        }
     } else {
         return true;
     }
@@ -175,10 +204,12 @@ function valid_number(number) {
  * @returns {Boolean}
  */
 function valid_form_upload1(title, choice, elem1, elem2) {
-    if (valid_multimedia("") && valid_titre(title) && valid_source(choice)) {
-        //Rendre visible le bloc d'upload suivant, et cacher l'actuel
+    if (valid_multimedia("") && validLanguage() && valid_titre(title) && valid_source(choice)) {
+//Rendre visible le bloc d'upload suivant, et cacher l'actuel
         visibilite_element(elem1);
         visibilite_element(elem2);
+        //On indique qu'aucune position géographique n'est sélectionnée
+        document.getElementById("output").innerHTML = "";
         return true;
         //Si la validation du formulaire est incorrecte, un message d'erreur s'affiche
     } else {
@@ -195,7 +226,7 @@ function valid_form_upload1(title, choice, elem1, elem2) {
  * @returns {Boolean}
  */
 function valid_form_upload2(elem1, elem2) {
-    //Récupération des informations de localisation
+//Récupération des informations de localisation
     var number = document.getElementById("numero_entered").value;
     var street = document.getElementById("street_entered").value;
     var postal_code = document.getElementById("postal_code_entered").value;
@@ -205,8 +236,9 @@ function valid_form_upload2(elem1, elem2) {
     //Lors de l'appel à cette fonction, l'élément d'id output contient la géolocalisation du lieu entré
     //par l'utilisateur si celui-ci a cliqué sur la map
     var geoloc = document.getElementById("output").innerHTML;
+    alert(geoloc);
     //Si l'utilisateur n'a pas cliqué sur la carte, on vérifie qu'il a entré une adresse dans les champs
-    if ((geoloc == "") || (geoloc == undefined)) {
+    if ((geoloc == "")) {
         if ((valid_number(number) && valid_number(street) && valid_number(postal_code) && valid_number(city) && valid_number(country))) {
             geocodeAddress(codeAddressJson(number, street, complement, city, country), function (localisation) {
                 if (localisation !== undefined) {
@@ -215,16 +247,14 @@ function valid_form_upload2(elem1, elem2) {
                 }
             });
             return true;
-
         } else {
             return false;
-
         }
     } else {
+        
         visibilite_element(elem1);
         visibilite_element(elem2);
         return true;
-
     }
 }
 
@@ -268,7 +298,7 @@ function visibilite_element(thingId) {
  * @returns {void}
  */
 function loadAutoComplete() {
-    //On récupère le type de source séectionné
+//On récupère le type de source séectionné
     var type = "none";
     var op2 = document.getElementById("upload_source_unknown");
     if (op2.selected) {
@@ -287,7 +317,7 @@ function loadAutoComplete() {
         type = "GAME";
     }
 
-    //Si un type est sélectionné, on charge les cources de ce type dans l'autocomplétion
+//Si un type est sélectionné, on charge les cources de ce type dans l'autocomplétion
     if (type != 'UNKNOWN' && type != 'none') {
         var input = document.getElementById("upload_source_title_entered");
         var awesomplete = new Awesomplete(input);
