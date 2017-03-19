@@ -24,6 +24,11 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "UploadServlet", urlPatterns = {"/UploadServlet"})
 public class UploadServlet extends HttpServlet {
 
+    public static final int TAILLE_TAMPON = 1073741824; // 1 Go
+    public static final String VUE = "/WEB-INF/jsp/globalMap.jsp";
+    public static final String CHAMP_FICHIER = "file_entered";
+
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -80,5 +85,6 @@ public class UploadServlet extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
         response.getWriter().write(true + "");
     }
+
 
 }

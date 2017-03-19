@@ -34,9 +34,11 @@ function upload() {
     var location = document.getElementById("output").innerHTML;
     var the_geom = ("POINT" + location).toString();
     //FORMAT FICHIER
-    var file_entered = document.getElementById("file_entered").value;
+    var file = document.getElementById("file_entered").value;
+    var file_entered = document.getElementById("file_entered");
     //Si le format du fichier entré est valide, on peut ajouter les informations à la base de données
     if (valid_form_upload3()) {
+
         var format = getFileExtension(file_entered);
 
         //on envoie à la servlet les informations
@@ -49,6 +51,7 @@ function upload() {
 
                     //Upload du fichier
                     uploadFile(file_entered, path, type_media, format);
+      
                 } else {
                     //Message d'erreur
                     document.getElementById("error_multimedia_already").innerHTML = error_multimedia_already_entered_fr;
@@ -66,8 +69,11 @@ function upload() {
         xhttp.open("GET", "UploadServlet?" + data, true);
         xhttp.setRequestHeader("Content-Type", "text/html; charset=UTF-8");
         xhttp.send();
+
     }
 }
+
+       
 
 /**
  * Enregistrement du fichier sur le serveur

@@ -17,6 +17,7 @@ function upload() {
     var language = document.getElementById("upload_language_entered").value;
     var time_begin = document.getElementById("upload_time_begin").value;
     var time_end = document.getElementById("upload_time_end").value;
+
     //Récupération de la date :
     var d = new Date();
     var day = d.getDate();
@@ -26,18 +27,20 @@ function upload() {
     var minute = d.getMinutes();
     var second = d.getSeconds();
     //Variable du jour :
-    var date = day + "/" + month + "/" + year;
+    var date = day + "-" + month + "-" + year;
     //Path
     var path = date + "_" + hour + "-" + minute + "-" + second;
     //ADRESSE
     var location = document.getElementById("output").innerHTML;
     var the_geom = ("POINT" + location).toString();
     //FORMAT FICHIER
-    var file_entered = document.getElementById("file_entered").value;
+    var file = document.getElementById("file_entered").value;
+    var file_entered = document.getElementById("file_entered");
     //Si le format du fichier entré est valide, on peut ajouter les informations à la base de données
     if (valid_form_upload3()) {
+
         var format = getFileExtension(file_entered);
-        
+
         //on envoie à la servlet les informations
         xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
@@ -46,8 +49,9 @@ function upload() {
                 var answer = xhttp.responseText;
                 if (answer == "true") {
 
-                    //Appel de la fonction suivante pour accéder à la globalMap
-                    $('#upload_confirmed_form').modal('show');
+                    //Upload du fichier
+                    uploadFile(file_entered, path, type_media, format);
+      
                 } else {
                     //Message d'erreur
                     document.getElementById("error_multimedia_already").innerHTML = error_multimedia_already_entered_fr;
@@ -55,36 +59,58 @@ function upload() {
 
             }
         };
-        var data = "idco=" + idco + "&" + "email=" + email + "&" + "title=" + title + "&" + "source_name=" + source_name + "&" + "choice_source=" + choice_source + "&" + "type_media=" + type_media + "&" + "date=" + date + "&" + "the_geom=" + the_geom + "&" + "format=" + format + "&" + "type=" + type_media + "&" + "description=" + description + "&" + "time_begin=" + time_begin + "&" + "time_end=" + time_end + "&" + "path=" + path + "&" + "language=" + language;
-        xhttp.open("GET", "UploadServlet?"+data, true);
+        var data = "idco=" + idco + "&" + "email=" + email + "&" + "title=" + title +
+                "&" + "source_name=" + source_name + "&" + "choice_source=" + choice_source +
+                "&" + "type_media=" + type_media + "&" + "date=" + date + "&" + "the_geom=" + the_geom +
+                "&" + "format=" + format + "&" + "type=" + type_media + "&" + "description=" + description +
+                "&" + "time_begin=" + time_begin + "&" + "time_end=" + time_end + "&" + "path=" + path +
+                "&" + "language=" + language;
+
+        xhttp.open("GET", "UploadServlet?" + data, true);
         xhttp.setRequestHeader("Content-Type", "text/html; charset=UTF-8");
         xhttp.send();
-        
-        //Méthode POST pour l'upload du fichier
-        xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (xhttp.readyState == 4 && xhttp.status == 200) {
-                //Réponse de la servlet : true si toutes les requêtes sont bien exécutées dans la servlet
-                var answer = xhttp.responseText;
-                if (answer == "true") {
 
-                    //Appel de la fonction suivante pour accéder à la globalMap
-                    $('#upload_confirmed_form').modal('show');
-                } else {
-                    //Message d'erreur
-                    document.getElementById("error_multimedia_already").innerHTML = error_multimedia_already_entered_fr;
-                }
-
-            }
-        };
-        var data = "file_entered=" + file_entered + "&" + "path=" + path + "&" + "type_media=" + type_media;
-        xhttp.open("POST", "UploadServlet", true);
-        xhttp.setRequestHeader("Content-Type", "multipart/form-data; boundary=" + "simple_boundary");
-        xhttp.setRequestHeader("Content-length", data.length);
-        xhttp.setRequestHeader("Connection", "close");
-        xhttp.send(data);
     }
 }
+
+       
+
+/**
+ * Enregistrement du fichier sur le serveur
+ * @param {File} file_entered
+ * @param {String} path
+ * @param {String} type_media
+ * @returns {void}
+ */
+function uploadFile(file_entered, path, type_media, ext) {
+   
+     /*if (answer == "true") {
+     //Appel de la fonction suivante pour accéder à la globalMap
+     $('#upload_confirmed_form').modal('show');
+     } else {
+     //Message d'erreur
+     document.getElementById("error_multimedia_already").innerHTML = error_multimedia_already_entered_fr;
+     }
+     }*/
+
+    var form = document.getElementById("form_file_upload");
+    var s = path + "." + ext;
+    switch (type_media) {
+        case 'VIDEO' :
+            s = "Videos" + "/" + s;
+            break;
+        case 'IMAGE' :
+            s = "Images" + "/" + s;
+            break;
+        default :
+            s = "Sons" + "/" + s;
+            break;
+    }
+    document.cookie = "path="+s;
+    document.cookie="idco="+document.getElementById("idco").value;
+    form.submit();
+}
+
 
 /**
  * Vérifier qu'une valeur est entrée pour le type de multimédia (i.e. qu'une case est bien cochée)
@@ -110,9 +136,6 @@ function valid_multimedia(type_media) {
         return false;
     }
 }
-
-
-
 
 /**
  * Obtenir le type du multimédia entré
@@ -150,7 +173,6 @@ function getLanguage() {
     var lang = document.getElementById("upload_language_entered");
     return lang;
 }
-
 
 /**
  * Vérifier que le titre du multimédia n'est pas vide, sinon renvoyer une erreur
@@ -259,7 +281,6 @@ function valid_form_upload2(elem1, elem2) {
     //Lors de l'appel à cette fonction, l'élément d'id output contient la géolocalisation du lieu entré
     //par l'utilisateur si celui-ci a cliqué sur la map
     var geoloc = document.getElementById("output").innerHTML;
-    alert(geoloc);
     //Si l'utilisateur n'a pas cliqué sur la carte, on vérifie qu'il a entré une adresse dans les champs
     if ((geoloc == "")) {
         if ((valid_number(number) && valid_number(street) && valid_number(postal_code) && valid_number(city) && valid_number(country))) {
@@ -340,7 +361,7 @@ function loadAutoComplete() {
         type = "GAME";
     }
 
-//Si un type est sélectionné, on charge les cources de ce type dans l'autocomplétion
+//Si un type est sélectionné, on charge les sources de ce type dans l'autocomplétion
     if (type != 'UNKNOWN' && type != 'none') {
         var input = document.getElementById("upload_source_title_entered");
         var awesomplete = new Awesomplete(input);
@@ -348,6 +369,7 @@ function loadAutoComplete() {
         var list = [];
         var nbsrc = document.getElementById("nbSources").value;
         for (var i = 0; i < nbsrc; i++) {
+            alert(type);
             if (type == document.getElementById("src_" + i + "_type").value) {
                 list.push(document.getElementById("src_" + i + "_title").value);
             }
@@ -374,7 +396,6 @@ function getExtension(filename)
  * @returns {Boolean}
  */
 function verifFileExtension(filename, listeExt) {
-
     if (filename == "") {
         document.getElementById("error_upload_file").innerHTML = error_file_none_fr;
         return false;
@@ -396,8 +417,7 @@ function verifFileExtension(filename, listeExt) {
 /**
  * Vérifie l'extension d'un fichier uploadé
  * @param {String} filename type du fichier uploadé
- * @param {String} format
- * @returns {Boolean}
+ * @returns {boolean}
  */
 function getFileExtension(filename) {
     filename = filename.toLowerCase();

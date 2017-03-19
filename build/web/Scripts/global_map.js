@@ -5,6 +5,7 @@
 function load() {
     //Chargement des chaînes de caractères
     loadText();
+    loadPop();
     //Chargement de la carte
     loadMap();
 }
@@ -19,14 +20,14 @@ function loadText() {
         document.getElementById("global_map").innerHTML = global_map_fr;
         document.getElementById("route_map").innerHTML = route_map_fr;
         document.getElementById("modification_link").innerHTML = modification_fr;
-        document.getElementById("favorite_link").innerHTML = favorite_fr;      
-        
+        document.getElementById("favorite_link").innerHTML = favorite_fr;
+
         //NAVIGATION PETITS ECRANS
         document.getElementById("global_map1").innerHTML = global_map_fr;
         document.getElementById("route_map1").innerHTML = route_map_fr;
         document.getElementById("modification_link1").innerHTML = modification_fr;
         document.getElementById("favorite_link1").innerHTML = favorite1_fr;
-         document.getElementById("deconnect").innerHTML = deconnect_fr;
+        document.getElementById("deconnect").innerHTML = deconnect_fr;
 
         //MODIFICATION DES INFORMATIONS PERSONNELLES
         document.getElementById("name_label").innerHTML = name_fr;
@@ -44,6 +45,12 @@ function loadText() {
         document.getElementById("signal").innerHTML = signal_fr;
         document.getElementById("signal2").innerHTML = signal2_fr;
         document.getElementById("signal_locked").innerHTML = signal_lock_fr;
+
+        //POP-UP UPLOAD SUCCEDEED :
+        document.getElementById("upload_confirmed_done").innerHTML = upload_confirmed_done_fr;
+        document.getElementById("valid_upload").innerHTML = valid_upload_fr;
+        document.getElementById("upload_confirmed_error").innerHTML = upload_confirmed_error_fr;
+
     }
 }
 
@@ -80,5 +87,20 @@ function outFavorite() {
     document.getElementById("button_favorite").src = "Ressources/star.png";
     document.getElementById("add_favorite").style.color = "#fffe83";
     document.getElementById("add_favorite").style.textDecoration = "none";
+}
+
+function loadPop() {
+    var up = document.getElementById("up").value;
+
+    if (up === '1') {
+        $('#upload_confirmed_form').modal('show');
+        document.getElementById("upload_confirmed_error").style.display = "block";
+        document.getElementById("upload_confirmed_done").style.display = "none";
+    }
+    if (up === '2') {
+        $('#upload_confirmed_form').modal('show');
+        document.getElementById("upload_confirmed_done").style.display = "block";
+        document.getElementById("upload_confirmed_error").style.display = "none";
+    }
 }
 

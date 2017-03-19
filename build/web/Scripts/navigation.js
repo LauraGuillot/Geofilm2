@@ -34,7 +34,13 @@ function getGlobalMap() {
     c1.type = "hidden";
     c1.name = "idco";
     c1.value = document.getElementById("idco").value;
-    form.appendChild(c1);
+    form.appendChild(c1);   
+    
+    var c2 = document.createElement('input');
+    c2.type = "hidden";
+    c2.name = "up";
+    c2.value = "0";
+    form.appendChild(c2);
 
     document.body.appendChild(form);
     form.submit();
@@ -101,7 +107,7 @@ function favoriteOut() {
 function displayVerticalMenu() {
     if (document.getElementById("vmenu").style.display == 'none' || document.getElementById("vmenu").style.display == '') {
         document.getElementById("vmenu").style.display = 'block';
-    } else { 
+    } else {
         document.getElementById("vmenu").style.display = 'none';
     }
 }

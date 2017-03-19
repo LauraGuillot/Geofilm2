@@ -37,13 +37,19 @@ function connect() {
                     c1.type = "hidden";
                     c1.name = "email";
                     c1.value = email;
-                    form.appendChild(c1);
+                    form.appendChild(c1); 
 
                     var c2 = document.createElement('input');
                     c2.type = "hidden";
                     c2.name = "mdp";
                     c2.value = mdp;
                     form.appendChild(c2);
+                    
+                    var c3 = document.createElement('input');
+                    c3.type = "hidden";
+                    c3.name = "up";
+                    c3.value = 0;
+                    form.appendChild(c3);
 
                     document.body.appendChild(form);
                     form.submit();

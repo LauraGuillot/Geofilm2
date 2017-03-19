@@ -240,3 +240,10 @@ li{
     bottom:10%;
     right:30px;
 }
+
+.hidden_input{
+    background-color: transparent;
+    border:none;
+    outline:none;
+    
+}
