@@ -33,10 +33,11 @@ function upload() {
     var location = document.getElementById("output").innerHTML;
     var the_geom = ("POINT" + location).toString();
     //FORMAT FICHIER
-    var file_entered = document.getElementById("file_entered").value;
+    var file = document.getElementById("file_entered").value;
+    var file_entered = document.getElementById("file_entered");
     //Si le format du fichier entré est valide, on peut ajouter les informations à la base de données
     if (valid_form_upload3()) {
-        var format = getFileExtension(file_entered);
+        var format = getFileExtension(file);
         
         //on envoie à la servlet les informations
         xhttp = new XMLHttpRequest();
@@ -46,8 +47,7 @@ function upload() {
                 var answer = xhttp.responseText;
                 if (answer == "true") {
 
-                    //Appel de la fonction suivante pour accéder à la globalMap
-                    $('#upload_confirmed_form').modal('show');
+                    
                 } else {
                     //Message d'erreur
                     document.getElementById("error_multimedia_already").innerHTML = error_multimedia_already_entered_fr;
@@ -68,11 +68,11 @@ function upload() {
                 var answer = xhttp.responseText;
                 if (answer == "true") {
 
-                    //Appel de la fonction suivante pour accéder à la globalMap
+                    //Ouverture d'une pop-up de confirmation d'upload
                     $('#upload_confirmed_form').modal('show');
                 } else {
                     //Message d'erreur
-                    document.getElementById("error_multimedia_already").innerHTML = error_multimedia_already_entered_fr;
+                    document.getElementById("error_upload_file").innerHTML = error_multimedia_already_entered_fr;
                 }
 
             }

@@ -21,6 +21,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import java.io.PrintWriter;
+import java.util.Collection;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
@@ -36,8 +37,7 @@ public class UploadServlet extends HttpServlet {
 
     public static final int TAILLE_TAMPON = 1073741824; // 1 Go
     public static final String VUE = "/WEB-INF/jsp/globalMap.jsp";
-    public static final String CHAMP_FICHIER     = "file_entered";
-
+    public static final String CHAMP_FICHIER = "file_entered";
 
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -91,8 +91,6 @@ public class UploadServlet extends HttpServlet {
         MultimediaManager mm = MultimediaManagerImpl.getInstance();
         mm.insertMultimedia(title, description, path, date, format, language, type_media, l, p, s, time_begin, time_end);
 
-        
-
         response.setContentType("text/html; charset=UTF-8");
         response.getWriter().write(true + "");
     }
@@ -108,13 +106,10 @@ public class UploadServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
 
-
-        
         String type_media = request.getParameter("type_media");
-        
+
         String path = request.getParameter("path");
 
-       
         String chemin = "";
         //Suivant le type du multimédia entré, on écrit le fichier dans les dossiers
         // Videos, Images, ou Sons
@@ -129,19 +124,31 @@ public class UploadServlet extends HttpServlet {
      * Les données reçues sont multipart, on doit donc utiliser la méthode
      * getPart() pour traiter le champ d'envoi de fichiers.
          */
-        
-        Part part = request.getPart("file_entered");//RENVOIE NULL POINTER EXCEPTION
-        String s = part.getContentType();
+
+        Collection<Part> Cpart = request.getParts();//RENVOIE NULL POINTER EXCEPTION
+        for (Part part : request.getParts()) {
+            String fileName = getNomFichier(part);
+            // part.write( chemin + File.separator + path );
+            if (fileName != null) {
+                ecrireFichier(part, path, chemin);
+                response.setContentType("text/html; charset=UTF-8");
+                response.getWriter().write(true + "");
+            } else {
+                response.setContentType("text/html; charset=UTF-8");
+                response.getWriter().write(false + "");
+            }
+
+        }
 //        Part part = (Part) request.getAttribute("file_input");
 
-        String nomChamp = part.getName();
-        /* Écriture du fichier sur le disque */
-        ecrireFichier(part, path, chemin);
-
-        request.setAttribute(nomChamp, path);
-
-        this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
-
+//        String nomChamp = part.getName();
+//String nomChamp = getNomFichier(part);
+//        /* Écriture du fichier sur le disque */
+//        ecrireFichier(part, path, chemin);
+//
+//        request.setAttribute(nomChamp, path);
+//        this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+        
     }
 
     /*
@@ -201,11 +208,8 @@ public class UploadServlet extends HttpServlet {
             if (contentDisposition.trim().startsWith("filename")) {
 
                 /*
-
              * Si "filename" est présent, alors renvoi de sa valeur,
-
              * c'est-à-dire du nom de fichier sans guillemets.
-
                  */
                 return contentDisposition.substring(contentDisposition.indexOf('=') + 1).trim().replace("\"", "");
 
