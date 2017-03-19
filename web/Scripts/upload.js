@@ -70,8 +70,17 @@ function upload() {
         xhttp.setRequestHeader("Content-Type", "text/html; charset=UTF-8");
         xhttp.send();
 
+<<<<<<< HEAD (5e526e6) - suite
     }
 }
+=======
+                    //Ouverture d'une pop-up de confirmation d'upload
+                    $('#upload_confirmed_form').modal('show');
+                } else {
+                    //Message d'erreur
+                    document.getElementById("error_upload_file").innerHTML = error_multimedia_already_entered_fr;
+                }
+>>>>>>> origin/master (b53dd57) - Upload : enreg
 
        
 

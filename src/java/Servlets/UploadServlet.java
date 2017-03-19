@@ -15,6 +15,15 @@ import Objects.Location;
 import Objects.Person;
 import Objects.Source;
 import java.io.IOException;
+<<<<<<< HEAD
+=======
+
+import java.io.PrintWriter;
+import java.util.Collection;
+
+import javax.servlet.Servlet;
+import javax.servlet.ServletConfig;
+>>>>>>> origin/master
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,7 +36,10 @@ public class UploadServlet extends HttpServlet {
     public static final int TAILLE_TAMPON = 1073741824; // 1 Go
     public static final String VUE = "/WEB-INF/jsp/globalMap.jsp";
     public static final String CHAMP_FICHIER = "file_entered";
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -86,5 +98,134 @@ public class UploadServlet extends HttpServlet {
         response.getWriter().write(true + "");
     }
 
+<<<<<<< HEAD
 
+=======
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    @Override
+    protected void doPost(HttpServletRequest request,
+            HttpServletResponse response) throws ServletException, IOException {
+
+        String type_media = request.getParameter("type_media");
+
+        String path = request.getParameter("path");
+
+        String chemin = "";
+        //Suivant le type du multimédia entré, on écrit le fichier dans les dossiers
+        // Videos, Images, ou Sons
+        if (type_media == "VIDEO") {
+            chemin = this.getServletConfig().getInitParameter("C:\\Users\\Paola\\Documents\\NetBeansProjects\\Geofilm2\\web\\Multimedias\\Videos");
+        } else if (type_media == "IMAGE") {
+            chemin = this.getServletConfig().getInitParameter("C:\\Users\\Paola\\Documents\\NetBeansProjects\\Geofilm2\\web\\Multimedias\\Images");
+        } else {
+            chemin = this.getServletConfig().getInitParameter("C:\\Users\\Paola\\Documents\\NetBeansProjects\\Geofilm2\\web\\Multimedias\\Sons");
+        }
+        /*
+     * Les données reçues sont multipart, on doit donc utiliser la méthode
+     * getPart() pour traiter le champ d'envoi de fichiers.
+         */
+
+        Collection<Part> Cpart = request.getParts();//RENVOIE NULL POINTER EXCEPTION
+        for (Part part : request.getParts()) {
+            String fileName = getNomFichier(part);
+            // part.write( chemin + File.separator + path );
+            if (fileName != null) {
+                ecrireFichier(part, path, chemin);
+                response.setContentType("text/html; charset=UTF-8");
+                response.getWriter().write(true + "");
+            } else {
+                response.setContentType("text/html; charset=UTF-8");
+                response.getWriter().write(false + "");
+            }
+
+        }
+//        Part part = (Part) request.getAttribute("file_input");
+
+//        String nomChamp = part.getName();
+//String nomChamp = getNomFichier(part);
+//        /* Écriture du fichier sur le disque */
+//        ecrireFichier(part, path, chemin);
+//
+//        request.setAttribute(nomChamp, path);
+//        this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+        
+    }
+
+    /*
+ * Méthode utilitaire qui a pour but d'écrire le fichier passé en paramètre
+ * sur le disque, dans le répertoire donné et avec le nom donné.
+     */
+    private void ecrireFichier(Part part, String nomFichier, String chemin) throws IOException {
+        /* Prépare les flux. */
+        BufferedInputStream entree = null;
+        BufferedOutputStream sortie = null;
+        try {
+            /* Ouvre les flux. */
+            entree = new BufferedInputStream(part.getInputStream(), TAILLE_TAMPON);
+            sortie = new BufferedOutputStream(new FileOutputStream(new File(chemin + nomFichier)),
+                    TAILLE_TAMPON);
+
+            /*
+         * Lit le fichier reçu et écrit son contenu dans un fichier sur le
+         * disque.
+             */
+            byte[] tampon = new byte[TAILLE_TAMPON];
+            int longueur;
+            while ((longueur = entree.read(tampon)) > 0) {
+                sortie.write(tampon, 0, longueur);
+            }
+        } finally {
+            try {
+                sortie.close();
+            } catch (IOException ignore) {
+            }
+            try {
+                entree.close();
+            } catch (IOException ignore) {
+            }
+        }
+    }
+
+    /*
+
+ * Méthode utilitaire qui a pour unique but d'analyser l'en-tête
+
+ * "content-disposition", et de vérifier si le paramètre "filename" y est
+
+ * présent. Si oui, alors le champ traité est de type File et la méthode
+
+ * retourne son nom, sinon il s'agit d'un champ de formulaire classique et
+
+ * la méthode retourne null.
+
+     */
+    private static String getNomFichier(Part part) {
+
+        /* Boucle sur chacun des paramètres de l'en-tête "content-disposition". */
+        for (String contentDisposition : part.getHeader("content-disposition").split(";")) {
+
+            /* Recherche de l'éventuelle présence du paramètre "filename". */
+            if (contentDisposition.trim().startsWith("filename")) {
+
+                /*
+             * Si "filename" est présent, alors renvoi de sa valeur,
+             * c'est-à-dire du nom de fichier sans guillemets.
+                 */
+                return contentDisposition.substring(contentDisposition.indexOf('=') + 1).trim().replace("\"", "");
+
+            }
+
+        }
+
+        /* Et pour terminer, si rien n'a été trouvé... */
+        return null;
+
+    }
+>>>>>>> origin/master
 }
