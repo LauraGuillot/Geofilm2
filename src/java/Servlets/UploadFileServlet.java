@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import org.springframework.web.servlet.ModelAndView;
 
 @WebServlet(name = "UploadFileServlet", urlPatterns = {"/UploadFileServlet"})
 public class UploadFileServlet extends HttpServlet {

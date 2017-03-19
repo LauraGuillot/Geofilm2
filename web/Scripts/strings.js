@@ -117,6 +117,7 @@ var error_upload_file_fr = "Le format du fichier n'est pas pris en charge.";
 var true_fr = "vrai";
 var location_ok_fr = "Localisation ok";
 var error_file_none_fr = "Veuillez choisir un fichier.";
+var error_multimedia_already_entered_fr = "Le multimédia n'a pas été uploadé.";
 
 var upload_confirmed_done_fr = "Votre multimédia a bien été uploadé.";
 var valid_upload_fr = "FERMER";
