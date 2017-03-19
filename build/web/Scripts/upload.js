@@ -14,10 +14,7 @@ function upload() {
     var type_media = getMultiType();
     var idco = document.getElementById("idco").value;
     var source_name = document.getElementById("upload_source_title_entered").value;
-    //TODO : path ???
-    //TODO : variable du langage de l'objet ?
-    var path = "";
-    var language = "";
+    var language = document.getElementById("upload_language_entered").value;
     var time_begin = document.getElementById("upload_time_begin").value;
     var time_end = document.getElementById("upload_time_end").value;
     //Récupération de la date :
@@ -29,16 +26,18 @@ function upload() {
     var minute = d.getMinutes();
     var second = d.getSeconds();
     //Variable du jour :
-    var date = day + "/" + month + "/" + year + "_" + hour + "-" + minute + "-" + second;
+    var date = day + "/" + month + "/" + year;
+    //Path
+    var path = date + "_" + hour + "-" + minute + "-" + second;
     //ADRESSE
-
     var location = document.getElementById("output").innerHTML;
     var the_geom = ("POINT" + location).toString();
     //FORMAT FICHIER
-    var file = document.getElementById("file_entered").value;
+    var file_entered = document.getElementById("file_entered").value;
     //Si le format du fichier entré est valide, on peut ajouter les informations à la base de données
     if (valid_form_upload3()) {
-        var format = getFileExtension(file);
+        var format = getFileExtension(file_entered);
+        
         //on envoie à la servlet les informations
         xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
@@ -57,9 +56,33 @@ function upload() {
             }
         };
         var data = "idco=" + idco + "&" + "email=" + email + "&" + "title=" + title + "&" + "source_name=" + source_name + "&" + "choice_source=" + choice_source + "&" + "type_media=" + type_media + "&" + "date=" + date + "&" + "the_geom=" + the_geom + "&" + "format=" + format + "&" + "type=" + type_media + "&" + "description=" + description + "&" + "time_begin=" + time_begin + "&" + "time_end=" + time_end + "&" + "path=" + path + "&" + "language=" + language;
-        xhttp.open("GET", "UploadServlet?" + data, true);
+        xhttp.open("GET", "UploadServlet?"+data, true);
         xhttp.setRequestHeader("Content-Type", "text/html; charset=UTF-8");
         xhttp.send();
+        
+        //Méthode POST pour l'upload du fichier
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                //Réponse de la servlet : true si toutes les requêtes sont bien exécutées dans la servlet
+                var answer = xhttp.responseText;
+                if (answer == "true") {
+
+                    //Appel de la fonction suivante pour accéder à la globalMap
+                    $('#upload_confirmed_form').modal('show');
+                } else {
+                    //Message d'erreur
+                    document.getElementById("error_multimedia_already").innerHTML = error_multimedia_already_entered_fr;
+                }
+
+            }
+        };
+        var data = "file_entered=" + file_entered + "&" + "path=" + path + "&" + "type_media=" + type_media;
+        xhttp.open("POST", "UploadServlet", true);
+        xhttp.setRequestHeader("Content-Type", "multipart/form-data; boundary=" + "simple_boundary");
+        xhttp.setRequestHeader("Content-length", data.length);
+        xhttp.setRequestHeader("Connection", "close");
+        xhttp.send(data);
     }
 }
 
@@ -251,7 +274,7 @@ function valid_form_upload2(elem1, elem2) {
             return false;
         }
     } else {
-        
+
         visibilite_element(elem1);
         visibilite_element(elem2);
         return true;

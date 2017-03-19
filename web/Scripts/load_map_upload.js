@@ -32,23 +32,6 @@ function loadMap() {
     //Au clic, on affiche les coordonnées
     map.on('click', getPos);
 
-//    map.on('click', function (e, callback) {
-//        var location = JSON.stringify(e.lngLat);
-//
-//        var wrapped = e.lngLat.wrap();
-//        addMarker(wrapped.lng, wrapped.lat);
-//        var point = "(" + wrapped.lat + "," + wrapped.lng + ")";
-//        document.getElementById('output').innerHTML = point;
-
-//        mapboxgl.geocodeReverse(
-//                {latitude: wrapped.lat, longitude: wrapped.lng},
-//                {types: 'country', limit: 1},
-//                function (err, res) {
-//                    // res is a GeoJSON document with up to 1 geocoding match
-//                });
-
-
-    
 }
 
 /**
@@ -62,9 +45,6 @@ function getPos(e) {
     document.getElementById("output").innerHTML = point;
     return point;
 }
-
-
-
 
 
 

@@ -40,7 +40,7 @@ public class UploadController {
         PersonManager pm = PersonManagerImpl.getInstance();
         Person p = pm.findPerson(idco);
 
-        //si la connexion est valide, on 
+    
         if (p != null) {
             ModelAndView result = new ModelAndView("uploading");
 
