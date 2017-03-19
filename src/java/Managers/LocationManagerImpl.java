@@ -55,15 +55,17 @@ public class LocationManagerImpl implements LocationManager {
     }
 
     /**
-     * Création d'une location à partir d'une géométrie entrée et retourne cette Location
+     * Création d'une location à partir d'une géométrie entrée et retourne cette
+     * Location
      *
      * @param the_geom
      * @return
      */
     @Override
     public Location insertLocation(String the_geom) {
-        Location l = new Location();
+        Location l = new Location(getMaxId());
         l.setLocationThegeom(the_geom);
+        System.out.println(the_geom+"  "+l.getLocationId());
         //Insertion de la localisation dans la base de données
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -152,5 +154,25 @@ public class LocationManagerImpl implements LocationManager {
             loc.add((Location) o);
         }
         return loc;
+    }
+
+    /**
+     * Récupérer l'id max des locations
+     *
+     * @return Id max
+     */
+    public int getMaxId() {
+        int max = 1;
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createNamedQuery("Location.findAll", Location.class);
+        List l = q.getResultList();
+
+        for (Object o : l) {
+            if (((Location) o).getLocationId() > max) {
+                max = ((Location) o).getLocationId();
+            }
+        }
+        System.out.println(max);
+        return max + 1;
     }
 }

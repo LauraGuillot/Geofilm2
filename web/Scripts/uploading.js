@@ -66,14 +66,10 @@ function loadText() {
         document.getElementById("subtitle3").innerHTML = upload_subtitle3_fr;
         document.getElementById("input_choice").innerHTML = upload_choice_input_fr;
         document.getElementById("validation3").innerHTML = validation_fr;
-        
-        //POP-UP UPLOAD SUCCEDEED :
-        document.getElementById("title4").innerHTML = upload_contents_title_fr;
-        document.getElementById("upload_confirmed_done").innerHTML = upload_confirmed_done_fr;
-        document.getElementById("valid_upload").innerHTML = valid_upload_fr;
 
     }
 }
+
 
 
 

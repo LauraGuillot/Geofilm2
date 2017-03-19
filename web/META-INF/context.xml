@@ -1,2 +1,3 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/Geofilm2"/>
+<Context path="/Geofilm2" allowCasualMultipartParsing="true"/>
+

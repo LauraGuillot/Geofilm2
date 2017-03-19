@@ -35,9 +35,11 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Source.findBySourceType", query = "SELECT s FROM Source s WHERE s.sourceType = :sourceType")})
 public class Source implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sourceId")
+    private Collection<Multimedia> multimediaCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "source_id")
     private Integer sourceId;
@@ -106,6 +108,15 @@ public class Source implements Serializable {
     @Override
     public String toString() {
         return "Objects.Source[ sourceId=" + sourceId + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Multimedia> getMultimediaCollection() {
+        return multimediaCollection;
+    }
+
+    public void setMultimediaCollection(Collection<Multimedia> multimediaCollection) {
+        this.multimediaCollection = multimediaCollection;
     }
     
 }

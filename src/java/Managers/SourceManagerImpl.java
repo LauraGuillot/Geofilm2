@@ -15,16 +15,16 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 public class SourceManagerImpl implements SourceManager {
-
+    
     private EntityManagerFactory emf;
     private static SourceManagerImpl theSourceManager;
-
+    
     private SourceManagerImpl() {
         if (emf == null) {
             emf = Persistence.createEntityManagerFactory("Geofilm2PU");
         }
     }
-
+    
     public static SourceManager getInstance() {
         if (theSourceManager == null) {
             theSourceManager = new SourceManagerImpl();
@@ -67,12 +67,13 @@ public class SourceManagerImpl implements SourceManager {
                 s.add((Source) o);
             }
         }
-
+        
         return s;
     }
 
     /**
      * Récupérer l'ID d'une source à partir de son nom
+     *
      * @param name
      * @return
      */
@@ -87,20 +88,40 @@ public class SourceManagerImpl implements SourceManager {
      *
      * @param title
      * @param type
-     * @return 
+     * @return
      */
     @Override
     public Source insertSource(String title, String type) {
-        Source s = new Source();
+        Source s = new Source(getMaxId());
         s.setSourceTitle(title);
         s.setSourceType(type);
-//Insertion de la source dans la base de données
+
+        //Insertion de la source dans la base de données
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.persist(s);
         em.getTransaction().commit();
-
+        
         return s;
     }
 
+    /**
+     * Récupérer l'id max des sources
+     *
+     * @return Id max
+     */
+    public int getMaxId() {
+        int max = 0;
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createNamedQuery("Source.findAll", Source.class);
+        List l = q.getResultList();
+        
+        for (Object o : l) {
+            if (((Source) o).getSourceId() > max) {
+                max = ((Source) o).getSourceId();
+            }
+        }
+        return max + 1;
+    }
+    
 }

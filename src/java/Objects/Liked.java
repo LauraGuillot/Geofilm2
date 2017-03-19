@@ -6,6 +6,7 @@
 package Objects;
 
 import java.io.Serializable;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -30,11 +31,13 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Liked.findByLikedType", query = "SELECT l FROM Liked l WHERE l.likedType = :likedType")})
 public class Liked implements Serializable {
 
+    @Basic(optional = false)
+    @Column(name = "liked_type")
+    private String likedType;
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected LikedPK likedPK;
-    @Column(name = "liked_type")
-    private Serializable likedType;
     @JoinColumn(name = "multimedia_id", referencedColumnName = "multimedia_id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Multimedia multimedia;
@@ -61,11 +64,11 @@ public class Liked implements Serializable {
         this.likedPK = likedPK;
     }
 
-    public Serializable getLikedType() {
+    public String getLikedType() {
         return likedType;
     }
 
-    public void setLikedType(Serializable likedType) {
+    public void setLikedType(String likedType) {
         this.likedType = likedType;
     }
 
@@ -109,5 +112,7 @@ public class Liked implements Serializable {
     public String toString() {
         return "Objects.Liked[ likedPK=" + likedPK + " ]";
     }
+
+    
     
 }

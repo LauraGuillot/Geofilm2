@@ -51,6 +51,12 @@ function inscription() {
                     c2.name = "mdp";
                     c2.value = mdp;
                     form.appendChild(c2);
+                      
+                    var c3 = document.createElement('input');
+                    c3.type = "hidden";
+                    c3.name = "up";
+                    c3.value = 0;
+                    form.appendChild(c3);
 
                     document.body.appendChild(form);
                     form.submit();

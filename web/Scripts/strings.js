@@ -120,6 +120,7 @@ var error_file_none_fr = "Veuillez choisir un fichier.";
 
 var upload_confirmed_done_fr = "Votre multimédia a bien été uploadé.";
 var valid_upload_fr = "FERMER";
+var upload_confirmed_error_fr = "Une erreur est survenue, votre fichier n'a pas pu être uploadé.";
 
 //POP-UP VISUALISATION D'UN MULTIMEDIA
 var signal_fr = "Signaler";

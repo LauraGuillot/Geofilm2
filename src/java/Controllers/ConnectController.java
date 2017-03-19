@@ -29,12 +29,12 @@ import org.springframework.web.servlet.ModelAndView;
 public class ConnectController {
 
     @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView post(@RequestParam("email") String email, @RequestParam("mdp") String mdp) {
+    public ModelAndView post(@RequestParam("email") String email, @RequestParam("mdp") String mdp,@RequestParam("up") String up) {
         ModelAndView r = new ModelAndView("redirect:globalMap.htm");
 
         //Mise à jour des connexions dans la base de données
         ConnectManager cm = ConnectManagerImpl.getInstance();
-        cm.checkConnection();
+        cm.checkConnection(); 
 
         //Récupération de l'utilisateur
         PersonManager pm = PersonManagerImpl.getInstance();
@@ -43,12 +43,14 @@ public class ConnectController {
         //Connexion de l'utilisateur 
         String idco = cm.connect(p);
         r.addObject("idco", idco);
+        
+        r.addObject("up", up);
 
         return r;
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView get(HttpServletRequest request, HttpServletResponse response, @RequestParam("idco") String idco) {
+    public ModelAndView get(HttpServletRequest request, HttpServletResponse response, @RequestParam("idco") String idco, @RequestParam("up") String up) {
 
         //On récupère la personne associée à l'identifiant de connexion
         PersonManager pm = PersonManagerImpl.getInstance();
@@ -79,6 +81,12 @@ public class ConnectController {
             result.addObject("likes", mm.getLikes(multis));
             result.addObject("dislikes", mm.getDislikes(multis));
             result.addObject("badloc", mm.getBadLoc(multis));
+
+            //Ajout du paramètre up
+            // Il vaut 0, si la page précédente n'était pas l'upload
+            // Il vaut 1 si la page précédente était l'upload et que ce dernier a échoué
+            // Il vaut 2 si la page précédente était l'upload et que ce dernier a réussi
+            result.addObject("up", up);
 
             return result;
 

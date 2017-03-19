@@ -60,8 +60,6 @@
         <script src="Scripts/upload.js"></script>
         <script src="Scripts/geoloc_upload.js"></script>
 
-
-
     </head>
     <body onload="load();">
 
@@ -306,12 +304,10 @@
                         <p class="title" style="font-style:italic" id="subtitle3"></p>
                     </div>
                     <!--Parcourir les fichiers de l'utilisateur pour uploader un multimédia-->
-                    <form action="" method="post" enctype="multipart/form-data">
-
-                            <p class="error_message" id="error_upload_file"></p>
-                            <p class="label_form" id="input_choice"></p>
-                            <input type="file" name="file_entered" id="file_entered">
-                 
+                    <form id="form_file_upload" action="UploadFileServlet" method="POST" enctype="multipart/form-data">
+                        <p class="error_message" id="error_upload_file"></p>
+                        <p class="label_form" id="input_choice"></p>    
+                        <input type="file"  name="file_entered" id="file_entered">
                     </form>
                 </div>
                 <!--Image step 3-->
@@ -362,30 +358,5 @@
             </div>
         </center>
     </div>
-
-    <!--POPUP : indication que l'upload a réussi-->
-    <div class="modal fade" id="upload_confirmed_form" role="dialog">
-        <center>
-            <div id ="small_modal" class="modal-dialog modal-sm">
-                <div class="modal-content modal_form">
-                    <!-- Titre -->
-                    <center>
-                        <p id="title4" class= "title"  style="margin-top: 40px"</p> 
-                    </center>
-                    <!-- Zone pour les messages d'erreurs -->
-                    <p id="upload_confirmed_error" class="error_message"></p>
-                    <!--Confirmation de l'upload-->
-                    <center><p id ="upload_confirmed_done" class="label_form" style="size:20px"></p></center>
-
-                    <!-- Bouton pour fermer la pop-up et revenir à la globalMap -->
-                    <center>
-                        <button id ="valid_upload" type="button" class="button small_button" onclick="getGlobalMap();"></button>
-                    </center>
-                </div>
-            </div>
-        </center>
-    </div>
-
-
 </body>
 </html>

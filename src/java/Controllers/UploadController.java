@@ -11,17 +11,9 @@ import Managers.PersonManager;
 import Managers.PersonManagerImpl;
 import Managers.ConnectManager;
 import Managers.ConnectManagerImpl;
-import Managers.LocationManager;
-import Managers.LocationManagerImpl;
-import Managers.MultimediaManager;
-import Managers.MultimediaManagerImpl;
 import Managers.SourceManager;
 import Managers.SourceManagerImpl;
-import Objects.Location;
-import Objects.Multimedia;
 import Objects.Person;
-import Objects.Source;
-import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
@@ -58,9 +50,10 @@ public class UploadController {
             //Connexion de l'utilisateur 
             result.addObject("idco", idco);
             
-                
-            
-
+            //Sources
+            SourceManager sm = SourceManagerImpl.getInstance();
+            result.addObject("src",sm.getSources());
+   
             return result;
             //si la connexion n'est pas valide, on retourne à la page d'accueil
         } else {

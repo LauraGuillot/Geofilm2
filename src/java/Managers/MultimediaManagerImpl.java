@@ -22,16 +22,16 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 public class MultimediaManagerImpl implements MultimediaManager {
-
+    
     private EntityManagerFactory emf;
     private static MultimediaManagerImpl theMultimediaManager;
-
+    
     private MultimediaManagerImpl() {
         if (emf == null) {
             emf = Persistence.createEntityManagerFactory("Geofilm2PU");
         }
     }
-
+    
     public static MultimediaManager getInstance() {
         if (theMultimediaManager == null) {
             theMultimediaManager = new MultimediaManagerImpl();
@@ -387,7 +387,7 @@ public class MultimediaManagerImpl implements MultimediaManager {
      */
     @Override
     public void insertMultimedia(String title, String description, String path, String date, String format, String language, String type, Location l, Person p, Source source, String time_begin, String time_end) {
-        Multimedia m = new Multimedia();
+        Multimedia m = new Multimedia(getMaxId());
         m.setMultimediaTitle(title);
         m.setMultimediaDescription(description);
         m.setMultimediaPath(path);
@@ -400,7 +400,7 @@ public class MultimediaManagerImpl implements MultimediaManager {
         m.setSourceId(source);
         m.setMultimediaEnd(time_end);
         m.setMultimediaStart(time_begin);
-
+        
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.persist(m);
@@ -500,7 +500,7 @@ public class MultimediaManagerImpl implements MultimediaManager {
             //Tranformation en arraylist + conservation uniquement des favoris
             for (Object o : l) {
                 Multimedia multi = (Multimedia) o;
-        
+                
                 Query q1 = em.createQuery("SELECT f FROM Favorite f WHERE  f.multimediaId=:m AND f.personId=:p");
                 q1.setParameter("m", multi);
                 q1.setParameter("p", p);
@@ -508,12 +508,30 @@ public class MultimediaManagerImpl implements MultimediaManager {
                 if (!l1.isEmpty()) {
                     m.add(multi);
                 }
-
+                
             }
             mult.add(m);
         }
-
+        
         return mult;
     }
-}
 
+    /**
+     * Récupérer l'id max des multimédias
+     *
+     * @return Id max
+     */
+    public int getMaxId() {
+        int max = 0;
+        EntityManager em = emf.createEntityManager();
+        Query q = em.createNamedQuery("Multimedia.findAll", Multimedia.class);
+        List l = q.getResultList();
+        
+        for (Object o : l) {
+            if (((Multimedia) o).getMultimediaId() > max) {
+                max = ((Multimedia) o).getMultimediaId();
+            }
+        }
+        return max + 1;
+    }
+}

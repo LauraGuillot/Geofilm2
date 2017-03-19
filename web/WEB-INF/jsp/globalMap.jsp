@@ -93,6 +93,8 @@
                     <input type="hidden" id="pos<c:out value="${status.index}"/>_multi<c:out value="${status1.index}_badloc"/>" value="<c:out value="${badloc[status.index][status1.index]}"/>"/>
                 </c:forEach>
             </c:forEach>
+
+            <input type="hidden" id="up" value="<c:out value="${up}"/>"/>
         </div>
 
         <!-- NAVIGATION GRANDS ECRANS-->
@@ -260,6 +262,28 @@
                                 <button id ="valid_modif" type="button" class="button small_button" onclick="modif();"></button>
                             </center>
                         </div>
+                    </div>
+                </div>
+            </center>
+        </div>
+
+
+
+        <!--POPUP : indication que l'upload a réussi-->
+        <div class="modal fade" id="upload_confirmed_form" role="dialog">
+            <center>
+                <div id ="small_modal" class="modal-dialog modal-sm">
+                    <div class="modal-content modal_form">
+                        <!-- Zone pour les messages d'erreurs -->
+                        <p id="upload_confirmed_error" class="error_message" style="display:none"></p>
+                        <!--Confirmation de l'upload-->
+                       <p id ="upload_confirmed_done" class="label_form" style="text-align:center;" style="display:none"></p>
+                       <br><br>
+
+                        <!-- Bouton pour fermer la pop-up et revenir à la globalMap -->
+                        <center>
+                            <button id ="valid_upload" type="button" class="button small_button" data-dismiss="modal"></button>
+                        </center>
                     </div>
                 </div>
             </center>
