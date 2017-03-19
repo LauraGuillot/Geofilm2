@@ -51,12 +51,11 @@ function upload() {
 
                     //Upload du fichier
                     uploadFile(file_entered, path, type_media, format);
-      
+
                 } else {
                     //Message d'erreur
                     document.getElementById("error_multimedia_already").innerHTML = error_multimedia_already_entered_fr;
                 }
-
             }
         };
         var data = "idco=" + idco + "&" + "email=" + email + "&" + "title=" + title +
@@ -69,20 +68,10 @@ function upload() {
         xhttp.open("GET", "UploadServlet?" + data, true);
         xhttp.setRequestHeader("Content-Type", "text/html; charset=UTF-8");
         xhttp.send();
-
-<<<<<<< HEAD (5e526e6) - suite
     }
 }
-=======
-                    //Ouverture d'une pop-up de confirmation d'upload
-                    $('#upload_confirmed_form').modal('show');
-                } else {
-                    //Message d'erreur
-                    document.getElementById("error_upload_file").innerHTML = error_multimedia_already_entered_fr;
-                }
->>>>>>> origin/master (b53dd57) - Upload : enreg
 
-       
+
 
 /**
  * Enregistrement du fichier sur le serveur
@@ -92,8 +81,8 @@ function upload() {
  * @returns {void}
  */
 function uploadFile(file_entered, path, type_media, ext) {
-   
-     /*if (answer == "true") {
+
+    /*if (answer == "true") {
      //Appel de la fonction suivante pour accéder à la globalMap
      $('#upload_confirmed_form').modal('show');
      } else {
@@ -115,8 +104,8 @@ function uploadFile(file_entered, path, type_media, ext) {
             s = "Sons" + "/" + s;
             break;
     }
-    document.cookie = "path="+s;
-    document.cookie="idco="+document.getElementById("idco").value;
+    document.cookie = "path=" + s;
+    document.cookie = "idco=" + document.getElementById("idco").value;
     form.submit();
 }
 
