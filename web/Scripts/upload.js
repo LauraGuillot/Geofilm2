@@ -39,7 +39,7 @@ function upload() {
     //Si le format du fichier entré est valide, on peut ajouter les informations à la base de données
     if (valid_form_upload3()) {
 
-        var format = getFileExtension(file_entered);
+        var format = getFileExtension(file);
 
         //on envoie à la servlet les informations
         xhttp = new XMLHttpRequest();
