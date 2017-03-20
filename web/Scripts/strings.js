@@ -140,6 +140,7 @@ var serie_fr = "SERIE";
 var or_fr = "OU";
 var no_source_fr ="Aucune source ne correspond à cette recherche.";
 var temp_fr = "Afficher les liens temporels entre les multimédias";
+var no_temp_fr = "Aucun lien temporel disponible.";
 
 //FAVORIS
 var favorite2_fr="FAVORIS";
