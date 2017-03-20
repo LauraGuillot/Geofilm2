@@ -306,6 +306,7 @@
                     <!--Parcourir les fichiers de l'utilisateur pour uploader un multimédia-->
                     <form id="form_file_upload" action="UploadFileServlet" method="POST" enctype="multipart/form-data">
                         <p class="error_message" id="error_upload_file"></p>
+                        <p class="error_message" id="size" style=display:none"></p>
                         <p class="label_form" id="input_choice"></p>    
                         <input type="file"  name="file_entered" id="file_entered">
                     </form>

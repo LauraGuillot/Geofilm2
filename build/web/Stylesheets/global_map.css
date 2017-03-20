@@ -3,7 +3,7 @@ html, body {
     margin: 0px;
 }
 .container{
-    height:92%;
+    height:91%;
     width:100%;
     margin: 0px;
     padding: 0px!important;
@@ -13,7 +13,7 @@ html, body {
 #mapid{
     margin: 0px;
     padding: 0px;
-    height:92%;
+    height:91%;
     width: 100%;
     position:absolute;
 }

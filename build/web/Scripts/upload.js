@@ -236,6 +236,81 @@ function valid_number(number) {
 }
 
 
+/**
+ * Vérifie que le format du fichier entré correspond au type de multimédia indiqué par l'utilisateur
+ * @returns {Boolean}7
+ */
+function valid_format() {
+    var filename = document.getElementById("file_entered").value;
+    if (document.getElementById("u_video").checked) {
+        if (valid_video(filename)) {
+            return true;
+        } else {
+            return false;
+        }
+    } else if (document.getElementById("u_image").checked) {
+        if (valid_image(filename)) {
+            return true;
+        } else {
+            return false;
+        }
+    } else if (document.getElementById("u_sound").checked) {
+        if (valid_son(filename)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+/**
+ * Vérifie que le fichier filename a une extension correspondant à une vidéo
+ * Si non, la fonction renvoie false
+ * @param {type} video_filename
+ * @returns {Boolean}
+ */
+function valid_video(video_filename) {
+    //Array des extensions autorisées/lues
+    extensionsValides = new Array('avi', 'wmv', 'mov', 'mp4', 'mkv', 'mka', 'mks', 'flv', 'Divx', 'Xvid', 'divx', 'xvid', 'm4v', 'mpg', 'mpeg');
+    if (verifFileExtension(video_filename, extensionsValides)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+/**
+ * Vérifie que le fichier filename a une extension correspondant à une image
+ * Si non, la fonction renvoie false
+ * @param {type} video_filename
+ * @returns {Boolean}
+ */
+function valid_image(image_filename) {
+    //Array des extensions autorisées/lues
+    extensionsValides = new Array('jpeg', 'dng', 'tiff', 'png', 'gif', 'jpg', 'psd', 'raw');
+    if (verifFileExtension(image_filename, extensionsValides)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/**
+ * Vérifie que le fichier filename a une extension correspondant à un son
+ * Si non, la fonction renvoie false
+ * @param {type} video_filename
+ * @returns {Boolean}
+ */
+function valid_son(son_filename) {
+    //Array des extensions autorisées/lues
+    extensionsValides = new Array('wav', 'm4v', 'wmv', 'mp3', 'm4a', 'aac');
+    if (verifFileExtension(son_filename, extensionsValides)) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 /**
  * Validation du premier formulaire : si la validation est ok, on passe au div suivant
@@ -310,7 +385,26 @@ function valid_form_upload3() {
     //Array des extensions autorisées/lues
     extensionsValides = new Array('avi', 'wmv', 'mov', 'mp4', 'mkv', 'mka', 'mks', 'flv', 'Divx', 'Xvid', 'divx', 'xvid', 'raw', 'jpeg', 'dng', 'tiff', 'png', 'gif', 'jpg', 'psd', 'wav', 'm4v', 'wmv', 'mpg', 'mpeg', 'mp3', 'm4a', 'aac');
     if (verifFileExtension(filename, extensionsValides)) {
-        return true;
+        //On vérifie ensuite que le format du fichier entré correspond bien à un format compatible avec le type de multimédia entré (info utilisateur : VIDEO
+        // SON ou IMAGE)
+        if (valid_format()) {
+            //Calcul de la taille du fichier uploadé
+            $('#file_entered').bind('change', function () {
+                document.getElementById("size").value = this.files[0].size;
+            })
+            //Si la taille ne dépasse pas 300Mo, on accepte l'upload
+            if (document.getElementById("size").value < 314572800) {
+                return true;
+            //Sinon, on renvoie un message d'erreur
+            } else {
+                document.getElementById("error_upload_file").innerHTML = error_size_file_fr;
+                return false
+            }
+        // Si le format du fichier n'est pas valide, on renvoie un message d'erreur
+        } else {
+            document.getElementById("error_upload_file").innerHTML = error_format_file_fr;
+            return false;
+        }
     } else {
         return false;
     }
@@ -367,7 +461,6 @@ function loadAutoComplete() {
         var list = [];
         var nbsrc = document.getElementById("nbSources").value;
         for (var i = 0; i < nbsrc; i++) {
-            alert(type);
             if (type == document.getElementById("src_" + i + "_type").value) {
                 list.push(document.getElementById("src_" + i + "_title").value);
             }
@@ -412,12 +505,3 @@ function verifFileExtension(filename, listeExt) {
     }
 }
 
-/**
- * Vérifie l'extension d'un fichier uploadé
- * @param {String} filename type du fichier uploadé
- * @returns {boolean}
- */
-function getFileExtension(filename) {
-    filename = filename.toLowerCase();
-    return getExtension(filename);
-}

@@ -247,3 +247,8 @@ li{
     outline:none;
     
 }
+
+#file_entered{
+    color : #87c2c4!important;
+    font-style: italic;
+}
