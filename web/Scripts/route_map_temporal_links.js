@@ -51,7 +51,7 @@ function displayTemp() {
  */
 function removeLinks() {
     if (clear == 1) { // si il y a des lignes, on les supprime
-        for (var j = line_min; j <= line_max; j++) {
+        for (var j = line_min; j < line_max; j++) {
             map.removeLayer("line_" + j);
         }
         clear = 0;
@@ -158,7 +158,7 @@ function displayLines(mult) {
         var id = line_min + i;
         map.addLayer({"id": "line_" + id, "type": "line", "source": line, "layout": layout, "paint": paint});
     }
-    line_max = line_min + mult.length - 2;
+    line_max = line_min + mult.length - 1;
 
     //Clear passe à 1 car des lignes ont été dessinées
     clear = 1;
@@ -173,6 +173,7 @@ function displayLines(mult) {
 function displayScrollbar(mult) {
 
     var table = document.getElementById("scrollbar");
+    table.innerHTML = "";
 
     //Affichage des multimedias
     for (var i = 0; i < mult.length; i++) {
@@ -213,6 +214,10 @@ function displayScrollbar(mult) {
         div.appendChild(img);
         div.appendChild(p);
         table.appendChild(div);
+    }
+    if(mult.length==0){
+        var table = document.getElementById("scrollbar");
+        table.innerHTML = no_temp_fr;
     }
 }
 
