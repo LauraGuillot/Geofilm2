@@ -15,8 +15,8 @@ function upload() {
     var idco = document.getElementById("idco").value;
     var source_name = document.getElementById("upload_source_title_entered").value;
     var language = document.getElementById("upload_language_entered").value;
-    var time_begin = document.getElementById("upload_time_begin").value;
-    var time_end = document.getElementById("upload_time_end").value;
+    var time_begin = document.getElementById("time_begin_h").value + ":" + document.getElementById("time_begin_m").value + ":" + document.getElementById("time_begin_s").value;
+    var time_end = document.getElementById("time_end_h").value + ":" + document.getElementById("time_end_m").value + ":" + document.getElementById("time_end_s").value;
 
     //Récupération de la date :
     var d = new Date();
@@ -312,6 +312,7 @@ function valid_son(son_filename) {
     }
 }
 
+
 /**
  * Validation du premier formulaire : si la validation est ok, on passe au div suivant
  * permettant de proposer une localisation du multimédia
@@ -389,18 +390,17 @@ function valid_form_upload3() {
         // SON ou IMAGE)
         if (valid_format()) {
             //Calcul de la taille du fichier uploadé
-            $('#file_entered').bind('change', function () {
-                document.getElementById("size").value = this.files[0].size;
-            })
+            //fileSize est exprimé en Ko
+            var fileSize = GetFileSize("file_entered");
             //Si la taille ne dépasse pas 300Mo, on accepte l'upload
-            if (document.getElementById("size").value < 314572800) {
+            if (fileSize < 307200) {
                 return true;
-            //Sinon, on renvoie un message d'erreur
+                //Sinon, on renvoie un message d'erreur
             } else {
                 document.getElementById("error_upload_file").innerHTML = error_size_file_fr;
                 return false
             }
-        // Si le format du fichier n'est pas valide, on renvoie un message d'erreur
+            // Si le format du fichier n'est pas valide, on renvoie un message d'erreur
         } else {
             document.getElementById("error_upload_file").innerHTML = error_format_file_fr;
             return false;
@@ -505,3 +505,32 @@ function verifFileExtension(filename, listeExt) {
     }
 }
 
+
+/**
+ * Vérifie l'extension d'un fichier uploadé
+ * @param {String} filename type du fichier uploadé
+ * @returns {boolean}
+ */
+function getFileExtension(filename) {
+    filename = filename.toLowerCase();
+    return getExtension(filename);
+}
+
+/**
+ * Permet de déterminer la taille d'un fichier avant son upload
+ * ATTENTION, ne fonctionne pas avec internet explorer !
+ * @param {type} fileid id du fichier dont on veut déterminer la taille
+ * @returns {Number} taille du fichier, en Kb
+ */
+function GetFileSize(fileid) {
+    try {
+        var fileSize = 0;
+
+        fileSize = $("#" + fileid)[0].files[0].size //size in kb
+
+        alert("Uploaded File Size is" + fileSize + "KB");
+        return fileSize;
+    } catch (e) {
+        alert("Error is :" + e);
+    }
+}

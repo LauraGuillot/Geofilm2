@@ -202,9 +202,14 @@
                         <div class="input_upload">
                             <p class="label_form" id="upload_time_code"></p>
                             <p class="label_form" style="display:inline-block!important" id="upload_time_begin"></p>
-                            <input style="display:inline-block!important; width:25%!important;" id="time_begin" type="time" name="begin">
+                            <input style="display:inline-block!important; width:10%!important;" id ="time_begin_h" type="text" name="begin_h" value="00">
+                            <input style="display:inline-block!important; width:10%!important;" id ="time_begin_m" type="text" name="begin_h" value="00">
+                            <input style="display:inline-block!important; width:10%!important;" id ="time_begin_s" type="text" name="begin_h" value="00">
+                            <br>
                             <p class="label_form" style="display:inline-block!important" id="upload_time_end"></p>
-                            <input style="display:inline-block!important; width:25%!important;" id="time_end" type="time" name="end"> <!--A récupérer sous la forme d'une chaine de caracatères-->
+                            <input style="display:inline-block!important; width:10%!important;" id ="time_end_h" type="text" name="begin_h" value="00">
+                            <input style="display:inline-block!important; width:10%!important;" id ="time_end_m" type="text" name="begin_h" value="00">
+                            <input style="display:inline-block!important; width:10%!important;" id ="time_end_s" type="text" name="begin_h" value="00">
 
                         </div>
 
@@ -306,7 +311,7 @@
                     <!--Parcourir les fichiers de l'utilisateur pour uploader un multimédia-->
                     <form id="form_file_upload" action="UploadFileServlet" method="POST" enctype="multipart/form-data">
                         <p class="error_message" id="error_upload_file"></p>
-                        <p class="error_message" id="size" style=display:none"></p>
+                        <p class="error_message" id="size"></p>
                         <p class="label_form" id="input_choice"></p>    
                         <input type="file"  name="file_entered" id="file_entered">
                     </form>
