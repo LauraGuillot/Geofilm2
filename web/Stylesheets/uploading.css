@@ -29,6 +29,7 @@ html, body {
     display:inline;
     text-align: left;
     white-space:pre-line;
+    position:relative;
 
 }
 
@@ -36,14 +37,22 @@ html, body {
     opacity :0.85;
     border-radius: 0;
     border:none;
-    margin-bottom:0px!important;  
+    margin-bottom:1px!important;  
     margin-right: 0px!important;
-    height:9%;
+    height:5%;
     width:100%;
     text-align:left;
     padding-top: 13px;
     padding-bottom:9%!important;
     position : relative;
+}
+
+#head_left{
+    margin-bottom: 0px!important;
+}
+
+#head_right{
+    margin-bottom: 0px!important;
 }
 
 #content_general1{
@@ -55,6 +64,7 @@ html, body {
     height:75%;
     padding-bottom : 5px;
     padding-left: 40px;
+    position : relative;
 }
 
 #content_general2{

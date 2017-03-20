@@ -155,12 +155,20 @@
 
             <div id="content_general">
                 <div class="row">
+                    <!--Header du contenu à gauche-->
+
+                    <div id="head_left" class="col-md-6" style="display: inline-block!important">
+                        <p class="title" style="padding-bottom: 0px!important" id="title1" > </p> 
+                        <p class="title" style="font-style:italic;display:inline-block!important;" id="subtitle1"> </p>
+                    </div>
+                    <div id="head_right" class="col-md-6" style="display: inline-block!important">
+                        <!--Header du contenu à droite de la page : step, avancement du remplissage du formulaire-->
+                        <right><img style="margin-left:40%!important; display:inline-block!important;" src="Ressources/step1.png" width="240px";></right>
+                    </div>
+
+
                     <div id="content_general1" class="col-md-6">
-                        <!--Header du contenu à gauche-->
-                        <div id="head" >
-                            <p class="title" style="padding-bottom: 0px!important" id="title1" > </p> 
-                            <p class="title" style="font-style:italic;display:inline-block;" id="subtitle1"> </p>
-                        </div>
+
 
                         <!--Saisie du type de multimédia-->
                         <p class="error_message" id="error_upload"> </p>
@@ -232,10 +240,7 @@
                         </div>
                     </div>
                     <div id="content_general2" class="col-md-6">
-                        <!--Header du contenu à droite de la page : step, avancement du remplissage du formulaire-->
-                        <div class="row">
-                            <right><img style="margin-left:30%!important; display:inline-block;" src="Ressources/step1.png" width="260px";></right>
-                        </div>
+
 
 
                         <right><button id ="next1" type="button" class="button small_button " style="margin-left:50%!important;margin-top:55%!important;" href="#" onclick="valid_form_upload1(getElementById('upload_title_entered'), getElementById('choice_source'), 'content_general', 'content_upload1');"></button></right>
@@ -246,13 +251,17 @@
             <!--Deuxième bloc de saisie des informations de localisation-->
             <div id="content_upload1" style="display:none;">
                 <div class="row">
+                    <!--Header du contenu : à gauche, titre général ; à droite : step-->
+                    <div id="head_left" class="col-md-6" style="display: inline-block!important">
+                        <p class="title" style="padding-bottom: 0px!important" id="title2"></p>
+                        <p class="title" style="font-style:italic" id="subtitle2"></p>
+                    </div>
+                    <div id="head_right" class="col-md-6" style="display: inline-block!important">
+                        <!--Header du contenu à droite de la page : step, avancement du remplissage du formulaire-->
+                        <right><img style="margin-left:40%!important; display:inline-block!important;" src="Ressources/step2.png" width="240px"></right>
+                    </div>
                     <div id="left_div" class="col-md-6">
-                        <!--Header du contenu à gauche : titre général-->
-                        <div id="head2">
-                            <p class="title" style="padding-bottom: 0px!important" id="title2"></p>
-                            <p class="title" style="font-style:italic" id="subtitle2"></p>
-                        </div>
-                        <br>
+
                         <!--Saisie du numéro, de la rue, d'un complément d'adresse si nécessaire,
                         du code postal, puis de la ville, et du pays-->
                         <p class="error_message" id="error_mandatory"></p>
@@ -280,10 +289,6 @@
                     </div>
 
                     <div id="right_div" class="col-md-6">
-                        <!--Header du contenu à droite de la page :step-->
-                        <div class="row">
-                            <right><img style="margin-left:30%!important; display:inline-block;" src="Ressources/step2.png" width="260px";></right>
-                        </div>
                         <p class="title" id="location" style="color:white;size:10px;padding-top:20px;text-align:center;" ></p>
 
                         <p class="error_message" id="location_ok" ></p>
@@ -301,29 +306,36 @@
 
             <!--3eme bloc : Upload du multimédia-->
             <div id="content_upload2" class="uploading" style="display:none;">
-
-                <div class="col-md-6">
-                    <!--Header général du bloc d'upload-->
-                    <div class="head3">
+                <div class="row">
+                    <!--Header du contenu : à gauche, titre général ; à droite : step-->
+                    <div id="head_left" class="col-md-6" style="display: inline-block!important">
                         <p class="title" style="padding-bottom: 0px!important" id="title3"></p>
                         <p class="title" style="font-style:italic" id="subtitle3"></p>
                     </div>
-                    <!--Parcourir les fichiers de l'utilisateur pour uploader un multimédia-->
-                    <form id="form_file_upload" action="UploadFileServlet" method="POST" enctype="multipart/form-data">
-                        <p class="error_message" id="error_upload_file"></p>
-                        <p class="error_message" id="size"></p>
-                        <p class="label_form" id="input_choice"></p>    
-                        <input type="file"  name="file_entered" id="file_entered">
-                    </form>
-                </div>
-                <!--Image step 3-->
-                <div class="col-md-6">
-                    <div class="row">
-                        <right><img style="margin-left:30%!important; display:inline-block;" src="Ressources/step3.png" width="260px";></right>
+                    <div id="head_right" class="col-md-6" style="display: inline-block!important">
+                        <!--Header du contenu à droite de la page : step, avancement du remplissage du formulaire-->
+                        <right><img style="margin-left:40%!important; display:inline-block!important;" src="Ressources/step3.png" width="240px"></right>
                     </div>
-                    <br>
-                    <!--Bouton de validation finale-->
-                    <right><button id ="validation3" style="margin-left:50%!important;" type="button" class="button small_button" onclick="upload()" style="margin-bottom: 40px"></button></right>
+                    <div class="col-md-6">
+                        <!--Header général du bloc d'upload-->
+                        <div class="head3">
+                            <p class="title" style="padding-bottom: 0px!important" id="title3"></p>
+                            <p class="title" style="font-style:italic" id="subtitle3"></p>
+                        </div>
+                        <!--Parcourir les fichiers de l'utilisateur pour uploader un multimédia-->
+                        <form id="form_file_upload" action="UploadFileServlet" method="POST" enctype="multipart/form-data">
+                            <p class="error_message" id="error_upload_file"></p>
+                            <p class="error_message" id="size"></p>
+                            <p class="label_form" id="input_choice"></p>    
+                            <input type="file"  name="file_entered" id="file_entered">
+                        </form>
+                    </div>
+                    <!--Image step 3-->
+                    <div class="col-md-6">
+                        <br>
+                        <!--Bouton de validation finale-->
+                        <right><button id ="validation3" style="margin-left:50%!important;" type="button" class="button small_button" onclick="upload()" style="margin-bottom: 40px"></button></right>
+                    </div>
                 </div>
 
             </div>

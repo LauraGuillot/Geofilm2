@@ -116,7 +116,6 @@ var error_localisation_fr = "L'adresse entrée n'est pas valide";
 var error_upload_file_fr = "Le format du fichier n'est pas pris en charge.";
 var error_format_file_fr = "Le format du fichier ne correspond pas type de multimédia choisi. Veuillez choisir un fichier valide ou revenir en arrière.";
 var error_size_file_fr = "Le fichier entré est trop volumineux (taille max : 300 Mo).";
-var true_fr = "vrai";
 var location_ok_fr = "Localisation ok";
 var error_file_none_fr = "Veuillez choisir un fichier.";
 var error_multimedia_already_entered_fr = "Le multimédia n'a pas été uploadé.";

@@ -377,9 +377,9 @@ function valid_form_upload2(elem1, elem2) {
 }
 
 /**
- * Peret de vérifier que le fichier entré a un format valide. Cela ne vérifie cependant pas
+ * Permet de vérifier que le fichier entré a un format valide. Cela ne vérifie cependant pas
  * la correspondance entre le type du fichier entré au div 1 et le format du fichier
- * @returns {undefined}
+ * @returns {Boolean}
  */
 function valid_form_upload3() {
     var filename = document.getElementById("file_entered").value;
@@ -528,7 +528,6 @@ function GetFileSize(fileid) {
 
         fileSize = $("#" + fileid)[0].files[0].size //size in kb
 
-        alert("Uploaded File Size is" + fileSize + "KB");
         return fileSize;
     } catch (e) {
         alert("Error is :" + e);
