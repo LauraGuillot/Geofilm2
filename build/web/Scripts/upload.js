@@ -40,6 +40,10 @@ function upload() {
     if (valid_form_upload3()) {
 
         var format = getFileExtension(file);
+        //On récupère les coordonnées lat lng de la géomtrie
+        //On choisit de ne garder que 6 chiffres pour vérifier qu'une géométrie proche n'existe pas déjà
+        var x = getPointX(the_geom);
+        var y = getPointY(the_geom);
 
         //on envoie à la servlet les informations
         xhttp = new XMLHttpRequest();
@@ -63,7 +67,7 @@ function upload() {
                 "&" + "type_media=" + type_media + "&" + "date=" + date + "&" + "the_geom=" + the_geom +
                 "&" + "format=" + format + "&" + "type=" + type_media + "&" + "description=" + description +
                 "&" + "time_begin=" + time_begin + "&" + "time_end=" + time_end + "&" + "path=" + path +
-                "&" + "language=" + language;
+                "&" + "language=" + language + "&" + "x=" + x + "&" + "y=" + y;
 
         xhttp.open("GET", "UploadServlet?" + data, true);
         xhttp.setRequestHeader("Content-Type", "text/html; charset=UTF-8");
@@ -532,4 +536,55 @@ function GetFileSize(fileid) {
     } catch (e) {
         alert("Error is :" + e);
     }
+}
+
+
+
+
+function distance(x1, y1, x2, y2) {
+    var a = x1 - x2;
+    var b = y1 - y2;
+    var c = Math.sqrt(a * a + b * b);
+    return c;
+}
+
+/**
+ * Récupère la coordonnée latitude de la location entrée, avec 6 caractères de précision
+ * @param {type} the_geom
+ * @returns {unresolved}
+ */
+function getPointX(the_geom)
+{
+    var loc = the_geom;
+   
+    var parts = loc.substr(loc.lastIndexOf("(") + 1);
+    alert(parts);
+    parts = parts.substr(0,5);
+    alert(parts);
+    return (parts);
+}
+
+
+
+/**
+ * Retourne la coordonnée longitude, avec 6 caractères pour précision 
+ * @param {type} loc
+ * @returns {unresolved}
+ */
+function getPointY(loc)
+{
+    var parts = loc.substr(loc.lastIndexOf(",") + 1);
+    parts = parts.substr(0,5);
+    return (parts);
+}
+
+/**
+ * Calcule la distance entre deux localisations
+ * @param {type} g1
+ * @param {type} g2
+ * @returns {Number}
+ */
+function getDistanceLoc(g1,g2){
+    var d = distance(getPointX(g1),getPointY(g1),getPointX(g2),getPointY(g2));
+    return d;
 }

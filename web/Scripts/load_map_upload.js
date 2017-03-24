@@ -117,19 +117,4 @@ function addMarker_onclick(x, y) {
     return marker;
 }
 
-/**
- * Fonction permettant de calculer la distance entre 2 points
- * @param {type} x1
- * @param {type} y1
- * @param {type} x2
- * @param {type} y2
- * @returns {Number}
- */
-function distance(x1, y1, x2, y2) {
-    var a = x1 - x2;
-    var b = y1 - y2;
-    var c = Math.sqrt(a * a + b * b);
-    return c;
-}
-
 

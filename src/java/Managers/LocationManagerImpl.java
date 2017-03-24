@@ -65,7 +65,7 @@ public class LocationManagerImpl implements LocationManager {
     public Location insertLocation(String the_geom) {
         Location l = new Location(getMaxId());
         l.setLocationThegeom(the_geom);
-        System.out.println(the_geom+"  "+l.getLocationId());
+        System.out.println(the_geom + "  " + l.getLocationId());
         //Insertion de la localisation dans la base de données
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -174,5 +174,26 @@ public class LocationManagerImpl implements LocationManager {
         }
         System.out.println(max);
         return max + 1;
+    }
+
+    /**
+     * 
+     * @param x
+     * @param y
+     * @return 
+     */
+    @Override
+    public ArrayList<Location> getLocClose(String x,String y) {
+        EntityManager em = emf.createEntityManager();
+
+        ArrayList<Location> loc = new ArrayList<>();
+        Query q = em.createQuery("SELECT l FROM Location l WHERE l.locationThegeom LIKE '%(x%,y%)%'");
+        q.setParameter("x", x);
+        q.setParameter("y", y);
+        List l = q.getResultList();
+        for (Object o : l) {
+            loc.add((Location) o);
+        }
+        return loc;
     }
 }

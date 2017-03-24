@@ -30,6 +30,12 @@
     width:100px;
 }
 
+.small_button2{
+    font-size: 15px;
+    padding : 10px; 
+    width:120px;
+}
+
 /* CROIX DE FERMETURE */
 .close{
     font-weight: 200;

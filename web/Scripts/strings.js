@@ -100,6 +100,7 @@ var postal_code_fr = "Code postal *";
 var city_fr = "Ville *";
 var country_fr = "Pays *";
 var next_fr = "SUIVANT";
+var previous_fr = "PRECEDENT";
 var type_media = "Indéterminé";
 var location_title_fr = "POINTER SUR LA CARTE";
 var alternative_fr = "OU";

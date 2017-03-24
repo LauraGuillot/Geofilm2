@@ -58,6 +58,7 @@ function loadText() {
         document.getElementById("city").innerHTML = city_fr;
         document.getElementById("country").innerHTML = country_fr;
         document.getElementById("next2").innerHTML = next_fr;
+        document.getElementById("previous1").innerHTML = previous_fr;
         document.getElementById("location").innerHTML = location_title_fr;
         document.getElementById("alternative").innerHTML = alternative_fr;
 
@@ -65,6 +66,7 @@ function loadText() {
         document.getElementById("title3").innerHTML = upload_contents_title_fr;
         document.getElementById("subtitle3").innerHTML = upload_subtitle3_fr;
         document.getElementById("input_choice").innerHTML = upload_choice_input_fr;
+        document.getElementById("previous2").innerHTML = previous_fr;
         document.getElementById("validation3").innerHTML = validation_fr;
 
     }

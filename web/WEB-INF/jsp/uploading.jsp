@@ -243,7 +243,7 @@
 
 
 
-                        <right><button id ="next1" type="button" class="button small_button " style="margin-left:50%!important;margin-top:55%!important;" href="#" onclick="valid_form_upload1(getElementById('upload_title_entered'), getElementById('choice_source'), 'content_general', 'content_upload1');"></button></right>
+                        <right><button id ="next1" type="button" class="button small_button2 " style="margin-left:50%!important;margin-top:55%!important;" href="#" onclick="valid_form_upload1(getElementById('upload_title_entered'), getElementById('choice_source'), 'content_general', 'content_upload1');"></button></right>
                     </div> 
                 </div>
             </div>
@@ -297,8 +297,9 @@
                         </div>
                         <div id="mapid" class="map"> </div>
                         <br>
-
-                        <right><button id ="next2" type="button" class="button small_button" href="#" onclick="valid_form_upload2('content_upload1', 'content_upload2');" ></button></right>
+                        <left><button id ="previous1" type="button" class="button small_button2 " style="margin-right:50%!important;display:inline-block;" href="#" onclick="visibilite_element('content_general');visibilite_element('content_upload1');"></button>
+                        </left>
+                        <right><button id ="next2" type="button" class="button small_button2" href="#" onclick="valid_form_upload2('content_upload1', 'content_upload2');" ></button></right>
                     </div>
 
                 </div>
@@ -330,11 +331,16 @@
                             <input type="file"  name="file_entered" id="file_entered">
                         </form>
                     </div>
-                    <!--Image step 3-->
                     <div class="col-md-6">
                         <br>
+                        <br>
+                        <br>
+                        <br>
+                        
+                        <left><button id ="previous2" type="button" class="button small_button2 " style="margin-right:50%!important;display:inline-block!important;" href="#" onclick="visibilite_element('content_upload1');visibilite_element('content_upload2');"></button>
+                        </left>
                         <!--Bouton de validation finale-->
-                        <right><button id ="validation3" style="margin-left:50%!important;" type="button" class="button small_button" onclick="upload()" style="margin-bottom: 40px"></button></right>
+                        <right><button id ="validation3" style="margin-left:50%!important;display:inline-block!important;" type="button" class="button small_button2" onclick="upload()" style="margin-bottom: 40px"></button></right>
                     </div>
                 </div>
 

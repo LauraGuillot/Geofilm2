@@ -15,6 +15,8 @@ import Objects.Location;
 import Objects.Person;
 import Objects.Source;
 import java.io.IOException;
+import static java.lang.Integer.parseInt;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -55,6 +57,9 @@ public class UploadServlet extends HttpServlet {
         String idco = request.getParameter("idco");
         String thegeom = request.getParameter("the_geom");
         String choice_source = request.getParameter("choice_source");
+        String x = request.getParameter("x");
+        String y = request.getParameter("y");
+        
 
         //Récupération de la personne qui a uploadé, de la position, puis de la source
         PersonManager pm = PersonManagerImpl.getInstance();
@@ -67,6 +72,17 @@ public class UploadServlet extends HttpServlet {
         //S'il la location n'existe pas, on l'ajoute à la base de données et l'on conserve la location dans la variable l
         if (b) {
             l = lm.insertLocation(thegeom);
+            //Sinon, on vérifie s'il n'existe pas de location proche de la localisation entrée
+        } else {
+            // On récupère le tableau des locations proches de l
+            ArrayList<Location> List = lm.getLocClose(x,y);
+            //Si le tableau n'est pas vide, on récupère la première position pour l'attribuer à la localisation de notre multimédia entré
+            if (!(List.isEmpty())){
+                l = List.get(0);
+            } else {
+                //si aucune localisation n'est trouvée proche, on entre la localisation dans base de données
+                l = lm.insertLocation(thegeom);
+            }
         }
 
         //Ajout de la source du multimédia dans la base de données, si elle n'est pas déjà entrée
