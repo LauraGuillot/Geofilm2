@@ -51,7 +51,8 @@ public class UploadFileServlet extends HttpServlet {
 
         //Suivant le type du multimédia entré, on écrit le fichier dans les dossiers
         // Videos, Images, ou Sons
-        String chemin = "C:\\Users\\Paola\\Documents\\NetBeansProjects\\Geofilm2\\web\\Multimedias\\" + path;
+       // String chemin = "C:\\Users\\Paola\\Documents\\NetBeansProjects\\Geofilm2\\web\\Multimedias\\" + path;
+       String chemin = "/Users/Laura/Desktop/Geofilm2/web/Multimedias/"+path;
         // Les données reçues sont multipart, on doit donc utiliser la méthode
         Part part = request.getPart("file_entered");
         /* Écriture du fichier sur le disque */

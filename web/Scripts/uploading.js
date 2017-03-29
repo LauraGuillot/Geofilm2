@@ -68,6 +68,7 @@ function loadText() {
         document.getElementById("input_choice").innerHTML = upload_choice_input_fr;
         document.getElementById("previous2").innerHTML = previous_fr;
         document.getElementById("validation3").innerHTML = validation_fr;
+        document.getElementById("return_file").innerHTML=no_file_fr
 
     }
 }

@@ -14,7 +14,7 @@ import org.mindrot.jbcrypt.BCrypt;
 public class PasswordHash {
 
     /**
-     * Hachage + Sallage d'un mot de passe
+     * Hachage + Salage d'un mot de passe
      * @param password Mot de passe
      * @return Mot de passe haché
      */

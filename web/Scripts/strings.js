@@ -106,7 +106,7 @@ var location_title_fr = "POINTER SUR LA CARTE";
 var alternative_fr = "OU";
 
 var upload_subtitle3_fr = "Ajout du fichier multimédia";
-var upload_choice_input_fr = "Choisissez un fichier multimédia :";
+var upload_choice_input_fr = "Choisissez un fichier multimédia";
 
 var error_multimedia_name_fr = "Veuillez saisir le nom du multimédia";
 var error_multimedia_type_fr ="Veuillez sélectionner un type de multimédia";
@@ -125,6 +125,7 @@ var upload_confirmed_done_fr = "Votre multimédia a bien été uploadé.";
 var valid_upload_fr = "FERMER";
 var upload_confirmed_error_fr = "Une erreur est survenue, votre fichier n'a pas pu être uploadé.";
 
+var no_file_fr = "Aucun fichier choisi";
 
 //POP-UP VISUALISATION D'UN MULTIMEDIA
 var signal_fr = "Signaler";

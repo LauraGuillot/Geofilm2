@@ -30,7 +30,6 @@ public class UploadServlet extends HttpServlet {
     public static final String VUE = "/WEB-INF/jsp/globalMap.jsp";
     public static final String CHAMP_FICHIER = "file_entered";
 
-
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -59,7 +58,6 @@ public class UploadServlet extends HttpServlet {
         String choice_source = request.getParameter("choice_source");
         String x = request.getParameter("x");
         String y = request.getParameter("y");
-        
 
         //Récupération de la personne qui a uploadé, de la position, puis de la source
         PersonManager pm = PersonManagerImpl.getInstance();
@@ -67,22 +65,16 @@ public class UploadServlet extends HttpServlet {
 
         //Ajout de la localisation du multimédia à la base de données, si elle n'est pas déjà entrée
         LocationManager lm = LocationManagerImpl.getInstance();
-        Location l = lm.findLocation(thegeom);
-        Boolean b = (l == null); //Booléen qui vaut vrai si aucune location à la position the_geom
+        Location l;
+        // On récupère le tableau des locations proches de l
+        ArrayList<Location> List = lm.getLocClose(x, y);
+
         //S'il la location n'existe pas, on l'ajoute à la base de données et l'on conserve la location dans la variable l
-        if (b) {
+        if (List.isEmpty()) {
             l = lm.insertLocation(thegeom);
             //Sinon, on vérifie s'il n'existe pas de location proche de la localisation entrée
         } else {
-            // On récupère le tableau des locations proches de l
-            ArrayList<Location> List = lm.getLocClose(x,y);
-            //Si le tableau n'est pas vide, on récupère la première position pour l'attribuer à la localisation de notre multimédia entré
-            if (!(List.isEmpty())){
-                l = List.get(0);
-            } else {
-                //si aucune localisation n'est trouvée proche, on entre la localisation dans base de données
-                l = lm.insertLocation(thegeom);
-            }
+            l = List.get(0);
         }
 
         //Ajout de la source du multimédia dans la base de données, si elle n'est pas déjà entrée
@@ -102,5 +94,4 @@ public class UploadServlet extends HttpServlet {
         response.getWriter().write(true + "");
     }
 
- 
 }

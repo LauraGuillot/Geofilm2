@@ -159,17 +159,15 @@
 
                     <div id="head_left" class="col-md-6" style="display: inline-block!important">
                         <p class="title" style="padding-bottom: 0px!important" id="title1" > </p> 
-                        <p class="title" style="font-style:italic;display:inline-block!important;" id="subtitle1"> </p>
+                        <p class="title" style="font-style:italic;" id="subtitle1"> </p>
                     </div>
                     <div id="head_right" class="col-md-6" style="display: inline-block!important">
                         <!--Header du contenu à droite de la page : step, avancement du remplissage du formulaire-->
-                        <right><img style="margin-left:40%!important; display:inline-block!important;" src="Ressources/step1.png" width="240px";></right>
+                        <img style="" src="Ressources/step1.png" width="250px">
                     </div>
 
 
-                    <div id="content_general1" class="col-md-6">
-
-
+                    <div id="content_general1" class="col-md-12">
                         <!--Saisie du type de multimédia-->
                         <p class="error_message" id="error_upload"> </p>
                         <p class="label_form" style="display:inline-block!important;" id="upload_type_multimedia"></p>
@@ -196,14 +194,14 @@
                         <!--Saisie du titre de multimédia-->
                         <div class="input_upload">
                             <p class="label_form" id="upload_title_multimedia"></p>
-                            <input style="width:80%!important;" type="text" name="titre" id="upload_title_entered">
+                            <input style="width:40%!important;" type="text" name="titre" id="upload_title_entered">
                         </div>
 
 
                         <!--Saisie d'une description du multimédia-->
                         <div class="input_upload">
                             <p class="label_form" id="upload_description"></p>
-                            <input style="width:90%!important;" type="text" name ="description" id="upload_description_entered">
+                            <input style="width:40%!important;" type="text" name ="description" id="upload_description_entered">
                         </div>
 
                         <!--Saisie du time code (surtout s'il s'agit d'une séquence video)-->
@@ -236,14 +234,10 @@
                         <br>
                         <div class="input_upload">
                             <p class="label_form" id="upload_source_title"></p>
-                            <input style="width:80%!important;" type="text" name="title_source" id="upload_source_title_entered">
+                            <input style="width:40%!important;" type="text" name="title_source" id="upload_source_title_entered">
                         </div>
-                    </div>
-                    <div id="content_general2" class="col-md-6">
 
-
-
-                        <right><button id ="next1" type="button" class="button small_button2 " style="margin-left:50%!important;margin-top:55%!important;" href="#" onclick="valid_form_upload1(getElementById('upload_title_entered'), getElementById('choice_source'), 'content_general', 'content_upload1');"></button></right>
+                        <button id ="next1" type="button" class="button small_button2" style="float:right;margin-right:30px;" href="#" onclick="valid_form_upload1(getElementById('upload_title_entered'), getElementById('choice_source'), 'content_general', 'content_upload1');"></button>
                     </div> 
                 </div>
             </div>
@@ -258,7 +252,7 @@
                     </div>
                     <div id="head_right" class="col-md-6" style="display: inline-block!important">
                         <!--Header du contenu à droite de la page : step, avancement du remplissage du formulaire-->
-                        <right><img style="margin-left:40%!important; display:inline-block!important;" src="Ressources/step2.png" width="240px"></right>
+                        <img style="" src="Ressources/step2.png" width="250px">
                     </div>
                     <div id="left_div" class="col-md-6">
 
@@ -317,7 +311,7 @@
                         <!--Header du contenu à droite de la page : step, avancement du remplissage du formulaire-->
                         <right><img style="margin-left:40%!important; display:inline-block!important;" src="Ressources/step3.png" width="240px"></right>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <!--Header général du bloc d'upload-->
                         <div class="head3">
                             <p class="title" style="padding-bottom: 0px!important" id="title3"></p>
@@ -327,20 +321,19 @@
                         <form id="form_file_upload" action="UploadFileServlet" method="POST" enctype="multipart/form-data">
                             <p class="error_message" id="error_upload_file"></p>
                             <p class="error_message" id="size"></p>
-                            <p class="label_form" id="input_choice"></p>    
-                            <input type="file"  name="file_entered" id="file_entered">
+
+                            <label class="fileContainer button button_file" >
+                                <p class="label_form" id="input_choice"></p>  
+                                <input type="file"  name="file_entered" id="file_entered" onchange="displayFile();">
+                            </label>
+                            <p id="return_file" style="margin-top:10px;"></p>
+
                         </form>
-                    </div>
-                    <div class="col-md-6">
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        
-                        <left><button id ="previous2" type="button" class="button small_button2 " style="margin-right:50%!important;display:inline-block!important;" href="#" onclick="visibilite_element('content_upload1');visibilite_element('content_upload2');"></button>
-                        </left>
-                        <!--Bouton de validation finale-->
-                        <right><button id ="validation3" style="margin-left:50%!important;display:inline-block!important;" type="button" class="button small_button2" onclick="upload()" style="margin-bottom: 40px"></button></right>
+                    
+                        <div style="float:right;">
+                        <button id ="previous2" type="button" class="button small_button2 " style="display:inline-block!important;" href="#" onclick="visibilite_element('content_upload1');visibilite_element('content_upload2');"></button>
+                        <button id ="validation3" style="display:inline-block!important;" type="button" class="button small_button2" onclick="upload()" style="margin-bottom: 40px"></button></right>
+                        </div>
                     </div>
                 </div>
 

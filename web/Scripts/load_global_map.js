@@ -43,6 +43,7 @@ function loadMap() {
             }
         });
     });
+    
     // Zoom 
     map.addControl(new mapboxgl.NavigationControl());
     //Affichage des marqueurs pour les multimédias

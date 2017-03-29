@@ -6,12 +6,13 @@ html, body {
 }
 
 .row{
+    height:91%!important;
     margin:0px!important;
     padding: 0px!important;
 }
 
 .container{
-    height:92%;
+    height:91%;
     width:100%!important;
     margin-right: 0px!important;
     padding: 0px!important;
@@ -21,7 +22,7 @@ html, body {
 }
 
 .content_general{
-    height:92%;
+    height:91%;
     width:90%!important;
     margin-right: 0px!important;
     margin-top:2%!important;
@@ -79,14 +80,13 @@ html, body {
 }
 
 .content_upload1{
-    height:92%;
+    height:91%!important;
     width:90%!important;
     margin-right: 0px!important;
     background-color: #333333!important;
     display:inline;
     text-align: left;
     white-space:pre-line;
-
 }
 
 #head2{
@@ -134,6 +134,7 @@ html, body {
     height:82%;
     padding-bottom:5px;
     padding-left : 0px!important;
+
 }
 
 #head_right{
@@ -143,6 +144,7 @@ html, body {
     text-align:left;
     padding-top: 20px;
     position : relative;
+    width:50%;
 }
 
 #head_left{
@@ -154,6 +156,7 @@ html, body {
     text-align:left;
     padding-top: 20px;
     position : relative;
+        width:50%;
 }
 
 
@@ -261,11 +264,31 @@ li{
 .hidden_input{
     background-color: transparent;
     border:none;
-    outline:none;
-    
+    outline:none;   
 }
 
-#file_entered{
-    color : #87c2c4!important;
-    font-style: italic;
+
+/* FILE CONTAINER */
+.button_file{
+    width:17%;
+    height:7.5%;
+    padding:10px!important;
 }
+#input_choice{
+    font-size: 12pt;
+}
+
+.fileContainer {
+    overflow: hidden;
+    position: relative;
+}
+
+.fileContainer [type=file] {
+    display: none;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    cursor: pointer;  
+}
+
+
+
