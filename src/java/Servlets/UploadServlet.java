@@ -15,7 +15,6 @@ import Objects.Location;
 import Objects.Person;
 import Objects.Source;
 import java.io.IOException;
-import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

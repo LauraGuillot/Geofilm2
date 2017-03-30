@@ -558,9 +558,9 @@ function getPointX(the_geom)
     var loc = the_geom;
    
     var parts = loc.substr(loc.lastIndexOf("(") + 1);
-    alert(parts);
+  
     parts = parts.substr(0,5);
-    alert(parts);
+
     return (parts);
 }
 
@@ -587,4 +587,11 @@ function getPointY(loc)
 function getDistanceLoc(g1,g2){
     var d = distance(getPointX(g1),getPointY(g1),getPointX(g2),getPointY(g2));
     return d;
+}
+
+
+function displayFile(){
+    var file = document.getElementById("file_entered").value;
+    file = file.substr(file.lastIndexOf("\\") + 1);
+    document.getElementById("return_file").innerHTML = file;
 }

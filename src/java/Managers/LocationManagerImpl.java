@@ -187,9 +187,8 @@ public class LocationManagerImpl implements LocationManager {
         EntityManager em = emf.createEntityManager();
 
         ArrayList<Location> loc = new ArrayList<>();
-        Query q = em.createQuery("SELECT l FROM Location l WHERE l.locationThegeom LIKE '%(x%,y%)%'");
-        q.setParameter("x", x);
-        q.setParameter("y", y);
+        String query = "SELECT l FROM Location l WHERE l.locationThegeom LIKE '%("+x+"%,"+y+"%)%'";
+        Query q = em.createQuery(query);
         List l = q.getResultList();
         for (Object o : l) {
             loc.add((Location) o);

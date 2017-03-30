@@ -219,7 +219,7 @@
                     </div>
 
                     <!-- Affichage des résultats des recherches -->
-                    <div id="result"></div>
+                    <div id="result" style="margin-top: 20px;"></div>
                 </div>
 
                 <div id="map_zone"  class="col-md-9">
